@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
-	root 'home#index'
+	root 'articles#new'
 	
+	get  'home/index'
+
+	get  'articles/index'
+	get  'articles/new'
+	post 'articles/create'
+	get  'articles/show'
 end

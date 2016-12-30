@@ -1,0 +1,4 @@
+<%= form_tag('/articles/index', method: 'post', remote: true) do %>
+	<%= kindeditor_tag :content %>
+	<%= submit_tag(t('search')) %>
+<% end %>
