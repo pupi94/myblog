@@ -44,3 +44,5 @@ a:focus{outline:0;}
 .crumb-wrap{height: 40px;line-height: 39px;border-bottom: 1px solid #e5e5e5;background: #f5f5f5;}
 .crumb-list{padding-left: 12px;}
 .crumb-list .icon-font{margin-right: 5px;}
+
+.crumb_box{padding: 30px 20px 30px 20px;}

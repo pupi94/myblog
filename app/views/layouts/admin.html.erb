@@ -1,64 +1,74 @@
-<!doctype html>s
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
     <title>后台管理</title>
-    <link rel="stylesheet" type="text/css" href="common.css"/>
-</head>
-<body>
-<div class="topbar-wrap white">
-    <div class="topbar-inner clearfix">
-        <div class="topbar-logo-wrap clearfix">
-            <h1 class="topbar-logo none"><a href="index.html" class="navbar-brand">后台管理</a></h1>
-            <ul class="navbar-list clearfix">
-                <li><a class="on" href="#">首页</a></li>
-                <li><a href="#" target="_blank">网站首页</a></li>
-            </ul>
-        </div>
-        <div class="top-info-wrap">
-            <ul class="top-info-list clearfix">
-                <li><a href="#">管理员</a></li>
-                <li><a href="#">修改密码</a></li>
-                <li><a href="#">退出</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-<div class="clearfix">
-    <div class="sidebar-wrap">
-        <div class="sidebar-title">
-            <h1>菜单</h1>
-        </div>
-        <div class="sidebar-content">
-            <ul class="sidebar-list">
-                <li>
-                    <a href="#">常用操作</a>
-                    <ul class="sub-menu">
-                        <li><a href="#">作品管理</a></li>
-                        <li><a href="#">博文管理</a></li>
-                        <li><a href="#">分类管理</a></li>
-                        <li><a href="#">留言管理</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">系统管理</a>
-                    <ul class="sub-menu">
-                        <li><a href="#">系统设置</a></li>
-                        <li><a href="#">清理缓存</a></li>
-                        <li><a href="#">数据备份</a></li>
-                        <li><a href="#">数据还原</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <%= csrf_meta_tags %>
 
-    <div class="main-wrap">
-        <div class="crumb-wrap">
-            <div class="crumb-list"><span>欢迎使用博客程序，建博的首选工具。</span></div>
-            <div><%= yield %></div>
+    <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'admin', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+    <div class="topbar-wrap white">
+        <div class="topbar-inner clearfix">
+            <div class="topbar-logo-wrap clearfix">
+                <h1 class="topbar-logo none"><a href="index.html" class="navbar-brand">后台管理</a></h1>
+                <ul class="navbar-list clearfix">
+                    <li><a class="on" href="#">首页</a></li>
+                    <li><a href="#" target="_blank">网站首页</a></li>
+                </ul>
+            </div>
+            <div class="top-info-wrap">
+                <ul class="top-info-list clearfix">
+                    <li><a href="#">管理员</a></li>
+                    <li><a href="#">修改密码</a></li>
+                    <li><a href="#">退出</a></li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
+    <div class="clearfix">
+        <div class="sidebar-wrap">
+            <div class="sidebar-title">
+                <h1>菜单</h1>
+            </div>
+
+            <div class="sidebar-content">
+                <ul class="sidebar-list">
+                    <li>
+                        <a href="#">常用操作</a>
+                        <ul class="sub-menu">
+                            <li><a href="#">写新文章</a></li>
+                            <li><a href="#">我的文章</a></li>
+                            <li><a href="#">草稿箱</a></li>
+                            <li><a href="#">回收站</a></li>
+                            <li><%= link_to "类别管理", categories_index_path%></li>
+                            <li><a href="#">留言板</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">系统管理</a>
+                        <ul class="sub-menu">
+                            <li><a href="#">系统设置</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="main-wrap">
+            <div class="crumb-wrap">
+                <div class="crumb-list"><span>欢迎使用博客程序，建博的首选工具。</span></div>
+                <div class="crumb_box"><%= yield %></div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
