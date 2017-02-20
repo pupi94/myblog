@@ -1,2 +1,24 @@
 zh:
-  search: 查询
+  backstage_system: 首页
+  blog_system: 网站首页
+  backstage_management_system: 后台管理
+  admin: 管理员
+  modify_pwd: 修改密码
+  exit: 退出
+
+  button:
+    search: 查询
+    cancel: 取消
+    confirm: 确认
+    save: 保存
+
+
+  menu: 
+    list: 菜单
+    common_operation: 常用操作
+    new_article: 写新文章
+    my_article: 我的文章
+    drafts: 草稿箱
+    trash: 回收站
+    message_board: 留言板
+    category: 类别管理
