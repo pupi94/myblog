@@ -16,6 +16,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'rails_kindeditor', '~> 0.5.0'
 
+gem 'defined_error', path: '../defined_error'
+
 group :development, :test do
   gem 'byebug', platform: :mri
 end

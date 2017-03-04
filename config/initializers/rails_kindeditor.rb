@@ -16,6 +16,4 @@ RailsKindeditor.setup do |config|
   #
   # config.asset_url_prefix = "http://asset.example.com/assets_prefx/" if Rails.env.production?
 
-
-
 end

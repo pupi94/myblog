@@ -2,8 +2,7 @@ class AdminController < ApplicationController
   layout "admin"
 
   def index
-  	puts "===#{params}"
+    puts "===#{params}"
   end
-
 end
 

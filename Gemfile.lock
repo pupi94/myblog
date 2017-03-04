@@ -1,3 +1,8 @@
+PATH
+  remote: ../defined_error
+  specs:
+    defined_error (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -175,6 +180,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.6)
   byebug
   coffee-rails (~> 4.2)
+  defined_error!
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)

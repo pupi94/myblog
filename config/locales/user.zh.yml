@@ -1,0 +1,8 @@
+zh:
+  user:
+    login_pwd: 登录密码
+    enter_pwd: 请输入密码
+    login_name: 登录账号
+    enter_name: 请输入账号
+    check_en_pwd: 账号不能为中文或特殊字符
+    enter_wrong: 请输入正确的用户名或密码
