@@ -22,3 +22,6 @@ zh:
     trash: 回收站
     message_board: 留言板
     category: 类别管理
+
+  table:
+    operate: 操作

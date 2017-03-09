@@ -29,7 +29,7 @@
         <ul class="top-info-list clearfix">
           <li><a href="#"><%= t('admin') %></a></li>
           <li><a href="#"><%= t('modify_pwd') %></a></li>
-          <li><a href="#"><%= t('exit') %></a></li>
+          <li><a href="/users/logout" id="logout"><%= t('exit') %></a></li>
         </ul>
       </div>
     </div>
@@ -59,16 +59,16 @@
 
     <div class="main-wrap">
       <div class="crumb-wrap">
-        <div class="crumb-list">
-          <a class="btn btn-primary " href="#">
+        <div class="crumb-left">
+          <a class="btn btn-primary" href="#">
             <span class="glyphicon glyphicon-list"></span>
           </a>
           <% if content_for?(:title_h1) %>
-          <span class="level1"><%= yield(:title_h1) %></span>
+            <span class="level1"><%= yield(:title_h1) %></span>
           <% end %>
         </div>
-        <div class="crumb_box"><%= yield %></div>
       </div>
+      <div class="crumb_box"><%= yield %></div>
     </div>
   </div>
 </body>

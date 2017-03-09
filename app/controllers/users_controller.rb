@@ -1,25 +1,44 @@
 class UsersController < ApplicationController
-  layout :resolve_layout
   before_filter :login_required, :except => [:login, :do_login]
 
   def login
-
-    puts "===#{params}========#{ErrorCode::SUCCESS}"
+    respond_to do |format|
+        format.html {
+          render "login",
+          layout: false
+        }
+    end
   end
 
   def do_login
-    puts "===#{params}"
-    redirect_to users_login_path, :flash=>{:alert=>"user not exist!"}
+    rtn = User.login(params)
+    if Util::success? rtn
+      if rtn.present? && rtn['user'].present?
+        session["user"] = rtn['user']
+        redirect_to admin_index_path
+      else
+        respond_to do |format|
+          format.html { 
+            render "login",
+            layout: false,
+            locals: {
+              :flash => {:alert=>"user not exist!"}
+            }
+          }
+        end
+      end
+    else
+      render_error
+    end
   end
 
-
-private
-  def resolve_layout
-    case action_name
-    when 'login', 'do_login'
-      'user'
-    else
-      'application'
+  def logout
+    reset_session
+    respond_to do |format|
+      format.html { 
+        render "login",
+        layout: false
+      }
     end
   end
 end

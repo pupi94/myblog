@@ -1,35 +1,49 @@
-<div class="container">
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>后台登录</title>
+	<%= csrf_meta_tags %>
+
+	<%= stylesheet_link_tag    'user', media: 'all', 'data-turbolinks-track': 'reload' %>
+	<%= javascript_include_tag 'user', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+	<div class="container">
 	<div class="line">
 		<div class="xs6 xm4 xs3-move xm4-move"><br/><br/>
 			<%= form_tag(controller: "users", action: "do_login", method: "post") do %>
-				<div class="panel">
-					<div class="panel-head"><strong><%= t('backstage_management_system')%></strong></div>
-					<div class="panel-body">
-						<div class="form-group">
-							<div class="field field-icon-right">
-								<input type="text" id="userName" class="input" name="user_name" placeholder="<%= t('user.login_name') %>" data-validate="required:<%= t('user.enter_name') %>,check_En:<%= t('user.check_en_pwd') %>" />
-								<span class="icon glyphicon glyphicon-user"></span>
-								<!-- <div class="input-help"><ul><li>请输入账号</li><li>账号不能为中文或者特殊字符</li></ul></div> -->
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="field field-icon-right">
-								<input type="password" class="input" name="password" placeholder="<%= t('user.login_pwd') %>" autocomplete="off" data-validate="required:<%= t('user.enter_pwd') %>"/>
-								<span class="icon glyphicon glyphicon-lock"></span>
-								<!-- <div class="input-help"><ul><li>请输入密码</li></ul></div> -->
-							</div>
+			<div class="panel">
+				<div class="panel-head"><strong><%= t('backstage_management_system')%></strong></div>
+				<div class="panel-body">
+					<div class="form-group">
+						<div class="field field-icon-right">
+							<input type="text" id="userName" class="input" name="user_name" placeholder="<%= t('user.login_name') %>" data-validate="required:<%= t('user.enter_name') %>,check_En:<%= t('user.check_en_pwd') %>" />
+							<span class="icon glyphicon glyphicon-user"></span>
+							<!-- <div class="input-help"><ul><li>请输入账号</li><li>账号不能为中文或者特殊字符</li></ul></div> -->
 						</div>
 					</div>
-					<div class="result text-center">
-						<% if flash[:alert] %>
-				            	<%= content_tag(:span, t('user.enter_wrong')) %>
-				          	<% end %>
-					</div>
-					<div class="panel-foot text-center">
-						<button class="button button-block bg-main text-big">立即登录后台</button>
+					<div class="form-group">
+						<div class="field field-icon-right">
+							<input type="password" class="input" name="password" placeholder="<%= t('user.login_pwd') %>" autocomplete="off" data-validate="required:<%= t('user.enter_pwd') %>"/>
+							<span class="icon glyphicon glyphicon-lock"></span>
+							<!-- <div class="input-help"><ul><li>请输入密码</li></ul></div> -->
+						</div>
 					</div>
 				</div>
+				<div class="result text-center">
+					<% if flash[:alert] %>
+					<%= content_tag(:span, t('user.enter_wrong')) %>
+					<% end %>
+				</div>
+				<div class="panel-foot text-center">
+					<button class="button button-block bg-main text-big">立即登录后台</button>
+				</div>
+			</div>
 			<% end %>
 		</div>
 	</div>
 </div>
+</body>
+</html>

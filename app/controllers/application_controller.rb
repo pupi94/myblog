@@ -27,11 +27,11 @@ class ApplicationController < ActionController::Base
   end
 
   def render_error(exception = nil)
-    render :file => "#{Rails.root}/public/500.html"
+    render layout: false, :file => "#{Rails.root}/public/500.html"
   end
 
   def render_not_found(exception = nil)
-    render :file => "#{Rails.root}/public/404.html"
+    render layout: false, :file => "#{Rails.root}/public/404.html"
   end
 
   def current_user

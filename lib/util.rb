@@ -21,4 +21,8 @@ module Util
     end
     params
   end
+
+  def self.success?(params)
+    params.present? && params['return_code'] == ErrorCode::SUCCESS
+  end
 end
