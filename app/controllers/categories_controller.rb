@@ -2,13 +2,13 @@ class CategoriesController < ApplicationController
   layout :resolve_layout
 
   def index
-  	puts "===#{params}"
   end
 
   def search
   end
 
   def create
+    puts "========#{params}"
     #rtn = Category.create(params)
   end
 

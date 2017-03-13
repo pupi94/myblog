@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   # categories
   get  'categories/index'
+  post 'categories/create'
 
   # users
   get  'users/login'

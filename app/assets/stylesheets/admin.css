@@ -1,5 +1,6 @@
 /*
  *= require include_bootstrap
+ *= require_tree ../../../vendor/assets/stylesheets/bootstrap-validator
  *= require public
  *= require_tree ./admin
  */
