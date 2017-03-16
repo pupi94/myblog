@@ -13,12 +13,11 @@
 ActiveRecord::Schema.define(version: 20170305115946) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name",        limit: 32,                null: false
-    t.integer  "article_num",            default: 0,    null: false
-    t.integer  "sequence",    limit: 2,                 null: false
-    t.boolean  "enable",                 default: true, null: false
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.string   "name",       limit: 32,                null: false
+    t.integer  "seq",        limit: 2,                 null: false
+    t.boolean  "enable",                default: true, null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -7,89 +7,25 @@
 		<%= t('category.add') %>
 	</button>
 </div>
-
-<table class="table table-hover">
-	<thead>
-		<tr>
-			<th><%= t('category.name') %></th>
-			<th><%= t('category.article_num') %></th>
-			<th><%= t('table.operate') %></th>
-			<th><%= t('category.sequence') %></th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>Tanmay</td>
-			<td>Bangalore</td>
-			<td>560001</td>
-			<td>560001</td>
-		</tr>
-	</tbody>
-</table>
-
-<div class="modal fade" id="add_category_modal" tabindex="-1" role="dialog"  aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content" style="max-width: 400px;">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-					&times;
-				</button>
-				<h4 class="modal-title"><%= t('category.add') %></h4>
-			</div>
-			<div class="modal-body">
-				<form class="form-horizontal add_category_form" action="/categories/create" method="POST" enctype=”multipart/form-data”>
-					<div class="form-group">
-      					<label class="col-sm-3 control-label"><%= t('category.name') %>:</label>
-   						<div class="col-sm-8">
-      						<input type="text" class="form-control" name="category_name">
-    						</div>
-  					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-white" data-dismiss="modal"><%= t("button.cancel") %></button>
-				<button type="button" class="btn btn-success"><%= t("button.save") %></button>
-			</div>
-		</div>
-	</div>
+<div>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th><%= t('category.name') %></th>
+				<th><%= t('category.article_num') %></th>
+				<th><%= t('table.operate') %></th>
+				<th><%= t('category.sequence') %></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Tanmay</td>
+				<td>Bangalore</td>
+				<td>560001</td>
+				<td>560001</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 
-
-<script type="text/javascript">
-	$(function() {
-		var $addCategoryModal = $("#add_category_modal");
-		var $addCategoryForm = $addCategoryModal.find(".add_category_form");
-
-		$addCategoryModal.on('shown.bs.modal', function(){
-		})
-		$addCategoryForm.bootstrapValidator({
-	            message: 'This value is not valid',
-	            feedbackIcons: {
-	                valid: 'glyphicon glyphicon-ok',
-	                invalid: 'glyphicon glyphicon-remove',
-	                validating: 'glyphicon glyphicon-refresh'
-	            },
-	            fields: {
-	                category_name: {
-	                    message: 'The username is not valid',
-	                    validators: {
-	                        notEmpty: {
-	                            message: 'The username is required and can\'t be empty'
-	                        }
-	                    }
-	                }
-	            }
-        	})
-		
-		$addCategoryModal.find(".btn-success").on('click', function(event){
-			$addCategoryForm.data('bootstrapValidator').validate();  
-            	if(!$addCategoryForm.data('bootstrapValidator').isValid()){
-            		console.log("1")
-                		return ;  
-            	}
-            	console.log("2")
-            	$addCategoryForm.submit();
-            	console.log("3")
-		});
-	});
-</script>
+<%= render :partial => "categories/shared/add_category_modal" %>
