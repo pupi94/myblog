@@ -12,7 +12,6 @@ zh:
     confirm: 确认
     save: 保存
 
-
   menu: 
     list: 菜单
     common_operation: 常用操作
@@ -23,5 +22,16 @@ zh:
     message_board: 留言板
     category: 类别管理
 
-  table:
+  common: 
     operate: 操作
+    status: 状态
+    enable: 启用
+    disable: 禁用
+    no_result: 未查询到数据
+    
+  dialog: 
+    title: 提示
+    failed: 操作失败! 
+    success: 操作成功! 
+    sys_error: 系统错误! 
+

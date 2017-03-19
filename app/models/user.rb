@@ -7,8 +7,8 @@ class User < ApplicationRecord
   validates :password, length: { maximum: 64, message: ErrorCode::ERR_USER_PASSWORD_THE_MAXIMUM_LENGTH_OF_64 }
   validates :nickname, length: { maximum: 32, message: ErrorCode::ERR_USER_NICKNAME_THE_MAXIMUM_LENGTH_OF_32 }
 
-  validates_uniqueness_of :username, message: ErrorCode::ERR_USER_NAME_NOT_UNIQUE
-  validates_uniqueness_of :nickname, message: ErrorCode::ERR_USER_NICKNAME_NOT_UNIQUE
+  # validates_uniqueness_of :username, message: ErrorCode::ERR_USER_NAME_NOT_UNIQUE
+  # validates_uniqueness_of :nickname, message: ErrorCode::ERR_USER_NICKNAME_NOT_UNIQUE
 
   def self.login(params)
     Util.try_rescue do |response|

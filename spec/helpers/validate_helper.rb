@@ -44,6 +44,55 @@ module ValidateHelper
     end
   end
 
+  def valid_column_uniqueness(valid_object, model_name, column_name, case_sensitive, error_code)
+    expect {
+      FactoryGirl.build(model_name, column_name => valid_object[column_name])
+    }.to raise_error ActiveRecord::RecordInvalid, Regexp.new(error_code.to_s)
+
+    # 不区分大小写
+    unless case_sensitive
+      upcase_value = valid_object[column_name].upcase if valid_object[column_name].respond_to?(:upcase!)
+      downcase_value = valid_object[column_name].downcase if valid_object[column_name].respond_to?(:downcase!)
+      expect {
+        FactoryGirl.build(model_name, column_name => upcase_value)
+      }.to raise_error ActiveRecord::RecordInvalid, Regexp.new(error_code)
+
+      expect {
+        FactoryGirl.build(model_name, column_name => upcase_value)
+      }.to raise_error ActiveRecord::RecordInvalid, Regexp.new(error_code)
+    end
+  end
+
+  def valid_with_scope_column_uniqueness(valid_object, model_name, column_names, case_sensitive, error_code)
+    expect {
+      FactoryGirl.build(model_name, valid_object.slice(*column_names))
+    }.to raise_error ActiveRecord::RecordInvalid, Regexp.new(error_code)
+
+    column_names.each do |column|
+      temp_params = valid_object.slice(*column_names)
+      begin
+        temp_params[column] = change_value(temp_params[column])
+        FactoryGirl.build(model_name, temp_params)
+      rescue => e
+        expect(e.message).not_to include error_code.to_s
+      end
+    end
+
+     # 不区分大小写
+    unless case_sensitive
+      upcase_values = valid_object.slice(*column_names).each{|_, val| val.upcase! if val.respond_to?(:upcase!)}
+      downcase_values = valid_object.slice(*column_names).each{|_, val| val.downcase! if val.respond_to?(:downcase!)}
+
+      expect {
+        FactoryGirl.build(model_name, upcase_values)
+      }.to raise_error ActiveRecord::RecordInvalid, Regexp.new(error_code)
+
+      expect {
+        FactoryGirl.build(model_name, downcase_values)
+      }.to raise_error ActiveRecord::RecordInvalid, Regexp.new(error_code)
+    end
+  end
+
   def get_rand_string(column_length = 32)
     rand_string = ''
     chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a

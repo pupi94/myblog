@@ -1,0 +1,26 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th><%= t('category.name') %></th>
+      <th><%= t('category.article_num') %></th>
+      <th><%= t('common.status') %></th>
+      <th><%= t('common.operate') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @categories && @categories.size > 0 %>
+      <% @categories.each do |category| %>
+          <tr>
+            <td><%= category['name'] %></td>
+            <td></td>
+            <td><%= show_status(category['enable']) %></td>
+            <td ></td>
+          </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="4" align="center"><%= @msg.present? ? @msg : t('common.no_result') %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

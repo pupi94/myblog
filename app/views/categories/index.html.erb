@@ -7,25 +7,8 @@
 		<%= t('category.add') %>
 	</button>
 </div>
-<div>
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th><%= t('category.name') %></th>
-				<th><%= t('category.article_num') %></th>
-				<th><%= t('table.operate') %></th>
-				<th><%= t('category.sequence') %></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Tanmay</td>
-				<td>Bangalore</td>
-				<td>560001</td>
-				<td>560001</td>
-			</tr>
-		</tbody>
-	</table>
+<div class="categories_list">
+	<%= render :partial => "categories/shared/categories_list" %>
 </div>
 
 <%= render :partial => "categories/shared/add_category_modal" %>

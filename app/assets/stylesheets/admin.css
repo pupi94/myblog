@@ -1,6 +1,7 @@
 /*
  *= require include_bootstrap
- *= require_tree ../../../vendor/assets/stylesheets/bootstrap-validator
+ *= require bootstrapValidator.min
+ *= require bootstrap-dialog
  *= require public
  *= require_tree ./admin
  */

@@ -12,7 +12,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label"><%= t('category.name') %>:</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" name="category_name">
+              <input type="text" class="form-control" name="name">
             </div>
           </div>
         </form>
@@ -24,7 +24,6 @@
     </div>
   </div>
 </div>
-
 
 <script type="text/javascript">
   $(function() {
@@ -41,7 +40,7 @@
         validating: 'glyphicon glyphicon-refresh'
       },
       fields: {
-        category_name: {
+        name: {
           validators: {
             notEmpty: {
               message: '类别不能为空'
@@ -62,12 +61,22 @@
         type:'post',
         dataType:'json',
         success:function(data) {
-          // if(data.msg =="true" ){
-          // }else{
-          // }
+          if(data.return_code == 0 ){
+            location.reload();
+         }else{
+            BootstrapDialog.alert({
+              title: '<%= t('dialog.title')%>',
+              message: '<strong><%= t('dialog.failed')%></strong>&nbsp;&nbsp;' + data.return_info,
+              type: BootstrapDialog.TYPE_DANGER
+            });
+         }
         },
         error : function() {
-          alert("异常！");
+          BootstrapDialog.alert({
+              title: '<%= t('dialog.title')%>',
+              message: '<%= t('dialog.sys_error')%>',
+              type: BootstrapDialog.TYPE_DANGER
+          });
         }
       });
     });

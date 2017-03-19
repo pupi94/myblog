@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  before_filter :login_required
 
   def self.in_development?
     'development' == Rails.env
@@ -17,10 +16,6 @@ class ApplicationController < ActionController::Base
       respond_to do |format|
         format.html {
           redirect_to users_login_path
-        }
-
-        format.json {
-          render :json => {'error' => 'Access Denied'}.to_json
         }
       end
     end

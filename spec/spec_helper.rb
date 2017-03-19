@@ -9,3 +9,12 @@ RSpec.configure do |config|
   end
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end
+
+
+def expect_success_result(result)
+  expect(result['return_code']).to eq ErrorCode::SUCCESS
+end
+
+def expect_error_result(result, error_code)
+  expect(result['return_code']).to eq error_code
+end
