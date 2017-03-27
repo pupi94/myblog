@@ -1,0 +1,24 @@
+zh:
+  article:
+    type: 类型
+    title: 标题
+    summary: 摘要
+    tags: 文章标签
+    category: 文章分类
+
+
+#（转载、翻译、原创）
+# 来源（类型为转载和翻译存在）  source
+# 来源路径（类型为转载和翻译存在）  source_url
+
+# 文章内容  content
+
+# 文章分类  category_id
+# 附件  attachment
+# 作者ID  author_id
+# 作者名称  author_name
+# 访问量 pv
+# 创建时间  created_at
+# 发布时间  pubdate
+# 文章状态（编辑状态，已发布，下架） status
+# enable（已删除（回收站））  

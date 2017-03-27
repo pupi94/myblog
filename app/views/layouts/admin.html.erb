@@ -16,60 +16,61 @@
 </head>
 
 <body>
-  <div class="topbar-wrap white">
-    <div class="topbar-inner clearfix">
-      <div class="topbar-logo-wrap clearfix">
-        <h1 class="topbar-logo none"><a href="index.html" class="navbar-brand"><%= t('backstage_management_system') %></a></h1>
-        <ul class="navbar-list clearfix">
-          <li><a class="on" href="/admin/index"><%= t('backstage_system') %></a></li>
-          <li><a href="#" target="_blank"><%= t('blog_system') %></a></li>
-        </ul>
+  <div id="wrapper">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="index.html">
+          <i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;<%= t('backstage_management_system') %>
+        </a>
       </div>
-      <div class="top-info-wrap">
-        <ul class="top-info-list clearfix">
-          <li><a href="#"><%= t('admin') %></a></li>
-          <li><a href="#"><%= t('modify_pwd') %></a></li>
-          <li><a href="/users/logout" id="logout"><%= t('exit') %></a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="clearfix">
-    <div class="sidebar-wrap">
-      <div class="sidebar-title">
-        <h1><%= t('menu.list') %></h1>
-      </div>
+      <ul class="nav navbar-right top-nav">
+        <li><a class="navbar-brand" href="#"><%= t('admin') %></a></li>
+        <li><a class="navbar-brand" href="#"><%= t('modify_pwd') %></a></li>
+        <li><a class="navbar-brand" href="/users/logout"><%= t('exit') %></a></li>
+      </ul>
+    </nav>
 
-      <div class="sidebar-content">
-        <ul class="sidebar-list">
-          <li>
-            <a href="#"><%= t('menu.common_operation') %></a>
-            <ul class="sub-menu">
-              <li><a href="#"><%= t('menu.new_article') %></a></li>
-              <li><a href="#"><%= t('menu.my_article') %></a></li>
-              <li><a href="#"><%= t('menu.drafts') %></a></li>
-              <li><a href="#"><%= t('menu.trash') %></a></li>
-              <li><%= link_to t('menu.category'), categories_index_path%></li>
-              <li><a href="#"><%= t('menu.message_board') %></a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav side-nav">
+        <li>
+          <a href="/articles/new"><i class="glyphicon glyphicon-plus"></i><%= t('menu.new_article') %></a>
+        </li>
+        <li>
+          <a href="/articles/index"><i class="glyphicon glyphicon-menu-hamburger"></i><%= t('menu.my_article') %></a>
+        </li>
+        <li>
+          <a href="#"><i class="glyphicon glyphicon-bookmark"></i><%= t('menu.drafts') %></a>
+        </li>
+        <li>
+          <a href="#"><i class="glyphicon glyphicon-trash"></i><%= t('menu.trash') %></a>
+        </li>
+        <li>
+          <a href="/categories/index"><i class="glyphicon glyphicon-menu-hamburger"></i><%= t('menu.category')%></a>
+        </li>
+        <li>
+          <a href="#"><i class="glyphicon glyphicon-bullhorn"></i><%= t('menu.message_board') %></a>
+        </li>
+      </ul>
     </div>
 
-    <div class="main-wrap">
-      <div class="crumb-wrap">
-        <div class="crumb-left">
-          <a class="btn btn-primary" href="#">
+    <div id="container-wrapper">
+      <div class="container-fluid">
+        <div class="col-lg-12 row">
+          <div class="container-title">
+           <a class="btn btn-primary" href="javascript:void()">
             <span class="glyphicon glyphicon-list"></span>
           </a>
           <% if content_for?(:title_h1) %>
-            <span class="level1"><%= yield(:title_h1) %></span>
+          <span class="level1"><%= yield(:title_h1) %></span>
           <% end %>
         </div>
       </div>
-      <div class="crumb_box"><%= yield %></div>
+      <div class="container-main">
+        <%= yield %>
+      </div>
     </div>
   </div>
+</div>
 </body>
 </html>
+

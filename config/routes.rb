@@ -14,4 +14,9 @@ Rails.application.routes.draw do
   post 'users/do_login'
   get  'users/do_login', to: 'users#login'
   get  'users/logout'
+
+  #article
+  get  'articles/new'
+  post 'articles/create'
+  get  'articles/index'
 end
