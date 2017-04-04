@@ -24,4 +24,12 @@ module CustomConstant
       "MIN" => 1
     }
   }
+
+  module ArticleSourceType 
+    extend ConstantValue
+    REPRINT = 'reprint'
+    TRANSLATE = 'translate'
+    ORIGINA = 'original'
+  end
+
 end

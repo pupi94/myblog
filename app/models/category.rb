@@ -21,7 +21,11 @@ class Category < ApplicationRecord
 
   def self.search(params)
     Util.try_rescue do |response|
-      categories = all.order(seq: :asc).select(%w(id name enable))
+      categories = all
+      if params['enable'].present? && params['enable']
+        categories = categories.where(enable: true)
+      end
+      categories = categories.order(seq: :asc).select(%w(id name enable))
       response['categories'] = categories.as_json
     end
   end

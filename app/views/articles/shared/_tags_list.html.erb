@@ -1,0 +1,10 @@
+<% if tags && tags.size > 0 %>
+  <% tags.each do |tag| %>
+    <div class="checkbox checkbox-inline" style="padding-top: 0px;padding-left: 0px;">
+      <label><input type="checkbox" name='tags[]' value="<%= tag['id'] %>"><%= tag['name'] %></label>
+    </div> 
+  <% end %>
+<% end %>
+<button type="button" class="btn btn-primary btn-xs add_tag_btn" data-toggle="tooltip"title="<%= t('article.add_tag')%>" style="margin-left: 10px;">
+  <span class="glyphicon glyphicon-plus"></span>
+</button>

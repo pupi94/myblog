@@ -8,12 +8,15 @@ service_error:
   10007: ERR_USER_NAME_NOT_UNIQUE
   10008: ERR_USER_NICKNAME_NOT_UNIQUE
 
-  
 
   11001: 类别名称不能为空
   11002: ERR_CATEGORY_SEQ_CANNOT_BE_BLANK
   11003: 类别名称长度超过限制
   11004: 类别名称已存在
+
+  12001: 标签名称不能为空
+  12002: 标签名称长度超过限制
+  12003: 标签名称已存在
 
   
 

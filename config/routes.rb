@@ -19,4 +19,7 @@ Rails.application.routes.draw do
   get  'articles/new'
   post 'articles/create'
   get  'articles/index'
+
+  #tag
+  post 'tags/create'
 end
