@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   layout :resolve_layout
 
   def index
-    rtn = Category.search nil
+    rtn = Category.search({})
     if Util.success? rtn
       @categories = rtn['categories']
     else

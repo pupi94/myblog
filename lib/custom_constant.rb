@@ -27,9 +27,9 @@ module CustomConstant
 
   module ArticleSourceType 
     extend ConstantValue
+    ORIGINA = 'original'
     REPRINT = 'reprint'
     TRANSLATE = 'translate'
-    ORIGINA = 'original'
   end
 
 end

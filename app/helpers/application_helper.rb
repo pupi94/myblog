@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def show_article_source_type_select
-    source_types = [[t("article.please_choose"), '']]
+    source_types = []
     ArticleSourceType.const_values.each do |value|
       source_types << [t("article.#{value}"), value]
     end

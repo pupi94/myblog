@@ -2,8 +2,8 @@
   <%= t('menu.new_article') %>
 <% end %>
 <div style="margin-left: auto; margin-right: auto; width: 75%">
-<%= form_tag('/articles/create', method: 'post', remote: true, enctype: "multipart/form-data", class: "form-horizontal") do %>
-   <%= render :partial => "articles/shared/article_form" %>
-<% end %>
+  <%= form_tag('/articles/create', method: 'post', name: 'article_form', remote: true, enctype: "multipart/form-data", class: "form-horizontal") do %>
+     <%= render :partial => "articles/shared/article_form" %>
+  <% end %>
 </div>
 <%= render :partial => "tags/shared/add_tag_modal" %>

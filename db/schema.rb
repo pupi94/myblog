@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170404052317) do
+ActiveRecord::Schema.define(version: 20170409022323) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",       limit: 32,                null: false
@@ -18,6 +18,17 @@ ActiveRecord::Schema.define(version: 20170404052317) do
     t.boolean  "enable",                default: true, null: false
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
+  end
+
+  create_table "kindeditor_assets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "asset"
+    t.integer  "file_size"
+    t.string   "file_type"
+    t.integer  "owner_id"
+    t.string   "owner_type"
+    t.string   "asset_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -13,9 +13,7 @@ zh:
     attachment: 文章图片
     source: 来源
     source_url: 相关链接
-
-  tag:
-    add:
+    preview: 预览
 
 # 来源（类型为转载和翻译存在）  source
 # 来源路径（类型为转载和翻译存在）  source_url
