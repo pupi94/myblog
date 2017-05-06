@@ -11,7 +11,7 @@ class Tag < ApplicationRecord
       if exists?(name: params['name'])
         raise CommonException.new(ErrorCode::ERR_TAG_NAME_NOT_UNIQUE)
       end
-      #handle_create(name: params['name'])
+      handle_create(name: params['name'])
     end
   end
 

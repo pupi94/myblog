@@ -15,4 +15,8 @@ class ArticlesController < ApplicationController
 
   def create
   end
+
+  def preview
+    
+  end
 end

@@ -56,22 +56,8 @@
       if(!$tagForm.data('bootstrapValidator').isValid()){
         return ;
       }
-      $.ajax({
-        url:'/tags/create',
-        data: $tagForm.serialize(),
-        type:'post',
-        dataType:'json',
-        success:function(data) {
-          console.log(data)
-        },
-        error : function() {
-          BootstrapDialog.alert({
-            title: '<%= t('dialog.title')%>',
-            message: '<%= t('dialog.sys_error')%>',
-            type: BootstrapDialog.TYPE_DANGER
-          });
-        }
-      });
+      $.post('/tags/create',$tagForm.serialize());
+      $addTagModal.modal('hide')
     });
   });
 </script>
