@@ -22,7 +22,7 @@ class CategoriesController < ApplicationController
   def resolve_layout
     case action_name
     when 'index', 'create'
-      'admin'
+      'cm_application'
     else
       'application'
     end

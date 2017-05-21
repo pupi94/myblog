@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   # admin
-  get  'admin/index'
+  get  'content_manage/index'
 
   # categories
   get  'categories/index'
@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get  'articles/new'
   post 'articles/create'
   get  'articles/index'
+  get  'articles/preview'
 
   #tag
   post 'tags/create'

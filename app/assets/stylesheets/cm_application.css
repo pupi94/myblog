@@ -2,6 +2,5 @@
  *= require include_bootstrap
  *= require bootstrapValidator.min
  *= require bootstrap-dialog
- *= require public
- *= require_tree ./admin
+ *= require_tree ./content_manage
  */

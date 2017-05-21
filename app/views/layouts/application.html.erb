@@ -1,12 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-	<%= render 'shared/head' %>
+<head>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <title>我的博客</title>
+  <%= csrf_meta_tags %>
 
-  <body>
-  	<%= render partial: "shared/navbar" %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  
+</head>
 
-    <%= yield %>
+<body class="user-select">
+  <header class="header">
+    <nav class="navbar navbar-default" id="navbar">
+      <div class="container">
+        <div class="header-topbar hidden-xs link-border">
+          <ul class="site-nav topmenu">
+            <li><a href="#">标签云</a></li>
+            <li><a href="#" rel="nofollow">读者墙</a></li>
+            <li><a href="#" rel="nofollow">友情链接</a></li>
+            <li><a href="#" rel="nofollow">友情链接</a></li>
+          </ul>
+        </div>
+        <div class="navbar-header">
+          <div class="logo hvr-bounce-in"><a href="" title=""><%= image_tag "logo.png" %></a></div>
+        </div>
+        <div class="navbar-collapse" id="header-navbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a data-cont="异清轩首页" href="index.html">首页</a></li>
+            <li><a href="#">前端技术</a></li>
+            <li><a href="#">后端程序</a></li>
+            <li><a href="#">管理系统</a></li>
+            <li><a href="#">授人以渔</a></li>
+            <li><a href="#">程序人生</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
 
-    <%= render partial: "shared/footer" %>
-  </body>
+  <section class="container default-height">
+    <div style="min-height: 905px"><%= yield %></div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2016 <a href="">xxxxx.com</a> &nbsp; <a href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow">豫ICP备xxxxxxx</a> &nbsp; <a href="sitemap.xml" target="_blank" class="sitemap">网站地图</a></p>
+    </div>
+    <div id="gotop"><a class="gotop"></a></div>
+  </footer>
+</body>
 </html>

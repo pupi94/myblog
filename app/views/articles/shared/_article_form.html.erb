@@ -72,7 +72,7 @@
 
 <div class="form-group" style="margin-bottom: 40px; margin-top: 35px;">
   <div class="col-sm-offset-10" style="display: inline;">
-    <button type="button" class="btn btn-primary" style="margin-right: 20px;"><%= t('article.preview') %></button>
+    <button type="button" class="btn btn-primary article_preview_btn" style="margin-right: 20px;"><%= t('article.preview') %></button>
     <button type="submit" class="btn btn-primary article_save_btn"><%= t('button.save') %></button>
   </div>
 </div>
@@ -114,6 +114,16 @@
         return;
       }
       $articleForm.submit()
+    })
+
+    $('.article_preview_btn').click(function() {
+      $articleForm.bootstrapValidator('validate')
+      if(!$articleForm.data('bootstrapValidator').isValid()){
+        return;
+      }
+      var data = $articleForm.serialize();
+      console.log(data)
+      window.open("/articles/preview?"+data)
     })
   })
 </script>

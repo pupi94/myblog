@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     if Util::success? rtn
       if rtn.present? && rtn['user'].present?
         session["user"] = rtn['user']
-        redirect_to admin_index_path
+        redirect_to content_manage_index_path
       else
         respond_to do |format|
           format.html { 
