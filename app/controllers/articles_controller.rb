@@ -14,20 +14,20 @@ class ArticlesController < ApplicationController
   end
 
   def create
+    article = params.slice(*%w(source_type title content category tags summary source source_url))
   end
 
   def preview
-    @article = params.slice(%w(source_type title content category tags summary source source_url))
+    article = params.slice(*%w(source_type title content category tags summary source source_url))
+    puts '=================='
+    puts article
     respond_to do |format|
-      puts params
       format.html { 
         render "preview",
-        layout: false
-        # locals: {
-        #   article: article,
-        #   tags: tags,
-        #   categories: categories
-        # }
+        layout: false,
+        locals: {
+          article: article
+        }
       }
     end
   end

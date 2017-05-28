@@ -31,6 +31,6 @@ class ApplicationController < ActionController::Base
 
   def current_user
     return nil unless session['user']
-    return session['user'] if session['user']
+    session['user']
   end
 end
