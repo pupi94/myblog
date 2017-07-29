@@ -1,5 +1,6 @@
-PATH
-  remote: ../defined_error
+GIT
+  remote: git@github.com:hpp19941122/defined_error.git
+  revision: 7b5429a1a90f05889759196e3d6d77f312e49b5f
   specs:
     defined_error (0.1.0)
 
@@ -228,4 +229,4 @@ DEPENDENCIES
   web-console
 
 BUNDLED WITH
-   1.13.7
+   1.15.3

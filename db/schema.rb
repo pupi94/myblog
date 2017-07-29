@@ -10,12 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170409022323) do
+ActiveRecord::Schema.define(version: 20170523135813) do
+
+  create_table "articles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "title",       limit: 64,                   null: false
+    t.string   "source_type", limit: 16,                   null: false
+    t.string   "source",      limit: 64
+    t.string   "source_url",  limit: 128
+    t.integer  "category_id",                              null: false
+    t.string   "tags",        limit: 64,                   null: false
+    t.string   "summary"
+    t.string   "attachment",  limit: 128
+    t.integer  "author_id",                                null: false
+    t.string   "author_name", limit: 32,                   null: false
+    t.integer  "pv",          limit: 3,     default: 0,    null: false
+    t.string   "status",      limit: 16,                   null: false
+    t.boolean  "enabled",                   default: true, null: false
+    t.date     "pubdate"
+    t.text     "content",     limit: 65535
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",       limit: 32,                null: false
     t.integer  "seq",        limit: 2,                 null: false
-    t.boolean  "enable",                default: true, null: false
+    t.boolean  "enabled",               default: true, null: false
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
   end
@@ -33,7 +53,7 @@ ActiveRecord::Schema.define(version: 20170409022323) do
 
   create_table "tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",       limit: 32,                null: false
-    t.boolean  "enable",                default: true, null: false
+    t.boolean  "enabled",               default: true, null: false
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
   end
@@ -42,7 +62,7 @@ ActiveRecord::Schema.define(version: 20170409022323) do
     t.string   "username",   limit: 32,                null: false
     t.string   "password",   limit: 64,                null: false
     t.string   "nickname",   limit: 32,                null: false
-    t.boolean  "enable",                default: true, null: false
+    t.boolean  "enabled",               default: true, null: false
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
   end

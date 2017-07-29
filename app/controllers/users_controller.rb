@@ -12,23 +12,19 @@ class UsersController < ApplicationController
 
   def do_login
     rtn = User.login(params)
-    if Util::success? rtn
-      if rtn.present? && rtn['user'].present?
+    if Util::success?(rtn) && rtn['user'].present?
         session["user"] = rtn['user']
         redirect_to content_manage_index_path
-      else
-        respond_to do |format|
-          format.html { 
-            render "login",
-            layout: false,
-            locals: {
-              :flash => {:alert=>"user not exist!"}
-            }
-          }
-        end
-      end
     else
-      render_error
+      respond_to do |format|
+        format.html {
+          render "login",
+          layout: false,
+          locals: {
+            :flash => {:alert=> rtn['return_info']}
+         }
+        }
+      end
     end
   end
 

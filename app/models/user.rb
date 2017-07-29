@@ -20,6 +20,7 @@ class User < ApplicationRecord
       end
       password  = Digest::MD5.hexdigest(params['password'].encode('utf-8')).upcase
       user = find_by(username: params["user_name"], password: password)
+      raise CommonException.new(ErrorCode::ERR_USER_PASSWORD_OR_NMAE_WRONG) unless user
       response['user'] = user
     end
   end

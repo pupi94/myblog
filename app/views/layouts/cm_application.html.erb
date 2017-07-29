@@ -16,57 +16,57 @@
 </head>
 
 <body>
-  <div id="wrapper">
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="index.html">
-          <i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;<%= t('backstage_management_system') %>
-        </a>
-      </div>
-      <ul class="nav navbar-right top-nav">
-        <li><a class="navbar-brand" href="#"><%= t('admin') %></a></li>
-        <li><a class="navbar-brand" href="#"><%= t('modify_pwd') %></a></li>
-        <li><a class="navbar-brand" href="/users/logout"><%= t('exit') %></a></li>
-      </ul>
-    </nav>
-
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-      <ul class="nav navbar-nav side-nav">
-        <li>
-          <a href="/articles/new"><i class="glyphicon glyphicon-plus"></i><%= t('menu.new_article') %></a>
+<div class="wrapper">
+  <div class="header">
+    <div class="header-title">
+      <strong><%= t('myblog_system') %></strong>
+      <small><%= t('management_system') %></small>
+    </div>
+    <div class="header-nav">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <%= t('admin') %><span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#"><i class="glyphicon glyphicon-user"></i><%= t('user.info') %></a></li>
+            <li><a href="#"><i class="glyphicon glyphicon-cog"></i><%= t('user.setting') %></a></li>
+          </ul>
         </li>
-        <li>
-          <a href="/articles/index"><i class="glyphicon glyphicon-menu-hamburger"></i><%= t('menu.my_article') %></a>
-        </li>
-        <li>
-          <a href="#"><i class="glyphicon glyphicon-bookmark"></i><%= t('menu.drafts') %></a>
-        </li>
-        <li>
-          <a href="#"><i class="glyphicon glyphicon-trash"></i><%= t('menu.trash') %></a>
-        </li>
-        <li>
-          <a href="/categories/index"><i class="glyphicon glyphicon-menu-hamburger"></i><%= t('menu.category')%></a>
-        </li>
-        <li>
-          <a href="#"><i class="glyphicon glyphicon-bullhorn"></i><%= t('menu.message_board') %></a>
-        </li>
+        <li><a href="/users/logout"><i class="glyphicon glyphicon-off"></i><%= t('log_out') %></a></li>
       </ul>
     </div>
+  </div>
 
-    <div id="container-wrapper">
-      <div class="container-fluid">
-        <div class="col-lg-12 row">
-          <div class="container-title">
-           <a class="btn btn-primary" href="javascript:void()">
+  <div class="container-wrapper">
+    <nav class="container-nav">
+      <ul class="nav">
+        <li><a href="/content_manage/index"><i class="glyphicon glyphicon-home"></i><%= t('menu.first_page') %></a></li>
+        <li><a href="/articles/new"><i class="glyphicon glyphicon-plus"></i><%= t('menu.new_article') %></a></li>
+        <li><a href="/articles/index"><i class="glyphicon glyphicon-menu-hamburger"></i><%= t('menu.my_article') %></a></li>
+        <li><a href="#"><i class="glyphicon glyphicon-bookmark"></i><%= t('menu.drafts') %></a></li>
+        <li><a href="#"><i class="glyphicon glyphicon-trash"></i><%= t('menu.trash') %></a></li>
+        <li><a href="/categories/index"><i class="glyphicon glyphicon-menu-hamburger"></i><%= t('menu.category')%></a></li>
+        <li><a href="#"><i class="glyphicon glyphicon-bullhorn"></i><%= t('menu.message_board') %></a></li>
+      </ul>
+    </nav>
+    <div class="container">
+      <div class="container-title">
+        <div class="title-img">
+          <a class="btn btn-primary" href="javascript:void(0)">
             <span class="glyphicon glyphicon-list"></span>
           </a>
-          <% if content_for?(:title_h1) %>
-          <span class="level1"><%= yield(:title_h1) %></span>
-          <% end %>
+        </div>
+        <div class="title-text">
+          <ol class="breadcrumb">
+            <% if content_for?(:title_h1) %><%= yield(:title_h1) %><% end %>
+          </ol>
         </div>
       </div>
       <div class="container-main">
         <%= yield %>
+        <!--<li>新增文章</li>-->
+        <!--<li class="active">Library</li>-->
       </div>
     </div>
   </div>

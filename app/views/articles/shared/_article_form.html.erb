@@ -79,7 +79,7 @@
 
 <script type="text/javascript">
   $(function(){
-    $articleForm = $("form[name='article_form'");
+    var $articleForm = $("form[name='article_form']");
 
     var empty_validator = {
       validators: {
@@ -109,20 +109,20 @@
     });
 
     $('.article_save_btn').click(function() {
-      $articleForm.bootstrapValidator('validate')
+      $articleForm.bootstrapValidator('validate');
       if(!$articleForm.data('bootstrapValidator').isValid()){
         return;
       }
       $articleForm.submit()
-    })
+    });
 
     $('.article_preview_btn').click(function() {
-      $articleForm.bootstrapValidator('validate')
+      $articleForm.bootstrapValidator('validate');
       if(!$articleForm.data('bootstrapValidator').isValid()){
         return;
       }
       var data = $articleForm.serialize();
-      console.log(data)
+      console.log(data);
       window.open("/articles/preview?"+data)
     })
   })
