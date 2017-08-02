@@ -37,4 +37,4 @@ zh:
 # 创建时间  created_at
 # 发布时间  pubdate
 # 文章状态（编辑状态，已发布，下架） status
-# enable（已删除（回收站））  
+# enabled（已删除（回收站））

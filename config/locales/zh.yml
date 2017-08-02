@@ -24,7 +24,7 @@ zh:
   common: 
     operate: 操作
     status: 状态
-    enable: 启用
+    enabled: 启用
     disable: 禁用
     no_result: 未查询到数据
     
