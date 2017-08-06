@@ -5,4 +5,4 @@
 //= require jquery.lazyload.min
 //= require jquery.ias
 //= require nprogress
-//= require_tree ./content
+//= require_tree ./blog

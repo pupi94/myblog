@@ -11,15 +11,15 @@
   <title>后台管理</title>
   <%= csrf_meta_tags %>
 
-  <%= stylesheet_link_tag    'cm_application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'cm_application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag    'management_application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'management_application', 'data-turbolinks-track': 'reload' %>
 </head>
 
 <body>
 <div class="wrapper">
   <div class="header">
     <div class="header-title">
-      <strong><%= t('myblog_system') %></strong>
+      <strong><a href="/home/index"><%= t('myblog_system') %></a></strong>
       <small><%= t('management_system') %></small>
     </div>
     <div class="header-nav">
@@ -59,14 +59,14 @@
         </div>
         <div class="title-text">
           <ol class="breadcrumb">
-            <% if content_for?(:title_h1) %><%= yield(:title_h1) %><% end %>
+            <!--<li>新增文章</li>-->
+            <!--<li class="active">Library</li>-->
+            <% if content_for?(:title) %><%= yield(:title) %><% end %>
           </ol>
         </div>
       </div>
       <div class="container-main">
         <%= yield %>
-        <!--<li>新增文章</li>-->
-        <!--<li class="active">Library</li>-->
       </div>
     </div>
   </div>

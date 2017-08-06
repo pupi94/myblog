@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_filter :login_required
-  layout "cm_application"
+  layout "management_application"
 
   def index
 
@@ -8,28 +8,14 @@ class ArticlesController < ApplicationController
 
   def new
     tags_rtn = Tag.search params
-    @tags = tags_rtn['tags'] || nil
+    @tags = tags_rtn['tags'] || []
     categories_rtn = Category.search({'enabled' => true})
-    @categories = categories_rtn['categories'] || nil
+    @categories = categories_rtn['categories'] || []
   end
 
   def create
-    article = params.slice(*%w(source_type title content category tags summary source source_url))
+    puts params.as_json
+    article = params.slice(*%w(source_type title blog category tags summary source source_url))
+    #redirect_to index
   end
-
-  def preview
-    article = params.slice(*%w(source_type title content category tags summary source source_url))
-    puts '=================='
-    puts article
-    respond_to do |format|
-      format.html { 
-        render "preview",
-        layout: false,
-        locals: {
-          article: article
-        }
-      }
-    end
-  end
-
 end

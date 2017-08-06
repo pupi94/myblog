@@ -6,3 +6,4 @@
 //= require bootstrap-dialog
 //= require kindeditor
 //= require load_kindeditor
+//= require attachment_upload
