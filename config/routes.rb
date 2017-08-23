@@ -23,4 +23,7 @@ Rails.application.routes.draw do
 
   #tag
   post 'tags/create'
+
+  post 'attachment/update'
+  get  'attachment/download'
 end

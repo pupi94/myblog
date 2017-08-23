@@ -1,40 +1,42 @@
 // 上传文件 插件
 // require jQuery
 // require css flex
+
 /*
  使用范例:
- $('.element').uploadAttachment({
-   url: '',
-   service_name: '',    // require
-   attachment_type: '', // require
-   attachment_id: '',   // require
-   object_name: '',     // require
-   object_id: '',
-   attachment: '',
-   attachment_name: '',
-   object_locked: true,
-   auto_upload: true,
-   form_data: {}
- });
 
- *** 如何获取最新的附件值：获取组件内 $('.element').find('input.component_attachment') 的值即可 ***
-*/
+ $('.element').uploadAttachment({
+ url: '',
+ attachment_type: '', // require
+ attachment_id: '',   // require
+ object_name: '',     // require
+ object_id: '',
+ attachment: '',
+ attachment_name: '',
+ object_locked: true,
+ auto_upload: true,
+ form_data: {}
+ });
+ */
 
 (function ($) {
   var defaultOpts = {
     url: '/attachment/update',
     download_path: '/attachment/download?file_path=',
+
     service_name: null,
+
     attachment_type: null,
     attachment_id: null,
     object_name: null,
     object_id: null,
-    attachment: null,
+    attachment: '',
     attachment_name: null,
     object_locked: false, // true: 只能查看文件；false: 可以上传、删除文件
-    auto_upload: false, // true: 文件选择后立即自动上传；false: 多文件手动上传
+    auto_upload: true, // true: 文件选择后立即自动上传；false: 多文件手动上传
     limit_file_number: 10, // 一次最多可选择上传的文件数量
     limit_file_size: 3 * 1024 * 1024, // 单个文件最大可上传的大小，单位字节
+    target_node: null, // 触发附件上传模态框的html元素 或者 需要自动回填上传结果的input元素
     form_data: {} // 除了以上属性还需要发送到服务器的属性全部用这个属性来保存
   };
 
@@ -42,13 +44,14 @@
     this.opts = opts;
     this.element = element;
     this.localFiles = [];
+    this.formData = this.buildExtraFormData();
     this.MAP_MSG = {
       file_size_exceed: '您选择的附件超过' + Math.ceil(opts.limit_file_size / 1024 / 1024) + 'M ，请处理后再提交！',
       file_type_not_support: '您选择的附件非支持类型，请重新选择！',
       file_name_repeat: '您已经选择该附件，请重新选择！',
       file_amount_exceed: '最多上传' + opts.limit_file_number + '个附件，请重新选择！'
     };
-    element.addClass('whalemove_attachment_upload_container');
+    element.addClass('attachment_upload_container');
     this.init();
   }
 
@@ -106,33 +109,43 @@
         $tpl.find('button.fileinput-button').on('click', me.sendFileUpload.bind(me));
       }
       $tpl.find('input.file_upload').fileupload(me.buildFileUploadOption())
-      .prop('disabled', !$.support.fileInput)
-      .parent().addClass($.support.fileInput ? undefined : 'disabled');
+        .prop('disabled', !$.support.fileInput)
+        .parent().addClass($.support.fileInput ? undefined : 'disabled');
       return $tpl;
     },
     buildExtraFormData: function () {
       var me = this;
-      var arr = [
-        {name: 'service_name', value: me.opts.service_name},
-        {name: 'attachment_type', value: me.opts.attachment_type},
-        {name: 'attachment_id', value: me.opts.attachment_id},
-        {name: 'object_name', value: me.opts.object_name},
-        {name: 'object_id', value: me.opts.object_id},
-        {name: 'attachment_name', value: me.opts.attachment_name},
-        {name: 'object_locked', value: me.opts.object_locked}
-      ];
+      var arr = [];
+
+      var keys = ['attachment', 'attachment_type', 'attachment_id', 'object_name', 'object_id', 'attachment_name', 'object_locked'];
+      keys.forEach(function (key) {
+        var value = me.opts[key];
+        if (value !== undefined && value !== null) {
+          arr.push({name: key, value: value});
+        }
+      });
+
       if (me.opts.form_data) {
-        var keys = Object.keys(me.opts.form_data);
+        keys = Object.keys(me.opts.form_data);
         if (keys && keys.length) {
           keys.forEach(function (key) {
-            var value = me.opts.form_data[key]
-            if (value != undefined && value != null) {
+            var value = me.opts.form_data[key];
+            if (value !== undefined && value !== null) {
               arr.push({name: key, value: value});
             }
           })
         }
       }
+
       return arr;
+    },
+    updateExtraFormData: function () {
+      var me = this;
+      $.each(me.formData, function (index, item) {
+        if (item.name === 'attachment') {
+          item.value = me.opts.attachment;
+        }
+      });
     },
     buildFileUploadOption: function () {
       var me = this;
@@ -140,7 +153,7 @@
         url: me.opts.url,
         type: 'post',
         dataType: 'json',
-        formData: me.buildExtraFormData(),
+        formData: me.formData,
         add: function (e, data) {
           var validation = me.checkFiles(data.files);
           if (validation.valid) {
@@ -151,10 +164,10 @@
             } else {
               me.addToLocalFiles(data.files);
               me.element.find('button.fileinput-button').removeAttr('disabled');
-              me.element.find('.attachment .error_msg').text('').addClass('hidden');
+              me.element.find('.error_msg').text('').addClass('hidden');
             }
           } else {
-            me.element.find('.attachment .error_msg').text(validation.msg).removeClass('hidden');
+            me.element.find('.error_msg').text(validation.msg).removeClass('hidden');
           }
         },
         done: function (e, data) {
@@ -188,9 +201,10 @@
       if (!me.localFiles || me.localFiles.length == 0) {
         return;
       }
+      me.updateExtraFormData();
       me.element.find('.fileinput-button').attr('disabled', 'disabled');
       me.element.find('button.fileinput-button span').text('正在上传');
-      me.element.find('input.file_upload').fileupload('send', {files: me.localFiles});
+      me.element.find('input.file_upload').fileupload('send', {files: me.localFiles, formData: me.formData});
     },
     deleteAttachment: function (event) {
       var me = this;
@@ -220,12 +234,10 @@
       if (data.return_code == 0) {
         me.opts.attachment = data.attachment;
         me.appendLinkFiles();
-        me.resetModalRelatedTarget();
-        /***  暴露给外部读取当前附件值： input.component_attachment  ***/
-        me.element.find('input.component_attachment').val(me.opts.attachment);
-        me.element.find('.attachment .error_msg').text('').addClass('hidden');
+        me.resetTargetNode();
+        me.element.find('.error_msg').text('').addClass('hidden');
       } else {
-        me.element.find('.attachment .error_msg').text(data.return_info).removeClass('hidden');
+        me.element.find('.error_msg').text(data.return_info).removeClass('hidden');
       }
     },
     appendLinkFiles: function () {
@@ -248,20 +260,21 @@
         $ul.append('<span>没有附件</span>');
       }
     },
-    resetModalRelatedTarget: function () {
+    resetTargetNode: function () {
+      // 回填数据
       var me = this;
-      var $relatedTarget = $('a.show-attachment-button[data-service-name=' + me.opts.service_name
-        + '][data-attachment-type=' + me.opts.attachment_type + '][data-attachment-id=' + me.opts.attachment_id + ']');
-      if ($relatedTarget) {
-        $relatedTarget.data('attachment', me.opts.attachment);
-        if (!me.opts.is_custom_text) {
-          $relatedTarget.text(me.opts.attachment ? '查看附件' : '上传附件');
-        }
+      if (!me.opts.target_node) {
+        return;
+      }
+      me.opts.target_node.val(me.opts.attachment); // input
+      me.opts.target_node.data('attachment', me.opts.attachment); // button or link
+      if (!me.opts.is_custom_text) {
+        me.opts.target_node.text(me.opts.attachment ? '查看附件' : '上传附件');
       }
     },
     init: function () {
       var me = this;
-      var $tpl = '<div class="attachment"><input class="component_attachment" hidden><div class="attachment-body"><ul class="clearfix"></ul><span class="error_msg hidden"></span></div></div>';
+      var $tpl = '<div class="attachment"><div class="attachment-body"><ul class="clearfix"></ul><span class="error_msg hidden"></span></div></div>';
       me.element.empty().append($tpl);
 
       me.appendLinkFiles();

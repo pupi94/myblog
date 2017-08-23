@@ -1,4 +1,3 @@
-#source 'https://rubygems.org'
 source 'https://gems.ruby-china.org'
 
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
@@ -39,3 +38,12 @@ group :development do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+
+# file load
+=begin
+gem "carrierwave", "0.10.0"
+gem 'rest-client', "1.7.3"
+gem 'carrierwave-aliyun', "0.3.6"
+gem 'file_load_by_aliyun', "0.3.1"
+=end

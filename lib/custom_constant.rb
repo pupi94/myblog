@@ -25,11 +25,18 @@ module CustomConstant
     }
   }
 
-  module ArticleSourceType 
+  module SourceType
     extend ConstantValue
     ORIGINA = 'original'
     REPRINT = 'reprint'
     TRANSLATE = 'translate'
+  end
+
+  module ArticleStatus
+    extend ConstantValue
+    EDITING = "editing"
+    PUBLISHED = "published"
+    SOLD_OUT = "sold_out"
   end
 
 end

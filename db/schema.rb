@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20170523135813) do
     t.string   "status",      limit: 16,                   null: false
     t.boolean  "enabled",                   default: true, null: false
     t.date     "pubdate"
-    t.text     "blog",     limit: 65535
+    t.text     "content",     limit: 65535
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
   end

@@ -22,7 +22,7 @@
   <div class="col-lg-12">
     <% @categories.each do |category| %>
         <div class="radio checkbox-inline" style="padding-top: 0px; padding-left: 0px;">
-          <label><input type="radio" name="category"  value="<%= category['id'] %>"><%= category['name'] %></label>
+          <label><input type="radio" name="category_id"  value="<%= category['id'] %>"><%= category['name'] %></label>
         </div>
     <% end %>
   </div>
@@ -33,10 +33,31 @@
     <label class="form_label"><%= t("article.tags") %></label>
   </div>
 </div>
+
 <div class="form-group">
   <div class="col-lg-12 tags_checkbox_list">
-    <%= render :partial => "articles/shared/tags_checkbox_list", locals: {tags: @tags} %>
+    <% if @tags && @tags.size > 0 %>
+        <% @tags.each do |tag| %>
+            <div class="checkbox checkbox-inline" style="padding-top: 0;padding-left: 0;">
+              <label><input type="checkbox" name='tags[]' value="<%= tag['id'] %>"><%= tag['name'] %></label>
+            </div>
+        <% end %>
+    <% end %>
+    <button type="button" class="btn btn-primary btn-xs add_tag_btn" data-toggle="tooltip"title="<%= t('article.add_tag')%>" style="margin-left: 10px;">
+      <span class="glyphicon glyphicon-plus"></span>
+    </button>
   </div>
+</div>
+
+<div class="form-group">
+  <div class="col-lg-12">
+    <label class="form_label"><%= t("article.summary") %></label>
+    <textarea class="form-control" name='summary' rows="3"></textarea>
+  </div>
+</div>
+
+<div class="form-group" style="padding-left: 15px; padding-right: 15px;">
+  <%= kindeditor_tag :content, '', :editor_id => 'article_editor' %>
 </div>
 
 <div class="form-group">
@@ -51,26 +72,16 @@
 </div>
 
 <div class="form-group">
-  <div class="col-lg-12">
-    <label class="form_label"><%= t("article.summary") %></label>
-    <textarea class="form-control" name='summary' rows="3"></textarea>
-  </div>
-</div>
-
-<div class="form-group" style="padding-left: 15px; padding-right: 15px;">
-  <%= kindeditor_tag :blog %>
-</div>
-
-<div class="form-group">
   <div class="col-lg-5">
-    <label><%= t('article.attachment') %></label>
-    <input type="file" name='attachment' class="form-control">
+    <%= upload_attachment_tag({"attachment_type" => "article"}) %>
+
+   <!-- <label><%= t('article.attachment') %></label>
+    <input type="file" name='attachment' class="form-control">-->
   </div>
 </div>
 
 <div class="form-group">
-  <div class="col-sm-offset-10" style="display: inline;">
-    <button type="button" class="btn btn-primary article_preview_btn" style="margin-right: 20px;"><%= t('article.preview') %></button>
+  <div class="col-sm-offset-11" style="display: inline;">
     <button type="submit" class="btn btn-primary article_save_btn"><%= t('button.save') %></button>
   </div>
 </div>
@@ -78,11 +89,6 @@
 <script type="text/javascript">
   $(function(){
     var $articleForm = $("#article_form");
-    var empty_validator = {
-      validators: {
-        notEmpty: {message: '不能为空'}
-      }
-    };
 
     $articleForm.bootstrapValidator({
       feedbackIcons: {
@@ -91,15 +97,35 @@
         validating: 'glyphicon glyphicon-refresh'
       },
       fields: {
-        title: empty_validator,
-        category: empty_validator,
-        summary: empty_validator,
+        title: {
+          validators: {
+            notEmpty: {message: '不能为空'},
+            stringLength:{max: 64, message: '最大长度为64！'}
+          }
+        },
+        category_id: {
+          validators: {
+            notEmpty: {message: '不能为空'}
+          }
+        },
+        summary: {
+          validators: {
+            stringLength:{max: 255, message: '最大长度为255！'}
+          }
+        },
+        source: {
+          validators: {
+            stringLength:{max: 64, message: '最大长度为64！'}
+          }
+        },
+        source_url: {
+          validators: {
+            stringLength:{max: 128, message: '最大长度为128！'}
+          }
+        },
         'tags[]': {
           validators: {
-            choice: {
-              min: 1,
-              message: '不能为空'
-            }
+            choice: {min: 1, message: '不能为空'}
           }
         }
       }
@@ -107,9 +133,11 @@
 
     $('.article_save_btn').click(function() {
       $articleForm.bootstrapValidator('validate');
-      if(!$articleForm.data('bootstrapValidator').isValid()){return false;}
-      $articleForm.attr('action', saveUrl);
-      $articleForm.submit()
+      if(!$articleForm.data('bootstrapValidator').isValid()){
+        return false;
+      }
+      article_editor.sync();
+      $articleForm.submit();
     });
   })
 </script>

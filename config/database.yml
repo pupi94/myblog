@@ -4,7 +4,6 @@ default: &default
   encoding: utf8
   pool: 5
   username: root
-  #password: 123456
   password: Hpp&&1221802
   socket: /var/lib/mysql/mysql.sock
 

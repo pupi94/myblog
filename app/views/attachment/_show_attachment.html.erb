@@ -1,9 +1,10 @@
-<div class="modal inmodal col-lg-12" id="show-attachment-modal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal inmodal col-lg-12" id="show_attachment_modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
+          <span aria-hidden="true">&times;</span>
+        </button>
         <h4 class="modal-title">附件管理</h4>
       </div>
       <div class="modal-body">
@@ -17,7 +18,7 @@
 
 <script type="text/javascript">
   $(document).ready(function () {
-    var $showAttachmentModal = $("#show-attachment-modal");
+    var $showAttachmentModal = $("#show_attachment_modal");
 
     $showAttachmentModal.on("show.bs.modal", function (event) {
       var current_link = $(event.relatedTarget);

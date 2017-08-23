@@ -14,8 +14,13 @@ class ArticlesController < ApplicationController
   end
 
   def create
+
     puts params.as_json
-    article = params.slice(*%w(source_type title blog category tags summary source source_url))
-    #redirect_to index
+    article = params.slice(*%w(source_type title content category tags summary source source_url))
+    redirect_to articles_index_path
+  end
+
+  def show
+
   end
 end

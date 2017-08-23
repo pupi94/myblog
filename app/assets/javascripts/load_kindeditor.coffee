@@ -1,3 +1,5 @@
+
+
 $(document).on 'turbolinks:before-cache', ->
   KindEditor.remove('.rails_kindeditor')
 
