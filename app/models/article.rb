@@ -11,11 +11,15 @@ class Article < ApplicationRecord
   validates :summary, length: { maximum: 255, message: ErrorCode::ERR_ARTICLE_SUMMARY_THE_MAXIMUM_LENGTH_OF_255 }
   validates :attachment, length: { maximum: 128, message: ErrorCode::ERR_ARTICLE_ATTACHMENT_THE_MAXIMUM_LENGTH_OF_128 }
 
-  validates :source_type,  inclusion: {in: SourceType.const_values, message: ErrorCode::ERR_ARTICLE_SOURCE_TYPE_INVALID.to_s}
-  validates :status,  inclusion: {in: ArticleStatus.const_values, message: ErrorCode::ERR_ARTICLE_STATUS_INVALID.to_s}
+  validates :source_type,  inclusion: {in: SourceType.const_values, message: ErrorCode::ERR_ARTICLE_SOURCE_TYPE_INVALID}
+  validates :status,  inclusion: {in: ArticleStatus.const_values, message: ErrorCode::ERR_ARTICLE_STATUS_INVALID}
 
   def self.create(params)
-    #"source_type"=>"original", "title"=>"是大法官第三方", "category"=>"1", "tags"=>["1"], "summary"=>"是大法官的双方各", "content"=>"第三方赶得上发个", "source"=>"", "source_ures",
-
+    Util.try_rescue do |response|
+      create_params = params.slice(
+        *%w'source_type title category_id tags summary content source source_url attachment author_id author_name'
+      )
+      handle_create(create_params)
+    end
   end
 end

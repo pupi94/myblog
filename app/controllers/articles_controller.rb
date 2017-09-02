@@ -14,9 +14,12 @@ class ArticlesController < ApplicationController
   end
 
   def create
+    params['author_id'] = current_user['id']
+    params['author_name'] = current_user['username']
+    rtn = Article.create(params)
+    if Util.success? rtn
 
-    puts params.as_json
-    article = params.slice(*%w(source_type title content category tags summary source source_url))
+    end
     redirect_to articles_index_path
   end
 

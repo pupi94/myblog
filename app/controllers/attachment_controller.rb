@@ -10,7 +10,7 @@ class AttachmentController < ApplicationController
       if result["return_code"] == 0
         send_data result["return_info"], :type => file_type.to_sym.downcase, :filename => URI.decode(file_name), :disposition => "inline"
       else
-        Log.error "download file failed: params[#{params}], result[#{result}]"
+        Log.error "download file failed: params[#{params}], attr_reader :                                                                                                                                                                                                                                                                                                                                               esult[#{result}]"
       end
     rescue Exception => e
       Log.error e
@@ -33,9 +33,13 @@ class AttachmentController < ApplicationController
 
       if params["upload_attachment"].present?
         attachment_path = ""
-        FileUtils.mkdir("#{Rails.root}/public/upload") unless File.exist?("#{Rails.root}/public/upload")
+        FileUtils.mkdir("#{Rails.root}/public/uploads") unless File.exist?("#{Rails.root}/public/uploads")
         params["upload_attachment"].each do |attachment|
-          filename = DateTime.now.strftime("%Y%m%d%H%M%S") << attachment.original_filename
+          filename = DateTime.now.strftime("%Y%m%d%H%M%S") << '_' << attachment.original_filename
+          p "=================================="
+          p attachment.original_filename
+          p filename
+          p "=================================="
           File.open(Rails.root.join('public', 'uploads', filename), 'wb') do |file|
             file.write(attachment.read)
           end
