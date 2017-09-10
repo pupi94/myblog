@@ -8,11 +8,11 @@ module CustomConstant
   end
 
   SERVICER_ID       = 'BLOG'
+
   DEFAULT_PAGE_SIZE = 15
-  
   SEARCH_PAGE = {
     "page_size" => {
-      "DEFAULT" => 15,
+      "DEFAULT" => DEFAULT_PAGE_SIZE,
       "MIN" => 1
     },
     "page_no" => {

@@ -1,10 +1,10 @@
 zh:
   article:
-    source_type: 类型
-
-    reprint: 转载
-    translate: 翻译
-    original: 原创
+    source_type_name: 类型
+    source_type:
+      original: 原创
+      reprint: 转载
+      translate: 翻译
 
     title: 标题
     summary: 摘要

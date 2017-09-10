@@ -1,14 +1,19 @@
 class ArticlesController < ApplicationController
-  before_filter :login_required
+  before_action :login_required
   layout "management_application"
 
   def index
-
+    rtn = Article.search(params)
+    if Util.success? rtn
+      @articles = Kaminari.paginate_array(
+        rtn['articles'], total_count: rtn['total_count']
+      ).page(params[:page].to_i).per(DEFAULT_PAGE_SIZE)
+    else
+      @msg = rtn['return_info']
+    end
   end
 
   def new
-    tags_rtn = Tag.search params
-    @tags = tags_rtn['tags'] || []
     categories_rtn = Category.search({'enabled' => true})
     @categories = categories_rtn['categories'] || []
   end
@@ -18,9 +23,10 @@ class ArticlesController < ApplicationController
     params['author_name'] = current_user['username']
     rtn = Article.create(params)
     if Util.success? rtn
-
+      redirect_to articles_index_path
+    else
+      render :new
     end
-    redirect_to articles_index_path
   end
 
   def show

@@ -4,3 +4,10 @@ table.table{
     background-color: #F3F3F3;
   }
 }
+
+.paginate-wrapper{
+  text-align:right;
+  .pagination {
+     margin: 0;
+  }
+}

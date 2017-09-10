@@ -51,13 +51,6 @@ ActiveRecord::Schema.define(version: 20170523135813) do
     t.datetime "updated_at"
   end
 
-  create_table "tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name",       limit: 32,                null: false
-    t.boolean  "enabled",               default: true, null: false
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-  end
-
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "username",   limit: 32,                null: false
     t.string   "password",   limit: 64,                null: false

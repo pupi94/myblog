@@ -10,7 +10,7 @@ module ApplicationHelper
   def show_article_source_type_select
     source_types = []
     SourceType.const_values.each do |value|
-      source_types << [t("article.#{value}"), value]
+      source_types << [t("article.source_type.#{value}"), value]
     end
     options_for_select(source_types)
   end

@@ -1,51 +1,12 @@
 <div class="form-group" style="margin-bottom: 0;">
-  <div class="col-lg-3">
+  <div class="col-lg-12">
     <label class="form_label"><%= t("article.title") %></label>
   </div>
 </div>
+
 <div class="form-group">
-  <div class="col-lg-2">
-    <%= select_tag(:source_type, show_article_source_type_select, class: "form-control")%>
-  </div>
-  <div class="col-lg-7">
+  <div class="col-lg-12">
     <input type="text" class="form-control" name="title">
-  </div>
-</div>
-
-<div class="form-group" style="margin-bottom: 0;">
-  <div class="col-lg-12">
-    <label class="form_label"><%= t("article.category") %></label>
-  </div>
-</div>
-
-<div class="form-group">
-  <div class="col-lg-12">
-    <% @categories.each do |category| %>
-        <div class="radio checkbox-inline" style="padding-top: 0px; padding-left: 0px;">
-          <label><input type="radio" name="category_id"  value="<%= category['id'] %>"><%= category['name'] %></label>
-        </div>
-    <% end %>
-  </div>
-</div>
-
-<div class="form-group" style="margin-bottom: 0;">
-  <div class="col-lg-12">
-    <label class="form_label"><%= t("article.tags") %></label>
-  </div>
-</div>
-
-<div class="form-group">
-  <div class="col-lg-12 tags_checkbox_list">
-    <% if @tags && @tags.size > 0 %>
-        <% @tags.each do |tag| %>
-            <div class="checkbox checkbox-inline" style="padding-top: 0;padding-left: 0;">
-              <label><input type="checkbox" name='tags[]' value="<%= tag['id'] %>"><%= tag['name'] %></label>
-            </div>
-        <% end %>
-    <% end %>
-    <button type="button" class="btn btn-primary btn-xs add_tag_btn" data-toggle="tooltip"title="<%= t('article.add_tag')%>" style="margin-left: 10px;">
-      <span class="glyphicon glyphicon-plus"></span>
-    </button>
   </div>
 </div>
 
@@ -60,6 +21,43 @@
   <%= kindeditor_tag :content, '', :editor_id => 'article_editor' %>
 </div>
 
+<div class="form-group" style="margin-bottom: 0;">
+  <div class="col-lg-12">
+    <label class="form_label"><%= t("article.category") %></label>
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="col-lg-12">
+    <% if @categories %>
+        <% @categories.each do |category| %>
+            <div class="radio checkbox-inline" style="padding-top: 0px; padding-left: 0px;">
+              <label><input type="radio" name="category_id"  value="<%= category['id'] %>"><%= category['name'] %></label>
+            </div>
+        <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="form-group" style="margin-bottom: 0;">
+  <div class="col-lg-2">
+    <label class="form_label"><%= t("article.source_type_name") %></label>
+  </div>
+  <div class="col-lg-10">
+    <label class="form_label"><%= t("article.tags") %></label>
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="col-lg-2">
+    <%= select_tag(:source_type, show_article_source_type_select, class: "form-control")%>
+  </div>
+
+  <div class="col-lg-10">
+    <input type="text" class="form-control" name='tags'>
+  </div>
+</div>
+
 <div class="form-group">
   <div class="col-lg-6">
     <label class="form_label"><%= t("article.source") %></label>
@@ -72,11 +70,8 @@
 </div>
 
 <div class="form-group">
-  <div class="col-lg-5">
+  <div class="col-lg-12">
     <%= upload_attachment_tag({"attachment_type" => "article"}) %>
-
-   <!-- <label><%= t('article.attachment') %></label>
-    <input type="file" name='attachment' class="form-control">-->
   </div>
 </div>
 
@@ -85,6 +80,7 @@
     <button type="submit" class="btn btn-primary article_save_btn"><%= t('button.save') %></button>
   </div>
 </div>
+
 
 <script type="text/javascript">
   $(function(){
@@ -113,6 +109,12 @@
             stringLength:{max: 255, message: '最大长度为255！'}
           }
         },
+        tags: {
+          validators: {
+            notEmpty: {message: '不能为空'},
+            stringLength:{max: 32, message: '最大长度为32！'}
+          }
+        },
         source: {
           validators: {
             stringLength:{max: 64, message: '最大长度为64！'}
@@ -121,11 +123,6 @@
         source_url: {
           validators: {
             stringLength:{max: 128, message: '最大长度为128！'}
-          }
-        },
-        'tags[]': {
-          validators: {
-            choice: {min: 1, message: '不能为空'}
           }
         }
       }

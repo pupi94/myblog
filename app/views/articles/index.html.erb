@@ -1,1 +1,7 @@
+<% content_for :title do %>
+    <li><%= t('menu.my_article') %></li>
+<% end %>
 
+<div class="articles_list">
+  <%= render :partial => "articles/shared/articles_list" %>
+</div>

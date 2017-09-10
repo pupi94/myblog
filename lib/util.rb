@@ -5,7 +5,7 @@ module Util
     begin
       yield(response) if block_given?
     rescue CustomException => e
-      Log.error e
+      Log.error e.result
       response = e.result
     rescue Exception => e
       Log.error e
@@ -15,9 +15,9 @@ module Util
   end
 
   # 检查并初始化分页参数
-  def self.check_search_page(params)
+  def self.check_paging_params(params)
     SEARCH_PAGE.each do |key, value|
-      params[key] = value['DEFAULT'] if params[key].blank? || params[key].to_i < value['MIN']
+      params[key] = (params[key].blank? || params[key].to_i < value['MIN']) ? value['DEFAULT'] : params[key].to_i
     end
     params
   end

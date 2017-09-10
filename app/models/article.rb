@@ -16,10 +16,22 @@ class Article < ApplicationRecord
 
   def self.create(params)
     Util.try_rescue do |response|
-      create_params = params.slice(
+      create_params = params.to_unsafe_h.slice(
         *%w'source_type title category_id tags summary content source source_url attachment author_id author_name'
       )
+      create_params['status'] = ArticleStatus::EDITING
       handle_create(create_params)
+    end
+  end
+
+  def self.search(params)
+    Util.try_rescue do |response|
+      search_column = %w(title source_type category_id tags summary content author_name pv pubdate status)
+      articles = all
+      response['total_count'] = articles.size
+      Util.check_paging_params(params)
+      articles = articles.limit(params['page_size']).offset(params['page_size'] * params['page_no'])
+      response['articles'] = articles.select(*search_column).as_json
     end
   end
 end
