@@ -14,9 +14,11 @@ RSpec.describe Article, type: :model do
     context 'present' do
       [
         ['title',         ErrorCode::ERR_ARTICLE_TITLE_CANNOT_BE_BLANK],
-        ['source_type',  ErrorCode::ERR_ARTICLE_SOURCE_TYPE_CANNOT_BE_BLANK],
-        ['category_id',  ErrorCode::ERR_ARTICLE_CATEGORY_ID_CANNOT_BE_BLANK],
-        ['tags',          ErrorCode::ERR_ARTICLE_TAGS_CANNOT_BE_BLANK]
+        ['source_type',   ErrorCode::ERR_ARTICLE_SOURCE_TYPE_CANNOT_BE_BLANK],
+        ['category_id',   ErrorCode::ERR_ARTICLE_CATEGORY_ID_CANNOT_BE_BLANK],
+        ['tags',          ErrorCode::ERR_ARTICLE_TAGS_CANNOT_BE_BLANK],
+        ['author_id',     ErrorCode::ERR_ARTICLE_AUTHOR_ID_CANNOT_BE_BLANK],
+        ['author_name',   ErrorCode::ERR_ARTICLE_AUTHOR_NAME_CANNOT_BE_BLANK]
       ].each do |value|
         it value do
           valid_column_present validate_object, *value
@@ -28,7 +30,7 @@ RSpec.describe Article, type: :model do
       [
         ['title',       64,   ErrorCode::ERR_ARTICLE_TITLE_THE_MAXIMUM_LENGTH_OF_64  ],
         ['source',      64,   ErrorCode::ERR_ARTICLE_SOURCE_THE_MAXIMUM_LENGTH_OF_64  ],
-        ['source_url', 128,  ErrorCode::ERR_ARTICLE_SOURCE_URL_THE_MAXIMUM_LENGTH_OF_128  ],
+        ['source_url', 128,   ErrorCode::ERR_ARTICLE_SOURCE_URL_THE_MAXIMUM_LENGTH_OF_128  ],
         ['tags',        64,   ErrorCode::ERR_ARTICLE_TAGS_THE_MAXIMUM_LENGTH_OF_64  ],
         ['summary',     255,  ErrorCode::ERR_ARTICLE_SUMMARY_THE_MAXIMUM_LENGTH_OF_255  ],
         ['attachment', 128,   ErrorCode::ERR_ARTICLE_ATTACHMENT_THE_MAXIMUM_LENGTH_OF_128  ]

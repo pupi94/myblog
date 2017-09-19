@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20170523135813) do
     t.string   "attachment",  limit: 128
     t.integer  "author_id",                                null: false
     t.string   "author_name", limit: 32,                   null: false
-    t.integer  "pv",          limit: 3,     default: 0,    null: false
+    t.integer  "pv",                        default: 0,    null: false
     t.string   "status",      limit: 16,                   null: false
     t.boolean  "enabled",                   default: true, null: false
     t.date     "pubdate"

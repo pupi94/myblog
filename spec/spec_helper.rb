@@ -8,8 +8,37 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
   config.shared_context_metadata_behavior = :apply_to_host_groups
+
 end
 
+
+RSpec::Matchers.define :be_success do
+  match do |actual|
+    (actual['return_code'] || actual['result']['return_code']) == 0
+  end
+
+  failure_message do |actual|
+    "expected that #{actual.inspect} would have success return code"
+  end
+
+  description do
+    'be success api result(return code 0)'
+  end
+end
+
+RSpec::Matchers.define :has_code do |expected|
+  match do |actual|
+    (actual['return_code'] || actual['result']['return_code']) == expected
+  end
+
+  failure_message do |actual|
+    "expected that #{actual.inspect} would have return code #{expected}"
+  end
+
+  description do
+    "api result with return code #{expected}"
+  end
+end
 
 def expect_success_result(result)
   expect(result['return_code']).to eq ErrorCode::SUCCESS

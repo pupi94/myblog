@@ -11,7 +11,7 @@ class CreateArticles < ActiveRecord::Migration[5.0]
       t.string   :attachment,     null: true, limit: 128
       t.integer  :author_id,      null: false, limit: 4
       t.string   :author_name,    null: false, limit: 32
-      t.integer  :pv,              null: false, limit: 3, default: 0
+      t.integer  :pv,              null: false, limit: 4, default: 0
       t.string   :status,          null: false, limit: 16
       t.boolean  :enabled,         null: false, default: true
       t.date     :pubdate,         null: true

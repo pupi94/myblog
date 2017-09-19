@@ -40,12 +40,3 @@ group :development do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-
-# file load
-=begin
-gem "carrierwave", "0.10.0"
-gem 'rest-client', "1.7.3"
-gem 'carrierwave-aliyun', "0.3.6"
-gem 'file_load_by_aliyun', "0.3.1"
-=end
