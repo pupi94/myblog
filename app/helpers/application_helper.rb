@@ -14,4 +14,9 @@ module ApplicationHelper
     end
     options_for_select(source_types)
   end
+
+  def format_date(date, format = '%Y-%m-%d %H:%M:%S')
+    return nil if date.blank?
+    date.to_time.strftime format
+  end
 end

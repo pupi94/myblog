@@ -10,20 +10,7 @@ module CustomConstant
   SERVICER_ID       = 'BLOG'
 
   DEFAULT_PAGE_SIZE = 15
-  SEARCH_PAGE = {
-    "page_size" => {
-      "DEFAULT" => DEFAULT_PAGE_SIZE,
-      "MIN" => 1
-    },
-    "page_no" => {
-      "DEFAULT" => 0,
-      "MIN" => 0
-    },
-    "page_count" => {
-      "DEFAULT" => 1,
-      "MIN" => 1
-    }
-  }
+  DEFAULT_PAGE = 1
 
   module SourceType
     extend ConstantValue

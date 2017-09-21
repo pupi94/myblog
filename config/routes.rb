@@ -13,16 +13,16 @@ Rails.application.routes.draw do
   # users
   get  'users/login'
   post 'users/do_login'
+  # 加上这个url后，在登录失败后刷新登录页面就不会报错了
   get  'users/do_login', to: 'users#login'
+
   get  'users/logout'
 
   #article
   get  'articles/new'
   post 'articles/create'
   get  'articles/index'
-
-  #tag
-  post 'tags/create'
+  get  'articles/:id', to: 'articles#show'
 
   post 'attachment/update'
   get  'attachment/download'

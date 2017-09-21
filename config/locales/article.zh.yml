@@ -6,6 +6,12 @@ zh:
       reprint: 转载
       translate: 翻译
 
+    status_name: 状态
+    status:
+      editing: 编辑中
+      published: 已发布
+      sold_out: 已下架
+
     title: 标题
     summary: 摘要
     tags: 文章标签
@@ -14,6 +20,9 @@ zh:
     attachment: 文章图片
     source: 来源
     source_url: 相关链接
+    pv: 访问量
+    created_at: 创建时间
+    pubdate: 发布时间
 
   category:
     add: 新增类别

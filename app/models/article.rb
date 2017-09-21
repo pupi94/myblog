@@ -28,12 +28,25 @@ class Article < ApplicationRecord
 
   def self.search(params)
     Util.try_rescue do |response|
-      search_column = %w(title source_type category_id tags summary content author_name pv pubdate status)
-      articles = all
+      articles = all.enabled_filter
+
+      articles = articles.where(category_id: params['category']) if params['category'].present?
+      articles = articles.where(status: params['status']) if params['status'].present?
+      if params['title'].present?
+        params['title'] = params['title'].strip
+       articles = articles.where("title like ?", "%#{params['title']}%") if params['title'].present?
+      end
+
       response['total_count'] = articles.size
-      Util.check_paging_params(params)
-      articles = articles.limit(params['page_size']).offset(params['page_size'] * params['page_no'])
-      response['articles'] = articles.select(*search_column).as_json
+      if response['total_count'] == 0
+        response['articles'] = {}
+        return response
+      end
+
+      articles = articles.order(created_at: :desc).page_filter(params['page_size'], params['page'])
+
+      search_column = %w(id title source_type tags pv pubdate status created_at)
+      response['articles'] = articles.select(*search_column)
     end
   end
 end

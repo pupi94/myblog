@@ -14,14 +14,6 @@ module Util
     return response.as_json
   end
 
-  # 检查并初始化分页参数
-  def self.check_paging_params(params)
-    SEARCH_PAGE.each do |key, value|
-      params[key] = (params[key].blank? || params[key].to_i < value['MIN']) ? value['DEFAULT'] : params[key].to_i
-    end
-    params
-  end
-
   def self.success?(params)
     params.present? && params['return_code'] == ErrorCode::SUCCESS
   end
