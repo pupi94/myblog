@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :login_required
-  layout "management_application"
+  layout 'management_application'
 
   def index
     rtn = Article.search(params)

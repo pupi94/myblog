@@ -9,7 +9,7 @@ module AttachmentUploadHelper
 
     # 使用默认路由 '/attachment/update' 上传附件时需要检查参数
     if params['object_locked'].blank? && params['url'].blank? && params['attachment_type'].blank?
-      Log.error "upload_attachment need 'attachment_type'"
+      Log.error 'upload_attachment need attachment_type'
       return nil
     end
     class_string = (0...16).map {(65 + rand(26)).chr}.join

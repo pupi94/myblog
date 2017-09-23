@@ -7,10 +7,10 @@ class AttachmentController < ApplicationController
       file_type = file_name.split('.').last
       #result = FileLoadByAliyun.download(file_path)
       result = {'return_code' => 0, 'return_info' => 'success'}
-      if result["return_code"] == 0
-        send_data result["return_info"], :type => file_type.to_sym.downcase, :filename => URI.decode(file_name), :disposition => "inline"
+      if result['return_code'] == 0
+        send_data result['return_info'], :type => file_type.to_sym.downcase, :filename => URI.decode(file_name), :disposition => 'inline'
       else
-        Log.error "download file failed: params[#{params}], attr_reader :                                                                                                                                                                                                                                                                                                                                               esult[#{result}]"
+        Log.error "download file failed: params[#{params}], attr_reader : result[#{result}]"
       end
     rescue Exception => e
       Log.error e
@@ -27,25 +27,25 @@ class AttachmentController < ApplicationController
     begin
       attachment_type = params['attachment_type']
       attachment_id = params['attachment_id']
-      attachment_name = params['attachment_name'].present? ? params['attachment_name'] : DateTime.now.strftime("%Y%m%d%H%M%S") # 临时文件夹
+      attachment_name = params['attachment_name'].present? ? params['attachment_name'] : DateTime.now.strftime('%Y%m%d%H%M%S') # 临时文件夹
       object_name = params['object_name']
       object_id = params['object_id']
 
-      if params["upload_attachment"].present?
-        attachment_path = ""
+      if params['upload_attachment'].present?
+        attachment_path = ''
         FileUtils.mkdir("#{Rails.root}/public/uploads") unless File.exist?("#{Rails.root}/public/uploads")
-        params["upload_attachment"].each do |attachment|
-          filename = DateTime.now.strftime("%Y%m%d%H%M%S") << '_' << attachment.original_filename
-          p "=================================="
+        params['upload_attachment'].each do |attachment|
+          filename = DateTime.now.strftime('%Y%m%d%H%M%S') << '_' << attachment.original_filename
+          p '=================================='
           p attachment.original_filename
           p filename
-          p "=================================="
+          p '=================================='
           File.open(Rails.root.join('public', 'uploads', filename), 'wb') do |file|
             file.write(attachment.read)
           end
           attachment_path << "uploads/#{filename}-||-"
         end
-        result["attachment"] = attachment_path
+        result['attachment'] = attachment_path
       end
     end
     render json: result

@@ -21,6 +21,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def get_categories
+    if session['categories'].nil?
+      categories = Category.search({'enabled' => true})
+      session['categories'] = categories
+    end
+    session['categories']
+  end
+
   def render_error(exception = nil)
     render layout: false, :file => "#{Rails.root}/public/500.html"
   end

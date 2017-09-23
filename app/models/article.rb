@@ -34,7 +34,7 @@ class Article < ApplicationRecord
       articles = articles.where(status: params['status']) if params['status'].present?
       if params['title'].present?
         params['title'] = params['title'].strip
-       articles = articles.where("title like ?", "%#{params['title']}%") if params['title'].present?
+       articles = articles.where('title like ?', "%#{params['title']}%") if params['title'].present?
       end
 
       response['total_count'] = articles.size
