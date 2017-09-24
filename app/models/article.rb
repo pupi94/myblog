@@ -16,6 +16,7 @@ class Article < ApplicationRecord
   validates :source_type,  inclusion: {in: SourceType.const_values, message: ErrorCode::ERR_ARTICLE_SOURCE_TYPE_INVALID}
   validates :status,  inclusion: {in: ArticleStatus.const_values, message: ErrorCode::ERR_ARTICLE_STATUS_INVALID}
 
+
   def self.create(params)
     Util.try_rescue do |response|
       create_params = params.to_unsafe_h.slice(
@@ -26,10 +27,11 @@ class Article < ApplicationRecord
     end
   end
 
-  def self.search(params)
+  def self.search_for_management(params)
     Util.try_rescue do |response|
-      articles = all.enabled_filter
+      articles = all
 
+      articles = (!params.has_key?('enabled') || params['enabled']) ? articles.enabled_filter : articles.disabled_filter
       articles = articles.where(category_id: params['category']) if params['category'].present?
       articles = articles.where(status: params['status']) if params['status'].present?
       if params['title'].present?
@@ -45,8 +47,22 @@ class Article < ApplicationRecord
 
       articles = articles.order(created_at: :desc).page_filter(params['page_size'], params['page'])
 
-      search_column = %w(id title source_type tags pv pubdate status created_at)
+      search_column = %w(id title source_type tags pv pubdate status created_at enabled)
       response['articles'] = articles.select(*search_column)
+    end
+  end
+
+  def self.show(params)
+    return CommonException.new(ErrorCode::ERR_ARTICLE_PARAMS_ID_CAN_NOT_BE_BLANK).result if params['id'].blank?
+
+    Util.try_rescue do |response|
+      articles = where(id: params['id'])
+      articles = articles.enabled_filter if params.has_key?('enabled') && params['enabled']
+      articles = articles.where(status: params['status']) if params['status'].present?
+      raise CommonException.new(ErrorCode::ERR_ARTICLE_DOES_NOT_EXIT) if articles.nil?
+      response['article'] = articles.select(
+        *%w'id source_type title category_id tags summary content source source_url attachment status'
+      ).first
     end
   end
 end

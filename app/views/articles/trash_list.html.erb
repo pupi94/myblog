@@ -1,0 +1,21 @@
+<% content_for :title do %>
+    <li><%= t('menu.trash') %></li>
+<% end %>
+<div class="row">
+  <%= form_tag('/articles/trash', method: "get", remote: true, class: "search-form") do %>
+      <div class="form-group col-sm-2">
+        <label><%= t('article.category') %>：</label>
+        <%= select_tag(:category, article_category_select_options, class: 'form-control') %>
+      </div>
+
+      <div class="form-group col-sm-3">
+        <label><%= t('article.title') %>：</label>
+        <input type="text" class="form-control" name="title">
+      </div>
+
+      <button type="submit" class="btn btn-primary" data-disable-with="<%= t('button.searching') %>"><%= t('button.search') %></button>
+  <% end %>
+</div>
+<div class="articles_list">
+  <%= render :partial => "articles/shared/articles_list" %>
+</div>

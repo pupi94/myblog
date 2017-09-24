@@ -3,6 +3,9 @@ table.table{
   >thead {
     background-color: #F3F3F3;
   }
+  td>a{
+    margin-right: 5px;
+  }
   a:hover, a:focus {
     text-decoration:none;
   }
@@ -12,5 +15,12 @@ table.table{
   text-align:right;
   .pagination {
      margin: 0;
+  }
+}
+
+.search-form{
+  margin-bottom: 30px;
+  >button{
+    margin-top: 24px;
   }
 }

@@ -12,6 +12,11 @@ zh:
       published: 已发布
       sold_out: 已下架
 
+    status_edit:
+      editing: 发布
+      published: 下架
+      sold_out: 上架
+
     title: 标题
     summary: 摘要
     tags: 文章标签
@@ -27,8 +32,3 @@ zh:
   category:
     add: 新增类别
     name: 类别
-    article_num: 文章数量
-
-  tag:
-    add: 添加标签
-    name: 标签名称

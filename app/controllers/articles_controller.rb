@@ -3,19 +3,42 @@ class ArticlesController < ApplicationController
   layout 'management_application'
 
   def index
-    rtn = Article.search(params)
-    if Util.success? rtn
-      @articles = Kaminari.paginate_array(
-        rtn['articles'], total_count: rtn['total_count']
-      ).page(params[:page].to_i).per(DEFAULT_PAGE_SIZE)
-    else
-      @msg = rtn['return_info']
-    end
+    search_params = params.permit(:category, :title, :status, :page, :page_size)
+    do_search search_params
+  end
+
+  def trash_list
+    search_params = params.permit(:category, :title, :page, :page_size)
+    search_params['enabled'] = false
+    do_search search_params
   end
 
   def new
-    categories_rtn = Category.search({'enabled' => true})
-    @categories = categories_rtn['categories'] || []
+    @categories = get_categories || []
+  end
+
+  def edit
+    @categories = get_categories || []
+    search_params = params.permit(:id)
+    search_params['enabled'] = true
+    rtn = Article.show(search_params)
+    if Util.success? rtn
+      @article = rtn['article']
+    else
+      log_error rtn
+      render_not_found
+    end
+  end
+
+  def update
+    p "============================="
+    p params
+    render :edit
+  end
+
+  def update_status
+    p "============================="
+    p params
   end
 
   def create
@@ -25,11 +48,25 @@ class ArticlesController < ApplicationController
     if Util.success? rtn
       redirect_to articles_index_path
     else
+      log_error rtn
       render :new
     end
   end
 
   def show
 
+  end
+
+  private
+  def do_search search_params
+    rtn = Article.search_for_management(search_params)
+    if Util.success? rtn
+      @articles = Kaminari.paginate_array(
+        rtn['articles'], total_count: rtn['total_count']
+      ).page(search_params[:page].to_i).per(DEFAULT_PAGE_SIZE)
+    else
+      log_error rtn
+      @msg = rtn['return_info']
+    end
   end
 end

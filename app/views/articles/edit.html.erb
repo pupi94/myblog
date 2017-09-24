@@ -1,0 +1,8 @@
+<% content_for :title do %>
+  <li><%= t('menu.article_edit') %></li>
+<% end %>
+<div class="ibox-content" style="width: 75%;margin-left: auto;margin-right: auto;">
+  <%= form_tag('/articles/update', method: 'post', id: 'article_form', remote: true, enctype: "multipart/form-data", class: "form-horizontal") do %>
+     <%= render :partial => "articles/shared/article_form" %>
+  <% end %>
+</div>

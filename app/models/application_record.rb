@@ -2,6 +2,7 @@ class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
   scope :enabled_filter, -> { where(enabled: true) }
+  scope :disabled_filter, -> { where(enabled: false) }
 
   scope :page_filter, ->(page_size, page) do
     page, page_size = page.to_i, page_size.to_i

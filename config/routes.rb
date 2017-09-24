@@ -21,7 +21,11 @@ Rails.application.routes.draw do
   #article
   get  'articles/new'
   post 'articles/create'
+  get  'articles/edit'
   get  'articles/index'
+  get  'articles/trash_list'
+  post 'articles/update'
+  post 'articles/update_status'
   get  'articles/:id', to: 'articles#show'
 
   post 'attachment/update'

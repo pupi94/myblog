@@ -26,6 +26,8 @@ zh:
     cancel: 取消
     confirm: 确认
     save: 保存
+    reset: 重置
+    searching: 查询中...
 
   menu:
     first_page: 首页
@@ -37,12 +39,14 @@ zh:
     trash: 回收站
     message_board: 留言板
     category: 类别管理
+    article_edit: 文章编辑
 
   common: 
     operate: 操作
     status: 状态
     enabled: 启用
     disable: 禁用
+    edit: 编辑
     no_result: 未查询到数据
     
   dialog: 
