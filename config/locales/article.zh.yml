@@ -15,7 +15,7 @@ zh:
     status_edit:
       editing: 发布
       published: 下架
-      sold_out: 上架
+      sold_out: 重新发布
 
     title: 标题
     summary: 摘要

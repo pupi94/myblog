@@ -27,7 +27,7 @@
             <td>
               <% if article['enabled'] %>
                 <%= link_to t('common.edit'), {:controller=>"articles", :action =>"edit", :id=> article['id']} %>
-                <%= link_to t("article.status_edit.#{article['status']}"), '#', data:{id: article['id'], status: article['status']}%>
+                <%= link_to t("article.status_edit.#{article['status']}"), '#', data:{id: article['id']}, class: 'article_status_edit'%>
               <% end %>
             </td>
           </tr>
@@ -44,3 +44,36 @@
     <%= paginate @articles, params: {controller: 'articles', action: 'index'}, remote: true %>
   <% end %>
 </div>
+
+<script type="text/javascript">
+  $(function(){
+    $('.articles_list .article_status_edit').on('click', function(){
+      var article_id = $(this).data('id');
+      event.preventDefault();//或者return false; 阻止a标签的连接跳转行为
+      $.ajax({
+        url:'/articles/update_status',
+        data: {id: article_id},
+        type:'post',
+        dataType:'json',
+        success:function(data) {
+          if(data.return_code == 0 ){
+            $('.articles_search_form').submit();
+          }else{
+            BootstrapDialog.alert({
+              title: '<%= t('dialog.title')%>',
+              message: '<strong><%= t('dialog.failed')%></strong>&nbsp;&nbsp;' + data.return_info,
+              type: BootstrapDialog.TYPE_DANGER
+            });
+          }
+        },
+        error : function() {
+          BootstrapDialog.alert({
+            title: '<%= t('dialog.title')%>',
+            message: '<%= t('dialog.sys_error')%>',
+            type: BootstrapDialog.TYPE_DANGER
+          });
+        }
+      });
+    })
+  })
+</script>

@@ -37,8 +37,7 @@ class ArticlesController < ApplicationController
   end
 
   def update_status
-    p "============================="
-    p params
+    render json: Article.update_status(params)
   end
 
   def create

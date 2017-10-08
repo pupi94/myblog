@@ -65,4 +65,29 @@ class Article < ApplicationRecord
       ).first
     end
   end
+
+  def self.update_status params
+    if params.blank? || params['id'].blank?
+      return CommonException.new(ErrorCode::ERR_ARTICLE_PARAMS_ID_CAN_NOT_BE_BLANK).result
+    end
+
+    article = find(params['id']) rescue nil
+    unless article && article.enabled
+      return CommonException.new(ErrorCode::ERR_ARTICLE_DOES_NOT_EXIT).result
+    end
+    Util.try_rescue do |response|
+      update_params = {}
+      case article.status
+        when ArticleStatus::EDITING
+          new_status = ArticleStatus::PUBLISHED
+          update_params['pubdate'] = Time.now
+        when ArticleStatus::PUBLISHED
+          new_status = ArticleStatus::SOLD_OUT
+        when ArticleStatus::SOLD_OUT
+          new_status = ArticleStatus::PUBLISHED
+      end
+      update_params['status'] = new_status
+      article.handle_update!(update_params)
+    end
+  end
 end

@@ -2,7 +2,7 @@
     <li><%= t('menu.my_article') %></li>
 <% end %>
 <div class="row">
-  <%= form_tag('/articles/index', method: "get", remote: true, class: "search-form") do %>
+  <%= form_tag('/articles/index', method: "get", remote: true, class: "search-form articles_search_form") do %>
     <div class="form-group col-sm-2">
       <label><%= t('article.category') %>：</label>
       <%= select_tag(:category, article_category_select_options, class: 'form-control') %>
