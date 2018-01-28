@@ -1,3 +1,142 @@
-<ul>
-	<li><%= link_to "blog_management", management_index_path%></li>
-</ul>
+<div class="content">
+
+  <div id="slide_show" class="carousel slide slide-show" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#slide_show" data-slide-to="0" class="active"></li>
+      <li data-target="#slide_show" data-slide-to="1"></li>
+      <li data-target="#slide_show" data-slide-to="2"></li>
+    </ol>
+
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <a href="" target="_blank"><%= image_tag 'banner/banner_01.jpg', alt: "", class:"img-responsive" %></a>
+      </div>
+      <div class="item">
+        <a href="" target="_blank"><%= image_tag 'banner/banner_02.jpg', alt: "", class:"img-responsive" %></a>
+      </div>
+      <div class="item">
+        <a href="" target="_blank"><%= image_tag 'banner/banner_03.jpg', alt: "", class:"img-responsive" %></a>
+      </div>
+    </div>
+
+    <a class="left carousel-control" href="#slide_show" role="button" data-slide="prev" rel="nofollow">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">上一个</span>
+    </a>
+    <a class="right carousel-control" href="#slide_show" role="button" data-slide="next" rel="nofollow">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">下一个</span>
+    </a>
+  </div>
+
+  <div class="title">
+    <h3>最新发布</h3>
+    <div class="tag-list">
+      <a href="">PHP</a>
+      <a href="">JavaScript</a>
+      <a href="">EmpireCMS</a>
+      <a href="">Apache</a>
+      <a href="">MySQL</a>
+    </div>
+  </div>
+
+  <div class="article-wrap">
+    <div class="article-list">
+      <article class="article">
+        <header>
+          <a class="cat">后端程序<i></i></a>
+          <h2><a href="article.html" title="">php如何判断一个日期的格式是否正确</a></h2>
+        </header>
+        <p class="meta">
+          <time><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
+          <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span>
+          <a class="comment" href="article.html#comment">
+            <i class="glyphicon glyphicon-comment"></i> 0个评论
+          </a>
+        </p>
+        <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
+      </article>
+      <article class="article">
+        <header>
+          <a class="cat">后端程序<i></i></a>
+          <h2><a href="article.html" title="">php如何判断一个日期的格式是否正确</a></h2>
+        </header>
+        <p class="meta">
+          <time><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
+          <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span>
+          <a class="comment" href="article.html#comment">
+            <i class="glyphicon glyphicon-comment"></i> 0个评论
+          </a>
+        </p>
+        <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
+      </article>
+      <article class="article">
+        <header>
+          <a class="cat">后端程序<i></i></a>
+          <h2><a href="article.html" title="">php如何判断一个日期的格式是否正确</a></h2>
+        </header>
+        <p class="meta">
+          <time><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
+          <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span>
+          <a class="comment" href="article.html#comment">
+            <i class="glyphicon glyphicon-comment"></i> 0个评论
+          </a>
+        </p>
+        <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
+      </article>
+      <article class="article">
+        <header>
+          <a class="cat">后端程序<i></i></a>
+          <h2><a href="article.html" title="">php如何判断一个日期的格式是否正确</a></h2>
+        </header>
+        <p class="meta">
+          <time><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
+          <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span>
+          <a class="comment" href="article.html#comment">
+            <i class="glyphicon glyphicon-comment"></i> 0个评论
+          </a>
+        </p>
+        <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
+      </article>
+      <article class="article">
+        <header>
+          <a class="cat">后端程序<i></i></a>
+          <h2><a href="article.html" title="">php如何判断一个日期的格式是否正确</a></h2>
+        </header>
+        <p class="meta">
+          <time><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
+          <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span>
+          <a class="comment" href="article.html#comment">
+            <i class="glyphicon glyphicon-comment"></i> 0个评论
+          </a>
+        </p>
+        <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
+      </article>
+      <article class="article">
+        <header>
+          <a class="cat">后端程序<i></i></a>
+          <h2><a href="article.html" title="">php如何判断一个日期的格式是否正确</a></h2>
+        </header>
+        <p class="meta">
+          <time><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
+          <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span>
+          <a class="comment" href="article.html#comment">
+            <i class="glyphicon glyphicon-comment"></i> 0个评论
+          </a>
+        </p>
+        <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
+      </article>
+    </div>
+
+    <div class="pagination" style="display: none;">
+      <ul>
+        <li class="prev-page"></li>
+        <li class="active"><span>1</span></li>
+        <li><a href="?page=4">2</a></li>
+        <li class="next-page"><a href="?page=2">下一页</a></li>
+        <li><span>共 2 页</span></li>
+      </ul>
+    </div>
+  </div>
+
+</div>

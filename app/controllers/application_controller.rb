@@ -11,17 +11,6 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::UnknownController, :with => :render_error unless in_development?
   rescue_from AbstractController::ActionNotFound, :with => :render_error unless in_development?
 
-
-  def get_categories
-    categories = Rails.cache.read("categories")
-    if categories.nil?
-      rtn  = Category.search({'enabled' => true})
-      categories = rtn['categories']
-      Rails.cache.write("categories", categories)
-    end
-    categories
-  end
-
   def login_required
     unless current_user
       respond_to do |format|

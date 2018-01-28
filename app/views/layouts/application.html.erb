@@ -16,44 +16,91 @@
   
 </head>
 
+
 <body class="user-select">
-  <header class="header">
-    <nav class="navbar navbar-default" id="navbar">
-      <div class="container">
-        <div class="header-topbar hidden-xs link-border">
-          <ul class="site-nav topmenu">
-            <li><a href="#">标签云</a></li>
-            <li><a href="#" rel="nofollow">读者墙</a></li>
-            <li><a href="#" rel="nofollow">友情链接</a></li>
-            <li><a href="#" rel="nofollow">友情链接</a></li>
-          </ul>
+  <%= render :partial => "layouts/shared/header" %>
+
+  <div class="main" style="height:200px;">
+    <section class="container">
+
+      <div class="content-wrap">
+        <%= yield %>
+      </div>
+      <%= render :partial => "layouts/shared/sidebar" %>
+    </section>
+  </div>
+
+  <%= render :partial => "layouts/shared/footer" %>
+
+  <div class="modal fade user-select" id="developing" tabindex="-1" role="dialog" aria-labelledby="developingModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="areDevelopingModalLabel" style="cursor:default;">该功能正在日以继夜的开发中…</h4>
         </div>
-        <div class="navbar-header">
-          <div class="logo hvr-bounce-in"><a href="" title=""><%= image_tag "logo.png" %></a></div>
+        <div class="modal-body"><%= image_tag "baoman/baoman_01.gif", attr: '深思熟虑' %>
+          <p style="padding:15px 15px 15px 100px; position:absolute; top:15px; cursor:default;">很抱歉，程序猿正在日以继夜的开发此功能，本程序将会在以后的版本中持续完善！</p>
         </div>
-        <div class="navbar-collapse" id="header-navbar">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a data-cont="异清轩首页" href="index.html">首页</a></li>
-            <li><a href="#">前端技术</a></li>
-            <li><a href="#">后端程序</a></li>
-            <li><a href="#">管理系统</a></li>
-            <li><a href="#">授人以渔</a></li>
-            <li><a href="#">程序人生</a></li>
-          </ul>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">朕已阅</button>
         </div>
       </div>
-    </nav>
-  </header>
-
-  <section class="container default-height">
-    <div style="min-height: 905px"><%= yield %></div>
-  </section>
-
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2016 <a href="">xxxxx.com</a> &nbsp; <a href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow">豫ICP备xxxxxxx</a> &nbsp; <a href="sitemap.xml" target="_blank" class="sitemap">网站地图</a></p>
     </div>
-    <div id="gotop"><a class="gotop"></a></div>
-  </footer>
+  </div>
 </body>
+
+<script type="text/javascript">
+    $('body').show();
+    $('.version').text(NProgress.version);
+    NProgress.start();
+    setTimeout(function() { NProgress.done(); $('.fade').removeClass('out'); }, 500);
+
+    $('img').attr('draggable', 'false');
+    $('a').attr('draggable', 'false');
+
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 100) {
+            $("#go_top").fadeIn();
+        } else {
+            $("#go_top").fadeOut();
+        }
+    });
+
+    $("#go_top").hide();
+    $("#go_top").click(function () {
+        $('html,body').animate({
+            'scrollTop': 0
+        }, 500);
+    });
+
+    //导航智能定位
+    $.fn.navSmartFloat = function () {
+        var position = function (element) {
+            var top = element.position().top, pos = element.css("position");
+            $(window).scroll(function () {
+                var scrolls = $(this).scrollTop();
+                if (scrolls > top) { //如果滚动到页面超出了当前元素element的相对页面顶部的高度
+                    $('.top-nav').fadeOut(0);
+                    element.css({
+                        position: "fixed",
+                        top: 0
+                    }).addClass("shadow");
+                } else {
+                    $('.top-nav').fadeIn(500);
+                    element.css({
+                        position: pos,
+                        top: top
+                    }).removeClass("shadow");
+                }
+            });
+        };
+        return $(this).each(function () {
+            position($(this));
+        });
+    };
+    //启用导航定位
+    $(".header").navSmartFloat();
+</script>
+
 </html>

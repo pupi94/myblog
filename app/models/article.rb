@@ -34,10 +34,8 @@ class Article < ApplicationRecord
       articles = (!params.has_key?('enabled') || params['enabled']) ? articles.enabled_filter : articles.disabled_filter
       articles = articles.where(category_id: params['category']) if params['category'].present?
       articles = articles.where(status: params['status']) if params['status'].present?
-      if params['title'].present?
-        params['title'] = params['title'].strip
-       articles = articles.where('title like ?', "%#{params['title']}%") if params['title'].present?
-      end
+      params['title'] = params['title'].strip if params['title'].present?
+      articles = articles.where('title like ?', "%#{params['title']}%") if params['title'].present?
 
       response['total_count'] = articles.size
       if response['total_count'] == 0
@@ -71,7 +69,7 @@ class Article < ApplicationRecord
       return CommonException.new(ErrorCode::ERR_ARTICLE_PARAMS_ID_CAN_NOT_BE_BLANK).result
     end
 
-    article = find(params['id']) rescue nil
+    article = find_by(id: params['id'])
     unless article && article.enabled
       return CommonException.new(ErrorCode::ERR_ARTICLE_DOES_NOT_EXIT).result
     end

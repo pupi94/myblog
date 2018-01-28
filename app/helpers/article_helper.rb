@@ -26,7 +26,7 @@ module ArticleHelper
 
   def get_categories
     categories = Rails.cache.read("categories")
-    if categories.nil?
+    if categories.blank?
       rtn  = Category.search({'enabled' => true})
       categories = rtn['categories']
       Rails.cache.write("categories", categories)

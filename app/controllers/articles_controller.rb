@@ -14,11 +14,10 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @categories = get_categories || []
+
   end
 
   def edit
-    @categories = get_categories || []
     search_params = params.permit(:id)
     search_params['enabled'] = true
     rtn = Article.show(search_params)

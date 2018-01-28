@@ -2,7 +2,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
-//= require_tree ../../../vendor/assets/javascripts/bootstrap-validator
+//= require_tree ../../../vendor/assets/javascripts/bootstrap_validator
 
 $(function(){
   var $loginForm = $('#login_form');

@@ -38,11 +38,11 @@
       & > .delete_attachment {
         width: 22px;
         height: 22px;
-        background: image-url("delete.png") no-repeat center;
+        background: image-url("attachment/delete.png") no-repeat center;
       }
 
       & > .delete_attachment:hover {
-        background: image-url("delete_hover.png") no-repeat center;
+        background: image-url("attachment/delete_hover.png") no-repeat center;
         cursor: pointer;
       }
     }

@@ -7,10 +7,10 @@ class Category < ApplicationRecord
   def self.create(params)
     Util.try_rescue do |response|
       if params['name'].blank?
-        raise CommonException.new(ErrorCode::ERR_CATEGORY_NAME_CANNOT_BE_BLANK)
+        fail CommonException.new(ErrorCode::ERR_CATEGORY_NAME_CANNOT_BE_BLANK)
       end
       if exists?(name: params['name'])
-        raise CommonException.new(ErrorCode::ERR_CATEGORY_NAME_NOT_UNIQUE)
+        fail CommonException.new(ErrorCode::ERR_CATEGORY_NAME_NOT_UNIQUE)
       end
       seq = all.size
       create_params = params.slice(*['name'])
