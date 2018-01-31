@@ -3,26 +3,21 @@ class UsersController < ApplicationController
 
   def login
     respond_to do |format|
-        format.html {
-          render 'login',
-          layout: false
-        }
+      format.html {
+        render 'login', layout: false
+      }
     end
   end
 
   def do_login
     rtn = User.login(params)
     if Util::success?(rtn) && rtn['user'].present?
-        session['user'] = rtn['user']
-        redirect_to management_index_path
+      session['user'] = rtn['user']
+      redirect_to management_index_path
     else
       respond_to do |format|
         format.html {
-          render 'login',
-          layout: false,
-          locals: {
-            :flash => {:alert=> rtn['return_info']}
-         }
+          render 'login', layout: false, locals: {:flash => {:alert => rtn['return_info']}}
         }
       end
     end
@@ -31,9 +26,8 @@ class UsersController < ApplicationController
   def logout
     reset_session
     respond_to do |format|
-      format.html { 
-        render 'login',
-        layout: false
+      format.html {
+        render 'login', layout: false
       }
     end
   end

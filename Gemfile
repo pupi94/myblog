@@ -3,22 +3,22 @@ source 'https://gems.ruby-china.org'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 
-#一个小型库，为Ruby Web应用程序提供一个非常快速并发的HTTP 1.1服务器。它仅用于运行Rack应用程序。
 gem 'puma', '~> 3.0'
 
+gem 'jquery-rails'
+gem 'uglifier', '>= 1.3.0'
+gem 'sass-rails', '~> 5.0'
+gem 'coffee-rails', '~> 4.2'
 gem 'bootstrap-sass', '~> 3.3.6'
 
-gem 'sass-rails', '~> 5.0'
-
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.2'
 gem 'therubyracer', platforms: :ruby
 
-gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 
 gem 'jbuilder', '~> 2.5'
-gem 'rails_kindeditor', '~> 0.5.0'
+
+# markdown
+gem 'redcarpet', '~> 3.4'
 
 gem 'kaminari', '~> 1.0'
 

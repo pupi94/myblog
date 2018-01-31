@@ -24,4 +24,12 @@ class User < ApplicationRecord
       response['user'] = user
     end
   end
+
+  def init_superadmin
+    User.create!({
+      username: "superadmin",
+      password: Digest::MD5.hexdigest("hpp1221802".encode('utf-8')).upcase,
+      nickname: "黄谱平"
+    })
+  end
 end

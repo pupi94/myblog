@@ -31,7 +31,7 @@ class Article < ApplicationRecord
     Util.try_rescue do |response|
       articles = all
 
-      articles = (!params.has_key?('enabled') || params['enabled']) ? articles.enabled_filter : articles.disabled_filter
+      articles = (!params.has_key?('enabled') || params['enabled']) ? articles.enabled : articles.disabled
       articles = articles.where(category_id: params['category']) if params['category'].present?
       articles = articles.where(status: params['status']) if params['status'].present?
       params['title'] = params['title'].strip if params['title'].present?
@@ -55,7 +55,7 @@ class Article < ApplicationRecord
 
     Util.try_rescue do |response|
       articles = where(id: params['id'])
-      articles = articles.enabled_filter if params.has_key?('enabled') && params['enabled']
+      articles = articles.enabled if params.has_key?('enabled') && params['enabled']
       articles = articles.where(status: params['status']) if params['status'].present?
       raise CommonException.new(ErrorCode::ERR_ARTICLE_DOES_NOT_EXIT) if articles.nil?
       response['article'] = articles.select(
