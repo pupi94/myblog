@@ -15,12 +15,21 @@
 <div class="form-group">
   <div class="col-lg-12">
     <label class="form_label"><%= t("article.summary") %></label>
-    <textarea class="form-control" name='summary' rows="3"><%= @article['summary']%></textarea>
+    <textarea class="form-control" name='summary' style="resize:none;" rows="2"><%= @article['summary']%></textarea>
   </div>
 </div>
 
-<div class="form-group" style="padding-left: 15px; padding-right: 15px;">
-  <%= kindeditor_tag :content, @article['content'], :editor_id => 'article_editor' %>
+<div class="form-group markdown-container">
+  <div class="col-lg-12">
+    <div class="toolbar-wrapper"></div>
+  </div>
+  <div class="markdown col-lg-12">
+    <div class="editor">
+      <textarea class="form-control" name="content" rows="20"><%= @article['content']%></textarea>
+    </div>
+    <!--<div class="show" hidden></div>-->
+
+  </div>
 </div>
 
 <div class="form-group" style="margin-bottom: 0;">
@@ -141,8 +150,19 @@
       if(!$articleForm.data('bootstrapValidator').isValid()){
         return false;
       }
-      article_editor.sync();
       $articleForm.submit();
+      return false;
+    });
+
+    var $contentEditor = $articleForm.find('textarea[name=content]');
+
+    $contentEditor.on('keydown', function(ev){
+      if(ev.altKey && ev.keyCode == 83) {
+        $.get('/articles/convert_html', {'content': $(this).val()}, function(res){
+          $('.content-show').html(res.content);
+        });
+      }
+      stopEventBubble(ev);
     });
   })
 </script>

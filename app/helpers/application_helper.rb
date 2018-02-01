@@ -6,10 +6,6 @@ module ApplicationHelper
   end
 
   def show_status(status)
-    if status
-      return t 'common.enabled'
-    else
-      return t 'common.disabled'
-    end
+    status ? t('common.enabled') : t('common.disabled')
   end
 end

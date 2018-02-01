@@ -16,6 +16,7 @@ class CreateArticles < ActiveRecord::Migration[5.0]
       t.boolean  :enabled,        null: false, default: true
       t.datetime :pubdate,        null: true
       t.text     :content
+      t.text     :content_html
       t.timestamps null: false
     end
   end

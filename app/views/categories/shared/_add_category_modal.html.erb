@@ -65,7 +65,6 @@
             location.reload();
          }else{
             BootstrapDialog.alert({
-              title: '<%= t('dialog.title')%>',
               message: '<strong><%= t('dialog.failed')%></strong>&nbsp;&nbsp;' + data.return_info,
               type: BootstrapDialog.TYPE_DANGER
             });
@@ -73,7 +72,6 @@
         },
         error : function() {
           BootstrapDialog.alert({
-              title: '<%= t('dialog.title')%>',
               message: '<%= t('dialog.sys_error')%>',
               type: BootstrapDialog.TYPE_DANGER
           });

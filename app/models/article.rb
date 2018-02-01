@@ -1,4 +1,6 @@
 class Article < ApplicationRecord
+  include MarkdownTool
+
   validates_presence_of :title, message: ErrorCode::ERR_ARTICLE_TITLE_CANNOT_BE_BLANK
   validates_presence_of :source_type, message: ErrorCode::ERR_ARTICLE_SOURCE_TYPE_CANNOT_BE_BLANK
   validates_presence_of :category_id, message: ErrorCode::ERR_ARTICLE_CATEGORY_ID_CANNOT_BE_BLANK
@@ -23,6 +25,7 @@ class Article < ApplicationRecord
         *%w'source_type title category_id tags summary content source source_url attachment author_id author_name'
       )
       create_params['status'] = ArticleStatus::EDITING
+      create_params['content_html'] = convert_html(create_params['content'])
       handle_create(create_params)
     end
   end

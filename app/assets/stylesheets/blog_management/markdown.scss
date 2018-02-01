@@ -1,0 +1,25 @@
+.markdown-container{
+  .toolbar-wrapper{
+    height: 30px;
+    background-color: #ededed;
+    border-top-left-radius: 4px;
+    border-top-right-radius:4px;
+    margin-bottom: 2px;
+  }
+  .markdown{
+    display:flex;
+    .show{
+      flex:1;
+      background-color: #3c763d;
+    }
+    .editor{
+      flex:1;
+
+      textarea{
+        resize:vertical;
+        border-top-left-radius:0;
+        border-top-right-radius:0;
+      }
+    }
+  }
+}

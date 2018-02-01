@@ -17,6 +17,12 @@ class ArticlesController < ApplicationController
 
   end
 
+  def convert_html
+    result = {'return_code' => 0, 'content' => '0'}
+    result['content'] = Article.convert_html(params['content'])
+    render json: result
+  end
+
   def edit
     search_params = params.permit(:id)
     search_params['enabled'] = true
@@ -30,8 +36,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    p "============================="
-    p params
+
     render :edit
   end
 

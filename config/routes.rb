@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   get  'articles/trash_list'
   post 'articles/update'
   post 'articles/update_status'
+  get  'articles/convert_html'
+
   get  'articles/:id', to: 'articles#show'
 
   post 'attachment/update'

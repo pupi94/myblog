@@ -1,26 +1,8 @@
-/* global define */
-
-/* ================================================
- * Make use of Bootstrap's modal more monkey-friendly.
- *
- * For Bootstrap 3.
- *
- * javanoob@hotmail.com
- *
- * https://github.com/nakupanda/bootstrap3-dialog
- *
- * Licensed under The MIT License.
- * ================================================ */
 (function (root, factory) {
-
     "use strict";
-
-    // CommonJS module is defined
     if (typeof module !== 'undefined' && module.exports) {
         module.exports = factory(require('jquery'), require('bootstrap'));
-    }
-    // AMD module is defined
-    else if (typeof define === "function" && define.amd) {
+    } else if (typeof define === "function" && define.amd) {
         define("bootstrap-dialog", ["jquery", "bootstrap"], function ($) {
             return factory($);
         });
@@ -28,16 +10,8 @@
         // planted over the root!
         root.BootstrapDialog = factory(root.jQuery);
     }
-
 }(this, function ($) {
-
     "use strict";
-
-    /* ================================================
-     * Definition of BootstrapDialogModal.
-     * Extend Bootstrap Modal and override some functions.
-     * BootstrapDialogModal === Modified Modal.
-     * ================================================ */
     var Modal = $.fn.modal.Constructor;
     var BootstrapDialogModal = function (element, options) {
         Modal.call(this, element, options);
@@ -158,12 +132,7 @@
         }
     };
 
-    // Add compatible methods.
     BootstrapDialogModal.prototype = $.extend(BootstrapDialogModal.prototype, Modal.prototype, BootstrapDialogModal.METHODS_TO_OVERRIDE[BootstrapDialogModal.getModalVersion()]);
-
-    /* ================================================
-     * Definition of BootstrapDialog.
-     * ================================================ */
     var BootstrapDialog = function (options) {
         this.defaultOptions = $.extend(true, {
             id: BootstrapDialog.newGuid(),
@@ -187,10 +156,6 @@
     };
 
     BootstrapDialog.BootstrapDialogModal = BootstrapDialogModal;
-
-    /**
-     *  Some constants.
-     */
     BootstrapDialog.NAMESPACE = 'bootstrap-dialog';
     BootstrapDialog.TYPE_DEFAULT = 'type-default';
     BootstrapDialog.TYPE_INFO = 'type-info';
@@ -199,15 +164,15 @@
     BootstrapDialog.TYPE_WARNING = 'type-warning';
     BootstrapDialog.TYPE_DANGER = 'type-danger';
     BootstrapDialog.DEFAULT_TEXTS = {};
-    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_DEFAULT] = 'Information';
-    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_INFO] = 'Information';
-    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_PRIMARY] = 'Information';
-    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_SUCCESS] = 'Success';
-    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_WARNING] = 'Warning';
-    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_DANGER] = 'Danger';
+    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_DEFAULT] = '提示';
+    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_INFO] = '提示';
+    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_PRIMARY] = '提示';
+    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_SUCCESS] = '成功';
+    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_WARNING] = '警告';
+    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_DANGER] = '错误';
     BootstrapDialog.DEFAULT_TEXTS['OK'] = 'OK';
-    BootstrapDialog.DEFAULT_TEXTS['CANCEL'] = 'Cancel';
-    BootstrapDialog.DEFAULT_TEXTS['CONFIRM'] = 'Confirmation';
+    BootstrapDialog.DEFAULT_TEXTS['CANCEL'] = '取消';
+    BootstrapDialog.DEFAULT_TEXTS['CONFIRM'] = '确认';
     BootstrapDialog.SIZE_NORMAL = 'size-normal';
     BootstrapDialog.SIZE_SMALL = 'size-small';
     BootstrapDialog.SIZE_WIDE = 'size-wide';    // size-wide is equal to modal-lg
@@ -220,10 +185,6 @@
     BootstrapDialog.ICON_SPINNER = 'glyphicon glyphicon-asterisk';
     BootstrapDialog.BUTTONS_ORDER_CANCEL_OK = 'btns-order-cancel-ok';
     BootstrapDialog.BUTTONS_ORDER_OK_CANCEL = 'btns-order-ok-cancel';
-
-    /**
-     * Default options.
-     */
     BootstrapDialog.defaultOptions = {
         type: BootstrapDialog.TYPE_PRIMARY,
         size: BootstrapDialog.SIZE_NORMAL,
@@ -243,17 +204,9 @@
         tabindex: -1,
         btnsOrder: BootstrapDialog.BUTTONS_ORDER_CANCEL_OK
     };
-
-    /**
-     * Config default options.
-     */
     BootstrapDialog.configDefaultOptions = function (options) {
         BootstrapDialog.defaultOptions = $.extend(true, BootstrapDialog.defaultOptions, options);
     };
-
-    /**
-     * Open / Close all created dialogs all at once.
-     */
     BootstrapDialog.dialogs = {};
     BootstrapDialog.openAll = function () {
         $.each(BootstrapDialog.dialogs, function (id, dialogInstance) {
@@ -265,12 +218,6 @@
             dialogInstance.close();
         });
     };
-
-    /**
-     * Get dialog instance by given id.
-     * 
-     * @returns dialog instance
-     */
     BootstrapDialog.getDialog = function (id) {
         var dialog = null;
         if (typeof BootstrapDialog.dialogs[id] !== 'undefined') {
@@ -279,31 +226,14 @@
 
         return dialog;
     };
-
-    /**
-     * Set a dialog.
-     * 
-     * @returns the dialog that has just been set.
-     */
     BootstrapDialog.setDialog = function (dialog) {
         BootstrapDialog.dialogs[dialog.getId()] = dialog;
 
         return dialog;
     };
-
-    /**
-     * Alias of BootstrapDialog.setDialog(dialog)
-     * 
-     * @param {type} dialog
-     * @returns {unresolved}
-     */
     BootstrapDialog.addDialog = function (dialog) {
         return BootstrapDialog.setDialog(dialog);
     };
-
-    /**
-     * Move focus to next visible dialog.
-     */
     BootstrapDialog.moveFocus = function () {
         var lastDialogInstance = null;
         $.each(BootstrapDialog.dialogs, function (id, dialogInstance) {
@@ -1176,43 +1106,17 @@
             return this;
         }
     };
-
-    // Add compatible methods.
     BootstrapDialog.prototype = $.extend(BootstrapDialog.prototype, BootstrapDialog.METHODS_TO_OVERRIDE[BootstrapDialogModal.getModalVersion()]);
-
-    /**
-     * RFC4122 version 4 compliant unique id creator.
-     *
-     * Added by https://github.com/tufanbarisyildirim/
-     *
-     *  @returns {String}
-     */
     BootstrapDialog.newGuid = function () {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
             var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
             return v.toString(16);
         });
     };
-
-    /* ================================================
-     * For lazy people
-     * ================================================ */
-
-    /**
-     * Shortcut function: show
-     *
-     * @param {type} options
-     * @returns the created dialog instance
-     */
     BootstrapDialog.show = function (options) {
         return new BootstrapDialog(options).open();
     };
 
-    /**
-     * Alert window
-     *
-     * @returns the created dialog instance
-     */
     BootstrapDialog.alert = function () {
         var alertOptions = {};
         var defaultAlertOptions = {
@@ -1277,12 +1181,6 @@
 
         return dialog.open();
     };
-
-    /**
-     * Confirm window
-     *
-     * @returns the created dialog instance
-     */
     BootstrapDialog.confirm = function () {
         var confirmOptions = {};
         var defaultConfirmOptions = {
@@ -1346,39 +1244,18 @@
         return dialog.open();
 
     };
-
-    /**
-     * Warning window
-     *
-     * @param {type} message
-     * @returns the created dialog instance
-     */
     BootstrapDialog.warning = function (message, callback) {
         return new BootstrapDialog({
             type: BootstrapDialog.TYPE_WARNING,
             message: message
         }).open();
     };
-
-    /**
-     * Danger window
-     *
-     * @param {type} message
-     * @returns the created dialog instance
-     */
     BootstrapDialog.danger = function (message, callback) {
         return new BootstrapDialog({
             type: BootstrapDialog.TYPE_DANGER,
             message: message
         }).open();
     };
-
-    /**
-     * Success window
-     *
-     * @param {type} message
-     * @returns the created dialog instance
-     */
     BootstrapDialog.success = function (message, callback) {
         return new BootstrapDialog({
             type: BootstrapDialog.TYPE_SUCCESS,
@@ -1387,5 +1264,4 @@
     };
 
     return BootstrapDialog;
-
 }));
