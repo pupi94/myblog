@@ -30,6 +30,18 @@ class Article < ApplicationRecord
     end
   end
 
+  def self.update(params)
+    Util.try_rescue do |response|
+
+      update_params = params.to_unsafe_h.slice(
+        *%w'source_type title category_id tags summary content source source_url attachment author_id author_name'
+      )
+      create_params['status'] = ArticleStatus::EDITING
+      create_params['content_html'] = convert_html(create_params['content'])
+      handle_create(create_params)
+    end
+  end
+
   def self.search_for_management(params)
     Util.try_rescue do |response|
       articles = all

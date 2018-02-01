@@ -2,7 +2,15 @@
   <li><%= t('menu.new_article') %></li>
 <% end %>
 <div class="ibox-content" style="width: 75%;margin-left: auto;margin-right: auto;">
-  <%= form_tag('/articles/create', method: 'post', id: 'article_form', remote: true, enctype: "multipart/form-data", class: "form-horizontal") do %>
-     <%= render :partial => "articles/shared/article_form" %>
+  <%= form_for @article, url:{action: 'create'}, html: {
+      enctype: "multipart/form-data",
+      class: "form-horizontal",
+      method: 'post',
+      id: 'article_form',
+      remote: true
+    } do |f| %>
+
+    <%= render :partial => "articles/shared/article_form", locals:{f: f} %>
+
   <% end %>
 </div>
