@@ -8,8 +8,4 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.timestamps null: false
     end
   end
-
-  def down
-    drop_table :users
-  end
 end

@@ -18,9 +18,9 @@ class Article < ApplicationRecord
   validates :source_type,  inclusion: {in: SourceType.const_values, message: ErrorCode::ERR_ARTICLE_SOURCE_TYPE_INVALID}
   validates :status,  inclusion: {in: ArticleStatus.const_values, message: ErrorCode::ERR_ARTICLE_STATUS_INVALID}
 
+  belongs_to :category
 
   before_save :update_content_html
-
   def update_content_html
     self.content_html = convert_html(self.content)
   end

@@ -3,6 +3,8 @@ class Category < ApplicationRecord
   validates_presence_of :seq, message: ErrorCode::ERR_CATEGORY_SEQ_CANNOT_BE_BLANK
 
   validates :name, length: { maximum: 32, message: ErrorCode::ERR_CATEGORY_NAME_THE_MAXIMUM_LENGTH_OF_32 }
+
+  has_many :articles
  
   def self.create(params)
     Util.try_rescue do |response|

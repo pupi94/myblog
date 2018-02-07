@@ -19,5 +19,8 @@ class CreateArticles < ActiveRecord::Migration[5.0]
       t.text     :content_html
       t.timestamps null: false
     end
+
+    add_foreign_key :articles, :users,      column: :author_id,   primary_key: :id, index: false
+    add_foreign_key :articles, :categories, column: :category_id, primary_key: :id
   end
 end
