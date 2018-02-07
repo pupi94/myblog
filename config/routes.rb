@@ -1,35 +1,28 @@
 Rails.application.routes.draw do
-
   root 'home#index'
 
-  get  'home/index'
-  # admin
-  get  'management/index'
+  get  'login', to: 'users#login'
+  post 'login', to: 'users#do_login'
+  get  'logout', to: 'users#logout'
 
-  # categories
-  get  'categories/index'
-  post 'categories/create'
+  get  '/articles/:id', to: 'articles#show', as: 'article'
 
-  # users
-  get  'users/login'
-  post 'users/do_login'
-  # 加上这个url后，在登录失败后刷新登录页面就不会报错了
-  get  'users/do_login', to: 'users#login'
+  namespace :admin do
+    root 'home#index'
 
-  get  'users/logout'
+    resources :articles, only:[:index, :new, :create, :edit, :update, :destroy] do
+      collection do
+        get  'trash_list'
+        post 'update_status'
+        get  'convert_html'
+      end
+    end
 
-  #article
-  get  'articles/new'
-  post 'articles/create'
-  get  'articles/edit'
-  get  'articles/index'
-  get  'articles/trash_list'
-  post 'articles/update'
-  post 'articles/update_status'
-  get  'articles/convert_html'
+    resources :categories, only: [:index, :create]
 
-  get  'articles/:id', to: 'articles#show'
+    post 'markdown/convert_html'
+  end
 
-  post 'attachment/update'
+  post 'attachment/upload'
   get  'attachment/download'
 end

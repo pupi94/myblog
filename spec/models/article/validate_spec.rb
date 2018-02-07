@@ -5,7 +5,7 @@ RSpec.describe Article, type: :model do
   describe '.validate' do
     include ValidateHelper
 
-    let(:validate_object) { FactoryGirl.build(:article) }
+    let(:validate_object) { FactoryGirl.build(:articles) }
 
     it 'success' do
       expect(validate_object).to be_present

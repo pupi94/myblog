@@ -6,25 +6,16 @@ class Category < ApplicationRecord
  
   def self.create(params)
     Util.try_rescue do |response|
-      if params['name'].blank?
-        fail CommonException.new(ErrorCode::ERR_CATEGORY_NAME_CANNOT_BE_BLANK)
-      end
-      if exists?(name: params['name'])
-        fail CommonException.new(ErrorCode::ERR_CATEGORY_NAME_NOT_UNIQUE)
-      end
-      seq = all.size
-      create_params = params.slice(*['name'])
-      create_params['seq'] = seq
-      handle_create(create_params.to_hash)
+      return CommonException.new(ErrorCode::ERR_CATEGORY_NAME_NOT_UNIQUE).result if exists?(name: params['name'])
+      params['seq'] = all.size
+      handle_create(params.to_unsafe_h)
     end
   end
 
   def self.search(params)
     Util.try_rescue do |response|
       categories = all
-      if params.has_key?('enabled')
-        categories = categories.where(enabled: params['enabled'])
-      end
+      categories = categories.where(enabled: params['enabled']) if params.has_key?('enabled')
       categories = categories.order(seq: :asc).select(%w(id name enabled))
       response['categories'] = categories.as_json
     end

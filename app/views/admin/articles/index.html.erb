@@ -2,7 +2,7 @@
     <li><%= t('menu.my_article') %></li>
 <% end %>
 <div class="row">
-  <%= form_tag('/articles/index', method: "get", remote: true, class: "search-form articles_search_form") do %>
+  <%= form_tag(admin_articles_path, method: "get", remote: true, class: "search-form articles_search_form") do %>
     <div class="form-group col-sm-2">
       <label><%= t('article.category') %>：</label>
       <%= select_tag(:category, article_category_select_options, class: 'form-control') %>
@@ -15,12 +15,14 @@
 
     <div class="form-group col-sm-3">
       <label><%= t('article.title') %>：</label>
-      <input type="text" class="form-control" name="title">
+      <%= text_field_tag :title, '', class: 'form-control' %>
     </div>
 
-    <button type="submit" class="btn btn-primary" data-disable-with="<%= t('button.searching') %>"><%= t('button.search') %></button>
+    <button type="submit" class="btn btn-primary" data-disable-with="<%= t('button.searching') %>">
+      <%= t('button.search') %>
+    </button>
   <% end %>
 </div>
 <div class="articles_list">
-  <%= render :partial => "articles/shared/articles_list" %>
+  <%= render :partial => "admin/articles/shared/articles_list" %>
 </div>

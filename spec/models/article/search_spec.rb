@@ -8,11 +8,11 @@ RSpec.describe Category, type: :model do
     }
 
     before(:each) do
-      create_list(:article ,10, :title => 'test title')
-      create_list(:article ,10, :status => ArticleStatus::EDITING, :category_id => 2)
-      create_list(:article ,10, :status => ArticleStatus::SOLD_OUT)
+      create_list(:articles , 10, :title => 'test title')
+      create_list(:articles , 10, :status => ArticleStatus::EDITING, :category_id => 2)
+      create_list(:articles , 10, :status => ArticleStatus::SOLD_OUT)
 
-      create_list(:article ,5, :enabled => false)
+      create_list(:articles , 5, :enabled => false)
     end
 
     it 'success' do

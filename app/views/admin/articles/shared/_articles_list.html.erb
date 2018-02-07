@@ -15,7 +15,7 @@
     <% if @articles && @articles.size > 0 %>
       <% @articles.each do |article| %>
           <tr>
-            <td><%= link_to article['title'], { controller: 'articles', action: 'show', 'id' => article['id'] }, target:'_blank' %></td>
+            <td><%= link_to article['title'], article_path(article['id']), target:'_blank' %></td>
             <td><%= t("article.source_type.#{article['source_type']}") %></td>
             <td><%= article['tags'] %></td>
             <td><%= article['pv'] %></td>
@@ -26,7 +26,7 @@
             </td>
             <td>
               <% if article['enabled'] %>
-                <%= link_to t('common.edit'), {:controller=>"articles", :action =>"edit", :id=> article['id']} %>
+                <%= link_to t('common.edit'), edit_admin_article_path(article['id']) %>
                 <%= link_to t("article.status_edit.#{article['status']}"), '#', data:{id: article['id']}, class: 'article_status_edit'%>
               <% end %>
             </td>
@@ -47,12 +47,10 @@
 
 <script type="text/javascript">
   $(function(){
-    $('.articles_list .article_status_edit').on('click', function(){
-      var article_id = $(this).data('id');
-      event.preventDefault();//或者return false; 阻止a标签的连接跳转行为
+    $('.articles_list .article_status_edit').on('click', function(e){
       $.ajax({
-        url:'/articles/update_status',
-        data: {id: article_id},
+        url:'/admin/articles/update_status',
+        data: {id: $(this).data('id')},
         type:'post',
         dataType:'json',
         success:function(data) {
@@ -72,6 +70,8 @@
           });
         }
       });
+
+      stopEventBubble(e);
     })
   })
 </script>

@@ -8,3 +8,4 @@
 //= require nprogress
 
 //= require_tree ./blog
+

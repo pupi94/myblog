@@ -30,8 +30,7 @@
     var $addCategoryModal = $("#add_category_modal");
     var $addCategoryForm = $addCategoryModal.find(".category_form");
 
-    $addCategoryModal.on('shown.bs.modal', function(){
-    })
+    $addCategoryModal.on('shown.bs.modal', function(){});
 
     $addCategoryForm.bootstrapValidator({
       feedbackIcons: {
@@ -56,7 +55,7 @@
         return ;
       }
       $.ajax({
-        url:'/categories/create',
+        url:'/admin/categories',
         data: $addCategoryForm.serialize(),
         type:'post',
         dataType:'json',

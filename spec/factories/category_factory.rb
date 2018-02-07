@@ -5,9 +5,9 @@ FactoryGirl.define do
 
     factory :category_with_article do
       after(:create) do |category|
-        create(:article, category_id: category.id)
-        create(:article, category_id: category.id)
-        create(:article, category_id: category.id)
+        create(:articles, category_id: category.id)
+        create(:articles, category_id: category.id)
+        create(:articles, category_id: category.id)
       end
     end
   end

@@ -1,0 +1,15 @@
+<% content_for :title do %>
+  <li><%= t('menu.article_edit') %></li>
+<% end %>
+<div class="ibox-content" style="width: 75%;margin-left: auto;margin-right: auto;">
+  <%= form_for [:admin, @article], html: {
+      enctype: "multipart/form-data",
+      class: "form-horizontal",
+      method: 'PATCH',
+      id: 'article_form',
+      remote: true
+    } do |f| %>
+
+    <%= render partial: "admin/articles/shared/article_form", locals:{f: f}  %>
+  <% end %>
+</div>

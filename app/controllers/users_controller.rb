@@ -1,34 +1,21 @@
 class UsersController < ApplicationController
-  before_filter :login_required, :except => [:login, :do_login]
+  layout false
 
-  def login
-    respond_to do |format|
-      format.html {
-        render 'login', layout: false
-      }
-    end
-  end
+  def login ;end
 
   def do_login
     rtn = User.login(params)
     if Util::success?(rtn) && rtn['user'].present?
       session['user'] = rtn['user']
-      redirect_to management_index_path
+      redirect_to admin_root_path
     else
-      respond_to do |format|
-        format.html {
-          render 'login', layout: false, locals: {:flash => {:alert => rtn['return_info']}}
-        }
-      end
+      flash[:alert] = rtn['return_info']
+      render :login
     end
   end
 
   def logout
     reset_session
-    respond_to do |format|
-      format.html {
-        render 'login', layout: false
-      }
-    end
+    redirect_to :login
   end
 end

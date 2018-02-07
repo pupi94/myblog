@@ -4,15 +4,15 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
   <meta name="renderer" content="webkit">
   <meta name="description" content="">
   <meta name="keywords" content="">
   <title>后台管理</title>
   <%= csrf_meta_tags %>
 
-  <%= stylesheet_link_tag    'management_application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'management_application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'admin', 'data-turbolinks-track': 'reload' %>
 </head>
 
 <body>
@@ -20,7 +20,7 @@
 
   <div class="header">
     <div class="header-title">
-      <strong><a href="/home/index"><%= t('myblog_system') %></a></strong>
+      <strong><a href="<%= root_path %>"><%= t('myblog_system') %></a></strong>
       <small><%= t('management_system') %></small>
     </div>
     <div class="header-nav">
@@ -34,7 +34,7 @@
             <li><a href="#"><i class="glyphicon glyphicon-cog"></i><%= t('user.setting') %></a></li>
           </ul>
         </li>
-        <li><a href="/users/logout"><i class="glyphicon glyphicon-off"></i><%= t('log_out') %></a></li>
+        <li><a href="<%= logout_path %>"><i class="glyphicon glyphicon-off"></i><%= t('log_out') %></a></li>
       </ul>
     </div>
   </div>
@@ -42,11 +42,11 @@
   <div class="container-wrapper">
     <nav class="container-nav">
       <ul class="nav">
-        <li><a href="/management/index"><i class="glyphicon glyphicon-home"></i><%= t('menu.first_page') %></a></li>
-        <li><a href="/articles/new"><i class="glyphicon glyphicon-plus"></i><%= t('menu.new_article') %></a></li>
-        <li><a href="/articles/index"><i class="glyphicon glyphicon-menu-hamburger"></i><%= t('menu.my_article') %></a></li>
-        <li><a href="/articles/trash_list"><i class="glyphicon glyphicon-trash"></i><%= t('menu.trash') %></a></li>
-        <li><a href="/categories/index"><i class="glyphicon glyphicon-menu-hamburger"></i><%= t('menu.category')%></a></li>
+        <li><a href="<%= admin_root_path %>"><i class="glyphicon glyphicon-home"></i><%= t('menu.first_page') %></a></li>
+        <li><a href="<%= new_admin_article_path %>"><i class="glyphicon glyphicon-plus"></i><%= t('menu.new_article') %></a></li>
+        <li><a href="<%= admin_articles_path %>"><i class="glyphicon glyphicon-menu-hamburger"></i><%= t('menu.my_article') %></a></li>
+        <li><a href="<%= trash_list_admin_articles_path %>"><i class="glyphicon glyphicon-trash"></i><%= t('menu.trash') %></a></li>
+        <li><a href="<%= admin_categories_path %>"><i class="glyphicon glyphicon-menu-hamburger"></i><%= t('menu.category')%></a></li>
         <li><a href="#"><i class="glyphicon glyphicon-bullhorn"></i><%= t('menu.message_board') %></a></li>
       </ul>
     </nav>

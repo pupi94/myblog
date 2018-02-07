@@ -11,21 +11,18 @@ class User < ApplicationRecord
   # validates_uniqueness_of :nickname, message: ErrorCode::ERR_USER_NICKNAME_NOT_UNIQUE
 
   def self.login(params)
-    if params['user_name'].blank?
-      return CommonException.new(ErrorCode::ERR_USER_NAME_CANNOT_BE_BLANK)
-    end
-    if params['password'].blank?
-      return CommonException.new(ErrorCode::ERR_USER_PASSWORD_CANNOT_BE_BLANK)
-    end
+    return CommonException.new(ErrorCode::ERR_USER_NAME_CANNOT_BE_BLANK).result if params['user_name'].blank?
+    return CommonException.new(ErrorCode::ERR_USER_PASSWORD_CANNOT_BE_BLANK).result if params['password'].blank?
+
     Util.try_rescue do |response|
       password  = Digest::MD5.hexdigest(params['password'].encode('utf-8')).upcase
       user = find_by(username: params["user_name"], password: password)
-      fail CommonException.new(ErrorCode::ERR_USER_PASSWORD_OR_NMAE_WRONG) unless user
+      return CommonException.new(ErrorCode::ERR_USER_PASSWORD_OR_NMAE_WRONG).result unless user
       response['user'] = user
     end
   end
 
-  def init_superadmin
+  def self.init_superadmin
     User.create!({
       username: "superadmin",
       password: Digest::MD5.hexdigest("hpp1221802".encode('utf-8')).upcase,

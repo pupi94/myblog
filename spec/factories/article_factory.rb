@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :article, class: Article do
+  factory :articles, class: Article do
     title         "测试标题"
     source        "文章来源"
     source_url    "https://www.google.com"

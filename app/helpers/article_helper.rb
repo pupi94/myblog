@@ -8,12 +8,12 @@ module ArticleHelper
     options_for_select(source_types)
   end
 
-  def article_category_select_options
+  def article_category_select_options category = nil
     options = [['全部', '']]
     get_categories.each do |category|
       options << [category['name'], category['id']]
     end
-    options_for_select(options)
+    options_for_select(options, category)
   end
 
   def article_status_select_options

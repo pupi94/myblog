@@ -19,44 +19,23 @@ class Article < ApplicationRecord
   validates :status,  inclusion: {in: ArticleStatus.const_values, message: ErrorCode::ERR_ARTICLE_STATUS_INVALID}
 
 
-  def self.create(params)
-    Util.try_rescue do |response|
-      create_params = params.to_unsafe_h.slice(
-        *%w'source_type title category_id tags summary content source source_url attachment author_id author_name'
-      )
-      create_params['status'] = ArticleStatus::EDITING
-      create_params['content_html'] = convert_html(create_params['content'])
-      handle_create(create_params)
-    end
+  before_save :update_content_html
+
+  def update_content_html
+    self.content_html = convert_html(self.content)
   end
 
-  def self.update(params)
-    Util.try_rescue do |response|
-
-      update_params = params.to_unsafe_h.slice(
-        *%w'source_type title category_id tags summary content source source_url attachment author_id author_name'
-      )
-      create_params['status'] = ArticleStatus::EDITING
-      create_params['content_html'] = convert_html(create_params['content'])
-      handle_create(create_params)
-    end
-  end
-
-  def self.search_for_management(params)
+  def self.search(params)
     Util.try_rescue do |response|
       articles = all
-
-      articles = (!params.has_key?('enabled') || params['enabled']) ? articles.enabled : articles.disabled
+      articles = (params.has_key?('enabled') && params['enabled'] == false) ? articles.disabled : articles.enabled
       articles = articles.where(category_id: params['category']) if params['category'].present?
       articles = articles.where(status: params['status']) if params['status'].present?
       params['title'] = params['title'].strip if params['title'].present?
       articles = articles.where('title like ?', "%#{params['title']}%") if params['title'].present?
 
       response['total_count'] = articles.size
-      if response['total_count'] == 0
-        response['articles'] = {}
-        return response
-      end
+      return response if response['total_count'] == 0
 
       articles = articles.order(created_at: :desc).page_filter(params['page_size'], params['page'])
 
@@ -65,42 +44,20 @@ class Article < ApplicationRecord
     end
   end
 
-  def self.show(params)
-    return CommonException.new(ErrorCode::ERR_ARTICLE_PARAMS_ID_CAN_NOT_BE_BLANK).result if params['id'].blank?
-
-    Util.try_rescue do |response|
-      articles = where(id: params['id'])
-      articles = articles.enabled if params.has_key?('enabled') && params['enabled']
-      articles = articles.where(status: params['status']) if params['status'].present?
-      raise CommonException.new(ErrorCode::ERR_ARTICLE_DOES_NOT_EXIT) if articles.nil?
-      response['article'] = articles.select(
-        *%w'id source_type title category_id tags summary content source source_url attachment status'
-      ).first
-    end
-  end
-
-  def self.update_status params
-    if params.blank? || params['id'].blank?
-      return CommonException.new(ErrorCode::ERR_ARTICLE_PARAMS_ID_CAN_NOT_BE_BLANK).result
-    end
-
-    article = find_by(id: params['id'])
+  def self.update_status id
+    article = find_by(id: id)
     unless article && article.enabled
       return CommonException.new(ErrorCode::ERR_ARTICLE_DOES_NOT_EXIT).result
     end
+
     Util.try_rescue do |response|
-      update_params = {}
-      case article.status
-        when ArticleStatus::EDITING
-          new_status = ArticleStatus::PUBLISHED
-          update_params['pubdate'] = Time.now
-        when ArticleStatus::PUBLISHED
-          new_status = ArticleStatus::SOLD_OUT
-        when ArticleStatus::SOLD_OUT
-          new_status = ArticleStatus::PUBLISHED
+      if [ArticleStatus::EDITING, ArticleStatus::SOLD_OUT].include?(article.status)
+        article.status = ArticleStatus::PUBLISHED
+        article.pubdate = Time.now
+      else
+        article.status = ArticleStatus::SOLD_OUT
       end
-      update_params['status'] = new_status
-      article.handle_update!(update_params)
+      article.handle_save
     end
   end
 end

@@ -16,17 +16,20 @@ class ApplicationRecord < ActiveRecord::Base
     obj = new
     obj.handle_assign_attributes(params)
     obj.handle_save!
-    return obj
+    obj
   end
 
-  def handle_update(params)
-    handle_assign_attributes(params)
+  def handle_save!
+    handle_valid
     handle_save
   end
 
-  def handle_update!(params)
-    handle_assign_attributes(params)
-    handle_save!
+  def handle_save
+    begin
+      save
+    rescue Exception => e
+      raise DatabaseException.new(e.message)
+    end
   end
 
   def handle_assign_attributes(params)
@@ -39,28 +42,26 @@ class ApplicationRecord < ActiveRecord::Base
     end
   end
 
-  def handle_valid
-    raise CommonException.new(errors.messages.first[1][0]) if !valid?
-  end
-
-  def handle_save
-    begin
-      save
-    rescue Exception => e
-      raise DatabaseException.new(e.message)
-    end
-  end
-
-  def handle_save!
-    handle_valid
-    handle_save
-  end
-
   def handle_destroy
     begin
       destroy
     rescue Exception => e
       raise DatabaseException.new(e.message)
     end
+  end
+
+  def handle_update!(params)
+    handle_assign_attributes(params)
+    handle_save!
+  end
+
+  def handle_update(params)
+    handle_assign_attributes(params)
+    handle_save
+  end
+
+  private
+  def handle_valid
+    raise CommonException.new(errors.messages.first[1][0]) if !valid?
   end
 end
