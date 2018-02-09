@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get  'logout', to: 'users#logout'
 
   get  '/articles/:id', to: 'articles#show', as: 'article'
+  get  '/home/paging_search'
 
   namespace :admin do
     root 'home#index'

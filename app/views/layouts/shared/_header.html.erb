@@ -21,11 +21,9 @@
     <div class="main-nav collapse navbar-collapse" id="navigation_bars">
       <ul class="nav navbar-nav navbar-right">
         <li class="active hidden-index"><a data-cont="首页" href="<%= root_path %>">首页</a></li>
-        <li><a href="#">前端技术</a></li>
-        <li><a href="#">后端程序</a></li>
-        <li><a href="#">管理系统</a></li>
-        <li><a href="#">程序人生</a></li>
-        <li><a href="#">程序人生</a></li>
+        <% get_categories.each do |category| %>
+          <li><a href="#"><%= category['name'] %></a></li>
+        <% end %>
       </ul>
     </div>
   </div>

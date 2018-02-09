@@ -20,7 +20,7 @@ zh:
     title: 标题
     summary: 摘要
     tags: 文章标签
-    category: 文章分类
+    category: 博客分类
     add_tag: 添加标签
     attachment: 文章图片
     source: 来源
@@ -30,5 +30,5 @@ zh:
     pubdate: 发布时间
 
   category:
-    add: 新增类别
-    name: 类别
+    add: 新增分类
+    name: 名称

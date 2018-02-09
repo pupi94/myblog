@@ -1,0 +1,58 @@
+<div class="content-wrap">
+  <div class="content article-show">
+    <div class="article">
+      <div class="article-header">
+        <h1 class="article-title">
+          <a><%= @article['title'] %></a>
+        </h1>
+        <div class="article-meta">
+          <span class="item article-meta-time">
+            <% pubdate = format_date(@article['pubdate']) %>
+            <a class="time" data-toggle="tooltip" data-placement="bottom" title="时间：<%= pubdate %>">
+             <i class="glyphicon glyphicon-time"></i> <%= pubdate %>
+           </a>
+          </span>
+
+          <% if @article['source'].present? %>
+            <span class="item article-meta-source">
+              <a href="<%= @article['source_url'] %>" data-toggle="tooltip" data-placement="bottom" title="来源：<%= @article['source'] %>">
+                <i class="glyphicon glyphicon-globe"></i> <%= @article['source'] %>
+              </a>
+            </span>
+          <% end %>
+
+          <span class="item article-meta-category">
+            <a data-toggle="tooltip" data-placement="bottom" title="栏目：<%= get_category_name @article['source'] %>">
+              <i class="glyphicon glyphicon-list"></i>后端程序
+            </a>
+          </span>
+
+          <span class="item article-meta-views">
+            <a data-toggle="tooltip" data-placement="bottom" title="查看：120">
+              <i class="glyphicon glyphicon-eye-open"></i> 共<%= @article['pv'] %>人围观
+            </a>
+          </span>
+
+          <span class="item article-meta-comment">
+            <a  data-toggle="tooltip" data-placement="bottom" title="评论：0">
+              <i class="glyphicon glyphicon-comment"></i> 0个评论
+            </a>
+          </span>
+        </div>
+      </div>
+      <div class="article-content">
+        <%= raw(@article['content_html']) %>
+      </div>
+
+      <div class="article-copyright hidden-xs">
+        未经允许不得转载：<a href="">Puping博客</a> » <a href="article.html"><%= @article['title'] %></a>
+      </div>
+
+      <div class="article-tags">标签：
+        <a href="#" rel="tag"><%= @article['tags'] %></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render partial: "home/shared/sidebar" %>

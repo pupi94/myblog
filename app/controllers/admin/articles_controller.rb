@@ -48,7 +48,7 @@ module Admin
 
     private
     def do_search search_params
-      rtn = Article.search(search_params)
+      rtn = Article.search_for_admin(search_params)
       if Util.success? rtn
         @articles = Kaminari.paginate_array(
           rtn['articles'] || [], total_count: rtn['total_count']

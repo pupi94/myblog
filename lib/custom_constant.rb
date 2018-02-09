@@ -11,6 +11,7 @@ module CustomConstant
 
   DEFAULT_PAGE_SIZE = 15
   DEFAULT_PAGE = 1
+  IAS_DEFAULT_PAGE_SIZE = 6
 
   module SourceType
     extend ConstantValue

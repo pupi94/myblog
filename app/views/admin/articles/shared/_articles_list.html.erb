@@ -25,10 +25,8 @@
               <span class="<%= "article_#{article['status']}"%>"><%= t("article.status.#{article['status']}") %></span>
             </td>
             <td>
-              <% if article['enabled'] %>
-                <%= link_to t('common.edit'), edit_admin_article_path(article['id']) %>
-                <%= link_to t("article.status_edit.#{article['status']}"), '#', data:{id: article['id']}, class: 'article_status_edit'%>
-              <% end %>
+              <%= link_to t('common.edit'), edit_admin_article_path(article['id']) %>
+              <%= link_to t("article.status_edit.#{article['status']}"), '#', data:{id: article['id']}, class: 'article_status_edit'%>
             </td>
           </tr>
       <% end %>

@@ -16,7 +16,7 @@ RSpec.describe Category, type: :model do
     end
 
     it 'success' do
-      rtn = Article.search(params)
+      rtn = Article.search_for_admin(params)
       expect_success_result rtn
       expect(rtn['articles'].size).to eq DEFAULT_PAGE_SIZE
       expect(rtn['total_count']).to eq 30
@@ -24,7 +24,7 @@ RSpec.describe Category, type: :model do
 
     it 'search by title' do
       params['title'] = 'test'
-      rtn = Article.search(params)
+      rtn = Article.search_for_admin(params)
       expect_success_result rtn
       expect(rtn['articles'].size).to eq 10
       expect(rtn['total_count']).to eq 10

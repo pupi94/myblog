@@ -18,8 +18,7 @@ class Category < ApplicationRecord
     Util.try_rescue do |response|
       categories = all
       categories = categories.where(enabled: params['enabled']) if params.has_key?('enabled')
-      categories = categories.order(seq: :asc).select(%w(id name enabled))
-      response['categories'] = categories.as_json
+      response['categories'] = categories.order(seq: :asc).select(%w(id name enabled))
     end
   end
 end

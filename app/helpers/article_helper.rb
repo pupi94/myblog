@@ -8,29 +8,11 @@ module ArticleHelper
     options_for_select(source_types)
   end
 
-  def article_category_select_options category = nil
-    options = [['全部', '']]
-    get_categories.each do |category|
-      options << [category['name'], category['id']]
-    end
-    options_for_select(options, category)
-  end
-
   def article_status_select_options
     options = [['全部', '']]
     ArticleStatus.const_values.each do |status|
       options << [t("article.status.#{status}"), status]
     end
     options_for_select(options)
-  end
-
-  def get_categories
-    categories = Rails.cache.read("categories")
-    if categories.blank?
-      rtn  = Category.search({'enabled' => true})
-      categories = rtn['categories']
-      Rails.cache.write("categories", categories)
-    end
-    categories
   end
 end

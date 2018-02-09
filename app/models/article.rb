@@ -25,7 +25,7 @@ class Article < ApplicationRecord
     self.content_html = convert_html(self.content)
   end
 
-  def self.search(params)
+  def self.search_for_admin(params)
     Util.try_rescue do |response|
       articles = all
       articles = (params.has_key?('enabled') && params['enabled'] == false) ? articles.disabled : articles.enabled
@@ -39,8 +39,18 @@ class Article < ApplicationRecord
 
       articles = articles.order(created_at: :desc).page_filter(params['page_size'], params['page'])
 
-      search_column = %w(id title source_type tags pv pubdate status created_at enabled)
+      search_column = %w[id title source_type tags pv pubdate status created_at]
       response['articles'] = articles.select(*search_column)
+    end
+  end
+
+  def self.search params
+    Util.try_rescue do |response|
+      articles = Article.where(status: ArticleStatus::PUBLISHED).order(pubdate: :desc)
+      response['count'] = articles.size
+      return response if response['count'] == 0
+      articles = articles.page_filter(params['page_size'], params['page'])
+      response['articles'] = articles.select(*%w[id category_id summary title pv pubdate])
     end
   end
 

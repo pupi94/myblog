@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
 
   def self.in_development?
-    Rails.env.development?
+    #Rails.env.development?
+    false
   end
 
   rescue_from Exception, :with => :render_error unless in_development?

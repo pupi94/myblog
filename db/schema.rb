@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20170523135813) do
     t.text     "content_html", limit: 65535
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
+    t.index ["author_id"], name: "fk_rails_e74ce85cbc", using: :btree
+    t.index ["category_id"], name: "fk_rails_af09d53ead", using: :btree
   end
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -50,4 +52,6 @@ ActiveRecord::Schema.define(version: 20170523135813) do
     t.datetime "updated_at",                           null: false
   end
 
+  add_foreign_key "articles", "categories"
+  add_foreign_key "articles", "users", column: "author_id"
 end

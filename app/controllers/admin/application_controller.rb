@@ -1,8 +1,8 @@
 module Admin
   class ApplicationController < ::ApplicationController
-    before_action :login_required
-
     layout 'admin'
+
+    before_action :login_required
 
     def login_required
       redirect_to(login_path) unless current_user

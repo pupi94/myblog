@@ -13,7 +13,11 @@
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  
+
+<!--  [if lt IE 9]>
+    <script>window.location.href='/upgrade_browser.html';</script>
+  [endif]-->
+
 </head>
 
 
@@ -22,11 +26,7 @@
 
   <div class="main" style="height:200px;">
     <section class="container">
-
-      <div class="content-wrap">
-        <%= yield %>
-      </div>
-      <%= render :partial => "layouts/shared/sidebar" %>
+      <%= yield %>
     </section>
   </div>
 

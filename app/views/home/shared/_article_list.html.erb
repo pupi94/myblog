@@ -1,0 +1,34 @@
+<% if @articles && @articles.size > 0 %>
+  <div class="article-list">
+    <% category_hash = get_category_hash %>
+    <% @articles.each do |article|%>
+      <article class="article">
+        <header>
+          <a class="cat"><%= category_hash[article['category_id'].to_s]['name'] %><i></i></a>
+          <h2><a href="<%= article_path(article['id']) %>" title=""><%= article['title'] %></a></h2>
+        </header>
+        <p class="meta">
+          <time><i class="glyphicon glyphicon-time"></i><%= format_date(article['pubdate']) %></time>
+          <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共<%= article['pv'] %>人围观</span>
+          <a class="comment" href="article.html#comment">
+            <i class="glyphicon glyphicon-comment"></i> 0个评论
+          </a>
+        </p>
+        <p class="note"><%= article['summary'] %></p>
+      </article>
+    <% end %>
+  </div>
+
+  <div class="pagination" style="display: none;">
+    <ul>
+      <% if @page > DEFAULT_PAGE %>
+        <li class="prev-page"></li>
+      <% end %>
+      <li class="active"><span><%= @page %></span></li>
+      <% if @page_size * @page < @count %>
+        <li class="next-page"><a href="/?page=<%= @page + 1 %>">下一页</a></li>
+      <% end %>
+      <li><span>共 <%= @count/@page_size +1 %> 页</span></li>
+    </ul>
+  </div>
+<% end %>
