@@ -50,6 +50,6 @@ IASNoneLeftExtension.prototype.unbind = function(ias) {
  * @public
  */
 IASNoneLeftExtension.prototype.defaults = {
-  text: 'You reached the end.',
-  html: '<div class="ias-noneleft" style="text-align: center;">{text}</div>'
+  text: '到  底  了',
+  html: '<div class="ias-noneleft">{text}</div>'
 };
