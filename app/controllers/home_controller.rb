@@ -10,8 +10,6 @@ class HomeController < ApplicationController
       @count = rtn['count']
       @page_size = search_params['page_size']
     end
-
-   # raise Exception.new
   end
 
   def paging_search

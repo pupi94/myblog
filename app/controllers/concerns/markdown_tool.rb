@@ -3,7 +3,7 @@ module MarkdownTool
 
   def convert_html(text)
     return nil if text.blank?
-    Markdown.render(text)
+    BlogMarkdown.render(text)
   end
 
   module ClassMethods

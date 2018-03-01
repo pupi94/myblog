@@ -26,4 +26,10 @@ Rails.application.routes.draw do
 
   post 'attachment/upload'
   get  'attachment/download'
+
+  unless Rails.env.development?
+    match '*path', to: 'error#no_resources', via: :all, constraints: lambda { |request|
+      return true;
+    }
+  end
 end

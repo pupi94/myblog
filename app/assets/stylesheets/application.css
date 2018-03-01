@@ -2,6 +2,6 @@
  *= require include_bootstrap
 
  *= require nprogress
- *= require error_404
+ *= require error
  *= require_tree ./blog
  */
