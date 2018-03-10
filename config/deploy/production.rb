@@ -11,11 +11,11 @@ server "120.79.159.182", user: "ping", roles: %w{app db web}, primary: true
 #
 # Global options
 # --------------
-#  set :ssh_options, {
-#    keys: %w(/home/rlisowski/.ssh/id_rsa),
-#    forward_agent: false,
-#    auth_methods: %w(password)
-#  }
+ set :ssh_options, {
+   keys: %w(~/.ssh/id_rsa),
+   forward_agent: true,
+   auth_methods: %w(publickey)
+ }
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------
