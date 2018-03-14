@@ -1,4 +1,5 @@
 include CustomConstant
+include Util
 
 require_relative "../../lib/extend_kaminari"
 

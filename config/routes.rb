@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   get  'attachment/download'
 
   unless Rails.env.development?
-    match '*path', to: 'error#no_resources', via: :all, constraints: lambda { |request|
+    match '*path', to: 'error#no_match', via: :all, constraints: lambda { |request|
       return true;
     }
   end
