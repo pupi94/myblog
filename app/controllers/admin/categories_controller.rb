@@ -1,5 +1,6 @@
 module Admin
   class CategoriesController < ApplicationController
+    layout 'admin'
 
     def index
       rtn = Category.search({})

@@ -3,8 +3,7 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 
-//= require jquery-ias
-//= require_tree ../../../vendor/assets/javascripts/ias_extension
+//= require include_jquery_ias
 //= require nprogress
 
 //= require_tree ./blog

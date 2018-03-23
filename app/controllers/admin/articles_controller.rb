@@ -1,5 +1,6 @@
 module Admin
   class ArticlesController < ApplicationController
+    layout 'admin'
 
     def index
       search_params = params.permit(:category, :title, :status, :page, :page_size)
@@ -18,6 +19,7 @@ module Admin
 
     def create
       @article = Article.new(article_params)
+      p @article
       @article.author_id   = current_user['id']
       @article.author_name = current_user['username']
       @article.status = ArticleStatus::EDITING

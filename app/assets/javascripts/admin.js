@@ -3,7 +3,7 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 
-//= require_tree ../../../vendor/assets/javascripts/bootstrap_validator
+//= require include_bootstrap_validator
 //= require bootstrap-dialog
 
 //= require jquery_file_upload

@@ -22,10 +22,11 @@ Rails.application.routes.draw do
     resources :categories, only: [:index, :create]
 
     post 'markdown/convert_html'
-  end
 
-  post 'attachment/upload'
-  get  'attachment/download'
+    post 'attachments/upload'
+    get  'attachments/download'
+    get  'attachments/delete'
+  end
 
   unless Rails.env.development?
     match '*path', to: 'error#no_match', via: :all, constraints: lambda { |request|
