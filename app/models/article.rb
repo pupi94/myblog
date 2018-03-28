@@ -1,6 +1,5 @@
 class Article < ApplicationRecord
   include MarkdownTool
-
   include Validates::ArticleValidate
 
   belongs_to :category

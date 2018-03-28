@@ -42,10 +42,6 @@ group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-
-  gem "capistrano", "~> 3.10", require: false
-  gem 'capistrano-rails', '~> 1.3', require: false
-  gem 'capistrano3-puma', '~> 3.1', require: false
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

@@ -3,12 +3,9 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  username: root
-  password: Hpp&&1221802
-  socket: /var/lib/mysql/mysql.sock
 
-  #username: root
-  #password: 123456
+  username: root
+  password: 123456
 
 development:
   <<: *default
@@ -20,5 +17,4 @@ test:
 
 production:
   <<: *default
-  database: myblog_production
-  #password: <%= ENV['MYBLOG_DATABASE_PASSWORD'] %>
+  password: <%= ENV['MYBLOG_DATABASE_PASSWORD'] %>
