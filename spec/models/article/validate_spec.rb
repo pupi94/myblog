@@ -5,10 +5,10 @@ RSpec.describe Article, type: :model do
   describe '.validate' do
     include ValidateHelper
 
-    let(:validate_object) { FactoryGirl.build(:articles) }
+    let(:article) { create(:articles) }
 
     it 'success' do
-      expect(validate_object).to be_present
+      expect(article).to be_present
     end
 
     context 'present' do
@@ -21,7 +21,7 @@ RSpec.describe Article, type: :model do
         ['author_name',   ErrorCode::ERR_ARTICLE_AUTHOR_NAME_CANNOT_BE_BLANK]
       ].each do |value|
         it value do
-          valid_column_present validate_object, *value
+          valid_column_present article, *value
         end
       end
     end
@@ -36,7 +36,7 @@ RSpec.describe Article, type: :model do
         ['attachment', 128,   ErrorCode::ERR_ARTICLE_ATTACHMENT_THE_MAXIMUM_LENGTH_OF_128  ]
       ].each do |value|
         it value do
-          valid_column_length validate_object, *value
+          valid_column_length article, *value
         end
       end
 
@@ -46,7 +46,7 @@ RSpec.describe Article, type: :model do
           ['status',      ArticleStatus.const_values, ErrorCode::ERR_ARTICLE_STATUS_INVALID ]
         ].each do |value|
           it value do
-            valid_column_range validate_object, *value
+            valid_column_range article, *value
           end
         end
       end

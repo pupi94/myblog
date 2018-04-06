@@ -4,10 +4,12 @@ module CategoryHelper
     if category_hash.nil?
       rtn  = Category.search({'enabled' => true})
       categories = rtn['categories']
+
       category_hash = {}
-      categories.each do |category|
-        category_hash[category['id'].to_s] = category
+      categories.reduce({}) do |hash, category|
+        hash[category['id'].to_s] = category
       end
+      
       Rails.cache.write("category_hash", category_hash)
     end
     category_hash

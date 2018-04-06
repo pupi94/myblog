@@ -5,9 +5,7 @@ RSpec.describe Category, type: :model do
   describe '.create' do
 
     let(:params) {
-      {
-        'name' => '类别一'
-      }
+      ActionController::Parameters.new(name: '类别一')
     }
 
     it 'success' do
@@ -25,7 +23,7 @@ RSpec.describe Category, type: :model do
     end
 
     it 'name exist' do
-      category = FactoryGirl.create(:category)
+      category = create(:category)
       params['name'] = category.name
       rtn = Category.create(params)
       expect_error_result(rtn, ErrorCode::ERR_CATEGORY_NAME_NOT_UNIQUE)
