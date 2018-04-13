@@ -8,7 +8,6 @@ class CreateArticles < ActiveRecord::Migration[5.0]
       t.integer  :category_id,    null: false, limit: 4
       t.string   :tags,           null: false, limit: 64
       t.string   :summary,        null: true,  limit: 255
-      t.string   :attachment,     null: true,  limit: 128
       t.integer  :author_id,      null: false, limit: 4
       t.string   :author_name,    null: false, limit: 32
       t.integer  :pv,             null: false, limit: 4, default: 0

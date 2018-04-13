@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 20170523135813) do
     t.integer  "category_id",                               null: false
     t.string   "tags",         limit: 64,                   null: false
     t.string   "summary"
-    t.string   "attachment",   limit: 128
     t.integer  "author_id",                                 null: false
     t.string   "author_name",  limit: 32,                   null: false
     t.integer  "pv",                         default: 0,    null: false

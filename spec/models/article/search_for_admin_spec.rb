@@ -17,7 +17,7 @@ RSpec.describe Category, type: :model do
 
     it 'success' do
       rtn = Article.search_for_admin(params)
-      expect_success_result rtn
+      expect(rtn).to be_success
       expect(rtn['articles'].size).to eq DEFAULT_PAGE_SIZE
       expect(rtn['total_count']).to eq 30
     end
@@ -25,7 +25,7 @@ RSpec.describe Category, type: :model do
     it 'search by title' do
       params['title'] = 'test'
       rtn = Article.search_for_admin(params)
-      expect_success_result rtn
+      expect(rtn).to be_success
       expect(rtn['articles'].size).to eq 10
       expect(rtn['total_count']).to eq 10
     end
@@ -33,7 +33,7 @@ RSpec.describe Category, type: :model do
     it 'search by category' do
       params['category'] = @category.id
       rtn = Article.search_for_admin(params)
-      expect_success_result rtn
+      expect(rtn).to be_success
       expect(rtn['articles'].size).to eq 10
       expect(rtn['total_count']).to eq 10
     end
@@ -41,7 +41,7 @@ RSpec.describe Category, type: :model do
     it 'search by status' do
       params['status'] = ArticleStatus::SOLD_OUT
       rtn = Article.search_for_admin(params)
-      expect_success_result rtn
+      expect(rtn).to be_success
       expect(rtn['articles'].size).to eq 10
       expect(rtn['total_count']).to eq 10
     end

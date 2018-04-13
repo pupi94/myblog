@@ -6,9 +6,6 @@
 //= require include_bootstrap_validator
 //= require bootstrap-dialog
 
-//= require jquery_file_upload
-//= require attachment_upload
-
 function stopEventBubble(event) {
   if (event && event.stopPropagation) {
     event.stopPropagation()

@@ -2,7 +2,7 @@
     <li><%= t('menu.trash') %></li>
 <% end %>
 <div class="row">
-  <%= form_tag(trash_list_admin_articles_path, method: "get", remote: true, class: "search-form") do %>
+  <%= form_tag(trash_admin_articles_path, method: "get", remote: true, class: "search-form") do %>
       <div class="form-group col-sm-2">
         <label><%= t('article.category') %>：</label>
         <%= select_tag(:category, category_select_options, class: 'form-control') %>

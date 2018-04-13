@@ -32,8 +32,7 @@ RSpec.describe Article, type: :model do
         ['source',      64,   ErrorCode::ERR_ARTICLE_SOURCE_THE_MAXIMUM_LENGTH_OF_64  ],
         ['source_url', 128,   ErrorCode::ERR_ARTICLE_SOURCE_URL_THE_MAXIMUM_LENGTH_OF_128  ],
         ['tags',        64,   ErrorCode::ERR_ARTICLE_TAGS_THE_MAXIMUM_LENGTH_OF_64  ],
-        ['summary',     255,  ErrorCode::ERR_ARTICLE_SUMMARY_THE_MAXIMUM_LENGTH_OF_255  ],
-        ['attachment', 128,   ErrorCode::ERR_ARTICLE_ATTACHMENT_THE_MAXIMUM_LENGTH_OF_128  ]
+        ['summary',     255,  ErrorCode::ERR_ARTICLE_SUMMARY_THE_MAXIMUM_LENGTH_OF_255  ]
       ].each do |value|
         it value do
           valid_column_length article, *value

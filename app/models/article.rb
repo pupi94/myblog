@@ -39,7 +39,7 @@ class Article < ApplicationRecord
       end
     end
 
-    def self.update_status id
+    def update_status id
       article = find_by(id: id)
       unless article && article.enabled
         return CommonException.new(ErrorCode::ERR_ARTICLE_DOES_NOT_EXIT).result

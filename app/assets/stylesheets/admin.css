@@ -2,6 +2,5 @@
  *= require include_bootstrap
  *= require bootstrapValidator.min
  *= require bootstrap-dialog
- *= require attachment_upload
  *= require_tree ./admin
  */

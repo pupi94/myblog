@@ -7,7 +7,7 @@ module Admin
       do_search search_params
     end
 
-    def trash_list
+    def trash
       search_params = params.permit(:category, :title, :page, :page_size)
       search_params['enabled'] = false
       do_search search_params
@@ -19,7 +19,6 @@ module Admin
 
     def create
       @article = Article.new(article_params)
-      p @article
       @article.author_id   = current_user['id']
       @article.author_name = current_user['username']
       @article.status = ArticleStatus::EDITING
@@ -63,7 +62,7 @@ module Admin
 
     def article_params
       params.require(:article).permit(
-        :source_type, :title, :category_id, :tags, :summary, :content, :source, :source_url, :attachment
+        :source_type, :title, :category_id, :tags, :summary, :content, :source, :source_url
       )
     end
   end

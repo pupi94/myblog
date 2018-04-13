@@ -22,6 +22,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'redcarpet', '~> 3.4'
 
 gem 'kaminari', '~> 1.0'
+gem 'carrierwave', '~> 1.2'
 
 gem 'defined_error', git: 'git@github.com:hpp19941122/defined_error.git'
 
@@ -32,8 +33,6 @@ group :development, :test do
   gem "rspec-rails", "~> 3.5.2"
   #把Rails 生成测试数据默认使用的固件换成更好用的预构件
   gem "factory_bot_rails", "~> 4.8.2"
-  #为预构件生成名字、Email 地址以及其他的示例数据
-  gem "faker", "~> 1.7.3"
   gem "database_cleaner", "~> 1.5.3"
 end
 

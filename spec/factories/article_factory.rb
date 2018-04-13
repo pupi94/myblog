@@ -11,7 +11,6 @@ FactoryBot.define do
     summary       "摘要"
     content       "测试内容"
     content_html  '测试内容'
-    attachment    ""
     pv            10
     pubdate       Time.now - 10.day
     status        ArticleStatus::PUBLISHED

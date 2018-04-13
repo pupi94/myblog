@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
     resources :articles, only:[:index, :new, :create, :edit, :update, :destroy] do
       collection do
-        get  'trash_list'
+        get  'trash'
         post 'update_status'
         get  'convert_html'
       end
@@ -22,10 +22,6 @@ Rails.application.routes.draw do
     resources :categories, only: [:index, :create]
 
     post 'markdown/convert_html'
-
-    post 'attachments/upload'
-    get  'attachments/download'
-    get  'attachments/delete'
   end
 
   unless Rails.env.development?

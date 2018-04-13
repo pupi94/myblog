@@ -5,9 +5,9 @@ module CategoryHelper
       rtn  = Category.search({'enabled' => true})
       categories = rtn['categories']
 
-      category_hash = {}
-      categories.reduce({}) do |hash, category|
+      category_hash = categories.reduce({}) do |hash, category|
         hash[category['id'].to_s] = category
+        hash
       end
       
       Rails.cache.write("category_hash", category_hash)
@@ -31,9 +31,9 @@ module CategoryHelper
   end
 
   def category_select_options category = nil
-    options = [['全部', '']]
-    get_categories.each do |category|
-      options << [category['name'], category['id']]
+    options = get_categories.reduce([['全部', '']]) do |opts, category|
+      opts << [category['name'], category['id']]
+      opts
     end
     options_for_select(options, category)
   end
