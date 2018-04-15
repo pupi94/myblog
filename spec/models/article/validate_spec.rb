@@ -50,6 +50,13 @@ RSpec.describe Article, type: :model do
         end
       end
 
+      it 'tags format' do
+        result = check_validate_object(article, 'tags' => 'java基础,Ruby On Rails')
+        validate_errors_info result, article, 'tags', ErrorCode::SUCCESS
+
+        result = check_validate_object(article, 'tags' => 'java基础,Ruby On Rails:')
+        validate_errors_info result, article, 'tags', ErrorCode::ERR_ARTICLE_TAGS_INVALID
+      end
     end
   end
 end

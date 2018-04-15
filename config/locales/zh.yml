@@ -64,5 +64,7 @@ zh:
   login:
     pwd_placeholder: 请输入密码
     name_placeholder: 请输入账号
+    pwd_or_name_blank: 账号或密码不能为空
+    pwd_or_name_wrong: 账号或密码错误
     btn: 立即登录后台
 

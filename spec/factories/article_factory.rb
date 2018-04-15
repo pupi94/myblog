@@ -7,7 +7,7 @@ FactoryBot.define do
     source        "文章来源"
     source_url    "https://www.google.com"
     source_type   SourceType::ORIGINA
-    tags          "1,2"
+    tags          "前端技术,后段程序"
     summary       "摘要"
     content       "测试内容"
     content_html  '测试内容'

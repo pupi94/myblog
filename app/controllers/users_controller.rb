@@ -4,13 +4,18 @@ class UsersController < ApplicationController
   def login ;end
 
   def do_login
-    rtn = User.login(params)
-    if Util::success?(rtn) && rtn['user'].present?
-      session['user'] = rtn['user']
-      redirect_to admin_root_path
-    else
-      flash[:alert] = rtn['return_info']
+    if params[:user_name].blank? || params[:password].blank?
+      flash[:alert] = I18n.t('login.pwd_or_name_blank')
       render :login
+    end
+
+    user = User.login(params[:user_name], params[:password])
+    if user.nil?
+      flash[:alert] = I18n.t('login.pwd_or_name_wrong')
+      render :login
+    else
+      session['user'] = user
+      redirect_to admin_root_path
     end
   end
 

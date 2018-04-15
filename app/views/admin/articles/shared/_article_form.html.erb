@@ -63,7 +63,7 @@
   </div>
 
   <div class="col-lg-10">
-    <%= f.text_field :tags, class: 'form-control' %>
+    <%= f.text_field :tags, class: 'form-control', placeholder: 'java,ruby' %>
   </div>
 </div>
 
@@ -114,7 +114,11 @@
         'article[tags]': {
           validators: {
             notEmpty: {message: '不能为空'},
-            stringLength:{max: 32, message: '最大长度为32！'}
+            stringLength:{max: 32, message: '最大长度为32！'},
+            regexp: {
+              regexp: /^([-a-zA-Z\u4E00-\u9FFF\s](,)?)+$/,
+              message: '格式错误！'
+            }
           }
         },
         'article[source]': {
@@ -130,7 +134,7 @@
       }
     });
 
-    $('.article_save_btn').click(function() {
+    $articleForm.find('.article_save_btn').click(function() {
       $articleForm.bootstrapValidator('validate');
       if(!$articleForm.data('bootstrapValidator').isValid()){
         return false;

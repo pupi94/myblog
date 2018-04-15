@@ -1,8 +1,8 @@
 module Validates
   module UserValidate
-    include ModelValidate
+    extend ModelValidate
 
-    attr_validates {
+    attr_validates do
       validates_presence_of :username, message: ErrorCode::ERR_USER_NAME_CANNOT_BE_BLANK
       validates_presence_of :password, message: ErrorCode::ERR_USER_PASSWORD_CANNOT_BE_BLANK
       validates_presence_of :nickname, message: ErrorCode::ERR_USER_NICKNAME_CANNOT_BE_BLANK
@@ -13,6 +13,6 @@ module Validates
 
       # validates_uniqueness_of :username, message: ErrorCode::ERR_USER_NAME_NOT_UNIQUE
       # validates_uniqueness_of :nickname, message: ErrorCode::ERR_USER_NICKNAME_NOT_UNIQUE
-    }
+    end
   end
 end

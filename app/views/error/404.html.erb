@@ -9,6 +9,9 @@
         <%= image_tag '404/right.png', alt: "", width: 260, class: "hidden-xs"  %>
       </div>
     </div>
-    <div class="back-index"> <a href="<%= root_path %>" class="btn btn-primary">返回首页</a> </div>
+
+    <div class="back-index">
+      <a href="<%= params['controller'] == 'home' ? root_path : admin_root_path %>" class="btn btn-primary">返回首页</a>
+    </div>
   </div>
 </div>

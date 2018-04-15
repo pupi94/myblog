@@ -27,22 +27,15 @@ module Admin
     end
 
     def update_status
-      if params['id'].present?
-        rtn = Article.update_status(params['id'])
-      else
-        rtn = CommonException.new(ErrorCode::ERR_ARTICLE_PARAMS_ID_CAN_NOT_BE_BLANK).result
-      end
-      render json: rtn
+      render json: Article.update_status(params['id'])
     end
 
     def edit
-      @article = Article.find_by_id(params[:id])
-      render_not_found unless @article
+      @article = Article.find(params[:id])
     end
 
     def update
-      article = Article.find_by_id(params[:id])
-      render_not_found unless article
+      article = Article.find(params[:id])
       article.handle_update!(article_params)
       redirect_to admin_articles_path
     end

@@ -9,7 +9,6 @@ module Admin
     end
 
     private
-
     def current_user
       session['user']
     end

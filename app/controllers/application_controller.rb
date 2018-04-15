@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from Exception, :with => :render_error unless Rails.env.development?
   rescue_from RuntimeError, :with => :render_error unless Rails.env.development?
-  rescue_from ActiveRecord::RecordNotFound, :with => :render_error unless Rails.env.development?
+  rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found unless Rails.env.development?
   rescue_from ActionController::RoutingError, :with => :render_not_found unless Rails.env.development?
   rescue_from ActionController::UnknownController, :with => :render_error unless Rails.env.development?
   rescue_from AbstractController::ActionNotFound, :with => :render_error unless Rails.env.development?

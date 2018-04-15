@@ -40,6 +40,7 @@ class Article < ApplicationRecord
     end
 
     def update_status id
+      return CommonException.new(ErrorCode::ERR_ARTICLE_PARAMS_ID_CAN_NOT_BE_BLANK).result if id.blank?
       article = find_by(id: id)
       unless article && article.enabled
         return CommonException.new(ErrorCode::ERR_ARTICLE_DOES_NOT_EXIT).result
