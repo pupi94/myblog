@@ -1,6 +1,6 @@
 .markdown-container{
   .toolbar-wrapper{
-    height: 30px;
+    height: 25px;
     background-color: #ededed;
     border-top-left-radius: 4px;
     border-top-right-radius:4px;
@@ -8,17 +8,38 @@
   }
   .markdown{
     display:flex;
-    .show{
+    .html-show{
       flex:1;
-      background-color: #3c763d;
+      border:solid 1px #ddd;
+      border-radius: 0 0 4px 0;
+      resize:vertical;
+      max-width: 500px;
+      word-wrap: break-word;
+      word-break: normal;
+      height: 414px;
+      display: none;
+      overflow-y: auto;
+      padding-left: 6px;
+      padding-right: 6px;
+      resize: none;;
+    }
+
+    .barrier{
+      width:7px;
+      background-color: #ddd;
+      cursor: pointer;
+      &:hover{
+        background-color: #cacaca;
+      }
     }
     .editor{
       flex:1;
 
       textarea{
-        resize:vertical;
-        border-top-left-radius:0;
-        border-top-right-radius:0;
+        border:solid 1px #ddd;
+        border-radius: 0 0 0 4px;
+        resize: none;;
+
       }
     }
   }

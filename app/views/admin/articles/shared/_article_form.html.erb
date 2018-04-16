@@ -25,7 +25,8 @@
     <div class="editor">
       <%= f.text_area :content, class: 'form-control', style: "resize:none;", rows: 20 %>
     </div>
-    <!--<div class="show" hidden></div>-->
+    <div class="barrier"></div>
+    <div class="html-show"></div>
   </div>
 </div>
 
@@ -143,13 +144,21 @@
       return false;
     });
 
-    var $contentEditor = $articleForm.find('textarea[name=content]');
+    var $contentEditor = $('#article_content');
 
+    $('.markdown-container .barrier').on('click', function(){
+      var $htmlShow = $('.markdown-container .html-show');
+      if($htmlShow.is(":hidden")){
+        $htmlShow.show()
+      }else{
+        $htmlShow.hide()
+      }
+    });
     $contentEditor.on('keydown', function(ev){
-      if(ev.altKey && ev.keyCode == 83) {
-        $.get('/articles/convert_html', {'content': $(this).val()}, function(res){
-          $('.content-show').html(res.content);
-        });
+      if(ev.altKey && ev.keyCode == 83) {//option + s 或者 alt + s
+        $.post('/admin/markdown/convert_html', {'content': $(this).val()}, function(res){
+          $('.html-show').html(res.content);
+        })
       }
       stopEventBubble(ev);
     });

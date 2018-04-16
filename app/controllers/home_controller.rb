@@ -3,13 +3,9 @@ class HomeController < ApplicationController
   def index
     search_params = params.permit(:page)
     search_params['page_size'] = IAS_DEFAULT_PAGE_SIZE
-    rtn = Article.search(search_params)
-    if Util.success? rtn
-      @articles = rtn['articles']
-      @page = (params['page'] || DEFAULT_PAGE).to_i
-      @count = rtn['count']
-      @page_size = search_params['page_size']
-    end
+    @articles, @count = Article.search(search_params)
+    @page = (params['page'] || DEFAULT_PAGE).to_i
+    @page_size = search_params['page_size']
   end
 
   def paging_search

@@ -12,7 +12,7 @@
     </tr>
   </thead>
   <tbody>
-    <% if @articles && @articles.size > 0 %>
+    <% if @articles.size > 0 %>
       <% @articles.each do |article| %>
           <tr>
             <td><%= link_to article['title'], article_path(article['id']), target:'_blank' %></td>
@@ -32,13 +32,13 @@
       <% end %>
     <% else %>
       <tr>
-        <td colspan="8" align="center"><%= @msg.present? ? @msg : t('common.no_result') %></td>
+        <td colspan="8" align="center"><%= t('common.no_result') %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <div class="paginate-wrapper">
-  <% if @articles && @articles.size > 0 %>
+  <% if @articles.size > 0 %>
     <%= paginate @articles, params: {controller: 'articles', action: 'index'}, remote: true %>
   <% end %>
 </div>

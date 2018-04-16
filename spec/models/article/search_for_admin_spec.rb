@@ -16,34 +16,30 @@ RSpec.describe Category, type: :model do
     end
 
     it 'success' do
-      rtn = Article.search_for_admin(params)
-      expect(rtn).to be_success
-      expect(rtn['articles'].size).to eq DEFAULT_PAGE_SIZE
-      expect(rtn['total_count']).to eq 30
+      articles, total_count = Article.search_for_admin(params)
+      expect(articles.size).to eq DEFAULT_PAGE_SIZE
+      expect(total_count).to eq 30
     end
 
     it 'search by title' do
       params['title'] = 'test'
-      rtn = Article.search_for_admin(params)
-      expect(rtn).to be_success
-      expect(rtn['articles'].size).to eq 10
-      expect(rtn['total_count']).to eq 10
+      articles, total_count = Article.search_for_admin(params)
+      expect(articles.size).to eq 10
+      expect(total_count).to eq 10
     end
 
     it 'search by category' do
       params['category'] = @category.id
-      rtn = Article.search_for_admin(params)
-      expect(rtn).to be_success
-      expect(rtn['articles'].size).to eq 10
-      expect(rtn['total_count']).to eq 10
+      articles, total_count = Article.search_for_admin(params)
+      expect(articles.size).to eq 10
+      expect(total_count).to eq 10
     end
 
     it 'search by status' do
       params['status'] = ArticleStatus::SOLD_OUT
-      rtn = Article.search_for_admin(params)
-      expect(rtn).to be_success
-      expect(rtn['articles'].size).to eq 10
-      expect(rtn['total_count']).to eq 10
+      articles, total_count = Article.search_for_admin(params)
+      expect(articles.size).to eq 10
+      expect(total_count).to eq 10
     end
   end
 end

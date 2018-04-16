@@ -49,7 +49,9 @@
       </div>
 
       <div class="article-tags">标签：
-        <a href="#" rel="tag"><%= @article['tags'] %></a>
+        <% @article['tags'].split(',').each do |tag| %>
+          <a href="#" rel="tag"><%= tag %></a>
+        <% end %>
       </div>
     </div>
   </div>

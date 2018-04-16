@@ -42,15 +42,10 @@ module Admin
 
     private
     def do_search search_params
-      rtn = Article.search_for_admin(search_params)
-      if Util.success? rtn
-        @articles = Kaminari.paginate_array(
-          rtn['articles'] || [], total_count: rtn['total_count']
-        ).page(search_params[:page].to_i).per(DEFAULT_PAGE_SIZE)
-      else
-        log_error rtn
-        @msg = rtn['return_info']
-      end
+      articles, total_count = Article.search_for_admin(search_params)
+
+      @articles = Kaminari.paginate_array(articles||[], total_count: total_count)
+        .page(search_params[:page].to_i).per(DEFAULT_PAGE_SIZE)
     end
 
     def article_params
