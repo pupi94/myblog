@@ -1,13 +1,17 @@
 class ApplicationController < ActionController::Base
 
-  rescue_from Exception, :with => :render_error #unless Rails.env.development?
-  rescue_from RuntimeError, :with => :render_error# unless Rails.env.development?
-  rescue_from CustomError, :with => :render_custom_error# unless Rails.env.development?
+  def self.development_env?
+    Rails.env.development?
+  end
 
-  rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found# unless Rails.env.development?
-  rescue_from ActiveRecord::RecordInvalid, :with => :render_invalid # unless Rails.env.development?
-  rescue_from ActionController::UnknownController, :with => :render_error# unless Rails.env.development?
-  rescue_from AbstractController::ActionNotFound, :with => :render_error #unless Rails.env.development?
+  rescue_from Exception, :with => :render_error unless development_env?
+  rescue_from RuntimeError, :with => :render_error unless development_env?
+  rescue_from CustomError, :with => :render_custom_error unless development_env?
+
+  rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found unless development_env?
+  rescue_from ActiveRecord::RecordInvalid, :with => :render_invalid unless development_env?
+  rescue_from ActionController::UnknownController, :with => :render_error unless development_env?
+  rescue_from AbstractController::ActionNotFound, :with => :render_error unless development_env?
 
   def render_custom_error(e)
     do_render(e, 'error/500', system_error_json(e.message_zh))

@@ -14,8 +14,9 @@ module CategoryHelper
 
   def categories_cache
     categories = Rails.cache.read("categories")
+
     if categories.nil?
-      categories = Category.enabled
+      categories = query_categories
       Rails.cache.write("categories", categories)
     end
     categories
@@ -25,7 +26,7 @@ module CategoryHelper
     category_hash = Rails.cache.read("category_hash")
     if category_hash.nil?
       category_hash = {}
-      categories.each do |category|
+      query_categories.each do |category|
         category_hash[category['id'].to_s] = category
       end
       Rails.cache.write("category_hash", category_hash)
@@ -33,7 +34,7 @@ module CategoryHelper
     category_hash
   end
 
-  def categories
-    Category.enabled.select(%w[id name])
+  def query_categories
+    Category.enabled.select(%w[id name]).as_json
   end
 end
