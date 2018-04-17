@@ -5,13 +5,13 @@ class UsersController < ApplicationController
 
   def do_login
     if params[:user_name].blank? || params[:password].blank?
-      flash[:alert] = I18n.t('login.pwd_or_name_blank')
+      flash[:alert] = I18n.t('user.error.pwd_or_name_blank')
       render :login
     end
 
     user = User.login(params[:user_name], params[:password])
     if user.nil?
-      flash[:alert] = I18n.t('login.pwd_or_name_wrong')
+      flash[:alert] = I18n.t('user.error.password_or_name_wrong')
       render :login
     else
       session['user'] = user

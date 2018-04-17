@@ -21,7 +21,7 @@
     <div class="main-nav collapse navbar-collapse" id="navigation_bars">
       <ul class="nav navbar-nav navbar-right">
         <li class="active hidden-index"><a data-cont="首页" href="<%= root_path %>">首页</a></li>
-        <% get_categories.each do |category| %>
+        <% categories_cache.each do |category| %>
           <li><a href="#"><%= category['name'] %></a></li>
         <% end %>
       </ul>

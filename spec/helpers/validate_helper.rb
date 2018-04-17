@@ -4,8 +4,8 @@ module ValidateHelper
     valid_object.valid?
   end
 
-  def validate_errors_info(check_result, valid_object, column_name, error_code)
-    if error_code == ErrorCode::SUCCESS
+  def validate_errors_info(check_result, valid_object, column_name, error_code = nil)
+    if error_code.nil?
       expect(check_result).to eq true
     else
       expect(check_result).to eq false
@@ -15,7 +15,7 @@ module ValidateHelper
 
   def valid_column_length(valid_object, column_name, column_length, error_code)
     result = check_validate_object(valid_object, column_name => get_a_string(column_length))
-    validate_errors_info result, valid_object, column_name, ErrorCode::SUCCESS
+    validate_errors_info result, valid_object, column_name
 
     result = check_validate_object(valid_object, column_name => get_a_string(column_length + 1))
     validate_errors_info result, valid_object, column_name, error_code
@@ -58,37 +58,7 @@ module ValidateHelper
       }.to raise_error ActiveRecord::RecordInvalid, Regexp.new(error_code)
 
       expect {
-        FactoryGirl.build(model_name, column_name => upcase_value)
-      }.to raise_error ActiveRecord::RecordInvalid, Regexp.new(error_code)
-    end
-  end
-
-  def valid_with_scope_column_uniqueness(valid_object, model_name, column_names, case_sensitive, error_code)
-    expect {
-      FactoryGirl.build(model_name, valid_object.slice(*column_names))
-    }.to raise_error ActiveRecord::RecordInvalid, Regexp.new(error_code)
-
-    column_names.each do |column|
-      temp_params = valid_object.slice(*column_names)
-      begin
-        temp_params[column] = change_value(temp_params[column])
-        FactoryGirl.build(model_name, temp_params)
-      rescue => e
-        expect(e.message).not_to include error_code.to_s
-      end
-    end
-
-     # 不区分大小写
-    unless case_sensitive
-      upcase_values = valid_object.slice(*column_names).each{|_, val| val.upcase! if val.respond_to?(:upcase!)}
-      downcase_values = valid_object.slice(*column_names).each{|_, val| val.downcase! if val.respond_to?(:downcase!)}
-
-      expect {
-        FactoryGirl.build(model_name, upcase_values)
-      }.to raise_error ActiveRecord::RecordInvalid, Regexp.new(error_code)
-
-      expect {
-        FactoryGirl.build(model_name, downcase_values)
+        FactoryGirl.build(model_name, column_name => downcase_value)
       }.to raise_error ActiveRecord::RecordInvalid, Regexp.new(error_code)
     end
   end

@@ -8,7 +8,6 @@ module Admin
       redirect_to(login_path) unless current_user
     end
 
-    private
     def current_user
       session['user']
     end

@@ -13,9 +13,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'therubyracer', platforms: :ruby
-
 gem 'turbolinks', '~> 5'
-
 gem 'jbuilder', '~> 2.5'
 
 # markdown
@@ -23,8 +21,7 @@ gem 'redcarpet', '~> 3.4'
 
 gem 'kaminari', '~> 1.0'
 gem 'carrierwave', '~> 1.2'
-
-gem 'defined_error', git: 'git@github.com:hpp19941122/defined_error.git'
+gem 'redis-rails', '~> 5.0'
 
 group :development, :test do
   gem 'byebug', platform: :mri

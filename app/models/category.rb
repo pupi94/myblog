@@ -3,21 +3,14 @@ class Category < ApplicationRecord
 
   has_many :articles
 
-  class << self
-    def create(params)
-      Util.try_rescue do |response|
-        return CommonException.new(ErrorCode::ERR_CATEGORY_NAME_NOT_UNIQUE).result if exists?(name: params['name'])
-        params['seq'] = all.size
-        self.handle_create(params.to_unsafe_h)
-      end
-    end
+  before_validation :set_seq
+  def set_seq
+    self.seq = Category.maximum(:seq).to_i + 1 if self.seq.nil?
+  end
 
-    def search(params)
-      Util.try_rescue do |response|
-        categories = all
-        categories = categories.where(enabled: params['enabled']) if params.has_key?('enabled')
-        response['categories'] = categories.order(seq: :asc).select(%w(id name enabled))
-      end
-    end
+  after_save :clear_cache
+  def clear_cache
+    Rails.cache.write('categories', nil)
+    Rails.cache.write('category_hash', nil)
   end
 end

@@ -38,21 +38,18 @@ class Article < ApplicationRecord
     end
 
     def update_status id
-      return CommonException.new(ErrorCode::ERR_ARTICLE_PARAMS_ID_CAN_NOT_BE_BLANK).result if id.blank?
-      article = self.find_by(id: id)
-      unless article && article.enabled
-        return CommonException.new(ErrorCode::ERR_ARTICLE_DOES_NOT_EXIT).result
-      end
+      fail CustomError.new('article.error.params_id_blank') if id.blank?
 
-      Util.try_rescue do |response|
-        if [ArticleStatus::EDITING, ArticleStatus::SOLD_OUT].include?(article.status)
-          article.status = ArticleStatus::PUBLISHED
-          article.pubdate = Time.now
-        else
-          article.status = ArticleStatus::SOLD_OUT
-        end
-        article.save
+      article = self.find_by(id: id)
+      fail CustomError.new('article.error.article_does_not_exit') unless article && article.enabled
+
+      if [ArticleStatus::EDITING, ArticleStatus::SOLD_OUT].include?(article.status)
+        article.status = ArticleStatus::PUBLISHED
+        article.pubdate = Time.now
+      else
+        article.status = ArticleStatus::SOLD_OUT
       end
+      article.save
     end
   end
 end

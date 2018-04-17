@@ -60,6 +60,7 @@
         type:'post',
         dataType:'json',
         success:function(data) {
+          console.log(data);
           if(data.return_code == 0 ){
             location.reload();
          }else{
@@ -69,7 +70,8 @@
             });
          }
         },
-        error : function() {
+        error : function(data) {
+          console.log(data);
           BootstrapDialog.alert({
               message: '<%= t('dialog.sys_error')%>',
               type: BootstrapDialog.TYPE_DANGER

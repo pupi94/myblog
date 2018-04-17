@@ -1,7 +1,6 @@
 include CustomConstant
-include Util
 
-require_relative "../../lib/extend_kaminari"
+require_relative "#{Rails.root}/lib/extend_kaminari"
 
 Log = Rails.logger
 Log.level = Rails.logger.level

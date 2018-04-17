@@ -38,7 +38,7 @@
 
 <div class="form-group">
   <div class="col-lg-12">
-    <% get_categories.each do |category| %>
+    <% categories_cache.each do |category| %>
       <div class="radio checkbox-inline" style="padding-top: 0px; padding-left: 0px;">
         <label>
           <%= f.radio_button(:category_id, category['id']) %>

@@ -13,8 +13,8 @@ RSpec.describe Category, type: :model do
 
     context 'present' do
       [
-        ['name',   ErrorCode::ERR_CATEGORY_NAME_CANNOT_BE_BLANK ],
-        ['seq',      ErrorCode::ERR_CATEGORY_SEQ_CANNOT_BE_BLANK    ]
+        ['name',  'category.error.name_blank' ],
+        ['seq',   'category.error.seq_blank']
       ].each do |value|
         it value do
           valid_column_present category, *value
@@ -24,7 +24,7 @@ RSpec.describe Category, type: :model do
 
     context 'length' do
       [
-        ['name',    32,   ErrorCode::ERR_CATEGORY_NAME_THE_MAXIMUM_LENGTH_OF_32  ]
+        ['name', 32, 'category.error.name_length_over_32']
       ].each do |value|
         it value do
           valid_column_length category, *value

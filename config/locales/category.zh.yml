@@ -1,0 +1,10 @@
+zh:
+  category:
+    add: 新增分类
+    name: 名称
+
+    error:
+      name_blank: 类别名称不能为空
+      seq_blank: 类别序号不能为空
+      name_length_over_32: 类别名称长度不能超过32
+      name_not_unique: 类别名称已存在

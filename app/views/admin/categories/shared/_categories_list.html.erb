@@ -7,7 +7,7 @@
     </tr>
   </thead>
   <tbody>
-    <% if @categories && @categories.size > 0 %>
+    <% if @categories.size > 0 %>
       <% @categories.each do |category| %>
           <tr>
             <td><%= category['name'] %></td>
@@ -17,7 +17,7 @@
       <% end %>
     <% else %>
       <tr>
-        <td colspan="4" align="center"><%= @msg.present? ? @msg : t('common.no_result') %></td>
+        <td colspan="4" align="center"><%= t('common.no_result') %></td>
       </tr>
     <% end %>
   </tbody>

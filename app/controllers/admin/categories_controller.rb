@@ -3,17 +3,12 @@ module Admin
     layout 'admin'
 
     def index
-      rtn = Category.search({})
-      if Util.success? rtn
-        @categories = rtn['categories']
-      else
-        @msg = rtn['return_info']
-      end
+      @categories = Category.all.order(seq: :asc)
     end
 
     def create
-      rtn = Category.create(params)
-      render :json =>rtn
+      category = Category.create!(name: params['name'])
+      render :json => {'return_code' => 0, 'id' => category.id}
     end
   end
 end

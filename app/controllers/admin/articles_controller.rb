@@ -22,12 +22,13 @@ module Admin
       @article.author_id   = current_user['id']
       @article.author_name = current_user['username']
       @article.status = ArticleStatus::EDITING
-      @article.handle_save!
+      @article.save!
       redirect_to admin_articles_path
     end
 
     def update_status
-      render json: Article.update_status(params['id'])
+      Article.update_status(params[:id])
+      render json: {'return_code' => 0}
     end
 
     def edit
@@ -36,7 +37,7 @@ module Admin
 
     def update
       article = Article.find(params[:id])
-      article.handle_update!(article_params)
+      article.update!(article_params)
       redirect_to admin_articles_path
     end
 

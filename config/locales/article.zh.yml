@@ -28,6 +28,21 @@ zh:
     created_at: 创建时间
     pubdate: 发布时间
 
-  category:
-    add: 新增分类
-    name: 名称
+    error:
+      title_blank: 文章标题不能为空
+      source_type_blank: 文章类型不能为空
+      category_id_blank: 文章类别不能为空
+      tags_blank: 文章标签名不能为空
+      title_length_over_64: 文章标题长度不能超过64
+      source_length_over_64: 文章来源长度不能超过64
+      source_url_length_over_128: 文章来源路径不能超过128
+      tags_length_over_64: 文章标签长度不能超过64
+      summary_length_over_255: 文章摘要长度不能超过255
+      tags_invalid: 文章标签名格式错误
+      source_type_invalid: 文章类型值非法
+      status_invalid: 文章状态值非法
+      author_id_blank: 文章作者ID不能为空
+      author_name_blank: 文章作者姓名不能为空
+
+      params_id_blank: 参数id不能为空
+      article_does_not_exit: 文章不存在

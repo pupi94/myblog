@@ -13,12 +13,12 @@ RSpec.describe Article, type: :model do
 
     context 'present' do
       [
-        ['title',         ErrorCode::ERR_ARTICLE_TITLE_CANNOT_BE_BLANK],
-        ['source_type',   ErrorCode::ERR_ARTICLE_SOURCE_TYPE_CANNOT_BE_BLANK],
-        ['category_id',   ErrorCode::ERR_ARTICLE_CATEGORY_ID_CANNOT_BE_BLANK],
-        ['tags',          ErrorCode::ERR_ARTICLE_TAGS_CANNOT_BE_BLANK],
-        ['author_id',     ErrorCode::ERR_ARTICLE_AUTHOR_ID_CANNOT_BE_BLANK],
-        ['author_name',   ErrorCode::ERR_ARTICLE_AUTHOR_NAME_CANNOT_BE_BLANK]
+        ['title',       'article.error.title_blank'],
+        ['source_type', 'article.error.source_type_blank'],
+        ['category_id', 'article.error.category_id_blank'],
+        ['tags',        'article.error.tags_blank'],
+        ['author_id',   'article.error.author_id_blank'],
+        ['author_name', 'article.error.author_name_blank']
       ].each do |value|
         it value do
           valid_column_present article, *value
@@ -28,11 +28,11 @@ RSpec.describe Article, type: :model do
 
     context 'length' do
       [
-        ['title',       64,   ErrorCode::ERR_ARTICLE_TITLE_THE_MAXIMUM_LENGTH_OF_64  ],
-        ['source',      64,   ErrorCode::ERR_ARTICLE_SOURCE_THE_MAXIMUM_LENGTH_OF_64  ],
-        ['source_url', 128,   ErrorCode::ERR_ARTICLE_SOURCE_URL_THE_MAXIMUM_LENGTH_OF_128  ],
-        ['tags',        64,   ErrorCode::ERR_ARTICLE_TAGS_THE_MAXIMUM_LENGTH_OF_64  ],
-        ['summary',     255,  ErrorCode::ERR_ARTICLE_SUMMARY_THE_MAXIMUM_LENGTH_OF_255  ]
+        ['title',       64,   'article.error.title_length_over_64'  ],
+        ['source',      64,   'article.error.source_length_over_64'  ],
+        ['source_url', 128,   'article.error.source_url_length_over_128'  ],
+        ['tags',        64,   'article.error.tags_length_over_64'  ],
+        ['summary',     255,  'article.error.summary_length_over_255'  ]
       ].each do |value|
         it value do
           valid_column_length article, *value
@@ -41,8 +41,8 @@ RSpec.describe Article, type: :model do
 
       context 'range' do
         [
-          ['source_type', SourceType.const_values, ErrorCode::ERR_ARTICLE_SOURCE_TYPE_INVALID ],
-          ['status',      ArticleStatus.const_values, ErrorCode::ERR_ARTICLE_STATUS_INVALID ]
+          ['source_type', SourceType.const_values, 'article.error.source_type_invalid' ],
+          ['status',      ArticleStatus.const_values, 'article.error.status_invalid' ]
         ].each do |value|
           it value do
             valid_column_range article, *value
@@ -52,10 +52,10 @@ RSpec.describe Article, type: :model do
 
       it 'tags format' do
         result = check_validate_object(article, 'tags' => 'java基础,Ruby On Rails')
-        validate_errors_info result, article, 'tags', ErrorCode::SUCCESS
+        validate_errors_info result, article, 'tags'
 
         result = check_validate_object(article, 'tags' => 'java基础,Ruby On Rails:')
-        validate_errors_info result, article, 'tags', ErrorCode::ERR_ARTICLE_TAGS_INVALID
+        validate_errors_info result, article, 'tags', 'article.error.tags_invalid'
       end
     end
   end

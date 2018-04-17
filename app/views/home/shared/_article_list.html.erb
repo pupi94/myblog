@@ -1,6 +1,6 @@
 <% if @articles && @articles.size > 0 %>
   <div class="article-list">
-    <% category_hash = get_category_hash %>
+    <% category_hash = category_hash_cache %>
     <% @articles.each do |article|%>
       <article class="article">
         <header>

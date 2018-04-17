@@ -1,40 +1,39 @@
 module CategoryHelper
-  def get_category_hash
-    category_hash = Rails.cache.read("category_hash")
-    if category_hash.nil?
-      rtn  = Category.search({'enabled' => true})
-      categories = rtn['categories']
 
-      category_hash = categories.reduce({}) do |hash, category|
-        hash[category['id'].to_s] = category
-        hash
-      end
-      
-      Rails.cache.write("category_hash", category_hash)
+  def category_select_options category = nil
+    options = categories.reduce([['全部', '']]) do |opts, category|
+      opts << [category['name'], category['id']]
     end
-    category_hash
+    options_for_select(options, category)
   end
 
-  def get_category_name category_id
-    category_hash = get_category_hash
+  def category_name category_id
+    category_hash = category_hash_cache
     category_hash[category_id.to_s]
   end
 
-  def get_categories
+  def categories_cache
     categories = Rails.cache.read("categories")
     if categories.nil?
-      rtn  = Category.search({'enabled' => true})
-      categories = rtn['categories']
+      categories = Category.enabled
       Rails.cache.write("categories", categories)
     end
     categories
   end
 
-  def category_select_options category = nil
-    options = get_categories.reduce([['全部', '']]) do |opts, category|
-      opts << [category['name'], category['id']]
-      opts
+  def category_hash_cache
+    category_hash = Rails.cache.read("category_hash")
+    if category_hash.nil?
+      category_hash = {}
+      categories.each do |category|
+        category_hash[category['id'].to_s] = category
+      end
+      Rails.cache.write("category_hash", category_hash)
     end
-    options_for_select(options, category)
+    category_hash
+  end
+
+  def categories
+    Category.enabled.select(%w[id name])
   end
 end
