@@ -13,8 +13,7 @@ RSpec.describe Category, type: :model do
 
     context 'present' do
       [
-        ['name',  'category.error.name_blank' ],
-        ['seq',   'category.error.seq_blank']
+        ['name',  'category.error.name_blank' ]
       ].each do |value|
         it value do
           valid_column_present category, *value

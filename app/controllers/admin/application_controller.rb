@@ -1,15 +1,7 @@
 module Admin
   class ApplicationController < ::ApplicationController
-    layout 'admin'
+    layout BlogLayout::ADMIN
 
-    before_action :login_required
-
-    def login_required
-      redirect_to(login_path) unless current_user
-    end
-
-    def current_user
-      session['user']
-    end
+    before_action :authenticate_user!
   end
 end

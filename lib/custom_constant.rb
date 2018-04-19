@@ -7,24 +7,26 @@ module CustomConstant
     end
   end
 
-  SERVICER_ID       = 'BLOG'
-
-  DEFAULT_PAGE_SIZE = 15
-  DEFAULT_PAGE = 1
-  IAS_DEFAULT_PAGE_SIZE = 6
+  DEFAULT_PAGE_SIZE = 15.freeze
+  DEFAULT_PAGE = 1.freeze
+  IAS_DEFAULT_PAGE_SIZE = 6.freeze
 
   module SourceType
     extend ConstantValue
-    ORIGINA = 'original'
-    REPRINT = 'reprint'
-    TRANSLATE = 'translate'
+    ORIGINA = 'original'.freeze
+    REPRINT = 'reprint'.freeze
+    TRANSLATE = 'translate'.freeze
   end
 
   module ArticleStatus
     extend ConstantValue
-    EDITING = "editing"
-    PUBLISHED = "published"
-    SOLD_OUT = "sold_out"
+    EDITING = "editing".freeze
+    PUBLISHED = "published".freeze
+    SOLD_OUT = "sold_out".freeze
   end
 
+  module BlogLayout
+    DEVISE = 'devise'.freeze
+    ADMIN = 'admin'.freeze
+  end
 end

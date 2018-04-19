@@ -22,6 +22,7 @@ gem 'redcarpet', '~> 3.4'
 gem 'kaminari', '~> 1.0'
 gem 'carrierwave', '~> 1.2'
 gem 'redis-rails', '~> 5.0'
+gem 'devise', '~> 4.4'
 
 group :development, :test do
   gem 'byebug', platform: :mri

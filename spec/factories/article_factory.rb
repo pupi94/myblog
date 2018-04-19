@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :articles, class: Article do
     category
-    author_id     1
+
+    association :author, factory: :user
     author_name   "测试用户"
     title         "测试标题"
     source        "文章来源"

@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
+
   root 'home#index'
 
-  get  'login', to: 'users#login'
-  post 'login', to: 'users#do_login'
-  get  'logout', to: 'users#logout'
+  devise_for(:users,
+    only: :sessions,
+    controllers: {
+      sessions: 'users/sessions'#,
+      #registrations: 'users/registrations'
+    }
+  )
 
   get  '/articles/:id', to: 'articles#show', as: 'article'
   get  '/home/paging_search'
@@ -24,9 +29,9 @@ Rails.application.routes.draw do
     post 'markdown/convert_html'
   end
 
-  #unless Rails.env.development?
+  unless Rails.env.development?
     match '*path', to: 'error#no_match', via: :all, constraints: lambda { |request|
       return true;
     }
-  #end
+  end
 end

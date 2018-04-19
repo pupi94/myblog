@@ -1,6 +1,6 @@
 module Admin
   class CategoriesController < ApplicationController
-    layout 'admin'
+    layout BlogLayout::ADMIN
 
     def index
       @categories = Category.all.order(seq: :asc)

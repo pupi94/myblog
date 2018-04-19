@@ -1,6 +1,6 @@
 module Admin
   class ArticlesController < ApplicationController
-    layout 'admin'
+    layout BlogLayout::ADMIN
 
     def index
       search_params = params.permit(:category, :title, :status, :page, :page_size)

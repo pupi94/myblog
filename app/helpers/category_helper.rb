@@ -1,7 +1,7 @@
 module CategoryHelper
 
   def category_select_options category = nil
-    options = categories.reduce([['全部', '']]) do |opts, category|
+    options = categories_cache.reduce([['全部', '']]) do |opts, category|
       opts << [category['name'], category['id']]
     end
     options_for_select(options, category)

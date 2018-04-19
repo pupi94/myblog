@@ -1,0 +1,62 @@
+<div class='sign-in-container col-lg-5'>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-horizontal"}) do |f| %>
+      <div class="form-title"><strong><%= t('management_system') %></strong></div>
+
+      <div class="form-group email-group">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <%= f.email_field :email, class: 'form-control', placeholder: t('sign_in.email_placeholder') %>
+        </div>
+      </div>
+
+      <div class="form-group pwd-group">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+          <%= f.password_field :password, class: "form-control", placeholder: t('sign_in.pwd_placeholder') %>
+        </div>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+          <div class="form-group remember-group">
+            <div class="checkbox">
+              <label><%= f.check_box :remember_me %> <%= t('sign_in.remember_pwd')%></label>
+            </div>
+          </div>
+      <% end %>
+      <div class="form-group link-group">
+        <div class="pull-right">
+          <%#= link_to t('register_link'), new_registration_path(resource_name) %>
+        </div>
+      </div>
+
+      <div class="form-foot">
+        <%= f.submit t('sign_in.btn'), class: "btn btn-primary col-lg-8" %>
+      </div>
+  <% end %>
+</div>
+
+<script>
+  $(function(){
+    var $loginForm = $('#new_user');
+    $loginForm.bootstrapValidator({
+      feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+      },
+      fields: {
+        'user[email]': {
+          validators: {
+            notEmpty: {message: '邮箱账号不能为空！'}
+          }
+        },
+        'user[password]': {
+          validators: {
+            notEmpty: {message: '密码不能为空！'}
+          }
+        }
+      }
+    });
+  });
+</script>
+

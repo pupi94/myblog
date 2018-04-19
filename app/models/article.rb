@@ -4,6 +4,8 @@ class Article < ApplicationRecord
 
   belongs_to :category
 
+  belongs_to :user, foreign_key: "author_id"
+
   before_save :update_content_html
   def update_content_html
     self.content_html = convert_html(self.content)

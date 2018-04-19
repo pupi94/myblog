@@ -27,14 +27,17 @@
       <ul class="nav navbar-nav">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <%= t('admin') %><span class="caret"></span>
+            <%= current_user.username %><span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
             <li><a href="#"><i class="glyphicon glyphicon-user"></i><%= t('user.info') %></a></li>
             <li><a href="#"><i class="glyphicon glyphicon-cog"></i><%= t('user.setting') %></a></li>
           </ul>
         </li>
-        <li><a href="<%= logout_path %>"><i class="glyphicon glyphicon-off"></i><%= t('log_out') %></a></li>
+        <li>
+          <%= link_to(destroy_user_session_path, method: 'DELETE') do %>
+            <i class='glyphicon glyphicon-off'></i><%= t('log_out')%>
+          <% end %>
       </ul>
     </div>
   </div>

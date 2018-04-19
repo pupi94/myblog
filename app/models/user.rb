@@ -1,10 +1,9 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+
   include Validates::UserValidate
 
-  class << self
-    def login(user_name, password)
-      password  = Digest::MD5.hexdigest(password.encode('utf-8')).upcase
-      find_by(username: user_name, password: password)
-    end
-  end
+  has_many :articles, foreign_key: "author_id"
 end
