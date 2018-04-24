@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  private
+  protected
   def no_match_json
     {'return_code' => 404, 'return_info' => I18n.t('error.resource_not_found')}
   end

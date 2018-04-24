@@ -24,6 +24,9 @@ gem 'carrierwave', '~> 1.2'
 gem 'redis-rails', '~> 5.0'
 gem 'devise', '~> 4.4'
 
+gem 'sidekiq', '~> 5.1'
+gem 'sidekiq-cron', '~> 0.6.3'
+
 group :development, :test do
   gem 'byebug', platform: :mri
 

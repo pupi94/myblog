@@ -27,7 +27,15 @@ Rails.application.routes.draw do
     resources :categories, only: [:index, :create]
 
     post 'markdown/convert_html'
+
+    require 'sidekiq/web'
+    require 'sidekiq/cron/web'
+    authenticate :user do
+      mount Sidekiq::Web => '/sidekiq'
+    end
   end
+
+
 
   unless Rails.env.development?
     match '*path', to: 'error#no_match', via: :all, constraints: lambda { |request|

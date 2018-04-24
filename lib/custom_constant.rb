@@ -29,4 +29,10 @@ module CustomConstant
     DEVISE = 'devise'.freeze
     ADMIN = 'admin'.freeze
   end
+
+  module SidekiqQueue
+    CRITICAL = 'critical'
+    DEFAULT = 'default'
+    LOW = 'low'
+  end
 end

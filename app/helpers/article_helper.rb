@@ -13,4 +13,13 @@ module ArticleHelper
     end
     options_for_select(options)
   end
+
+  def common_tags
+    tags = Rails.cache.read('common_tags')
+    if tags.nil?
+      tags = Article.common_tags
+      Rails.cache.write('common_tags', tags)
+    end
+    tags
+  end
 end

@@ -11,6 +11,18 @@ class Article < ApplicationRecord
     self.content_html = convert_html(self.content)
   end
 
+  def update_status
+    fail CustomError.new('article.error.article_can_not_edit') unless self.enabled
+
+    if [ArticleStatus::EDITING, ArticleStatus::SOLD_OUT].include?(self.status)
+      self.status = ArticleStatus::PUBLISHED
+      self.pubdate = Time.now
+    else
+      self.status = ArticleStatus::SOLD_OUT
+    end
+    self.save
+  end
+
   class << self
     def search_for_admin(params)
       articles = self.all
@@ -39,19 +51,14 @@ class Article < ApplicationRecord
       return articles, total_count
     end
 
-    def update_status id
-      fail CustomError.new('article.error.params_id_blank') if id.blank?
-
-      article = self.find_by(id: id)
-      fail CustomError.new('article.error.article_does_not_exit') unless article && article.enabled
-
-      if [ArticleStatus::EDITING, ArticleStatus::SOLD_OUT].include?(article.status)
-        article.status = ArticleStatus::PUBLISHED
-        article.pubdate = Time.now
-      else
-        article.status = ArticleStatus::SOLD_OUT
+    def common_tags
+      tag_hash = Hash.new(0)
+      self.all.enabled.pluck(:tags).each do |tag_str|
+        tag_str.split(',').each do |tag|
+          tag_hash[tag] += 1
+        end
       end
-      article.save
+      tag_hash.to_a.sort {|a, b| a[1] > b[1] ? -1 : 1}.slice(0, 5).map{|tag| tag[0]}
     end
   end
 end

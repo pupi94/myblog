@@ -32,11 +32,9 @@
     <div class="title">
       <h3>最新发布</h3>
       <div class="tag-list">
-        <a href="">PHP</a>
-        <a href="">JavaScript</a>
-        <a href="">EmpireCMS</a>
-        <a href="">Apache</a>
-        <a href="">MySQL</a>
+        <% common_tags.each do |tag| %>
+          <a href=""><%= tag %></a>
+        <% end %>
       </div>
     </div>
     <div class="article-wrap">

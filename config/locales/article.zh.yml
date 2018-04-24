@@ -45,4 +45,4 @@ zh:
       author_name_blank: 文章作者姓名不能为空
 
       params_id_blank: 参数id不能为空
-      article_does_not_exit: 文章不存在
+      article_can_not_edit: 文章不能编辑

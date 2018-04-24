@@ -19,15 +19,21 @@ module Admin
 
     def create
       @article = Article.new(article_params)
-      @article.author_id   = current_user['id']
-      @article.author_name = current_user['username']
+      @article.author_id   = current_user.id
+      @article.author_name = current_user.username
       @article.status = ArticleStatus::EDITING
       @article.save!
       redirect_to admin_articles_path
     end
 
     def update_status
-      Article.update_status(params[:id])
+      if params[:id].blank?
+        render json: {'return_code' => 500, 'return_info' => I18n.t('article.error.params_id_blank')}
+        return
+      end
+
+      article = Article.find(params[:id])
+      article.update_status
       render json: {'return_code' => 0}
     end
 
