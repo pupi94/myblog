@@ -20,9 +20,14 @@
 
     <div class="main-nav collapse navbar-collapse" id="navigation_bars">
       <ul class="nav navbar-nav navbar-right">
-        <li class="active hidden-index"><a data-cont="首页" href="<%= root_path %>">首页</a></li>
+        <li class="hidden-index <%= params[:category].blank? ? 'active' : '' %>">
+          <a data-cont="首页" href="<%= root_path %>">首页</a>
+        </li>
+
         <% categories_cache.each do |category| %>
-          <li><a href="#"><%= category['name'] %></a></li>
+          <li class="<%= params[:category].present? && params[:category] == category['name_en'] ? 'active' : '' %> ">
+            <a href="/<%= category['name_en'] %>"><%= category['name'] %></a>
+          </li>
         <% end %>
       </ul>
     </div>

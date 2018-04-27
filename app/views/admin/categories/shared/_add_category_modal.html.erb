@@ -15,6 +15,12 @@
               <input type="text" class="form-control" name="name">
             </div>
           </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><%= t('category.name_en') %>:</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" name="name_en">
+            </div>
+          </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -42,7 +48,18 @@
         name: {
           validators: {
             notEmpty: {
-              message: '类别不能为空'
+              message: '名称不能为空'
+            }
+          }
+        },
+        name_en: {
+          validators: {
+            notEmpty: {
+              message: '英文名称不能为空'
+            },
+            regexp: {
+              regexp: /^[-a-zA-Z0-9_]+$/,
+              message: '英文名称格式错误！'
             }
           }
         }

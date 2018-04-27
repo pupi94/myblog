@@ -35,7 +35,9 @@ Rails.application.routes.draw do
     end
   end
 
-
+  get '/:category', to: 'articles#search', as: '/', constraints: lambda { |request|
+    Category.name_en_list.include?(request[:category])
+  }
 
   unless Rails.env.development?
     match '*path', to: 'error#no_match', via: :all, constraints: lambda { |request|

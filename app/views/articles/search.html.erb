@@ -1,0 +1,28 @@
+<div class="content-wrap">
+  <div class="content">
+    <% if params[:category].present? %>
+      <div class="title">
+        <h3><%= find_category_by_name_en(params[:category])['name'] %></h3>
+      </div>
+    <% end %>
+
+    <div class="article-wrap">
+      <%= render partial: "home/shared/article_list" %>
+    </div>
+  </div>
+</div>
+<%= render partial: "home/shared/sidebar" %>
+<script>
+  $(function(){
+    var ias = $.ias({
+      container: ".article-wrap",
+      item: ".article",
+      pagination: ".pagination",
+      next: ".next-page a"
+    });
+
+    ias.extension(new IASSpinnerExtension({src: '/images/loading.gif'}));
+    ias.extension(new IASTriggerExtension({}));
+    ias.extension(new IASNoneLeftExtension({text: '到底了。。。'}));
+  });
+</script>

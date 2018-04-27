@@ -23,7 +23,7 @@
     <div class="widget widget_search">
       <form class="navbar-form" method="GET">
         <div class="input-group">
-          <input type="text" name="keyword" class="form-control" size="35" placeholder="请输入关键字" maxlength="15" autocomplete="off">
+          <input type="text" class="form-control" size="35" placeholder="请输入关键字" maxlength="15" autocomplete="off">
           <span class="input-group-btn">
             <button class="btn btn-primary" name="search" type="submit">搜索</button>
           </span>
@@ -44,13 +44,12 @@
   <div class="widget widget_hot">
     <h3>热门文章</h3>
     <ul>
-      <li><a href="">php如何判断一个日期的格式是否正确php</a><time>2016-1-4</time></li>
-      <li><a href="">php如何判断一个日期的格式是否正确</a><time>2016-1-4</time></li>
-      <li><a href="">php如何判断一个日期的格式是否正确</a><time>2016-1-4</time></li>
-      <li><a href="">php如何判断一个日期的格式是否正确</a><time>2016-1-4</time></li>
-      <li><a href="">php如何判断一个日期的格式是否正确</a><time>2016-1-4</time></li>
-      <li><a href="">php如何判断一个日期的格式是否正确</a><time>2016-1-4</time></li>
-      <li><a href="">php如何判断一个日期的格式是否正确</a><time>2016-1-4</time></li>
+      <% hot_articles.each do |article| %>
+        <li>
+          <%= link_to article.title, article_path(article) %>
+          <time><%= format_date(article.pubdate, '%Y-%m-%d') %></time>
+        </li>
+      <% end %>
     </ul>
   </div>
 </aside>

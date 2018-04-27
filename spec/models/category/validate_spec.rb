@@ -13,7 +13,8 @@ RSpec.describe Category, type: :model do
 
     context 'present' do
       [
-        ['name',  'category.error.name_blank' ]
+        ['name',  'category.error.name_blank' ],
+        ['name_en',  'category.error.name_en_blank' ]
       ].each do |value|
         it value do
           valid_column_present category, *value
@@ -23,12 +24,21 @@ RSpec.describe Category, type: :model do
 
     context 'length' do
       [
-        ['name', 32, 'category.error.name_length_over_32']
+        ['name', 32, 'category.error.name_length_over_32'],
+        ['name_en', 32, 'category.error.name_en_length_over_32']
       ].each do |value|
         it value do
           valid_column_length category, *value
         end
       end
+    end
+
+    it 'name_en format' do
+      result = check_validate_object(category, 'name_en' => 'ruby_test')
+      validate_errors_info result, category, 'name_en'
+
+      result = check_validate_object(category, 'name_en' => 'Rails:')
+      validate_errors_info result, category, 'name_en', 'category.error.name_en_invalid'
     end
   end
 end

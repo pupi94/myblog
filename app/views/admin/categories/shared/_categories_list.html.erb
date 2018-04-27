@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th><%= t('category.name') %></th>
+      <th><%= t('category.name_en') %></th>
       <th><%= t('common.status') %></th>
       <th><%= t('common.operate') %></th>
     </tr>
@@ -11,6 +12,7 @@
       <% @categories.each do |category| %>
           <tr>
             <td><%= category['name'] %></td>
+            <td><%= category['name_en'] %></td>
             <td><%= show_status(category['enabled']) %></td>
             <td ></td>
           </tr>

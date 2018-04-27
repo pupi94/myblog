@@ -43,9 +43,11 @@ class Article < ApplicationRecord
     end
 
     def search params
-      articles = self.where(status: ArticleStatus::PUBLISHED).order(pubdate: :desc)
+      articles = self.where(status: ArticleStatus::PUBLISHED)
+      articles = articles.where(category_id: params['category_id']) if params['category_id'].present?
       total_count = articles.size
       return nil, 0 if total_count == 0
+      articles = articles.order(pubdate: :desc)
       articles = articles.page_filter(params['page_size'], params['page'])
       articles = articles.select(*%w[id category_id summary title pv pubdate])
       return articles, total_count

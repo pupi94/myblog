@@ -34,7 +34,19 @@ module CategoryHelper
     category_hash
   end
 
+  def find_category_by_name_en(name_en)
+    hash = Rails.cache.read('categories_name_en_hash')
+    if hash.nil?
+      hash = Category.enabled.reduce({}) do |tmp_hash, category|
+        tmp_hash[category.name_en] = {'id' => category.id, 'name' => category.name}
+        tmp_hash
+      end
+      Rails.cache.write('categories_name_en_hash', hash)
+    end
+    hash[name_en]
+  end
+
   def query_categories
-    Category.enabled.select(%w[id name]).as_json
+    Category.enabled.select(%w[id name name_en])
   end
 end

@@ -22,4 +22,8 @@ module ArticleHelper
     end
     tags
   end
+
+  def hot_articles
+    Article.all.enabled.order(pv: :desc, pubdate: :desc).limit(8).select(%w[id title pubdate])
+  end
 end

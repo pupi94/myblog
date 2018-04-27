@@ -71,6 +71,6 @@ module ValidateHelper
   end
 
   def get_a_string(length)
-    length > 0 ? '测' * length : ''
+    length > 0 ? 'T' * length : ''
   end
 end

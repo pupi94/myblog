@@ -28,6 +28,8 @@ zh:
     created_at: 创建时间
     pubdate: 发布时间
 
+    latest_pub: 最新发布
+
     error:
       title_blank: 文章标题不能为空
       source_type_blank: 文章类型不能为空
