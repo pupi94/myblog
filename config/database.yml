@@ -1,4 +1,4 @@
-default: &default
+1default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5

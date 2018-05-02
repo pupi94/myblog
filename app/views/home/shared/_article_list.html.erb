@@ -19,16 +19,9 @@
     <% end %>
   </div>
 
-  <div class="pagination" style="display: none;">
-    <ul>
-      <% if @page > DEFAULT_PAGE %>
-        <li class="prev-page"></li>
-      <% end %>
-      <li class="active"><span><%= @page %></span></li>
-      <% if @page_size * @page < @count %>
-        <li class="next-page"><a href="/?page=<%= @page + 1 %>">下一页</a></li>
-      <% end %>
-      <li><span>共 <%= @count/@page_size +1 %> 页</span></li>
-    </ul>
+  <div class="pagination-wrapper">
+    <% if @articles.size > 0 %>
+        <%= paginate @articles, remote: true, show_total_count: false %>
+    <% end %>
   </div>
 <% end %>

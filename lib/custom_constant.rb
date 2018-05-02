@@ -9,7 +9,7 @@ module CustomConstant
 
   DEFAULT_PAGE_SIZE = 15.freeze
   DEFAULT_PAGE = 1.freeze
-  IAS_DEFAULT_PAGE_SIZE = 6.freeze
+  ARTICLE_PAGE_SIZE = 10
 
   module SourceType
     extend ConstantValue

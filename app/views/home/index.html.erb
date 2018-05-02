@@ -38,22 +38,9 @@
       </div>
     </div>
     <div class="article-wrap">
-      <%= render partial: "home/shared/article_list" %>
+      <%= render partial: "home/shared/article_list", cached: true %>
     </div>
   </div>
 </div>
-<%= render partial: "home/shared/sidebar" %>
-<script>
-  $(function(){
-    var ias = $.ias({
-      container: ".article-wrap",
-      item: ".article",
-      pagination: ".pagination",
-      next: ".next-page a"
-    });
 
-    ias.extension(new IASSpinnerExtension({src: '/images/loading.gif'}));
-    ias.extension(new IASTriggerExtension({}));
-    ias.extension(new IASNoneLeftExtension({text: '到底了。。。'}));
-  });
-</script>
+<%= render partial: "home/shared/sidebar" %>

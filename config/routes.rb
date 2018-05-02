@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
   root 'home#index'
+  get '/:category', to: 'articles#search', as: '/', constraints: lambda { |request|
+    Category.name_en_list.include?(request[:category])
+  }
+
+  get  '/articles/:id', to: 'articles#show', as: 'article'
 
   devise_for(:users,
     only: :sessions,
@@ -9,9 +14,6 @@ Rails.application.routes.draw do
       #registrations: 'users/registrations'
     }
   )
-
-  get  '/articles/:id', to: 'articles#show', as: 'article'
-  get  '/home/paging_search'
 
   namespace :admin do
     root 'home#index'
@@ -34,10 +36,6 @@ Rails.application.routes.draw do
       mount Sidekiq::Web => '/sidekiq'
     end
   end
-
-  get '/:category', to: 'articles#search', as: '/', constraints: lambda { |request|
-    Category.name_en_list.include?(request[:category])
-  }
 
   unless Rails.env.development?
     match '*path', to: 'error#no_match', via: :all, constraints: lambda { |request|

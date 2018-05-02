@@ -21,14 +21,15 @@
     </div>
 
     <div class="widget widget_search">
-      <form class="navbar-form" method="GET">
+      <%= form_tag('', method: "GET", class: 'navbar-form') do %>
         <div class="input-group">
-          <input type="text" class="form-control" size="35" placeholder="请输入关键字" maxlength="15" autocomplete="off">
+          <%= text_field_tag('wd', nil, class: 'form-control', size: 35, placeholder: "请输入关键字", maxlength: "15", autocomplete: "off" ) %>
           <span class="input-group-btn">
-            <button class="btn btn-primary" name="search" type="submit">搜索</button>
+            <button class="btn btn-primary" type="submit">搜索</button>
           </span>
         </div>
-      </form>
+      <% end %>
+
     </div>
   </div>
 

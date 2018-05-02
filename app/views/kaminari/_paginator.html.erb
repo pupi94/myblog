@@ -8,7 +8,12 @@
 -%>
 <%= paginator.render do -%>
     <ul class="pagination">
-      <li><span style="margin-right: 5px;border:none;color: #676a6c;background-color: white;">共找到 <i style="font-style: normal;color: orange;"><%= total_count %></i> 条数据</span></li>
+      <% if show_total_count? %>
+        <li><span style="margin-right: 5px;border:none;color: #676a6c;background-color: white;">
+          共找到 <i style="font-style: normal;color: orange;"><%= total_count %></i> 条数据</span>
+        </li>
+      <% end %>
+
       <%= first_page_tag unless current_page.first? %>
       <%= prev_page_tag unless current_page.first? %>
       <% each_page do |page| -%>

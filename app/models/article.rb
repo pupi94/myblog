@@ -38,18 +38,26 @@ class Article < ApplicationRecord
       articles = articles.order(created_at: :desc).page_filter(params['page_size'], params['page'])
 
       search_column = %w[id title source_type tags pv pubdate status created_at]
-      articles = articles.select(*search_column)
+      articles = articles.select(*search_column).as_json
       return articles, total_count
     end
 
     def search params
       articles = self.where(status: ArticleStatus::PUBLISHED)
       articles = articles.where(category_id: params['category_id']) if params['category_id'].present?
+
+      if params['wd'].present? && params['wd'] != ','
+        articles = articles.where(
+          'title like :search_text or summary like :search_text or tags like :search_text',
+          search_text: "%#{params['wd'].strip}%"
+        )
+      end
+
       total_count = articles.size
       return nil, 0 if total_count == 0
       articles = articles.order(pubdate: :desc)
       articles = articles.page_filter(params['page_size'], params['page'])
-      articles = articles.select(*%w[id category_id summary title pv pubdate])
+      articles = articles.select(*%w[id category_id summary title pv pubdate]).as_json
       return articles, total_count
     end
 
