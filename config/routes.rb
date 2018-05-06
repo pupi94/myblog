@@ -8,10 +8,10 @@ Rails.application.routes.draw do
   get  '/articles/:id', to: 'articles#show', as: 'article'
 
   devise_for(:users,
-    only: :sessions,
+    only: %i[sessions registrations],
     controllers: {
-      sessions: 'users/sessions'#,
-      #registrations: 'users/registrations'
+      sessions: 'users/sessions',
+      registrations: 'users/registrations'
     }
   )
 

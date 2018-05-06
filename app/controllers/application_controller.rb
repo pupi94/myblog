@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def self.development_env?
     Rails.env.development?
@@ -47,5 +48,9 @@ class ApplicationController < ActionController::Base
 
   def system_error_json(msg = nil)
     {'return_code' => 500, 'return_info' => msg || I18n.t('error.system_error')}
+  end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
   end
 end
