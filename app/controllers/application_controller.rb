@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found unless development_env?
   rescue_from ActiveRecord::RecordInvalid, :with => :render_invalid unless development_env?
-  rescue_from ActionController::UnknownController, :with => :render_error unless development_env?
   rescue_from AbstractController::ActionNotFound, :with => :render_error unless development_env?
 
   def render_custom_error(e)

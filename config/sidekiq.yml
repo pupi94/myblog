@@ -1,0 +1,17 @@
+---
+max_retries: 2
+
+:concurrency: 2
+:pidfile: ./tmp/pids/sidekiq.pid
+:logfile: ./log/sidekiq.log
+
+staging:
+  :concurrency: 10
+production:
+  :concurrency: 20
+
+#- [critical, 2] 设置队列权重
+:queues:
+  - critical
+  - default
+  - low
