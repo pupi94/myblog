@@ -6,6 +6,8 @@ class Article < ApplicationRecord
 
   belongs_to :user, foreign_key: "author_id"
 
+  scope :published, -> { where(status: ArticleStatus::PUBLISHED) }
+
   before_save :update_content_html
   def update_content_html
     self.content_html = convert_html(self.content)
@@ -43,7 +45,7 @@ class Article < ApplicationRecord
     end
 
     def search params
-      articles = self.where(status: ArticleStatus::PUBLISHED)
+      articles = self.enabled.published
       articles = articles.where(category_id: params['category_id']) if params['category_id'].present?
 
       if params['wd'].present? && params['wd'] != ','
@@ -63,7 +65,7 @@ class Article < ApplicationRecord
 
     def common_tags
       tag_hash = Hash.new(0)
-      self.all.enabled.pluck(:tags).each do |tag_str|
+      self.enabled.published.pluck(:tags).each do |tag_str|
         tag_str.split(',').each do |tag|
           tag_hash[tag] += 1
         end
