@@ -11,6 +11,8 @@ module CustomConstant
   DEFAULT_PAGE = 1.freeze
   ARTICLE_PAGE_SIZE = 10
 
+  SUCCESS_CODE = 0
+
   module SourceType
     extend ConstantValue
     ORIGINA = 'original'.freeze

@@ -7,8 +7,8 @@ module Admin
     end
 
     def create
-      category = Category.create!(name: params['name'], name_en: params[:name_en])
-      render :json => {'return_code' => 0, 'id' => category.id}
+      Category.create!(name: params['name'], name_en: params[:name_en])
+      render :json => success_json
     end
   end
 end

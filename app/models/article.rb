@@ -18,24 +18,33 @@ class Article < ApplicationRecord
 
     if [ArticleStatus::EDITING, ArticleStatus::SOLD_OUT].include?(self.status)
       self.status = ArticleStatus::PUBLISHED
-      self.pubdate = Time.now
+      self.pubdate = Time.current
     else
       self.status = ArticleStatus::SOLD_OUT
     end
     self.save
   end
 
+  scope :category_filter, ->(category_id) do
+    where(category_id: category_id) if category_id.present?
+  end
+
+  scope :title_filter, ->(title) do
+    if title.present?
+      title = title.strip
+      where('title like ?', "%#{title}%") if title.present?
+    end
+  end
+
   class << self
     def search_for_admin(params)
-      articles = self.all
-      articles = (params.has_key?('enabled') && false == params['enabled']) ? articles.disabled : articles.enabled
-      articles = articles.where(category_id: params['category']) if params['category'].present?
+      articles = self.enabled
       articles = articles.where(status: params['status']) if params['status'].present?
-      params['title'] = params['title'].strip if params['title'].present?
-      articles = articles.where('title like ?', "%#{params['title']}%") if params['title'].present?
+
+      articles = articles.category_filter(params['category']).title_filter(params['title'])
 
       total_count = articles.size
-      return nil, total_count if total_count == 0
+      return nil, 0 if total_count == 0
 
       articles = articles.order(created_at: :desc).page_filter(params['page_size'], params['page'])
 
@@ -44,9 +53,21 @@ class Article < ApplicationRecord
       return articles, total_count
     end
 
+    def trash(params)
+      articles = self.disabled.category_filter(params['category']).title_filter(params['title'])
+
+      total_count = articles.size
+      return nil, 0 if total_count == 0
+
+      articles = articles.order(created_at: :desc).page_filter(params['page_size'], params['page'])
+
+      search_column = %w[id title source_type tags created_at]
+      articles = articles.select(*search_column).as_json
+      return articles, total_count
+    end
+
     def search params
-      articles = self.enabled.published
-      articles = articles.where(category_id: params['category_id']) if params['category_id'].present?
+      articles = self.enabled.published.category_filter(params['category_id'])
 
       if params['wd'].present? && params['wd'] != ','
         articles = articles.where(
@@ -57,6 +78,7 @@ class Article < ApplicationRecord
 
       total_count = articles.size
       return nil, 0 if total_count == 0
+
       articles = articles.order(pubdate: :desc)
       articles = articles.page_filter(params['page_size'], params['page'])
       articles = articles.select(*%w[id category_id summary title pv pubdate]).as_json

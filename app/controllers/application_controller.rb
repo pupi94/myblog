@@ -52,4 +52,8 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
   end
+
+  def success_json
+    {'return_code' => SUCCESS_CODE}
+  end
 end

@@ -1,0 +1,82 @@
+<div class="modal fade" id="add_notice_modal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="max-width: 600px;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><%= t('notice.add') %></h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal notice_form">
+          <div class="form-group">
+            <label class="col-sm-2 control-label"><%= t('notice.content') %>:</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="content">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-white" data-dismiss="modal"><%= t("button.cancel") %></button>
+        <button type="button" class="btn btn-success"><%= t("button.save") %></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function() {
+    var $addNoticeModal = $("#add_notice_modal");
+    var $addNoticeForm = $addNoticeModal.find(".notice_form");
+
+    $addNoticeModal.on('shown.bs.modal', function(){});
+
+    $addNoticeForm.bootstrapValidator({
+      feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+      },
+      fields: {
+        name: {
+          validators: {
+            notEmpty: {
+              message: '不能为空'
+            },
+            stringLength:{max: 128, message: '最大长度为128！'}
+          }
+        }
+      }
+    });
+
+    $addNoticeModal.find(".btn-success").on('click', function(event){
+      $addNoticeForm.data('bootstrapValidator').validate();
+      if(!$addNoticeForm.data('bootstrapValidator').isValid()){
+        return ;
+      }
+      $.ajax({
+        url:'/admin/notices',
+        data: $addNoticeForm.serialize(),
+        type:'post',
+        dataType:'json',
+        success:function(data) {
+          console.log(data);
+          if(data.return_code == 0 ){
+            location.reload();
+         }else{
+            BootstrapDialog.alert({
+              message: '<strong><%= t('dialog.failed')%></strong>&nbsp;&nbsp;' + data.return_info,
+              type: BootstrapDialog.TYPE_DANGER
+            });
+         }
+        },
+        error : function(data) {
+          console.log(data);
+          BootstrapDialog.alert({
+              message: '<%= t('dialog.sys_error')%>',
+              type: BootstrapDialog.TYPE_DANGER
+          });
+        }
+      });
+    });
+  });
+</script>

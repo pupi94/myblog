@@ -8,9 +8,10 @@ module Admin
     end
 
     def trash
-      search_params = params.permit(:category, :title, :page, :page_size)
-      search_params['enabled'] = false
-      do_search search_params
+      articles, total_count = Article.trash(params.permit(:category, :title, :page, :page_size))
+
+      @articles = Kaminari.paginate_array(articles||[], total_count: total_count)
+        .page(params[:page].to_i).per(DEFAULT_PAGE_SIZE)
     end
 
     def new
@@ -34,7 +35,7 @@ module Admin
 
       article = Article.find(params[:id])
       article.update_status
-      render json: {'return_code' => 0}
+      render json: success_json
     end
 
     def edit
@@ -50,7 +51,6 @@ module Admin
     private
     def do_search search_params
       articles, total_count = Article.search_for_admin(search_params)
-
       @articles = Kaminari.paginate_array(articles||[], total_count: total_count)
         .page(search_params[:page].to_i).per(DEFAULT_PAGE_SIZE)
     end

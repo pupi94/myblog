@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'home#index'
 
-    resources :articles, only:[:index, :new, :create, :edit, :update, :destroy] do
+    resources :articles, only: %i[index new create edit update destroy] do
       collection do
         get  'trash'
         post 'update_status'
@@ -26,12 +26,14 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :categories, only: [:index, :create]
+    resources :categories, only: %i[index create]
+    resources :notices, only: %i[index create destroy]
 
     post 'markdown/convert_html'
 
     require 'sidekiq/web'
     require 'sidekiq/cron/web'
+
     authenticate :user do
       mount Sidekiq::Web => '/sidekiq'
     end

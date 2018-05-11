@@ -13,7 +13,7 @@ FactoryBot.define do
     content       "测试内容"
     content_html  '测试内容'
     pv            10
-    pubdate       Time.now - 10.day
+    pubdate       Time.current - 10.day
     status        ArticleStatus::PUBLISHED
     enabled       true
   end

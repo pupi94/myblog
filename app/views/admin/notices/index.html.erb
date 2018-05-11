@@ -1,0 +1,14 @@
+<% content_for :title do %>
+    <li><%= t('menu.notice') %></li>
+<% end %>
+
+<div class="pull-right" style="margin-bottom: 15px;">
+  <button id="add_notice_btn" class="btn btn-primary" data-toggle="modal" data-target="#add_notice_modal">
+    <%= t('category.add') %>
+  </button>
+</div>
+<div class="notice_list">
+  <%= render :partial => "admin/notices/shared/notice_list" %>
+</div>
+
+<%= render :partial => "admin/notices/shared/add_notice_modal" %>

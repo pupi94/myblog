@@ -1,4 +1,4 @@
-<% if @articles && @articles.size > 0 %>
+<% if @articles.has_values? %>
   <div class="article-list">
     <% category_hash = category_hash_cache %>
     <% @articles.each do |article|%>
@@ -20,7 +20,7 @@
   </div>
 
   <div class="pagination-wrapper">
-    <% if @articles.size > 0 %>
+    <% if @articles.has_values? %>
         <%= paginate @articles, remote: true, show_total_count: false %>
     <% end %>
   </div>

@@ -10,7 +10,12 @@
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane notice active" id="notice">
           <ul>
-            <li><time><%= format_date(Time.now, '%Y-%m-%d')%></time><a href="javascript:void(0)" target="_blank">欢迎访问puping博客</a></li>
+            <% notice_list.each do |notice| %>
+              <li>
+                <time><%= format_date(notice.created_at, '%Y-%m-%d')%></time>
+                <a href="javascript:void(0)" target="_blank"><%= notice.content  %></a>
+              </li>
+            <% end %>
           </ul>
         </div>
         <div role="tabpanel" class="tab-pane contact" id="contact">

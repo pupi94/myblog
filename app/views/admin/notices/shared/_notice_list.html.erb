@@ -1,0 +1,56 @@
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th width="60%"><%= t('notice.content') %></th>
+      <th width="20%"><%= t('notice.created_at') %></th>
+      <th width="20%"><%= t('common.operate') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @notices.size > 0 %>
+      <% @notices.each do |notice| %>
+          <tr>
+            <td><%= notice['content'] %></td>
+            <td><%= format_date(notice['created_at']) %></td>
+            <td>
+              <%= link_to t("button.delete"), '#', data:{id: notice.id}, class: 'notice_destroy' %>
+            </td>
+          </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="3" align="center"><%= t('common.no_result') %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script type="text/javascript">
+  $(function(){
+    $('.notice_list .notice_destroy').on('click', function(e){
+      $.ajax({
+        url:'/admin/notices/' + $(this).data('id'),
+        type:'delete',
+        dataType:'json',
+        success:function(data) {
+          if(data.return_code == 0 ){
+            location.reload();
+          }else{
+            BootstrapDialog.alert({
+              message: '<strong><%= t('dialog.failed')%></strong>&nbsp;&nbsp;' + data.return_info,
+              type: BootstrapDialog.TYPE_DANGER
+            });
+          }
+        },
+        error : function() {
+          BootstrapDialog.alert({
+            message: '<%= t('dialog.sys_error')%>',
+            type: BootstrapDialog.TYPE_DANGER
+          });
+        }
+      });
+
+      stopEventBubble(e);
+    })
+  })
+</script>

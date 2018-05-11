@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def date_now_str
-    now = Time.now
+    now = Time.current
     now_str = format_date(now, '%Y年%m月%d日')
     case now.wday
     when 0
@@ -29,5 +29,9 @@ module ApplicationHelper
 
   def show_status(status)
     status ? t('common.enabled') : t('common.disabled')
+  end
+
+  def notice_list
+    Notice.order(created_at: :desc).limit(5)
   end
 end
