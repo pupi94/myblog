@@ -1,0 +1,17 @@
+.html-show{
+  code{
+    color: #333333;
+    background-color: #f5f5f5;
+  }
+  h4{
+    margin-top: 15px;
+  }
+
+  ul{
+    padding-left: 40px;
+
+    >li{
+      list-style: disc;
+    }
+  }
+}
