@@ -10,7 +10,7 @@ module Kaminari::Helpers
     end
   end
 
-  HelperMethods.module_eval do
+  module HelperMethods
     def paginate(scope, paginator_class: Kaminari::Helpers::Paginator, template: nil, **options)
       options[:total_pages] ||= scope.total_pages
       options.reverse_merge!(

@@ -30,10 +30,8 @@ class Article < ApplicationRecord
   end
 
   scope :title_filter, ->(title) do
-    if title.present?
-      title = title.strip
-      where('title like ?', "%#{title}%") if title.present?
-    end
+    title = title&.strip
+    where('title like ?', "%#{title}%") if title.present?
   end
 
   class << self

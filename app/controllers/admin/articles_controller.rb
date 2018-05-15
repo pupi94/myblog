@@ -28,11 +28,6 @@ module Admin
     end
 
     def update_status
-      if params[:id].blank?
-        render json: {'return_code' => 500, 'return_info' => I18n.t('article.error.params_id_blank')}
-        return
-      end
-
       article = Article.find(params[:id])
       article.update_status
       render json: success_json
