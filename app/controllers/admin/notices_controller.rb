@@ -1,5 +1,6 @@
 module Admin
   class NoticesController < ApplicationController
+    layout BlogLayout::ADMIN
 
     def create
       Notice.create!(content: params['content'])

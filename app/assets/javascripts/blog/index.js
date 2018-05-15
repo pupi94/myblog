@@ -4,7 +4,7 @@ $(function () {
     var sidebar = $('.sidebar');
     var sidebarHeight = sidebar.height();
     var windowScrollTop = $(window).scrollTop();
-    if (windowScrollTop > sidebarHeight - 60 && sidebar.length) {
+    if (windowScrollTop > sidebarHeight - 50 && sidebar.length) {
       $('.fixed').css({
         'position': 'fixed',
         'top': '70px',
