@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root 'home#index'
   get '/:category', to: 'articles#search', as: '/', constraints: lambda { |request|
-    Category.name_en_list.include?(request[:category])
+    Category.en_names.include?(request[:category])
   }
 
   get  '/articles/:id', to: 'articles#show', as: 'article'

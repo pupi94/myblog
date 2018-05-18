@@ -24,6 +24,6 @@ module ArticleHelper
   end
 
   def hot_articles
-    Article.enabled.published.order(pv: :desc, pubdate: :desc).limit(8).select(%w[id title pubdate])
+    Article.published.order(pv: :desc, pubdate: :desc).limit(8).select(%w[id title pubdate])
   end
 end

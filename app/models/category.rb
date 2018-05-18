@@ -13,15 +13,15 @@ class Category < ApplicationRecord
     Rails.cache.write('categories', nil)
     Rails.cache.write('category_hash', nil)
     Rails.cache.write('categories_name_en_hash', nil)
-    Rails.cache.write('name_en_list', nil)
+    Rails.cache.write('en_names', nil)
   end
 
   class << self
-    def name_en_list
-      list = Rails.cache.read('name_en_list')
+    def en_names
+      list = Rails.cache.read('en_names')
       if list.nil?
         list = self.enabled.pluck(:name_en)
-        Rails.cache.write('name_en_list', list)
+        Rails.cache.write('en_names', list)
       end
       list
     end
