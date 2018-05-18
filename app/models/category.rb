@@ -11,7 +11,7 @@ class Category < ApplicationRecord
   after_save :clear_cache
   def clear_cache
     Rails.cache.write('categories', nil)
-    Rails.cache.write('category_hash', nil)
+    Rails.cache.write('categories_hash', nil)
     Rails.cache.write('categories_name_en_hash', nil)
     Rails.cache.write('en_names', nil)
   end

@@ -7,46 +7,36 @@ module CategoryHelper
     options_for_select(options, category)
   end
 
-  def category_name category_id
-    category_hash = category_hash_cache
-    category_hash[category_id.to_s]
-  end
-
   def categories_cache
     categories = Rails.cache.read("categories")
-
     if categories.nil?
-      categories = query_categories
+      categories = Category.enabled.select(%w[id name name_en]).as_json
       Rails.cache.write("categories", categories)
     end
     categories
   end
 
-  def category_hash_cache
-    category_hash = Rails.cache.read("category_hash")
-    if category_hash.nil?
-      category_hash = {}
-      query_categories.each do |category|
-        category_hash[category['id'].to_s] = category
+  def categories_hash_cache
+    categories_hash = Rails.cache.read("categories_hash")
+    if categories_hash.nil?
+      categories_hash = {}
+      categories_cache.each do |category|
+        categories_hash[category['id'].to_s] = category
       end
-      Rails.cache.write("category_hash", category_hash)
+      Rails.cache.write("categories_hash", categories_hash)
     end
-    category_hash
+    categories_hash
   end
 
-  def find_category_by_name_en(name_en)
-    hash = Rails.cache.read('categories_name_en_hash')
+  def categories_en_name_hash
+    hash = Rails.cache.read('categories_en_name_hash')
     if hash.nil?
-      hash = Category.enabled.reduce({}) do |tmp_hash, category|
-        tmp_hash[category.name_en] = {'id' => category.id, 'name' => category.name}
-        tmp_hash
+      hash = {}
+      categories_cache.each do |category|
+        hash[category['name_en']] = {'id' => category['id'], 'name' => category['name']}
       end
-      Rails.cache.write('categories_name_en_hash', hash)
+      Rails.cache.write('categories_en_name_hash', hash)
     end
-    hash[name_en]
-  end
-
-  def query_categories
-    Category.enabled.select(%w[id name name_en])
+    hash
   end
 end

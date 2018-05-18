@@ -2,7 +2,7 @@
   <div class="content">
     <% if params[:category].present? %>
       <div class="title">
-        <h3><%= find_category_by_name_en(params[:category])['name'] %></h3>
+        <h3><%= categories_en_name_hash[params[:category]]&.[]('name') %></h3>
       </div>
     <% end %>
 

@@ -3,12 +3,13 @@ module Admin
     layout BlogLayout::ADMIN
 
     def index
-      search_params = params.permit(:category, :title, :status, :page, :page_size)
-      do_search search_params
+      articles, total_count = Article.search(params.permit(:category, :title, :status, :page, :page_size))
+      @articles = Kaminari.paginate_array(articles||[], total_count: total_count)
+        .page(params[:page].to_i).per(DEFAULT_PAGE_SIZE)
     end
 
     def trash
-      articles, total_count = Article.trash(params.permit(:category, :title, :page, :page_size))
+      articles, total_count = Article.search(params.permit(:category, :title, :page, :page_size), enabled: false)
 
       @articles = Kaminari.paginate_array(articles||[], total_count: total_count)
         .page(params[:page].to_i).per(DEFAULT_PAGE_SIZE)
@@ -44,12 +45,6 @@ module Admin
     end
 
     private
-    def do_search search_params
-      articles, total_count = Article.search_for_admin(search_params)
-      @articles = Kaminari.paginate_array(articles||[], total_count: total_count)
-        .page(search_params[:page].to_i).per(DEFAULT_PAGE_SIZE)
-    end
-
     def article_params
       params.require(:article).permit(
         :source_type, :title, :category_id, :tags, :summary, :content, :source, :source_url

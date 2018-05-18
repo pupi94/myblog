@@ -1,10 +1,10 @@
 <% if @articles.has_values? %>
   <div class="article-list">
-    <% category_hash = category_hash_cache %>
+    <% hash = categories_hash_cache %>
     <% @articles.each do |article|%>
       <article class="article">
         <header>
-          <a class="cat"><%= category_hash[article['category_id'].to_s]['name'] %><i></i></a>
+          <a class="cat"><%= hash[article['category_id'].to_s]['name'] %><i></i></a>
           <h2><a href="<%= article_path(article['id']) %>" title=""><%= article['title'] %></a></h2>
         </header>
         <p class="meta">

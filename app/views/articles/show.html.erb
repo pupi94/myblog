@@ -22,8 +22,8 @@
           <% end %>
 
           <span class="item article-meta-category">
-            <a data-toggle="tooltip" data-placement="bottom" title="栏目：<%= category_name @article['source'] %>">
-              <i class="glyphicon glyphicon-list"></i>后端程序
+            <a data-toggle="tooltip" data-placement="bottom" title="栏目：<%=  %>">
+              <i class="glyphicon glyphicon-list"></i><%= categories_hash_cache[@article['category_id'].to_s]['name'] %>
             </a>
           </span>
 

@@ -3,13 +3,13 @@ class Article < ApplicationRecord
   include Validates::ArticleValidate
 
   belongs_to :category
-
   belongs_to :user, foreign_key: "author_id"
 
-  #scope :published, -> { enabled.where(status: ArticleStatus::PUBLISHED) }
-
-  def self.published
-    enabled.where(status: ArticleStatus::PUBLISHED)
+  scope :published, -> { enabled.where(status: ArticleStatus::PUBLISHED) }
+  scope :category_filter, ->(category_id) { where(category_id: category_id) if category_id.present? }
+  scope :title_filter, ->(title) do
+    title = title&.strip
+    where('title like ?', "%#{title}%") if title.present?
   end
 
   before_save :update_content_html
@@ -29,47 +29,12 @@ class Article < ApplicationRecord
     self.save
   end
 
-  scope :category_filter, ->(category_id) do
-    where(category_id: category_id) if category_id.present?
-  end
-
-  scope :title_filter, ->(title) do
-    title = title&.strip
-    where('title like ?', "%#{title}%") if title.present?
-  end
-
   class << self
-    def search_for_admin(params)
-      articles = self.enabled
+    def search(params, enabled: true, order_by: :created_at)
+      articles = enabled ? self.enabled : self.disabled
+
       articles = articles.where(status: params['status']) if params['status'].present?
-
       articles = articles.category_filter(params['category']).title_filter(params['title'])
-
-      total_count = articles.size
-      return nil, 0 if total_count == 0
-
-      articles = articles.order(created_at: :desc).page_filter(params['page_size'], params['page'])
-
-      search_column = %w[id title source_type tags pv pubdate status created_at]
-      articles = articles.select(*search_column).as_json
-      return articles, total_count
-    end
-
-    def trash(params)
-      articles = self.disabled.category_filter(params['category']).title_filter(params['title'])
-
-      total_count = articles.size
-      return nil, 0 if total_count == 0
-
-      articles = articles.order(created_at: :desc).page_filter(params['page_size'], params['page'])
-
-      search_column = %w[id title source_type tags created_at]
-      articles = articles.select(*search_column).as_json
-      return articles, total_count
-    end
-
-    def search params
-      articles = self.published.category_filter(params['category_id'])
 
       if params['wd'].present? && params['wd'] != ','
         articles = articles.where(
@@ -81,10 +46,11 @@ class Article < ApplicationRecord
       total_count = articles.size
       return nil, 0 if total_count == 0
 
-      articles = articles.order(pubdate: :desc)
-      articles = articles.page_filter(params['page_size'], params['page'])
-      articles = articles.select(*%w[id category_id summary title pv pubdate]).as_json
+      articles = articles.order("#{order_by} desc").page_filter(params['page_size'], params['page'])
+      search_column = %w[id title category_id summary source_type tags pv pubdate status created_at]
+      articles = articles.select(*search_column).as_json
       return articles, total_count
+
     end
 
     def common_tags
