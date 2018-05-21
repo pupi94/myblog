@@ -44,6 +44,12 @@ module Admin
       redirect_to admin_articles_path
     end
 
+    def show
+      @article = Article.find(params[:id])
+      @article.pv += BlogRedis.pfcount("article::#{@article.id}::pv").to_i
+      render 'articles/show', layout: BlogLayout::APPLICATION
+    end
+
     private
     def article_params
       params.require(:article).permit(

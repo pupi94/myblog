@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'home#index'
 
-    resources :articles, only: %i[index new create edit update destroy] do
+    resources :articles, only: %i[index new create edit update destroy show] do
       collection do
         get  'trash'
         post 'update_status'

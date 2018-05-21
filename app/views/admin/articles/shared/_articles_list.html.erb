@@ -15,7 +15,7 @@
     <% if @articles.has_values? %>
       <% @articles.each do |article| %>
           <tr>
-            <td><%= link_to article['title'], article_path(article['id']), target:'_blank' %></td>
+            <td><%= link_to article['title'], admin_article_path(article['id']), target:'_blank' %></td>
             <td><%= t("article.source_type.#{article['source_type']}") %></td>
             <td><%= article['tags'] %></td>
             <td><%= article['pv'] %></td>

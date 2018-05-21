@@ -16,3 +16,5 @@ BlogMarkdown = Redcarpet::Markdown.new(
   space_after_headers:true,
   superscript:true
 )
+
+BlogRedis = Redis.new

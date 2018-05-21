@@ -50,7 +50,6 @@ class Article < ApplicationRecord
       search_column = %w[id title category_id summary source_type tags pv pubdate status created_at]
       articles = articles.select(*search_column).as_json
       return articles, total_count
-
     end
 
     def common_tags

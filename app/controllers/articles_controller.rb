@@ -16,7 +16,22 @@ class ArticlesController < ApplicationController
       .page(search_params[:page].to_i).per(search_params['page_size'])
   end
 
+  after_action :article_pv, only: :show
   def show
     @article = Article.find(params[:id])
+    raise ActiveRecord::RecordNotFound.new unless @article.status == ArticleStatus::PUBLISHED
+
+    @article.pv += BlogRedis.pfcount(article_pv_key(@article.id)).to_i
+  end
+
+  private
+  def article_pv
+    BlogRedis.pfadd(article_pv_key(@article.id), request.remote_ip || session.id)
+
+    Log.info("文章 #{@article.id} 访问量加1： 访问者的IP是： #{request.remote_ip || session.id}")
+  end
+
+  def article_pv_key(id)
+    "article::#{id}::pv"
   end
 end

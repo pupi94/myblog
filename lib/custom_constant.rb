@@ -30,6 +30,7 @@ module CustomConstant
   module BlogLayout
     DEVISE = 'devise'.freeze
     ADMIN = 'admin'.freeze
+    APPLICATION = 'application'.freeze
   end
 
   module SidekiqQueue
