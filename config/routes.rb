@@ -26,7 +26,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :categories, only: %i[index create]
+    resources :categories, only: %i[index create update]
     resources :notices, only: %i[index create destroy]
 
     post 'markdown/convert_html'

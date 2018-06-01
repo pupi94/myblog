@@ -11,4 +11,94 @@
 	<%= render :partial => "admin/categories/shared/categories_list" %>
 </div>
 
-<%= render :partial => "admin/categories/shared/add_category_modal" %>
+<%= render :partial => "admin/categories/shared/category_modal", locals: {action: 'add'} %>
+<%= render :partial => "admin/categories/shared/category_modal", locals: {action: 'edit'} %>
+
+<script type="text/javascript">
+  $(function() {
+    var $addCategoryModal = $("#add_category_modal");
+    var $editCategoryModal = $("#edit_category_modal");
+    var $categoryForm = null;
+
+    $addCategoryModal.on('shown.bs.modal', function(e){
+      $categoryForm = $addCategoryModal.find(".category_form");
+    });
+
+    $editCategoryModal.on('shown.bs.modal', function(e){
+      $categoryForm = $editCategoryModal.find(".category_form");
+      var data = e.relatedTarget.dataset;
+      $categoryForm.find("input[name='id']").val(data.id);
+      $categoryForm.find("input[name='name_en']").val(data.nameEn);
+      $categoryForm.find("input[name='name']").val(data.name);
+    });
+
+    var validate = {
+      feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+      },
+      fields: {
+        name: {
+          validators: {
+            notEmpty: {
+              message: '名称不能为空'
+            }
+          }
+        },
+        name_en: {
+          validators: {
+            notEmpty: {
+              message: '英文名称不能为空'
+            },
+            regexp: {
+              regexp: /^[-a-zA-Z0-9_]+$/,
+              message: '英文名称格式错误！'
+            }
+          }
+        }
+      }
+    };
+
+    $addCategoryModal.find(".category-add").on('click', function(event){
+      handle_category('/admin/categories', 'post')
+    });
+
+    $editCategoryModal.find(".category-edit").on('click', function(event){
+      var id = $categoryForm.find("input[name='id']").val();
+      handle_category('/admin/categories/' + id, 'put')
+    });
+
+    function handle_category(url, type){
+      $categoryForm.bootstrapValidator(validate);
+      $categoryForm.data('bootstrapValidator').validate();
+      if(!$categoryForm.data('bootstrapValidator').isValid()){
+        return ;
+      }
+      $.ajax({
+        url: url,
+        data: $categoryForm.serialize(),
+        type: type,
+        dataType:'json',
+        success:function(data) {
+          console.log(data);
+          if(data.return_code == 0 ){
+            location.reload();
+          }else{
+            BootstrapDialog.alert({
+              message: '<strong><%= t('dialog.failed')%></strong>&nbsp;&nbsp;' + data.return_info,
+              type: BootstrapDialog.TYPE_DANGER
+            });
+          }
+        },
+        error : function(data) {
+          console.log(data);
+          BootstrapDialog.alert({
+            message: '<%= t('dialog.sys_error')%>',
+            type: BootstrapDialog.TYPE_DANGER
+          });
+        }
+      });
+    }
+  });
+</script>

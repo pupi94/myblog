@@ -14,7 +14,17 @@
             <td><%= category['name'] %></td>
             <td><%= category['name_en'] %></td>
             <td><%= show_status(category['enabled']) %></td>
-            <td ></td>
+            <td>
+              <%= link_to t('button.edit'), '',
+                class: 'category-edit',
+                data: {
+                  id: category['id'],
+                  name: category['name'],
+                  name_en: category['name_en'],
+                  toggle: "modal",
+                  target: "#edit_category_modal"
+                } %>
+            </td>
           </tr>
       <% end %>
     <% else %>
