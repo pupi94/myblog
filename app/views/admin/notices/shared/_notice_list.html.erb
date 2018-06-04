@@ -13,7 +13,7 @@
             <td><%= notice['content'] %></td>
             <td><%= format_date(notice['created_at']) %></td>
             <td>
-              <%= link_to t("button.delete"), '#', data:{id: notice.id}, class: 'notice_destroy' %>
+              <%= link_to t("button.delete"), admin_notice_path(notice),method: :delete, data:{confirm: t('common.delete_confirm')} %>
             </td>
           </tr>
       <% end %>
@@ -24,33 +24,3 @@
     <% end %>
   </tbody>
 </table>
-
-<script type="text/javascript">
-  $(function(){
-    $('.notice_list .notice_destroy').on('click', function(e){
-      $.ajax({
-        url:'/admin/notices/' + $(this).data('id'),
-        type:'delete',
-        dataType:'json',
-        success:function(data) {
-          if(data.return_code == 0 ){
-            location.reload();
-          }else{
-            BootstrapDialog.alert({
-              message: '<strong><%= t('dialog.failed')%></strong>&nbsp;&nbsp;' + data.return_info,
-              type: BootstrapDialog.TYPE_DANGER
-            });
-          }
-        },
-        error : function() {
-          BootstrapDialog.alert({
-            message: '<%= t('dialog.sys_error')%>',
-            type: BootstrapDialog.TYPE_DANGER
-          });
-        }
-      });
-
-      stopEventBubble(e);
-    })
-  })
-</script>

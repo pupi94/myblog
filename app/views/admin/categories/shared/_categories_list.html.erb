@@ -28,7 +28,7 @@
               <%= link_to t('category.move_up'), '#', class: 'glyphicon glyphicon-arrow-up', data:{id: category['id']} %>
               <%= link_to t('category.move_up'), '#', class: 'glyphicon glyphicon-arrow-down', data:{id: category['id']} %>
 
-              <%= link_to(t('button.delete'), admin_category_path(category), method: :delete) %>
+              <%= link_to(t('button.delete'), admin_category_path(category), method: :delete, data: {confirm: t('common.delete_confirm')}) %>
             </td>
           </tr>
       <% end %>

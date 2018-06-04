@@ -12,8 +12,8 @@ module Admin
     end
 
     def destroy
-      Notice.find(params[:id]).destroy!
-      render :json => success_json
+      Notice.find(params[:id]).destroy
+      redirect_to admin_notices_path
     end
   end
 end

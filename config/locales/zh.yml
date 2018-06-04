@@ -39,6 +39,7 @@ zh:
     enabled: 启用
     disable: 禁用
     no_result: 未查询到数据
+    delete_confirm: 确认删除？
     
   dialog: 
     title: 提示
