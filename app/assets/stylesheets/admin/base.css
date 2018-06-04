@@ -95,6 +95,10 @@ a>i{
   padding-left:10px;
   padding-right:15px;
 }
+.container .alert {
+  padding: 10px 30px;
+  margin-bottom: 5px;
+}
 .container-title{
   background-color: #fff;
   border-bottom: 1px solid #ddd;

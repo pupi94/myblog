@@ -3,7 +3,7 @@ module Admin
     layout BlogLayout::ADMIN
 
     def index
-      @categories = Category.all.order(seq: :asc)
+      @categories = Category.all
     end
 
     def create
@@ -17,6 +17,29 @@ module Admin
       category.name_en = params[:name_en]
       category.save
       render :json => success_json
+    end
+
+    def move_up
+      category = Category.find(params['id'])
+      category.move_up
+      render :json => success_json
+    end
+
+    def move_down
+      category = Category.find(params['id'])
+      category.move_down
+      render :json => success_json
+    end
+
+    def destroy
+      category = Category.find(params['id'])
+      begin
+        category.destroy
+      rescue Exception => e
+        flash[:error_msg] = I18n.t('category.error.destroy')
+        Log.error(e)
+      end
+      redirect_to admin_categories_path
     end
   end
 end

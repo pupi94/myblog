@@ -26,7 +26,12 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :categories, only: %i[index create update]
+    resources :categories, only: %i[index create update destroy] do
+      collection do
+        post 'move_up'
+        post 'move_down'
+      end
+    end
     resources :notices, only: %i[index create destroy]
 
     post 'markdown/convert_html'

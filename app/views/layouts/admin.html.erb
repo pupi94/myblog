@@ -69,6 +69,18 @@
           </ol>
         </div>
       </div>
+
+      <div class="container-notice">
+        <% if flash[:error_msg] %>
+          <div class="fade in alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close fade" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <%= flash[:error_msg] %>
+          </div>
+        <% end %>
+      </div>
+
       <div class="container-main">
         <%= yield %>
       </div>
@@ -76,6 +88,14 @@
   </div>
 
 </div>
+<script type="text/javascript">
+  $(function(){
+    var notice = $('.container-notice .alert');
+    if(notice.length > 0){
+      setTimeout(function () {notice.alert('close')}, 15000);
+    }
+  })
+</script>
 </body>
 </html>
 
