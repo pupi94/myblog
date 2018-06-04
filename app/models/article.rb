@@ -17,16 +17,14 @@ class Article < ApplicationRecord
     self.content_html = convert_html(self.content)
   end
 
-  def update_status
+  def publish
     fail CustomError.new('article.error.article_can_not_edit') unless self.enabled
 
-    if [ArticleStatus::EDITING, ArticleStatus::SOLD_OUT].include?(self.status)
+    if ArticleStatus::EDITING == self.status
       self.status = ArticleStatus::PUBLISHED
       self.pubdate = Time.current
-    else
-      self.status = ArticleStatus::SOLD_OUT
+      self.save
     end
-    self.save
   end
 
   class << self

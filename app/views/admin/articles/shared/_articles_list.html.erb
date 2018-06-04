@@ -26,7 +26,21 @@
             </td>
             <td>
               <%= link_to t('button.edit'), edit_admin_article_path(article['id']) %>
-              <%= link_to t("article.status_edit.#{article['status']}"), '#', data:{id: article['id']}, class: 'article_status_edit'%>
+              <% if article['status'] == ArticleStatus::EDITING %>
+                <%=
+                  link_to t("article.publish"),
+                    "/admin/articles/publish/#{article['id']}",
+                    method: :put,
+                    data: { confirm: t('article.publish_confirm') }
+                %>
+              <% end %>
+
+              <%=
+                link_to t("button.delete"),
+                  "/admin/articles/delete/#{article['id']}",
+                  method: :delete,
+                  data: { confirm: t('common.delete_confirm') }
+              %>
             </td>
           </tr>
       <% end %>
@@ -42,34 +56,3 @@
     <%= paginate @articles, params: {controller: 'articles', action: 'index'}, remote: true %>
   <% end %>
 </div>
-
-<script type="text/javascript">
-  $(function(){
-    $('.articles_list .article_status_edit').on('click', function(e){
-      $.ajax({
-        url:'/admin/articles/update_status',
-        data: {id: $(this).data('id')},
-        type:'post',
-        dataType:'json',
-        success:function(data) {
-          if(data.return_code == 0 ){
-            $('.articles_search_form').submit();
-          }else{
-            BootstrapDialog.alert({
-              message: '<strong><%= t('dialog.failed')%></strong>&nbsp;&nbsp;' + data.return_info,
-              type: BootstrapDialog.TYPE_DANGER
-            });
-          }
-        },
-        error : function() {
-          BootstrapDialog.alert({
-            message: '<%= t('dialog.sys_error')%>',
-            type: BootstrapDialog.TYPE_DANGER
-          });
-        }
-      });
-
-      stopEventBubble(e);
-    })
-  })
-</script>

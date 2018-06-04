@@ -6,16 +6,12 @@ zh:
       reprint: 转载
       translate: 翻译
 
+    publish: 发布
+    publish_confirm: 确认发布？
     status_name: 状态
     status:
       editing: 编辑中
       published: 已发布
-      sold_out: 已下架
-
-    status_edit:
-      editing: 发布
-      published: 下架
-      sold_out: 重新发布
 
     title: 标题
     summary: 摘要

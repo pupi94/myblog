@@ -28,10 +28,10 @@ module Admin
       redirect_to admin_articles_path
     end
 
-    def update_status
+    def publish
       article = Article.find(params[:id])
-      article.update_status
-      render json: success_json
+      article.publish
+      redirect_to admin_articles_path
     end
 
     def edit
@@ -48,6 +48,13 @@ module Admin
       @article = Article.find(params[:id])
       @article.pv += BlogRedis.pfcount("article::#{@article.id}::pv").to_i
       render 'articles/show', layout: BlogLayout::APPLICATION
+    end
+
+    def delete
+      article = Article.find(params[:id])
+      article.enabled = false
+      article.save!
+      redirect_to admin_articles_path
     end
 
     private

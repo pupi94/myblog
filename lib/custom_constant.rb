@@ -24,7 +24,6 @@ module CustomConstant
     extend ConstantValue
     EDITING = "editing".freeze
     PUBLISHED = "published".freeze
-    SOLD_OUT = "sold_out".freeze
   end
 
   module BlogLayout
