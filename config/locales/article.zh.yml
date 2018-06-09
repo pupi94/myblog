@@ -39,8 +39,6 @@ zh:
       tags_invalid: 文章标签名格式错误
       source_type_invalid: 文章类型值非法
       status_invalid: 文章状态值非法
-      author_id_blank: 文章作者ID不能为空
-      author_name_blank: 文章作者姓名不能为空
 
       params_id_blank: 参数id不能为空
       article_can_not_edit: 文章不能编辑

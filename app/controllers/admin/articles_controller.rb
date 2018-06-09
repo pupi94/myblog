@@ -20,11 +20,11 @@ module Admin
     end
 
     def create
-      @article = Article.new(article_params)
-      @article.author_id   = current_user.id
-      @article.author_name = current_user.username
-      @article.status = ArticleStatus::EDITING
-      @article.save!
+      article = Article.new(article_params)
+      article.author_id   = current_user.id
+      article.author_name = current_user.username
+      article.status = ArticleStatus::EDITING
+      article.save!
       redirect_to admin_articles_path
     end
 

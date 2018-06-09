@@ -7,8 +7,6 @@ module Validates
       validates_presence_of :source_type, message: 'article.error.source_type_blank'
       validates_presence_of :category_id, message: 'article.error.category_id_blank'
       validates_presence_of :tags,        message: 'article.error.tags_blank'
-      validates_presence_of :author_id,   message: 'article.error.author_id_blank'
-      validates_presence_of :author_name, message: 'article.error.author_name_blank'
 
       validates :title,      length: { maximum: 64, message: 'article.error.title_length_over_64' }
       validates :source,     length: { maximum: 64, message: 'article.error.source_length_over_64' }

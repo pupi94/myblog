@@ -17,8 +17,6 @@ RSpec.describe Article, type: :model do
         ['source_type', 'article.error.source_type_blank'],
         ['category_id', 'article.error.category_id_blank'],
         ['tags',        'article.error.tags_blank'],
-        ['author_id',   'article.error.author_id_blank'],
-        ['author_name', 'article.error.author_name_blank']
       ].each do |value|
         it value do
           valid_column_present article, *value

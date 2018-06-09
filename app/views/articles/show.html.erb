@@ -50,7 +50,7 @@
 
       <div class="article-tags">标签：
         <% @article['tags'].split(',').each do |tag| %>
-          <a href="#" rel="tag"><%= tag %></a>
+            <%= link_to tag, root_path(wd: tag) %>
         <% end %>
       </div>
     </div>
