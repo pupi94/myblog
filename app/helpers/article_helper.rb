@@ -15,12 +15,9 @@ module ArticleHelper
   end
 
   def common_tags
-    tags = Rails.cache.read('common_tags')
-    if tags.nil?
-      tags = Article.common_tags
-      Rails.cache.write('common_tags', tags)
+    Rails.cache.fetch('common_tags') do
+      Article.common_tags
     end
-    tags
   end
 
   def hot_articles
