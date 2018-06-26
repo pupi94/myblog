@@ -1,13 +1,11 @@
-class CustomError < RuntimeError
+class CustomError < StandardError
+  attr_reader :message
+
   def initialize(msg = nil)
-    @msg = msg
+    @message = msg
   end
 
-  def message
-    @msg
-  end
-
-  def message_zh
-    @msg.present? && I18n.exists?(@msg) ? I18n.t(@msg) : @msg
+  def message_local
+    message.present? && I18n.exists?(message) ? I18n.t(message) : message
   end
 end

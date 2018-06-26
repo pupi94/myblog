@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   rescue_from AbstractController::ActionNotFound, :with => :render_error unless development_env?
 
   def render_custom_error(e)
-    do_render(e, 'error/500', system_error_json(e.message_zh))
+    do_render(e, 'error/500', system_error_json(e.message_local))
   end
 
   def render_invalid(e)

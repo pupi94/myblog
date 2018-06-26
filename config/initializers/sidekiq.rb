@@ -1,5 +1,5 @@
 Sidekiq.configure_server do |config|
-  config.redis = { url: 'redis://127.0.0.1:6379/0' }
+  config.redis = { url: Rails.configuration.settings['redis']['sidekiq'] }
   # 异常处理
   #config.error_handlers << Proc.new {|ex,ctx_hash| MyErrorService.notify(ex, ctx_hash) }
 
@@ -18,7 +18,7 @@ Sidekiq.configure_server do |config|
 end
 
 Sidekiq.configure_client do |config|
-  config.redis = { url: 'redis://127.0.0.1:6379/0' }
+  config.redis = { url: Rails.configuration.settings['redis']['sidekiq'] }
 end
 
 # 设置默认的参数
