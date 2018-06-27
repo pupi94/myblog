@@ -17,8 +17,6 @@ module Myblog
 
     config.settings = config_for(:settings)
 
-    config.cache_store = :redis_store, config.settings['redis']['cache'], { expire_after: 1.day }
-
     config.generators do |g|
       g.test_framework :rspec,
         fixtures: false,

@@ -17,4 +17,4 @@ BlogMarkdown = Redcarpet::Markdown.new(
   superscript:true
 )
 
-BlogRedis = Redis.new
+BlogRedis = Redis.new(url: Rails.configuration.settings['redis']['cache'])
