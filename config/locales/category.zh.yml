@@ -9,14 +9,6 @@ zh:
     move_up: 上移
 
     error:
-      name_blank: 类别名称不能为空
-      seq_blank: 类别序号不能为空
-      name_length_over_32: 类别名称长度不能超过32
-      name_not_unique: 类别名称已存在
-      name_en_blank: 类别英文名称不能为空
-      name_en_length_over_32: 类别英文名称长度不能超过32
-      name_en_not_unique: 类别英文名称已存在
-      name_en_invalid: 类别英文名称值非法
       first: 到顶了，不能再往上移了
       last: 到底了，不能再往下移了
       destroy: 此分类下还存在文章，请先将此分类下文章转移到其它分类再删除！

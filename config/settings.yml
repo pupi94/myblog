@@ -6,5 +6,8 @@ default: &defaults
 development:
   <<: *defaults
 
+production:
+  <<: *defaults
+
 test:
   <<: *defaults

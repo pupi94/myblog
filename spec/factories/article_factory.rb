@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :articles, class: Article do
+  factory :article, class: Article do
     category
 
     association :author, factory: :user

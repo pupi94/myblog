@@ -1,9 +1,0 @@
-zh:
-  notice:
-    add: 添加公告
-    content: 内容
-    created_at: 创建时间
-
-    error:
-      content_blank: 公告内容不能为空
-      content_length_over_128: 公告内容长度不能超过128

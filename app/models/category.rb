@@ -1,22 +1,16 @@
 class Category < ApplicationRecord
   include Validates::CategoryValidate
 
+  default_scope { order(seq: :asc) }
+
   has_many :articles
 
-  default_scope { order(seq: :asc) }
+  after_save :clear_cache
+  after_destroy :clear_cache
 
   before_validation :set_seq
   def set_seq
     self.seq = Category.maximum(:seq).to_i + 1 if self.seq.nil?
-  end
-
-  after_save :clear_cache
-  after_destroy :clear_cache
-  def clear_cache
-    Rails.cache.write('categories', nil)
-    Rails.cache.write('categories_hash', nil)
-    Rails.cache.write('categories_en_name_hash', nil)
-    Rails.cache.write('en_names', nil)
   end
 
   def move_up
@@ -45,4 +39,12 @@ class Category < ApplicationRecord
       list
     end
   end
+
+  private
+    def clear_cache
+      Rails.cache.write('categories', nil)
+      Rails.cache.write('categories_hash', nil)
+      Rails.cache.write('categories_en_name_hash', nil)
+      Rails.cache.write('en_names', nil)
+    end
 end
