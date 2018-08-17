@@ -1,0 +1,36 @@
+en:
+  activerecord:
+    errors:
+      models:
+        article:
+          attributes:
+            title:
+              blank: "can not blank"
+              too_long: "length cannot exceed 64"
+            source_type:
+              blank: "can not blank"
+              invalid: "invalid"
+            category_id:
+              blank: "can not blank"
+            tags:
+              blank: "can not blank"
+              too_long: "length cannot exceed 64"
+              invalid: "invalid"
+            source:
+              too_long: "length cannot exceed 64"
+            source_url:
+              too_long: "length cannot exceed 128"
+            summary:
+              too_long: "length cannot exceed 255"
+            status:
+              invalid: "invalid"
+    attributes:
+      article:
+        title: Title
+        source_type: 文章类型
+        category_id: 文章类别
+        tags: 文章标签
+        source: 文章来源
+        source_url: 来源路径
+        summary: 文章摘要
+        status: 文章状态

@@ -1,11 +1,11 @@
-source 'https://gems.ruby-china.org'
+source 'https://gems.ruby-china.com'
 
 gem 'rails', '~> 5.2'
 gem 'mysql2', '>= 0.3.18'
+
 gem 'bootsnap', '~> 1.3'
 
 gem 'puma', '~> 3.0'
-
 gem 'jquery-rails'
 #  压缩JavaScript
 gem 'uglifier', '>= 1.3.0'
@@ -21,9 +21,12 @@ gem 'jbuilder', '~> 2.5'
 gem 'redcarpet', '~> 3.4'
 
 gem 'kaminari', '~> 1.0'
+# upload files
 gem 'carrierwave', '~> 1.2'
 gem 'redis-rails', '~> 5.0'
+
 gem 'devise', '~> 4.4'
+gem "devise-i18n", "~> 1.6"
 
 gem 'sidekiq', '~> 5.1'
 gem 'sidekiq-cron', '~> 0.6.3'
@@ -31,11 +34,10 @@ gem 'sidekiq-cron', '~> 0.6.3'
 group :development, :test do
   gem 'byebug', platform: :mri
 
-  #封装RSpec 的程序，还包含了一些专为Rails 提供的功能
   gem "rspec-rails", "~> 3.5.2"
-  #把Rails 生成测试数据默认使用的固件换成更好用的预构件
   gem "factory_bot_rails", "~> 4.8.2"
-  gem "database_cleaner", "~> 1.5.3"
+  gem "shoulda-matchers"
+  gem 'rails-controller-testing'
 end
 
 group :development do

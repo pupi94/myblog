@@ -1,9 +1,0 @@
-zh:
-  sign_in_link: 登陆
-  register_link: 注册账号
-
-  sign_in:
-    pwd_placeholder: 请输入密码
-    email_placeholder: 请输入邮箱账号
-    remember_pwd: 记住密码
-    btn: 立即登录后台

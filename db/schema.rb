@@ -36,11 +36,11 @@ ActiveRecord::Schema.define(version: 2018_05_11_032138) do
 
   create_table "categories", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 32, null: false
+    t.string "name_en", limit: 32, null: false
     t.integer "seq", limit: 2, null: false
     t.boolean "enabled", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name_en", limit: 32, default: " ", null: false
   end
 
   create_table "notices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
