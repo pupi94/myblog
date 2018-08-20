@@ -10,44 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_11_032138) do
-
-  create_table "articles", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "title", limit: 64, null: false
-    t.string "source_type", limit: 16, null: false
-    t.string "source", limit: 64
-    t.string "source_url", limit: 128
-    t.integer "category_id", null: false
-    t.string "tags", limit: 64, null: false
-    t.string "summary"
-    t.integer "author_id", null: false
-    t.string "author_name", limit: 32, null: false
-    t.integer "pv", default: 0, null: false
-    t.string "status", limit: 16, null: false
-    t.boolean "enabled", default: true, null: false
-    t.datetime "pubdate"
-    t.text "content"
-    t.text "content_html"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "fk_rails_e74ce85cbc"
-    t.index ["category_id"], name: "fk_rails_af09d53ead"
-  end
-
-  create_table "categories", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name", limit: 32, null: false
-    t.string "name_en", limit: 32, null: false
-    t.integer "seq", limit: 2, null: false
-    t.boolean "enabled", default: true, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "notices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "content", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 2017_02_28_142916) do
 
   create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "username", limit: 32, null: false
@@ -61,12 +24,19 @@ ActiveRecord::Schema.define(version: 2018_05_11_032138) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  add_foreign_key "articles", "categories"
-  add_foreign_key "articles", "users", column: "author_id"
 end
