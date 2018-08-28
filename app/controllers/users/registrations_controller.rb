@@ -1,4 +1,4 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  layout BlogLayout::DEVISE
+  layout "devise"
 
 end

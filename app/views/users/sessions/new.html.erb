@@ -5,32 +5,39 @@
       <div class="form-group email-group">
         <div class="input-group">
           <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-          <%= f.email_field :email, class: 'form-control', placeholder: t('sign_in.email_placeholder') %>
+          <%= f.email_field :email, class: 'form-control', placeholder: t('.email_placeholder') %>
         </div>
       </div>
 
       <div class="form-group pwd-group">
         <div class="input-group">
           <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-          <%= f.password_field :password, class: "form-control", placeholder: t('sign_in.pwd_placeholder') %>
+          <%= f.password_field :password, class: "form-control", placeholder: t('.pwd_placeholder') %>
         </div>
       </div>
 
       <% if devise_mapping.rememberable? %>
           <div class="form-group remember-group">
             <div class="checkbox">
-              <label><%= f.check_box :remember_me %> <%= t('sign_in.remember_pwd')%></label>
+              <label><%= f.check_box :remember_me %> <%= t('.remember_pwd')%></label>
             </div>
           </div>
       <% end %>
+
+      <% if flash[:alert].present? %>
+        <div class="form-group alert-group">
+          <div class="text-danger text-center"><%= flash[:alert] %></div>
+        </div>
+      <% end %>
+
       <div class="form-group link-group">
         <div class="pull-right">
-          <%#= link_to t('register_link'), new_registration_path(resource_name) %>
+          <%= link_to t('.register_link'), new_registration_path(resource_name) %>
         </div>
       </div>
 
       <div class="form-foot">
-        <%= f.submit t('sign_in.btn'), class: "btn btn-primary col-lg-8" %>
+        <%= f.submit t('.sign_in'), class: "btn btn-primary col-lg-8" %>
       </div>
   <% end %>
 </div>
@@ -47,12 +54,12 @@
       fields: {
         'user[email]': {
           validators: {
-            notEmpty: {message: '邮箱账号不能为空！'}
+            notEmpty: {message: "<%= t('.email_required') %>"}
           }
         },
         'user[password]': {
           validators: {
-            notEmpty: {message: '密码不能为空！'}
+            notEmpty: {message: "<%= t('.password_required') %>"}
           }
         }
       }

@@ -5,5 +5,5 @@ class User < ApplicationRecord
 
   validates :username, presence: true, length: { maximum: 32 }
 
-  has_many :articles, foreign_key: "author_id"
+  has_many :articles
 end

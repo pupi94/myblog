@@ -1,15 +1,14 @@
 class ArticlesController < ApplicationController
-  include CategoryHelper
 
   def search
     search_params = params.permit(:page, :wd)
-    search_params['page_size'] = ARTICLE_PAGE_SIZE
+    search_params['page_size'] = 15
 
     if params[:category].present?
       search_params['category'] = categories_en_name_hash[params[:category]]['id']
     end
 
-    search_params['status'] = ArticleStatus::PUBLISHED
+    search_params['status'] = "published"
 
     articles, count = Article.search(search_params, order_by: :pubdate)
     @articles = Kaminari.paginate_array(articles||[], total_count: count)
@@ -19,7 +18,7 @@ class ArticlesController < ApplicationController
   after_action :article_pv, only: :show
   def show
     @article = Article.find(params[:id])
-    raise ActiveRecord::RecordNotFound.new unless @article.status == ArticleStatus::PUBLISHED
+    raise ActiveRecord::RecordNotFound.new unless @article.status == "published"
 
     @article.pv += BlogRedis.pfcount(article_pv_key(@article.id)).to_i
   end

@@ -1,0 +1,66 @@
+zh-CN:
+  activerecord:
+    attributes:
+      user:
+        created_at: "创建于"
+        current_password: "当前密码"
+        current_sign_in_at: "最近登录于"
+        current_sign_in_ip: "最近登录 IP"
+        email: "电子邮箱"
+        encrypted_password: "密码被加密"
+        failed_attempts: "失败尝试"
+        last_sign_in_at: "最后登录于"
+        last_sign_in_ip: "最后登录的 IP"
+        locked_at: "锁定于"
+        password: "密码"
+        password_confirmation: "密码确认"
+        remember_created_at: "记住创建于"
+        remember_me: "记住登录信息"
+        reset_password_sent_at: "重置密码发送于"
+        reset_password_token: "密码重置令牌"
+        sign_in_count: "登录次数"
+        updated_at: "更新于"
+        username: "用户名"
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "不能为空"
+              too_long: "长度不能超过32个字符"
+              taken: "已被占用"
+            username:
+              blank: "不能为空"
+              too_long: "长度不能超过32个字符"
+            password:
+              blank: "不能为空"
+              too_short: "长度不能低于6个字符"
+            password_confirmation:
+              confirmation: "不能为空"
+    models:
+      user: "用户"
+
+  users:
+    sessions:
+      new:
+        sign_in: "登录"
+        email_placeholder: "请输入邮箱账号"
+        pwd_placeholder: "请输入密码"
+        remember_pwd: "记住密码"
+        email_required: '邮箱账号不能为空'
+        password_required: '密码不能为空'
+        sign_in: "登录"
+        register_link: "注册"
+    registrations:
+      new:
+        sign_up: "注册"
+        email: "邮箱账号"
+        username: "用户名"
+        password: "密码"
+        password_confirmation: "确认密码"
+        sign_in_link: "登录"
+
+  devise:
+    failure:
+      invalid: "邮箱账号或密码错误"
+      not_found_in_database: "邮箱账号或密码错误"

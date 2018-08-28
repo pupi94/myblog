@@ -2,7 +2,7 @@ class HomeController < ApplicationController
 	
   def index
     search_params = params.permit(:page, :wd)
-    search_params['page_size'] = ARTICLE_PAGE_SIZE
+    search_params['page_size'] = 15
 
     articles, count = Article.search(search_params)
 

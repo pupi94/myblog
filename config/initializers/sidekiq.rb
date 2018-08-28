@@ -18,7 +18,7 @@ Sidekiq.configure_server do |config|
 end
 
 Sidekiq.configure_client do |config|
-  config.redis = { url: Rails.configuration.settings['redis']['sidekiq'] }
+  config.redis = { url: ENV["REDIS_SIDEKIQ"] }
 end
 
 # 设置默认的参数

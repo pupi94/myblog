@@ -1,7 +1,5 @@
 module Admin
-  class HomeController < ApplicationController
-    layout BlogLayout::ADMIN
-
+  class HomeController < ::AdminApplicationController
     before_action :authenticate_user!
 
     def index

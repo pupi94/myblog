@@ -1,0 +1,62 @@
+zh-CN:
+  views:
+    pagination:
+      first: "&laquo; 首页"
+      last: "尾页 &raquo;"
+      previous: "&lsaquo; 上一页"
+      next: "下一页 &rsaquo;"
+      truncate: "&hellip;"
+
+  myblog_system: PuPing 博客
+  management_system: 后台管理
+
+#
+#  admin: 管理员
+#  log_out: 退出
+#
+#  button:
+#    search: 查询
+#    cancel: 取消
+#    confirm: 确认
+#    save: 保存
+#    reset: 重置
+#    searching: 查询中...
+#    edit: 编辑
+#    delete: 删除
+#
+#  menu:
+#    first_page: 首页
+#    new_article: 新增文章
+#    my_article: 我的文章
+#    drafts: 草稿箱
+#    trash: 回收站
+#    message_board: 留言板
+#    category: 博客分类
+#    article_edit: 文章编辑
+#    notice: 公告栏
+#
+#  common:
+#    operate: 操作
+#    status: 状态
+#    enabled: 启用
+#    disable: 禁用
+#    no_result: 未查询到数据
+#    delete_confirm: 确认删除？
+#
+#  dialog:
+#    title: 提示
+#    failed: 操作失败!
+#    success: 操作成功!
+#    sys_error: 系统错误!
+#
+#  error:
+#    system_error: 系统错误!
+#    resource_not_found: 资源未找到!
+#
+#  user:
+#    info: 资料
+#    setting: 设置
+#
+#    error:
+#      password_or_name_wrong: 账号或密码错误
+#      pwd_or_name_blank: 账号或密码不能为空

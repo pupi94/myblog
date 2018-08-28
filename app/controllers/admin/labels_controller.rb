@@ -1,6 +1,5 @@
 module Admin
-  class LabelsController < ApplicationController
-    layout BlogLayout::ADMIN
+  class LabelsController < ::AdminApplicationController
 
     def index
       #@categories = Category.all

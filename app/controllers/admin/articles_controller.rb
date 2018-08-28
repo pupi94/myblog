@@ -1,6 +1,5 @@
 module Admin
-  class ArticlesController < ApplicationController
-    layout BlogLayout::ADMIN
+  class ArticlesController < ::AdminApplicationController
 
     def index
       articles, total_count = Article.search(params.permit(:category, :title, :status, :page, :page_size))

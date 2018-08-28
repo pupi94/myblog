@@ -1,5 +1,5 @@
 class Users::SessionsController < Devise::SessionsController
-  layout BlogLayout::DEVISE
+  layout "devise"
 
   def after_sign_in_path_for(resource_or_scope)
     scope = Devise::Mapping.find_scope!(resource_or_scope)

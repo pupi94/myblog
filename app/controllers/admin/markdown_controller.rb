@@ -1,5 +1,5 @@
 module Admin
-  class MarkdownController < ApplicationController
+  class MarkdownController < ::AdminApplicationController
     include MarkdownTool
 
     def convert_html

@@ -8,7 +8,7 @@ FactoryBot.define do
     body_html  '测试内容'
     pv          10
     pubdate     Time.current - 10.day
-    status      ArticleStatus::PUBLISHED
+    status      "published"
     enabled     true
   end
 end
