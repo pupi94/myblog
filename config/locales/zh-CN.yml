@@ -10,6 +10,29 @@ zh-CN:
   myblog_system: PuPing 博客
   management_system: 后台管理
 
+  layouts:
+    admin:
+      title: puping博客后台管理
+      user_info: 我的信息
+      pwd_edit: 修改密码
+      log_out: 登出系统
+      first_page: 首页
+      new_article: 新增文章
+      my_article: 文章列表
+      label: 文章标签
+  admin:
+    articles:
+      shared:
+        article_form:
+          title: 标题
+          summary: 摘要
+          save: 保存
+      new:
+        new_article: 新增文章
+      index:
+        my_article: 文章列表
+        title: 文章标题
+
 #
 #  admin: 管理员
 #  log_out: 退出
@@ -53,9 +76,6 @@ zh-CN:
 #    system_error: 系统错误!
 #    resource_not_found: 资源未找到!
 #
-#  user:
-#    info: 资料
-#    setting: 设置
 #
 #    error:
 #      password_or_name_wrong: 账号或密码错误

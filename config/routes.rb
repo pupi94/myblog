@@ -2,9 +2,7 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
-
   root 'home#index'
-  get  '/articles/:id', to: 'articles#show', as: 'article'
 
   devise_for(:users,
     only: %i[sessions registrations],
@@ -14,22 +12,19 @@ Rails.application.routes.draw do
     }
   )
 
+  resource :article, only: [:show]
   namespace :admin do
     root 'home#index'
 
-    resources :articles, only: %i[index new create edit update show] do#destroy
-      collection do
-        get 'trash'
-        put 'publish/:id', to: 'articles#publish'
-        get 'convert_html'
-        delete 'delete/:id', to: 'articles#delete'
+    resources :articles, only: %i[index new create edit update show destroy] do
+      member do
+        put 'publish'
       end
     end
 
     resources :labels, only: %i[index create update destroy]
 
     post 'markdown/convert_html'
-
 
     authenticate :user do
       mount Sidekiq::Web => '/sidekiq'
