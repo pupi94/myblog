@@ -1,9 +1,7 @@
 module CustomConstant
   module ConstantValue
     def const_values
-      result = []
-      self.constants.each {|constant_key| result << self.const_get(constant_key)}
-      result
+      self.constants.reduce([]){ |values, value| values << self.const_get(value) }
     end
   end
 
@@ -11,17 +9,9 @@ module CustomConstant
   DEFAULT_PAGE = 1.freeze
   ARTICLE_PAGE_SIZE = 10
 
-  SUCCESS_CODE = 0
-
-  module SourceType
-    extend ConstantValue
-    ORIGINA = 'original'.freeze
-    REPRINT = 'reprint'.freeze
-    TRANSLATE = 'translate'.freeze
-  end
-
   module ArticleStatus
     extend ConstantValue
+
     EDITING = "editing".freeze
     PUBLISHED = "published".freeze
   end

@@ -2,26 +2,19 @@ zh:
   activerecord:
     errors:
       models:
-        category:
+        label:
           attributes:
             name:
               blank: "不能为空"
-              too_long: "长度不能超过32"
-              taken: " %{value} 已存在"
-            name_en:
-              blank: "不能为空"
-              too_long: "长度不能超过32"
-              taken: " %{value} 已存在"
-              invalid: "值非法"
+              too_long: "长度不能超过32个字符"
+              taken: "已被占用"
     attributes:
-      category:
-        name: 类别名称
-        name_en: 类别英文名称
+      label:
+        name: "标签名称"
+    model:
+      label: "文章标签"
 
-
-
-
-  category:
+  label:
     add: 新增分类
     edit: 编辑分类
     name: 名称

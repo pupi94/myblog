@@ -21,8 +21,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'redcarpet', '~> 3.4'
 
 gem 'kaminari', '~> 1.0'
-# upload files
-gem 'carrierwave', '~> 1.2'
 gem 'redis-rails', '~> 5.0'
 
 gem 'devise', '~> 4.4'
@@ -34,10 +32,11 @@ gem 'sidekiq-cron', '~> 0.6.3'
 group :development, :test do
   gem 'byebug', platform: :mri
 
-  gem "rspec-rails", "~> 3.5.2"
-  gem "factory_bot_rails", "~> 4.8.2"
+  gem "rspec-rails"
+  gem "factory_bot_rails"
   gem "shoulda-matchers"
   gem 'rails-controller-testing'
+  gem "database_cleaner"
 end
 
 group :development do

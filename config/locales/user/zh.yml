@@ -25,7 +25,7 @@ zh:
         unconfirmed_email: "未确认邮件"
         unlock_token: "帐户解锁令牌"
         updated_at: "更新于"
-        username: 用户名
+        username: "用户名"
     errors:
       models:
         user:

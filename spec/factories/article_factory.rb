@@ -1,20 +1,14 @@
 FactoryBot.define do
   factory :article, class: Article do
-    category
-
-    association :author, factory: :user
-    author_name   "测试用户"
-    title         "测试标题"
-    source        "文章来源"
-    source_url    "https://www.google.com"
-    source_type   SourceType::ORIGINA
-    tags          "前端技术,后段程序"
-    summary       "摘要"
-    content       "测试内容"
-    content_html  '测试内容'
-    pv            10
-    pubdate       Time.current - 10.day
-    status        ArticleStatus::PUBLISHED
-    enabled       true
+    label
+    user
+    title      "测试标题"
+    summary    "摘要"
+    body       "测试内容"
+    body_html  '测试内容'
+    pv          10
+    pubdate     Time.current - 10.day
+    status      ArticleStatus::PUBLISHED
+    enabled     true
   end
 end

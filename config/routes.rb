@@ -1,10 +1,9 @@
+require 'sidekiq/web'
+require 'sidekiq/cron/web'
+
 Rails.application.routes.draw do
 
   root 'home#index'
-  get '/:category', to: 'articles#search', as: '/', constraints: lambda { |request|
-    Category.en_names.include?(request[:category])
-  }
-
   get  '/articles/:id', to: 'articles#show', as: 'article'
 
   devise_for(:users,
@@ -27,18 +26,10 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :categories, only: %i[index create update destroy] do
-      collection do
-        post 'move_up'
-        post 'move_down'
-      end
-    end
-    resources :notices, only: %i[index create destroy]
+    resources :labels, only: %i[index create update destroy]
 
     post 'markdown/convert_html'
 
-    require 'sidekiq/web'
-    require 'sidekiq/cron/web'
 
     authenticate :user do
       mount Sidekiq::Web => '/sidekiq'
