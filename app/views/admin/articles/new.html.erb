@@ -1,5 +1,5 @@
 <% content_for :title do %>
-  <li><%= t('menu.new_article') %></li>
+  <li><%= t('.new_article') %></li>
 <% end %>
 <div class="ibox-content" style="width: 75%;margin-left: auto;margin-right: auto;">
   <%= form_for @article, url:{action: 'create'}, html: {

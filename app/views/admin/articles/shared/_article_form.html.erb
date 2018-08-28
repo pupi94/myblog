@@ -1,18 +1,26 @@
-<div class="form-group" style="margin-bottom: 0;">
+<div class="form-group">
   <div class="col-lg-12">
-    <label class="form_label"><%= t("article.title") %></label>
+    <% (1..3).each do |n| %>
+      <div class="radio checkbox-inline" style="padding-top: 0px; padding-left: 0px;">
+        <label>
+          <%= f.radio_button(:label_id, n) %>
+          <%= n %>
+        </label>
+      </div>
+    <% end %>
   </div>
 </div>
 
 <div class="form-group">
   <div class="col-lg-12">
+    <label class="form_label"><%= t(".title") %></label>
     <%= f.text_field :title, class: 'form-control' %>
   </div>
 </div>
 
 <div class="form-group">
   <div class="col-lg-12">
-    <label class="form_label"><%= t("article.summary") %></label>
+    <label class="form_label"><%= t(".summary") %></label>
     <%= f.text_area :summary, class: 'form-control', style: "resize:none;", rows: 2 %>
   </div>
 </div>
@@ -23,65 +31,16 @@
   </div>
   <div class="markdown col-lg-12">
     <div class="editor">
-      <%= f.text_area :content, class: 'form-control', style: "resize:none;", rows: 20 %>
+      <%= f.text_area :body, class: 'form-control', style: "resize:none;", rows: 20 %>
     </div>
     <div class="barrier"></div>
     <div class="html-show"></div>
   </div>
 </div>
 
-<div class="form-group" style="margin-bottom: 0;">
-  <div class="col-lg-12">
-    <label class="form_label"><%= t("article.category") %></label>
-  </div>
-</div>
-
-<div class="form-group">
-  <div class="col-lg-12">
-    <% categories_cache.each do |category| %>
-      <div class="radio checkbox-inline" style="padding-top: 0px; padding-left: 0px;">
-        <label>
-          <%= f.radio_button(:category_id, category['id']) %>
-          <%= category['name'] %>
-        </label>
-      </div>
-    <% end %>
-  </div>
-</div>
-
-<div class="form-group" style="margin-bottom: 0;">
-  <div class="col-lg-2">
-    <label class="form_label"><%= t("article.source_type_name") %></label>
-  </div>
-  <div class="col-lg-10">
-    <label class="form_label"><%= t("article.tags") %></label>
-  </div>
-</div>
-
-<div class="form-group">
-  <div class="col-lg-2">
-    <%= f.select(:source_type, article_source_type_select_options, {}, {class: 'form-control'}) %>
-  </div>
-
-  <div class="col-lg-10">
-    <%= f.text_field :tags, class: 'form-control', placeholder: 'java,ruby' %>
-  </div>
-</div>
-
-<div class="form-group">
-  <div class="col-lg-6">
-    <label class="form_label"><%= t("article.source") %></label>
-    <%= f.text_field :source, class: 'form-control' %>
-  </div>
-  <div class="col-lg-6">
-    <label class="form_label"><%= t("article.source_url") %></label>
-    <%= f.text_field :source_url, class: 'form-control' %>
-  </div>
-</div>
-
 <div class="form-group">
   <div class="pull-right" style="padding-right: 15px;">
-    <%= f.submit t('button.save'), class: "btn btn-primary article_save_btn"%>
+    <%= f.submit t('.save'), class: "btn btn-primary article_save_btn"%>
   </div>
 </div>
 
@@ -102,7 +61,7 @@
             stringLength:{max: 64, message: '最大长度为64！'}
           }
         },
-        'article[category_id]': {
+        'article[label_id]': {
           validators: {
             notEmpty: {message: '不能为空'}
           }
@@ -110,26 +69,6 @@
         'article[summary]': {
           validators: {
             stringLength:{max: 255, message: '最大长度为255！'}
-          }
-        },
-        'article[tags]': {
-          validators: {
-            notEmpty: {message: '不能为空'},
-            stringLength:{max: 32, message: '最大长度为32！'},
-            regexp: {
-              regexp: /^([-a-zA-Z\u4E00-\u9FFF\s](,)?)+$/,
-              message: '格式错误！'
-            }
-          }
-        },
-        'article[source]': {
-          validators: {
-            stringLength:{max: 64, message: '最大长度为64！'}
-          }
-        },
-        'article[source_url]': {
-          validators: {
-            stringLength:{max: 128, message: '最大长度为128！'}
           }
         }
       }
