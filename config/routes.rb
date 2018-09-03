@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   )
 
   resource :article, only: [:show]
+
   namespace :admin do
     root 'home#index'
 

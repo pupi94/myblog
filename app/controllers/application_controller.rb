@@ -6,8 +6,6 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from Exception, :with => :render_error unless development_env?
-  rescue_from RuntimeError, :with => :render_error unless development_env?
- # rescue_from CustomError, :with => :render_custom_error
 
   rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found unless development_env?
   rescue_from ActiveRecord::RecordInvalid, :with => :render_invalid unless development_env?

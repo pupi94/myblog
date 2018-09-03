@@ -27,11 +27,25 @@ zh-CN:
           title: 标题
           summary: 摘要
           save: 保存
+        articles_list:
+          title: 标题
+          pv: 访问量
+          pubdate: 发布日期
+          created_at: 创建日期
+          status: 状态
+          no_result: 没有文章
       new:
         new_article: 新增文章
       index:
         my_article: 文章列表
         title: 文章标题
+        search: 查询
+        searching: 查询中
+
+    labels:
+      index:
+        labels: 文章标签
+        add_btn: 添加标签
 
 #
 #  admin: 管理员

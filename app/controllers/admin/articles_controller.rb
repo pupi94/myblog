@@ -1,16 +1,9 @@
 module Admin
-  class ArticlesController < ::AdminApplicationController
+  class ArticlesController < ::AdminController
     def index
       # articles, total_count = Article.search(params.permit(:title, :status, :page, :page_size))
       # @articles = Kaminari.paginate_array(articles||[], total_count: total_count)
       #   .page(params[:page].to_i).per(15)
-    end
-
-    def trash
-      articles, total_count = Article.search(params.permit(:category, :title, :page, :page_size), enabled: false)
-
-      @articles = Kaminari.paginate_array(articles||[], total_count: total_count)
-        .page(params[:page].to_i).per(DEFAULT_PAGE_SIZE)
     end
 
     def new

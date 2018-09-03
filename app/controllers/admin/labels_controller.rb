@@ -1,5 +1,5 @@
 module Admin
-  class LabelsController < ::AdminApplicationController
+  class LabelsController < ::AdminController
 
     def index
       #@categories = Category.all

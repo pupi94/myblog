@@ -1,28 +1,24 @@
 <table class="table table-bordered table-hover">
   <thead>
     <tr>
-      <th width="26%"><%= t('article.title') %></th>
-      <th width="6%"><%= t('article.source_type_name') %></th>
-      <th width="15%"><%= t('article.tags') %></th>
-      <th width="5%"><%= t('article.pv') %></th>
-      <th width="15%"><%= t('article.pubdate') %></th>
-      <th width="15%"><%= t('article.created_at') %></th>
-      <th width="6%"><%= t('article.status_name') %></th>
-      <th width="12%"><%= t('common.operate') %></th>
+      <th width="40%"><%= t('.title') %></th>
+      <th width="10%"><%= t('.pv') %></th>
+      <th width="15%"><%= t('.pubdate') %></th>
+      <th width="15%"><%= t('.created_at') %></th>
+      <th width="10%"><%= t('.status') %></th>
+      <th width="10%"></th>
     </tr>
   </thead>
   <tbody>
-    <% if @articles.has_values? %>
+    <% if @articles %>
       <% @articles.each do |article| %>
           <tr>
-            <td><%= link_to article['title'], admin_article_path(article['id']), target:'_blank' %></td>
-            <td><%= t("article.source_type.#{article['source_type']}") %></td>
-            <td><%= article['tags'] %></td>
+            <td><%= article.label %><%= link_to article['title'], admin_article_path(article['id']), target:'_blank' %></td>
             <td><%= article['pv'] %></td>
             <td><%= format_date(article['pubdate']) %></td>
             <td><%= format_date(article['created_at']) %></td>
             <td>
-              <span class="<%= "article_#{article['status']}"%>"><%= t("article.status.#{article['status']}") %></span>
+              <span class="<%= "article_#{article['status']}"%>"><%= t(".article_#{article['status']}") %></span>
             </td>
             <td>
               <%= link_to t('button.edit'), edit_admin_article_path(article['id']) %>
@@ -46,13 +42,13 @@
       <% end %>
     <% else %>
       <tr>
-        <td colspan="8" align="center"><%= t('common.no_result') %></td>
+        <td colspan="8" align="center"><%= t('.no_result') %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <div class="paginate-wrapper">
-  <% if @articles.has_values? %>
+  <% if @articles %>
     <%= paginate @articles, params: {controller: 'articles', action: 'index'}, remote: true %>
   <% end %>
 </div>

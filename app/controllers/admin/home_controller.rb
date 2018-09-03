@@ -1,5 +1,5 @@
 module Admin
-  class HomeController < ::AdminApplicationController
+  class HomeController < ::AdminController
     before_action :authenticate_user!
 
     def index

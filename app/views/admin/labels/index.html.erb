@@ -1,18 +1,18 @@
 <% content_for :title do %>
-		<li><%= t('menu.category') %></li>
+		<li><%= t('.labels') %></li>
 <% end %>
 
 <div class="pull-right" style="margin-bottom: 15px;">
 	<button id="add_category_btn" class="btn btn-primary" data-toggle="modal" data-target="#add_category_modal">
-		<%= t('category.add') %>
+		<%= t('.add_btn') %>
 	</button>
 </div>
 <div class="categories_list">
-	<%= render :partial => "admin/categories/shared/categories_list" %>
+	<%#= render :partial => "admin/categories/shared/categories_list" %>
 </div>
 
-<%= render :partial => "admin/categories/shared/category_modal", locals: {action: 'add'} %>
-<%= render :partial => "admin/categories/shared/category_modal", locals: {action: 'edit'} %>
+<%#= render :partial => "admin/categories/shared/category_modal", locals: {action: 'add'} %>
+<%#= render :partial => "admin/categories/shared/category_modal", locals: {action: 'edit'} %>
 
 <script type="text/javascript">
   $(function() {
