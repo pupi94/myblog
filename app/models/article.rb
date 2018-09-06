@@ -7,8 +7,8 @@ class Article < ApplicationRecord
   belongs_to :label
   belongs_to :user
 
-  before_save :update_body_html
-  def update_content_html
+  before_save :set_body_html
+  def set_body_html
     self.body_html = convert_html(self.body)
   end
 

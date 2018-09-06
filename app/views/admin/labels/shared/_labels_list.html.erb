@@ -42,60 +42,6 @@
 
 <script type="text/javascript">
   $(function(){
-    var trSize = $('.categories_list tbody tr').length;
-    $('.categories_list .glyphicon-arrow-up').on('click', function(e){
-      handle_move(e, 'up')
-    });
 
-    $('.categories_list .glyphicon-arrow-down').on('click', function(e){
-      handle_move(e, 'down')
-    });
-
-    function handle_move(e, action){
-      stopEventBubble(e);
-      var that = $(e.currentTarget);
-      var parentTr = that.parent().parent();
-      var index = parentTr.index();
-      var id = that.data('id');
-
-      var url = '', hint = '';
-      if(action == 'up'){
-        url = '/admin/categories/move_up';
-        hint = "<%= t('category.error.first')%>"
-      }else{
-        url = '/admin/categories/move_down';
-        hint = "<%= t('category.error.last')%>";
-      }
-      if((index == 0 && action == 'up') || (index == (trSize - 1) && action == 'down')){
-        BootstrapDialog.alert({
-          message: hint,
-          type: BootstrapDialog.TYPE_WARNING
-        });
-        return;
-      }
-
-      $.ajax({
-        url: url,
-        data: {id: id},
-        type: 'post',
-        dataType:'json',
-        success:function(data) {
-          if(data.return_code == 0 ){
-            action == 'up' ? parentTr.after(parentTr.prev()) : parentTr.before(parentTr.next());
-          }else{
-            BootstrapDialog.alert({
-              message: '<strong><%= t('dialog.failed')%></strong>&nbsp;&nbsp;' + data.return_info,
-              type: BootstrapDialog.TYPE_DANGER
-            });
-          }
-        },
-        error : function(data) {
-          BootstrapDialog.alert({
-            message: '<%= t('dialog.sys_error')%>',
-            type: BootstrapDialog.TYPE_DANGER
-          });
-        }
-      });
-    }
   })
 </script>

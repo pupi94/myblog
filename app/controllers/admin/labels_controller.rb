@@ -6,8 +6,9 @@ module Admin
     end
 
     def create
-      #Category.create!(name: params['name'], name_en: params[:name_en])
-      #render :json => success_json
+      @label = Label.new(name: params[:name])
+      flash[:alert] = @label.errors.full_messages.first unless @label.save
+      redirect_to admin_labels_path
     end
 
     def update

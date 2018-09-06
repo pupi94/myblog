@@ -46,7 +46,20 @@ zh-CN:
       index:
         labels: 文章标签
         add_btn: 添加标签
+      shared:
+        label_modal:
+          add: 添加标签
+          name: 名称
 
+  button:
+    cancel: 取消
+    save: 保存
+    edit: 编辑
+    delete: 删除
+
+  error:
+    server_error: 系统错误
+    not_found: resource not found
 #
 #  admin: 管理员
 #  log_out: 退出

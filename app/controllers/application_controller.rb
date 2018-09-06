@@ -1,57 +1,55 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def self.development_env?
-    Rails.env.development?
-  end
+  rescue_from Exception, :with => :server_error
 
-  rescue_from Exception, :with => :render_error unless development_env?
+  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+  rescue_from ActiveRecord::RecordInvalid, :with => :record_invalid
 
-  rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found unless development_env?
-  rescue_from ActiveRecord::RecordInvalid, :with => :render_invalid unless development_env?
-  rescue_from AbstractController::ActionNotFound, :with => :render_error unless development_env?
-
-  def render_custom_error(e)
-    do_render(e, 'error/500', system_error_json(e.message_local))
-  end
-
-  def render_invalid(e)
-    msgs = e.record.errors.messages
-    Log.error msgs
-    do_render(e, 'error/500', system_error_json(I18n.t(msgs.first[1][0])))
-  end
-
-  def render_error(e = nil)
-    do_render(e, 'error/500', system_error_json)
-  end
-
-  def render_not_found(e = nil)
-    do_render(e, 'error/404', no_match_json)
-  end
-
-  def do_render(e, page, rtn)
-    Log.error e
+  private
+  def record_invalid(e)
+    error = e.record.errors.full_messages.first
     respond_to do |format|
-      format.html { render page }
-      format.js { render json: rtn }
-      format.json { render json: rtn }
+      format.html { render "error/500" }
+      format.js { render_unprocessable_entity(error) }
+      format.json { render_unprocessable_entity(error) }
     end
   end
 
-  protected
-  def no_match_json
-    {'return_code' => 404, 'return_info' => I18n.t('error.resource_not_found')}
+  def server_error(e)
+    Rails.logger.error(e)
+    respond_to do |format|
+      format.html { render "error/500" }
+      format.js { render_internal_server_error }
+      format.json { render_internal_server_error }
+    end
   end
 
-  def system_error_json(msg = nil)
-    {'return_code' => 500, 'return_info' => msg || I18n.t('error.system_error')}
+  def record_not_found
+    respond_to do |format|
+      format.html { render "error/404" }
+      format.js { render_not_found }
+      format.json { render_not_found }
+    end
+  end
+
+  def render_internal_server_error
+    render json: { error: I18n.t("error.server_error") }, status: :internal_server_error
+  end
+
+  def render_unprocessable_entity(error)
+    render json: { error: error }, status: :unprocessable_entity
+  end
+
+  def render_not_found
+    render json: { error: I18n.t('error.not_found') }, status: :unprocessable_entity
+  end
+
+  def render_ok
+    render json: { }, status: :ok
   end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
-  end
-
-  def success_json
-    {'return_code' => SUCCESS_CODE}
   end
 end
