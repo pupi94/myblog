@@ -1,47 +1,18 @@
 <table class="table table-bordered table-hover">
   <thead>
     <tr>
-      <th><%= t('category.name') %></th>
-      <th><%= t('category.name_en') %></th>
-      <th><%= t('common.status') %></th>
-      <th><%= t('common.operate') %></th>
+      <th><%= t('.name') %></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
-    <% if @categories.size > 0 %>
-      <% @categories.each do |category| %>
-          <tr>
-            <td><%= category['name'] %></td>
-            <td><%= category['name_en'] %></td>
-            <td><%= show_status(category['enabled']) %></td>
-            <td>
-              <%= link_to t('button.edit'), '',
-                class: 'category-edit',
-                data: {
-                  id: category['id'],
-                  name: category['name'],
-                  name_en: category['name_en'],
-                  toggle: "modal",
-                  target: "#edit_category_modal"
-                } %>
-
-              <%= link_to t('category.move_up'), '#', class: 'glyphicon glyphicon-arrow-up', data:{id: category['id']} %>
-              <%= link_to t('category.move_up'), '#', class: 'glyphicon glyphicon-arrow-down', data:{id: category['id']} %>
-
-              <%= link_to(t('button.delete'), admin_category_path(category), method: :delete, data: {confirm: t('common.delete_confirm')}) %>
-            </td>
-          </tr>
-      <% end %>
-    <% else %>
+    <% @labels.each do |label| %>
       <tr>
-        <td colspan="4" align="center"><%= t('common.no_result') %></td>
+        <td><%= label.name %></td>
+        <td>
+          <%= link_to(t('button.delete'), admin_label_path(label), method: :delete) %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<script type="text/javascript">
-  $(function(){
-
-  })
-</script>

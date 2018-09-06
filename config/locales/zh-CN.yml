@@ -50,6 +50,9 @@ zh-CN:
         label_modal:
           add: 添加标签
           name: 名称
+        labels_list:
+          delete_confirm: 确认删除
+          name: 标签名
 
   button:
     cancel: 取消
@@ -60,6 +63,7 @@ zh-CN:
   error:
     server_error: 系统错误
     not_found: resource not found
+    article_exit: 请先移出该标签下的所以文章再删除！
 #
 #  admin: 管理员
 #  log_out: 退出

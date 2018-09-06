@@ -10,14 +10,13 @@
 <%- end %>
 
 <div class="pull-right" style="margin-bottom: 15px;">
-	<button id="add_category_btn" class="btn btn-primary" data-toggle="modal" data-target="#add_label_modal">
+	<button class="btn btn-primary" data-toggle="modal" data-target="#add_label_modal">
 		<%= t('.add_btn') %>
 	</button>
 </div>
 
-<div class="categories_list">
-	<%#= render :partial => "admin/categories/shared/categories_list" %>
+<div class="label_list" style="margin-top: 30px;">
+	<%= render :partial => "admin/labels/shared/labels_list" %>
 </div>
 
 <%= render :partial => "admin/labels/shared/label_modal" %>
-<%#= render :partial => "admin/categories/shared/category_modal", locals: {action: 'edit'} %>

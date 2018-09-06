@@ -1,8 +1,9 @@
 module Admin
   class LabelsController < ::AdminController
+    before_action :load_label, only: [:destroy]
 
     def index
-      #@categories = Category.all
+      @labels = Label.all
     end
 
     def create
@@ -11,23 +12,17 @@ module Admin
       redirect_to admin_labels_path
     end
 
-    def update
-      # category = Category.find(params[:id])
-      # category.name = params[:name]
-      # category.name_en = params[:name_en]
-      # category.save
-      # render :json => success_json
+    def destroy
+      @label.destroy!
+      redirect_to admin_labels_path
+    rescue Label::ExitArticleError
+      flash[:alert] = I18n.t("error.article_exit")
+      redirect_to admin_labels_path
     end
 
-    def destroy
-      # category = Category.find(params['id'])
-      # begin
-      #   category.destroy
-      # rescue Exception => e
-      #   flash[:error_msg] = I18n.t('category.error.destroy')
-      #   Log.error(e)
-      # end
-      # redirect_to admin_categories_path
-    end
+    private
+      def load_label
+        @label = Label.find(params[:id])
+      end
   end
 end
