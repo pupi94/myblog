@@ -1,18 +1,22 @@
 <% content_for :title do %>
     <li><%= t('.my_article') %></li>
 <% end %>
-<div class="row">
-  <%= form_tag(admin_articles_path, method: "get", remote: true, class: "search-form articles_search_form") do %>
-    <div class="form-group col-sm-3">
-      <label><%= t('.title') %>：</label>
-      <%= text_field_tag :title, '', class: 'form-control' %>
-    </div>
 
-    <button type="submit" class="btn btn-primary" data-disable-with="<%= t('.searching') %>">
-      <%= t('.search') %>
-    </button>
-  <% end %>
+<div class="pull-right">
+  <a href="<%= new_admin_article_path %>" class="btn btn-primary"><%= t('.new_article') %></a>
 </div>
-<div class="articles_list">
+
+<div class="articles_list" style="margin-top: 50px;">
   <%= render :partial => "admin/articles/shared/articles_list" %>
 </div>
+
+<%#= form_tag(admin_articles_path, method: "get", remote: true, class: "search-form articles_search_form") do %>
+  <!--<div class="form-group col-sm-3">-->
+    <!--<label><%#= t('.title') %>：</label>-->
+    <!--<%#= text_field_tag :title, '', class: 'form-control' %>-->
+  <!--</div>-->
+
+  <!--<button type="submit" class="btn btn-primary" data-disable-with="<%#= t('.searching') %>">-->
+    <!--<%#= t('.search') %>-->
+  <!--</button>-->
+<%# end %>

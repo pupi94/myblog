@@ -17,8 +17,7 @@ zh-CN:
       pwd_edit: 修改密码
       log_out: 登出系统
       first_page: 首页
-      new_article: 新增文章
-      my_article: 文章列表
+      my_article: 我的文章
       label: 文章标签
   admin:
     articles:
@@ -41,6 +40,7 @@ zh-CN:
         title: 文章标题
         search: 查询
         searching: 查询中
+        new_article: 新增文章
 
     labels:
       index:
