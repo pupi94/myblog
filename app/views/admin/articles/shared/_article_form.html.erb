@@ -1,7 +1,19 @@
+<%- if flash[:errors].present? %>
+  <div class="form-group">
+    <div class="col-lg-12">
+
+      <div class="alert alert-danger alert-dismissible text-center" role="alert" style="margin-bottom: 15px;">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <%= flash[:errors].join(",") %>
+      </div>
+    </div>
+  </div>
+<%- end %>
+
 <div class="form-group">
   <div class="col-lg-2">
     <%= f.label :label_id, t(".label") %>
-    <%= f.select :label_id, Label.all.collect {|label| [label.id, label.name]}, {}, class: 'form-control' %>
+    <%= f.select :label_id, Label.all.collect {|label| [label.name, label.id]}, {}, class: 'form-control' %>
   </div>
   <div class="col-lg-10">
     <%= f.label :title, t(".title") %>
@@ -65,13 +77,11 @@
       }
     });
 
-    $articleForm.find('.article_save_btn').click(function() {
+    $articleForm.on("submit", function(){
       $articleForm.bootstrapValidator('validate');
       if(!$articleForm.data('bootstrapValidator').isValid()){
         return false;
       }
-      $articleForm.submit();
-      return false;
     });
 
     var $contentEditor = $('#article_content');

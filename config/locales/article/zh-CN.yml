@@ -1,14 +1,5 @@
 zh-CN:
   activerecord:
-    errors:
-      models:
-        article:
-          attributes:
-            title:
-              blank: "不能为空"
-              too_long: "长度不能超过64"
-            summary:
-              too_long: "长度不能超过255"
     attributes:
       article:
         title: "文章标题"

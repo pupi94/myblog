@@ -1,13 +1,5 @@
 zh-CN:
   activerecord:
-    errors:
-      models:
-        label:
-          attributes:
-            name:
-              blank: "不能为空"
-              too_long: "长度不能超过32个字符"
-              taken: "已被占用"
     attributes:
       label:
         name: "标签名称"

@@ -1,14 +1,5 @@
 en:
   activerecord:
-    errors:
-      models:
-        article:
-          attributes:
-            title:
-              blank: "can't be blank"
-              too_long: "is too long (maximum is 64 characters)"
-            summary:
-              too_long: "is too long (maximum is 255 characters)"
     attributes:
       article:
         title: "Title"

@@ -25,6 +25,7 @@ zh-CN:
         article_form:
           title: 标题
           summary: 摘要
+          label: 标签
           save: 保存
         articles_list:
           title: 标题
