@@ -1,8 +1,0 @@
-en:
-  activerecord:
-    attributes:
-      article:
-        title: "Title"
-        summary: "Summary"
-    models:
-      article: "Article"

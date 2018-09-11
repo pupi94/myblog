@@ -1,12 +1,8 @@
 module Admin
   class ArticlesController < ::AdminController
-
     def index
-      articles, total_count = Article.search(params.permit(:title, :status, :page, :page_size))
-
-
-      @articles = Kaminari.paginate_array(articles||[], total_count: total_count)
-        .page(params[:page].to_i).per(15)
+      @articles = ArticleQuery.new(current_user.articles).search(query_params)
+      @articles = paginate(@articles)
     end
 
     def new
@@ -55,6 +51,10 @@ module Admin
     private
     def create_params
       params.require(:article).permit(:title, :label_id, :summary, :body)
+    end
+
+    def query_params
+      params.permit(:title, :status, :label_id)
     end
   end
 end

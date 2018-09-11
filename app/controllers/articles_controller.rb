@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
 
-  def search
+  def index
     search_params = params.permit(:page, :wd)
     search_params['page_size'] = 15
 

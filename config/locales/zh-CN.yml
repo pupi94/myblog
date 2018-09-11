@@ -7,9 +7,6 @@ zh-CN:
       next: "下一页 &rsaquo;"
       truncate: "&hellip;"
 
-  myblog_system: PuPing 博客
-  management_system: 后台管理
-
   layouts:
     admin:
       title: puping博客后台管理
@@ -33,7 +30,6 @@ zh-CN:
           pubdate: 发布日期
           created_at: 创建日期
           status: 状态
-          no_result: 没有文章
       new:
         new_article: 新增文章
       index:
@@ -42,6 +38,8 @@ zh-CN:
         search: 查询
         searching: 查询中
         new_article: 新增文章
+        label: 标签
+        status: 状态
 
     labels:
       index:
@@ -54,6 +52,32 @@ zh-CN:
         labels_list:
           delete_confirm: 确认删除
           name: 标签名
+
+  activerecord:
+    attributes:
+      label:
+        name: "标签名称"
+
+      article:
+        title: "文章标题"
+        summary: "文章摘要"
+    model:
+      label: "文章标签"
+      user: "User"
+
+  article:
+    status:
+      all: "所有"
+      opened: "编辑中"
+      published: "已上线"
+      cancelled: "已下线"
+
+  label:
+    all: 所有
+
+  myblog_system: PuPing 博客
+  management_system: 后台管理
+
 
   button:
     cancel: 取消

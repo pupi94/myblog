@@ -1,8 +1,0 @@
-zh-CN:
-  activerecord:
-    attributes:
-      article:
-        title: "文章标题"
-        summary: "文章摘要"
-    models:
-      user: "User"

@@ -1,7 +1,0 @@
-en:
-  activerecord:
-    attributes:
-      label:
-        name: "Name"
-    model:
-      label: "Article label"

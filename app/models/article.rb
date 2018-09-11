@@ -26,7 +26,6 @@ class Article < ApplicationRecord
   def set_body_html
     self.body_html = convert_html(self.body)
   end
-
 end
 
 

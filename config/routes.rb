@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'home#index'
 
-    resources :articles, only: %i[index new create edit update show destroy] do
+    resources :articles, only: %i[index new create edit update show] do
       member do
         put 'publish'
       end

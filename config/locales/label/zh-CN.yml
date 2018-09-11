@@ -1,7 +1,0 @@
-zh-CN:
-  activerecord:
-    attributes:
-      label:
-        name: "标签名称"
-    model:
-      label: "文章标签"
