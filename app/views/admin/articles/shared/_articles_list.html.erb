@@ -41,5 +41,5 @@
   </tbody>
 </table>
 <div class="paginate-wrapper">
-  <%= paginate @articles, params: {controller: 'articles', action: 'index'}, remote: true %>
+  <%== render :partial => 'pagy/nav_bootstrap', locals: {pagy: @pagy} %>
 </div>

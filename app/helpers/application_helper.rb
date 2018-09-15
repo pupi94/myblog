@@ -1,4 +1,5 @@
 module ApplicationHelper
+  include Pagy::Frontend
 
   def date_now_str
     now = Time.current

@@ -1,8 +1,10 @@
 module Admin
   class ArticlesController < ::AdminController
+    include Pagy::Backend
+
     def index
       @articles = ArticleQuery.new(current_user.articles).search(query_params)
-      @articles = paginate(@articles)
+      @pagy, @articles = pagy(@articles)
     end
 
     def new

@@ -15,7 +15,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'therubyracer', platforms: :ruby
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
-gem 'kaminari', '~> 1.1'
+gem 'pagy', '~> 0.19'
 gem 'redis-rails', '~> 5.0'
 gem 'aasm', '~> 5.0'
 gem 'rails-i18n', '~> 5.1'
