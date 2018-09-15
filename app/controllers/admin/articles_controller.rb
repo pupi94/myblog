@@ -1,16 +1,10 @@
 module Admin
-  class ArticlesController < ::AdminApplicationController
+  class ArticlesController < ::AdminController
+    include Pagy::Backend
+
     def index
-      # articles, total_count = Article.search(params.permit(:title, :status, :page, :page_size))
-      # @articles = Kaminari.paginate_array(articles||[], total_count: total_count)
-      #   .page(params[:page].to_i).per(15)
-    end
-
-    def trash
-      articles, total_count = Article.search(params.permit(:category, :title, :page, :page_size), enabled: false)
-
-      @articles = Kaminari.paginate_array(articles||[], total_count: total_count)
-        .page(params[:page].to_i).per(DEFAULT_PAGE_SIZE)
+      @articles = ArticleQuery.new(current_user.articles).search(query_params)
+      @pagy, @articles = pagy(@articles)
     end
 
     def new
@@ -18,12 +12,13 @@ module Admin
     end
 
     def create
-      article = Article.new(article_params)
-      article.author_id   = current_user.id
-      article.author_name = current_user.username
-      article.status = ArticleStatus::EDITING
-      article.save!
+      @article = current_user.articles.new(create_params)
+      @article.save!
       redirect_to admin_articles_path
+    rescue ActiveRecord::RecordInvalid => e
+      redirect_to new_admin_article_path,
+        status: :unprocessable_entity,
+        flash: { errors: e.record.errors.full_messages }
     end
 
     def publish
@@ -56,10 +51,12 @@ module Admin
     end
 
     private
-    def article_params
-      params.require(:article).permit(
-        :source_type, :title, :category_id, :tags, :summary, :content, :source, :source_url
-      )
+    def create_params
+      params.require(:article).permit(:title, :label_id, :summary, :body)
+    end
+
+    def query_params
+      params.permit(:title, :status, :label_id)
     end
   end
 end

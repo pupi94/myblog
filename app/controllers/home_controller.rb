@@ -6,8 +6,8 @@ class HomeController < ApplicationController
 
     articles, count = Article.search(search_params)
 
-    @articles = Kaminari.paginate_array(articles||[], total_count: count)
-      .page(search_params[:page].to_i).per(search_params['page_size'])
+    #@articles = Kaminari.paginate_array(articles||[], total_count: count)
+      #.page(search_params[:page].to_i).per(search_params['page_size'])
   end
 
   def paging_search

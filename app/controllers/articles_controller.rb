@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
 
-  def search
+  def index
     search_params = params.permit(:page, :wd)
     search_params['page_size'] = 15
 
@@ -11,8 +11,8 @@ class ArticlesController < ApplicationController
     search_params['status'] = "published"
 
     articles, count = Article.search(search_params, order_by: :pubdate)
-    @articles = Kaminari.paginate_array(articles||[], total_count: count)
-      .page(search_params[:page].to_i).per(search_params['page_size'])
+    #@articles = Kaminari.paginate_array(articles||[], total_count: count)
+      #.page(search_params[:page].to_i).per(search_params['page_size'])
   end
 
   after_action :article_pv, only: :show

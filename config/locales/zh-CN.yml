@@ -1,14 +1,26 @@
 zh-CN:
-  views:
-    pagination:
-      first: "&laquo; 首页"
-      last: "尾页 &raquo;"
-      previous: "&lsaquo; 上一页"
-      next: "下一页 &rsaquo;"
-      truncate: "&hellip;"
-
-  myblog_system: PuPing 博客
-  management_system: 后台管理
+  pagy:
+    nav:
+      prev: "&lsaquo;&nbsp;上一页"
+      next: "下一页&nbsp;&rsaquo;"
+      gap: "&hellip;"
+      current: "You're on page"
+    info:
+      single_page:
+        zero: "No %{item_name} found"
+        one: "Displaying <b>1</b> %{item_name}"
+        other: "Displaying <b>all %{count}</b> %{item_name}"
+      multiple_pages: "Displaying %{item_name} <b>%{from}-%{to}</b> of <b>%{count}</b> in total"
+      item_name:
+        zero: "items"
+        one: "item"
+        other: "items"
+    compact:
+      page: "Page"
+      of: "of"
+    items:
+      show: "Show"
+      items: "items per page"
 
   layouts:
     admin:
@@ -17,8 +29,7 @@ zh-CN:
       pwd_edit: 修改密码
       log_out: 登出系统
       first_page: 首页
-      new_article: 新增文章
-      my_article: 文章列表
+      my_article: 我的文章
       label: 文章标签
   admin:
     articles:
@@ -26,13 +37,73 @@ zh-CN:
         article_form:
           title: 标题
           summary: 摘要
+          label: 标签
           save: 保存
+        articles_list:
+          title: 标题
+          pv: 访问量
+          pubdate: 发布日期
+          created_at: 创建日期
+          status: 状态
       new:
         new_article: 新增文章
       index:
         my_article: 文章列表
         title: 文章标题
+        search: 查询
+        searching: 查询中
+        new_article: 新增文章
+        label: 标签
+        status: 状态
 
+    labels:
+      index:
+        labels: 文章标签
+        add_btn: 添加标签
+      shared:
+        label_modal:
+          add: 添加标签
+          name: 名称
+        labels_list:
+          delete_confirm: 确认删除
+          name: 标签名
+
+  activerecord:
+    attributes:
+      label:
+        name: "标签名称"
+
+      article:
+        title: "文章标题"
+        summary: "文章摘要"
+    model:
+      label: "文章标签"
+      user: "User"
+
+  article:
+    status:
+      all: "所有"
+      opened: "编辑中"
+      published: "已上线"
+      cancelled: "已下线"
+
+  label:
+    all: 所有
+
+  myblog_system: PuPing 博客
+  management_system: 后台管理
+
+
+  button:
+    cancel: 取消
+    save: 保存
+    edit: 编辑
+    delete: 删除
+
+  error:
+    server_error: 系统错误
+    not_found: resource not found
+    article_exit: 请先移出该标签下的所以文章再删除！
 #
 #  admin: 管理员
 #  log_out: 退出

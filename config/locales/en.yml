@@ -1,2 +1,12 @@
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      label:
+        name: "Name"
+
+      article:
+        title: "Title"
+        summary: "Summary"
+    model:
+      label: "Article label"
+      article: "Article"
