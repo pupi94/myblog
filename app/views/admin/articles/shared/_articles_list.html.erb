@@ -13,25 +13,22 @@
     <% @articles.each do |article| %>
       <tr>
         <td>
-          <%= article.label_id %>
+          <%#= article.label.name %>
           <%= link_to article.title, admin_article_path(article.id), target:'_blank' %>
         </td>
         <td><%= article.pv %></td>
         <td><%= format_date(article.pubdate) %></td>
         <td><%= format_date(article.created_at) %></td>
         <td>
-          <span class="<%= "article_#{article.status}"%>"><%= t(".article_#{article.status}") %></span>
+          <span class="<%= "article_#{article.status}"%>"><%= t("article.status.#{article.status}") %></span>
         </td>
         <td>
           <%= link_to t('button.edit'), edit_admin_article_path(article.id) %>
           <% if article.opened? %>
-            <%= link_to t("article.publish"),
-                "/admin/articles/publish/#{article.id}",
-                method: :put,
-                data: { confirm: t('article.publish_confirm') } %>
+            <%= link_to t("article.publish"), publish_admin_article_path(article), method: :patch %>
           <% end %>
 
-          <%= link_to t("button.delete"),
+          <%#= link_to t("button.delete"),
               "/admin/articles/delete/#{article.id}",
               method: :delete,
               data: { confirm: t('common.delete_confirm') } %>

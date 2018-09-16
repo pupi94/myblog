@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
     resources :articles, only: %i[index new create edit update show] do
       member do
-        put 'publish'
+        patch 'publish'
       end
     end
 

@@ -86,6 +86,7 @@ zh-CN:
       opened: "编辑中"
       published: "已上线"
       cancelled: "已下线"
+    publish: "发布"
 
   label:
     all: 所有

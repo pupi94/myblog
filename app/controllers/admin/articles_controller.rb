@@ -1,6 +1,7 @@
 module Admin
   class ArticlesController < ::AdminController
     include Pagy::Backend
+    before_action :load_article, only: [:publish, :edit, :show]
 
     def index
       @articles = ArticleQuery.new(current_user.articles).search(query_params)
@@ -22,17 +23,14 @@ module Admin
     end
 
     def publish
-      article = Article.find(params[:id])
-      article.publish
+      @article.publish!
       redirect_to admin_articles_path
     end
 
     def edit
-      @article = Article.find(params[:id])
     end
 
     def update
-      article = Article.find(params[:id])
       article.update!(article_params)
       redirect_to admin_articles_path
     end
@@ -43,7 +41,7 @@ module Admin
       render 'articles/show', layout: BlogLayout::APPLICATION
     end
 
-    def delete
+    def cancel
       article = Article.find(params[:id])
       article.enabled = false
       article.save!
@@ -57,6 +55,10 @@ module Admin
 
     def query_params
       params.permit(:title, :status, :label_id)
+    end
+
+    def load_article
+      @article = current_user.articles.find(params[:id])
     end
   end
 end
