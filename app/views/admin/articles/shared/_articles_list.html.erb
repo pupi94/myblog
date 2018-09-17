@@ -2,11 +2,11 @@
   <thead>
     <tr>
       <th width="40%"><%= t('.title') %></th>
-      <th width="10%"><%= t('.pv') %></th>
+      <th width="5%"><%= t('.pv') %></th>
       <th width="15%"><%= t('.pubdate') %></th>
       <th width="15%"><%= t('.created_at') %></th>
       <th width="10%"><%= t('.status') %></th>
-      <th width="10%"></th>
+      <th width="15%"></th>
     </tr>
   </thead>
   <tbody>
@@ -14,7 +14,7 @@
       <tr>
         <td>
           <%#= article.label.name %>
-          <%= link_to article.title, admin_article_path(article.id), target:'_blank' %>
+          <%= link_to article.title, article_path(article.id), target:'_blank' %>
         </td>
         <td><%= article.pv %></td>
         <td><%= format_date(article.pubdate) %></td>

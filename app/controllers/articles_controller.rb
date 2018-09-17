@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  before_action :load_article, only: [:show]
 
   def index
     search_params = params.permit(:page, :wd)
@@ -17,17 +18,20 @@ class ArticlesController < ApplicationController
 
   after_action :article_pv, only: :show
   def show
-    @article = Article.find(params[:id])
-    raise ActiveRecord::RecordNotFound.new unless @article.status == "published"
-
+    raise ActiveRecord::RecordNotFound.new unless @article.published?
     @article.pv += BlogRedis.pfcount(article_pv_key(@article.id)).to_i
   end
+
 
   private
   def article_pv
     BlogRedis.pfadd(article_pv_key(@article.id), request.remote_ip || session.id)
 
     Log.info("文章 #{@article.id} 访问量加1： 访问者的IP是： #{request.remote_ip || session.id}")
+  end
+
+  def load_article
+    @article = current_user.articles.find(params[:id])
   end
 
   def article_pv_key(id)

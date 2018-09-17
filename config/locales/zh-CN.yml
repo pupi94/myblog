@@ -55,6 +55,8 @@ zh-CN:
         new_article: 新增文章
         label: 标签
         status: 状态
+      edit:
+        article_edit: 编辑文章
 
     labels:
       index:

@@ -12,12 +12,12 @@ Rails.application.routes.draw do
     }
   )
 
-  resource :article, only: [:show]
+  resources :articles, only: [:show]
 
   namespace :admin do
     root 'home#index'
 
-    resources :articles, only: %i[index new create edit update show] do
+    resources :articles, only: %i[index new create edit update] do
       member do
         patch 'publish'
       end

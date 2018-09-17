@@ -1,7 +1,7 @@
 module Admin
   class ArticlesController < ::AdminController
     include Pagy::Backend
-    before_action :load_article, only: [:publish, :edit, :show]
+    before_action :load_article, only: [:publish, :edit, :show, :update]
 
     def index
       @articles = ArticleQuery.new(current_user.articles).search(query_params)
@@ -13,7 +13,7 @@ module Admin
     end
 
     def create
-      @article = current_user.articles.new(create_params)
+      @article = current_user.articles.new(article_params)
       @article.save!
       redirect_to admin_articles_path
     rescue ActiveRecord::RecordInvalid => e
@@ -31,25 +31,17 @@ module Admin
     end
 
     def update
-      article.update!(article_params)
+      @article.update!(article_params)
       redirect_to admin_articles_path
     end
 
     def show
-      @article = Article.find(params[:id])
       @article.pv += BlogRedis.pfcount("article::#{@article.id}::pv").to_i
-      render 'articles/show', layout: BlogLayout::APPLICATION
-    end
-
-    def cancel
-      article = Article.find(params[:id])
-      article.enabled = false
-      article.save!
-      redirect_to admin_articles_path
+      render 'articles/show', layout: "application"
     end
 
     private
-    def create_params
+    def article_params
       params.require(:article).permit(:title, :label_id, :summary, :body)
     end
 

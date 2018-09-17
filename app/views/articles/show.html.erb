@@ -13,17 +13,9 @@
            </a>
           </span>
 
-          <% if @article['source'].present? %>
-            <span class="item article-meta-source">
-              <a href="<%= @article['source_url'] %>" data-toggle="tooltip" data-placement="bottom" title="来源：<%= @article['source'] %>">
-                <i class="glyphicon glyphicon-globe"></i> <%= @article['source'] %>
-              </a>
-            </span>
-          <% end %>
-
           <span class="item article-meta-category">
             <a data-toggle="tooltip" data-placement="bottom" title="栏目：<%=  %>">
-              <i class="glyphicon glyphicon-list"></i><%= categories_hash_cache[@article['category_id'].to_s]['name'] %>
+              <i class="glyphicon glyphicon-list"></i><%= @article.label.name %>
             </a>
           </span>
 
@@ -49,9 +41,9 @@
       </div>
 
       <div class="article-tags">标签：
-        <% @article['tags'].split(',').each do |tag| %>
-            <%= link_to tag, root_path(wd: tag) %>
-        <% end %>
+        <%# @article['tags'].split(',').each do |tag| %>
+            <%#= link_to tag, root_path(wd: tag) %>
+        <%# end %>
       </div>
     </div>
   </div>
