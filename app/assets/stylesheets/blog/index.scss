@@ -331,40 +331,6 @@ body, input, button, textarea, select {
 }
 /* endregion--轮播图*/
 
-/* region-- 标题 */
-.title {
-  margin-top: 0;
-  margin-bottom: 10px;
-  overflow: hidden;
-}
-.title h3 {
-  font-size: 20px;
-  margin: 0;
-  float: left;
-  cursor: pointer;
-}
-.title h3:hover {
-  color: #F73B3B;
-}
-.title .tag-list {
-  float: right;
-  position: relative;
-  top: 5px;
-}
-.title .tag-list a {
-  display: inline-block;
-  margin-left: 20px;
-  color: #999;
-}
-.title .tag-list a:hover {
-  color: #3399CC;
-  -webkit-transform: scale(1.05);
-  transform: scale(1.05);
-  -webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
-  transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
-}
-/* endregion--标题*/
-
 /* region--文章*/
 article {
   clear: both;
@@ -620,72 +586,6 @@ article time:hover, article .comment:hover, article .views:hover {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
 }
-
-/*侧边栏每日一句*/
-.widget-sentence-content {
-  padding: 15px;
-  cursor: pointer;
-}
-
-.widget-sentence-content h4 {
-  color: #3399CC;
-  font-size: 20px;
-  margin: 0 0 10px;
-}
-
-.widget-sentence-content h4:hover {
-  color: #31B2F3;
-}
-
-.widget-sentence-content p {
-  font-size: 12px;
-  color: #AAA;
-}
-
-/*侧边栏热门文章*/
-.widget_hot ul{
-  margin-bottom: 0;
-}
-
-.widget_hot li{
-  padding: 5px 15px;
-  height: 40px;
-  margin-bottom: 1px;
-  border-bottom: solid 1px #eee;
-}
-
-.widget_hot li a {
-  display: inline-block;
-  line-height: 29px;
-  max-width: 235px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: #515151;
-  position: relative;
-  font-size: 14px;
-
-}
-
-.widget_hot li a:hover,.widget_hot li a:active {
-  color: #3399CC;
-}
-
-.widget_hot li:hover {
-  -webkit-transform: scale(1.02);
-  transform: scale(1.02);
-  -webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
-  transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
-}
-
-.widget_hot li time {
-  float: right;
-  line-height: 29px;
-  color: #BBB;
-  margin-left: 10px;
-  display: inline;
-}
-
 /* endregion--侧边栏 */
 
 @media (max-width: 1000px) {
@@ -700,13 +600,4 @@ article time:hover, article .comment:hover, article .views:hover {
   .hidden-index {
     display: none !important;
   }
-}
-
-.proverbs{
-  background-color: #fff;
-  padding: 15px;
-}
-.quote-headtips{
-  color: rgb(150, 175, 72);
-  font-size: 17px;
 }
