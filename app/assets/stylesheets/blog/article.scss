@@ -71,6 +71,7 @@
 
 /*文章版权*/
 .article-copyright {
+  margin-bottom: 15px;
   background-color: #EEE;
   font-size: 12px;
   padding: 3px 0;
@@ -88,32 +89,6 @@
     color: #FFF;
     a{
       color: #FFF;
-    }
-  }
-}
-
-/*文章标签*/
-.article-tags {
-  margin: 15px 0;
-  text-align: center;
-  cursor: default;
-  a {
-    display: inline-block;
-    padding: 2px 7px;
-    line-height: 20px;
-    margin: 0 4px 4px 0;
-    color: #FFF;
-    font-size: 12px;
-    background-color: #3399CC;
-    opacity: 0.85;
-    filter: alpha(opacity=85);
-    &:hover {
-      opacity: 1;
-      filter: alpha(opacity=100);
-      -webkit-transform: scale(1.03);
-      transform: scale(1.03);
-      -webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
-      transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
     }
   }
 }

@@ -1,5 +1,5 @@
 class Article < ApplicationRecord
-  include MarkdownTool
+  include MarkdownHelper
   include AASM
 
   validates :title, presence: true, length: { maximum: 64 }
@@ -14,6 +14,7 @@ class Article < ApplicationRecord
     state :cancelled
 
     event :publish do
+      before { self.pubdate = Time.current }
       transitions :from => :opened, :to => :published
     end
 
@@ -27,15 +28,3 @@ class Article < ApplicationRecord
     self.body_html = convert_html(self.body)
   end
 end
-
-
-# DEFAULT_PAGE_SIZE = 15.freeze
-# DEFAULT_PAGE = 1.freeze
-# ARTICLE_PAGE_SIZE = 10
-
-#
-# module SidekiqQueue
-#   CRITICAL = 'critical'
-#   DEFAULT = 'default'
-#   LOW = 'low'
-# end

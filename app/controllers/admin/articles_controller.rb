@@ -1,6 +1,7 @@
 module Admin
   class ArticlesController < ::AdminController
     include Pagy::Backend
+    include RedisHelper
     before_action :load_article, only: [:publish, :edit, :show, :update]
 
     def index
@@ -36,7 +37,7 @@ module Admin
     end
 
     def show
-      @article.pv += BlogRedis.pfcount("article::#{@article.id}::pv").to_i
+      @article.pv += redis_client.pfcount("article::#{@article.id}::pv").to_i
       render 'articles/show', layout: "application"
     end
 

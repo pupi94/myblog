@@ -31,6 +31,11 @@ zh-CN:
       first_page: 首页
       my_article: 我的文章
       label: 文章标签
+    shared:
+      header:
+        first_page: 首页
+        articles: 编程技术
+
   admin:
     articles:
       shared:
@@ -95,7 +100,6 @@ zh-CN:
 
   myblog_system: PuPing 博客
   management_system: 后台管理
-
 
   button:
     cancel: 取消

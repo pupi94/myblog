@@ -1,10 +1,8 @@
-<% if @articles.has_values? %>
   <div class="article-list">
-    <% hash = categories_hash_cache %>
     <% @articles.each do |article|%>
       <article class="article">
         <header>
-          <a class="cat"><%= hash[article['category_id'].to_s]['name'] %><i></i></a>
+          <a class="cat"><%#= hash[article['category_id'].to_s]['name'] %><i></i></a>
           <h2><a href="<%= article_path(article['id']) %>" title=""><%= article['title'] %></a></h2>
         </header>
         <p class="meta">
@@ -20,8 +18,5 @@
   </div>
 
   <div class="pagination-wrapper">
-    <% if @articles.has_values? %>
-        <%= paginate @articles, remote: true, show_total_count: false %>
-    <% end %>
+    <%== render :partial => 'pagy/nav_bootstrap', locals: {pagy: @pagy} %>
   </div>
-<% end %>

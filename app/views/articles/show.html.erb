@@ -7,43 +7,28 @@
         </h1>
         <div class="article-meta">
           <span class="item article-meta-time">
-            <% pubdate = format_date(@article['pubdate']) %>
-            <a class="time" data-toggle="tooltip" data-placement="bottom" title="时间：<%= pubdate %>">
-             <i class="glyphicon glyphicon-time"></i> <%= pubdate %>
-           </a>
+            <a class="time"><i class="glyphicon glyphicon-time"></i> <%= format_date(@article['pubdate']) %></a>
           </span>
 
           <span class="item article-meta-category">
-            <a data-toggle="tooltip" data-placement="bottom" title="栏目：<%=  %>">
-              <i class="glyphicon glyphicon-list"></i><%= @article.label.name %>
-            </a>
+            <a><i class="glyphicon glyphicon-list"></i><%= @article.label.name %></a>
           </span>
 
           <span class="item article-meta-views">
-            <a data-toggle="tooltip" data-placement="bottom" title="查看：120">
-              <i class="glyphicon glyphicon-eye-open"></i> 共<%= @article['pv'] %>人围观
-            </a>
+            <a><i class="glyphicon glyphicon-eye-open"></i> 共<%= @article['pv'] %>人围观</a>
           </span>
 
           <span class="item article-meta-comment">
-            <a  data-toggle="tooltip" data-placement="bottom" title="评论：0">
-              <i class="glyphicon glyphicon-comment"></i> 0个评论
-            </a>
+            <a><i class="glyphicon glyphicon-comment"></i> 0个评论</a>
           </span>
         </div>
       </div>
       <div class="article-content html-show">
-        <%= raw(@article['content_html']) %>
+        <%= raw(@article['body_html']) %>
       </div>
 
       <div class="article-copyright hidden-xs">
         未经允许不得转载：<a href="">Puping博客</a> » <a href="#"><%= @article['title'] %></a>
-      </div>
-
-      <div class="article-tags">标签：
-        <%# @article['tags'].split(',').each do |tag| %>
-            <%#= link_to tag, root_path(wd: tag) %>
-        <%# end %>
       </div>
     </div>
   </div>

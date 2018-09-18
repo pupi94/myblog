@@ -14,7 +14,7 @@
       <tr>
         <td>
           <%#= article.label.name %>
-          <%= link_to article.title, article_path(article.id), target:'_blank' %>
+          <%= link_to article.title, admin_article_path(article.id), target:'_blank' %>
         </td>
         <td><%= article.pv %></td>
         <td><%= format_date(article.pubdate) %></td>
