@@ -1,13 +1,7 @@
 <div class="content-wrap">
   <div class="content">
-    <% if params[:category].present? %>
-      <div class="title">
-        <h3><%= categories_en_name_hash[params[:category]]&.[]('name') %></h3>
-      </div>
-    <% end %>
-
     <div class="article-wrap">
-      <%= render partial: "home/shared/article_list" %>
+      <%= render partial: "articles/shared/article_list" %>
     </div>
   </div>
 </div>

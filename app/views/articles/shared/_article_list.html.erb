@@ -1,22 +1,22 @@
-  <div class="article-list">
-    <% @articles.each do |article|%>
-      <article class="article">
-        <header>
-          <a class="cat"><%= article.label.name %><i></i></a>
-          <h2><a href="<%= article_path(article['id']) %>" title=""><%= article['title'] %></a></h2>
-        </header>
-        <p class="meta">
-          <time><i class="glyphicon glyphicon-time"></i><%= format_date(article['pubdate']) %></time>
-          <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共<%= article['pv'] %>人围观</span>
-          <a class="comment" href="article.html#comment">
-            <i class="glyphicon glyphicon-comment"></i> 0个评论
-          </a>
-        </p>
-        <p class="note"><%= article['summary'] %></p>
-      </article>
-    <% end %>
-  </div>
+<div class="article-list">
+  <% @articles.each do |article|%>
+    <article class="article">
+      <header>
+        <a class="cat"><%= article.label.name %><i></i></a>
+        <h2><a href="<%= article_path(article['id']) %>" title=""><%= article['title'] %></a></h2>
+      </header>
+      <p class="meta">
+        <time><i class="glyphicon glyphicon-time"></i><%= format_date(article['pubdate']) %></time>
+        <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共<%= article['pv'] %>人围观</span>
+        <a class="comment" href="article.html#comment">
+          <i class="glyphicon glyphicon-comment"></i> 0个评论
+        </a>
+      </p>
+      <p class="note"><%= article['summary'] %></p>
+    </article>
+  <% end %>
+</div>
 
-  <div class="pagination-wrapper">
-    <%== render :partial => 'pagy/nav_bootstrap', locals: {pagy: @pagy} %>
-  </div>
+<div class="pagination-wrapper">
+  <%== render :partial => 'pagy/nav_bootstrap', locals: {pagy: @pagy} %>
+</div>

@@ -15,7 +15,7 @@
     <div class="widget widget_search">
       <%= form_tag(articles_path, method: "GET", class: 'navbar-form') do %>
         <div class="input-group">
-          <%= text_field_tag('wd', nil, class: 'form-control', size: 35, placeholder: "请输入关键字", maxlength: "15", autocomplete: "off" ) %>
+          <%= text_field_tag('wd', params[:wd], class: 'form-control', size: 35, placeholder: "请输入关键字", maxlength: "15", autocomplete: "off" ) %>
           <span class="input-group-btn">
             <button class="btn btn-primary" type="submit">搜索</button>
           </span>

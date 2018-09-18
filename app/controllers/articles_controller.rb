@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :load_article, only: [:show]
   include RedisHelper
+  include Pagy::Backend
 
   def index
     @articles = ArticleQuery.new(Article.published).search(query_params)
@@ -14,6 +15,10 @@ class ArticlesController < ApplicationController
   end
 
   private
+  def query_params
+    params.permit(:wd)
+  end
+
   def article_pv
     redis_client.pfadd(article_pv_key(@article.id), request.remote_ip || session.id)
 

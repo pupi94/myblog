@@ -12,7 +12,11 @@ class ArticleQuery
 
   end
 
+  # wd
+
   private
+  # title, :label_id, :summary, :body
+
   # def keywords_downcase(keywords)
   #   return "" if keywords.blank?
   #   keywords.downcase
