@@ -26,7 +26,7 @@ class ArticlesController < ApplicationController
   end
 
   def load_article
-    @article = current_user.articles.find(params[:id])
+    @article = Article.find(params[:id])
   end
 
   def article_pv_key(id)
