@@ -1,12 +1,7 @@
-update_common_tags_cache_job:
-  cron: "* 1 * * *" # 每天凌晨一点更新一次常用标签缓存
-  class: "UpdateCommonTagsCacheJob"
-  queue: low
-
-sync_article_pv_job:
-  cron: "* 1 * * *" # 每天凌晨一点同步一次文章访问量
-  class: "SyncArticlePvJob"
-  queue: default
+#sync_article_pv_job:
+#  cron: "* 1 * * *" # 每天凌晨一点同步一次文章访问量
+#  class: "SyncArticlePvJob"
+#  queue: default
 
 # 第一列 分钟： 1——59
 # 第二列 小时： 1——23(0表示子夜)
