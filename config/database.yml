@@ -15,5 +15,6 @@ test:
 
 production:
   <<: *default
-  password: <%= ENV['MYBLOG_DATABASE_PASSWORD'] %>
+  host: <%= ENV['DB_HOST'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
   database: myblog_production

@@ -1,6 +1,6 @@
 module Admin
   class MarkdownController < ::AdminController
-    include MarkdownTool
+    include MarkdownHelper
 
     def convert_html
       result = {'return_code' => SUCCESS_CODE, 'content' => ''}
