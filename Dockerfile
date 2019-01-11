@@ -2,13 +2,7 @@ FROM ruby:2.5.1
 RUN apt-get update -qq && apt-get install -y build-essential apt-utils mysql-client imagemagick cron curl openssh-client --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 ENV RAILS_ENV='production'
-ENV RACK_ENV='production' 
-ENV RAILS_MASTER_KEY='d6616fce51f8bb86a9452f6be037a321'
-ENV REDIS_CACHE='redis://172.17.0.3:6379/0'
-ENV REDIS_SIDEKIQ='redis://172.17.0.3:6379/1'
-
-ENV DB_HOST='172.17.0.2'
-ENV DB_PASSWORD='123456'
+ENV RACK_ENV='production'
 
 # Define where our application will live inside the image
 ENV RAILS_ROOT /var/www/app
