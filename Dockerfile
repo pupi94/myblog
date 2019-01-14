@@ -5,7 +5,7 @@ ENV RAILS_ENV='production'
 ENV RACK_ENV='production'
 
 # Define where our application will live inside the image
-ENV RAILS_ROOT /var/www/app
+ENV RAILS_ROOT /var/www/myblog
 
 # Create application home. App server will need the pids dir so just create everything in one shot
 RUN mkdir -p $RAILS_ROOT/tmp/pids
@@ -25,6 +25,7 @@ COPY . .
 RUN bundle exec rake assets:precompile
 
 EXPOSE 3000
+
 # Define the script we want run once the container boots
 # Use the "exec" form of CMD so our script shuts down gracefully on SIGTERM (i.e. `docker stop`)
 CMD bundle exec rails db:migrate && puma -C config/puma.rb
