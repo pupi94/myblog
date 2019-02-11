@@ -2,7 +2,6 @@ FROM ruby:2.5.1
 RUN apt-get update -qq && apt-get install -y build-essential apt-utils mysql-client imagemagick cron curl openssh-client --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 ENV RAILS_ENV='production'
-ENV RACK_ENV='production'
 
 # Define where our application will live inside the image
 ENV RAILS_ROOT /var/www/myblog
