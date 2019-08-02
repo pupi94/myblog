@@ -43,11 +43,11 @@ module Admin
 
     private
     def article_params
-      params.require(:article).permit(:title, :label_id, :summary, :body)
+      params.require(:article).permit(:title, :label_id, :body)
     end
 
     def query_params
-      params.permit(:title, :status, :label_id)
+      params.permit(:title, :published, :label_id)
     end
 
     def load_article

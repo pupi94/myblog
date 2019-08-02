@@ -5,17 +5,10 @@ class ArticleQuery
   end
 
   def search(params)
-    # @relation = @relation.search_products_title(keywords_downcase(params[:keywords])) if params[:keywords].present?
-    # @relation = @relation.with_products_type(params[:type]) if params[:type].present?
-    # @relation =
     @relation = @relation.order(created_at: :desc)
-
   end
 
-  # wd
-
   private
-  # title, :label_id, :summary, :body
 
   # def keywords_downcase(keywords)
   #   return "" if keywords.blank?

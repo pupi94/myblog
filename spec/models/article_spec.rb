@@ -14,8 +14,7 @@ RSpec.describe Article, type: :model do
     end
 
     context "length" do
-      it { should validate_length_of(:title).is_at_most(64).with_message("is too long (maximum is 64 characters)")  }
-      it { should validate_length_of(:summary).is_at_most(255).with_message("is too long (maximum is 255 characters)") }
+      it { should validate_length_of(:title).is_at_most(255).with_message("is too long (maximum is 64 characters)")  }
     end
   end
 end

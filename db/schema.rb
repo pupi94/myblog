@@ -16,13 +16,11 @@ ActiveRecord::Schema.define(version: 2017_05_23_135813) do
     t.integer "label_id"
     t.integer "user_id"
     t.string "title", limit: 64, null: false
-    t.string "summary"
-    t.integer "pv", default: 0, null: false
-    t.string "status", limit: 16, null: false
-    t.datetime "pubdate"
+    t.integer "pageview", default: 0, null: false
+    t.boolean "published", default: true, null: false
+    t.datetime "published_at"
     t.text "body"
     t.text "body_html"
-    t.boolean "enabled", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["label_id"], name: "index_articles_on_label_id"

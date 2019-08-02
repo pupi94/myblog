@@ -1,6 +1,7 @@
 module Admin
   class LabelsController < ::AdminController
     before_action :load_label, only: [:destroy]
+    protect_from_forgery :except => [:create]
 
     def index
       @labels = Label.all

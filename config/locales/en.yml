@@ -6,7 +6,6 @@ en:
 
       article:
         title: "Title"
-        summary: "Summary"
     model:
-      label: "Article label"
+      label: "Article category"
       article: "Article"
