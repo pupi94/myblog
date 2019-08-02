@@ -1,5 +1,7 @@
 source 'https://gems.ruby-china.com'
 
+ruby "2.6.3"
+
 gem 'rails', '~> 5.2'
 gem 'mysql2', '>= 0.3.18'
 
