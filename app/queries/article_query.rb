@@ -11,7 +11,6 @@ class ArticleQuery
   end
 
   private
-
   # def keywords_downcase(keywords)
   #   return "" if keywords.blank?
   #   keywords.downcase
@@ -31,8 +30,8 @@ class ArticleQuery
   #   end
   # end
 
-  #scope :enabled, -> { where(enabled: true) }
-  #scope :disabled, -> { where(enabled: false) }
+  # scope :enabled, -> { where(enabled: true) }
+  # scope :disabled, -> { where(enabled: false) }
   #
   # scope :page_filter, ->(page_size, page) do
   #   page, page_size = page.to_i, page_size.to_i

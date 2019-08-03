@@ -19,14 +19,13 @@ module Admin
       @label.destroy!
       redirect_to admin_labels_path
     rescue Label::ExitArticleError
-      flash[:alert] = I18n.t('error.article_exit')
+      flash[:alert] = I18n.t("error.article_exit")
       redirect_to admin_labels_path
     end
 
     private
-
-    def load_label
-      @label = Label.find(params[:id])
-    end
+      def load_label
+        @label = Label.find(params[:id])
+      end
   end
 end

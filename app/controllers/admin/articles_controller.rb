@@ -39,7 +39,11 @@ module Admin
       redirect_to admin_articles_path
     end
 
-    def edit; end
+    def edit
+
+
+
+    end
 
     def update
       @article.update!(article_params)
@@ -47,21 +51,20 @@ module Admin
     end
 
     def show
-      render 'articles/show', layout: 'application'
+      render "articles/show", layout: 'application'
     end
 
     private
+      def article_params
+        params.require(:article).permit(:title, :label_id, :body)
+      end
 
-    def article_params
-      params.require(:article).permit(:title, :label_id, :body)
-    end
+      def query_params
+        params.permit(:title, :published, :label_id)
+      end
 
-    def query_params
-      params.permit(:title, :published, :label_id)
-    end
-
-    def load_article
-      @article = current_user.articles.find(params[:id])
-    end
+      def load_article
+        @article = current_user.articles.find(params[:id])
+      end
   end
 end
