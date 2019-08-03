@@ -15,9 +15,9 @@ ActiveRecord::Schema.define(version: 2017_05_23_135813) do
   create_table "articles", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "label_id"
     t.integer "user_id"
-    t.string "title", limit: 64, null: false
-    t.integer "pageview", default: 0, null: false
-    t.boolean "published", default: true, null: false
+    t.string "title"
+    t.integer "pageview", default: 0
+    t.boolean "published", default: false
     t.datetime "published_at"
     t.text "body"
     t.text "body_html"

@@ -30,7 +30,7 @@ zh-CN:
       log_out: 登出系统
       first_page: 首页
       my_article: 我的文章
-      label: 文章标签
+      label: 文章分类
     shared:
       header:
         first_page: 首页
@@ -48,7 +48,7 @@ zh-CN:
           pageview: 访问量
           published_at: 发布日期
           created_at: 创建日期
-          published: 状态
+          status: 状态
       new:
         new_article: 新增文章
       index:
@@ -57,22 +57,22 @@ zh-CN:
         search: 查询
         searching: 查询中
         new_article: 新增文章
-        label: 标签
+        label: 分类
         status: 状态
       edit:
         article_edit: 编辑文章
 
     labels:
       index:
-        labels: 文章标签
-        add_btn: 添加标签
+        labels: 文章分类
+        add_btn: 添加分类
       shared:
         label_modal:
-          add: 添加标签
+          add: 添加分类
           name: 名称
         labels_list:
           delete_confirm: 确认删除
-          name: 标签名
+          name: 分类名称
 
   activerecord:
     attributes:
@@ -82,14 +82,16 @@ zh-CN:
       article:
         title: 文章标题
     model:
-      label: 文章标签
+      label: 文章分类
       user: User
 
   article:
     status:
+      all: 全部
       published: 已发布
       unpublished: 未发布
     publish: 发布
+    unpublish: 取消发布
 
   label:
     all: 所有
@@ -106,4 +108,4 @@ zh-CN:
   error:
     server_error: 系统错误
     not_found: resource not found
-    article_exit: 请先移出该标签下的所以文章再删除！
+    article_exit: 请先移出该分类下的所以文章再删除！

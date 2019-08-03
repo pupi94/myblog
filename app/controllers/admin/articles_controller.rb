@@ -1,8 +1,7 @@
 module Admin
   class ArticlesController < ::AdminController
     include Pagy::Backend
-    include RedisHelper
-    before_action :load_article, only: [:publish, :edit, :show, :update]
+    before_action :load_article, only: [:publish, :edit, :show, :update, :unpublish, :destroy]
 
     def index
       @articles = ArticleQuery.new(current_user.articles).search(query_params)
@@ -28,6 +27,16 @@ module Admin
       redirect_to admin_articles_path
     end
 
+    def unpublish
+      @article.unpublish!
+      redirect_to admin_articles_path
+    end
+
+    def destroy
+      @article.destroy!
+      redirect_to admin_articles_path
+    end
+
     def edit
     end
 
@@ -37,7 +46,6 @@ module Admin
     end
 
     def show
-      @article.pv += redis_client.pfcount("article::#{@article.id}::pv").to_i
       render 'articles/show', layout: "application"
     end
 

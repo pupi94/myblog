@@ -7,7 +7,7 @@
         </h1>
         <div class="article-meta">
           <span class="item article-meta-time">
-            <a class="time"><i class="glyphicon glyphicon-time"></i> <%= format_date(@article['pubdate']) %></a>
+            <a class="time"><i class="glyphicon glyphicon-time"></i> <%= format_date(@article['published_at']) %></a>
           </span>
 
           <span class="item article-meta-category">
@@ -15,7 +15,7 @@
           </span>
 
           <span class="item article-meta-views">
-            <a><i class="glyphicon glyphicon-eye-open"></i> 共<%= @article['pv'] %>人围观</a>
+            <a><i class="glyphicon glyphicon-eye-open"></i> 共<%= @article['pageview'] %>人围观</a>
           </span>
 
           <span class="item article-meta-comment">

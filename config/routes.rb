@@ -17,9 +17,10 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'home#index'
 
-    resources :articles, only: %i[index new create edit update show] do
+    resources :articles do
       member do
-        patch 'publish'
+        patch :publish
+        patch :unpublish
       end
     end
 
