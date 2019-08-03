@@ -43,7 +43,6 @@ group :development, :test do
   gem "rspec-rails"
   gem "shoulda-matchers"
 
-  gem "overcommit"
   gem "rubocop"
   gem "rubocop-rails"
   gem "rubocop-performance"

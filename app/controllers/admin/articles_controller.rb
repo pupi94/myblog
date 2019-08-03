@@ -40,9 +40,6 @@ module Admin
     end
 
     def edit
-
-
-
     end
 
     def update
@@ -51,7 +48,7 @@ module Admin
     end
 
     def show
-      render "articles/show", layout: 'application'
+      render "articles/show", layout: "application"
     end
 
     private
