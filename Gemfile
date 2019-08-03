@@ -44,9 +44,8 @@ group :development, :test do
   gem 'shoulda-matchers'
 
   gem 'overcommit'
-  gem 'rubocop'
-  gem 'rubocop-rails'
-  gem 'simplecov'
+  gem "rubocop"
+  gem "rubocop-rails"
 end
 
 group :development do
