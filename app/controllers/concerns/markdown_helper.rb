@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MarkdownHelper
   extend ActiveSupport::Concern
 
@@ -12,9 +14,9 @@ module MarkdownHelper
       fenced_code_blocks: true,
       disable_indented_code_blocks: true,
       strikethrough: true, # 解析删除线
-      lax_spacing:true,
-      space_after_headers:true,
-      superscript:true
+      lax_spacing: true,
+      space_after_headers: true,
+      superscript: true
     )
   end
 end

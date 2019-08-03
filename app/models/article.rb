@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Article < ApplicationRecord
   include MarkdownHelper
   include AASM
@@ -7,11 +9,11 @@ class Article < ApplicationRecord
   belongs_to :label
   belongs_to :user
 
-  scope :published, ->{ where(published: true) }
+  scope :published, -> { where(published: true) }
 
   before_save :set_body_html
   def set_body_html
-    self.body_html = convert_html(self.body)
+    self.body_html = convert_html(body)
   end
 
   def publish!

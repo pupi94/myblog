@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
@@ -5,14 +7,13 @@ Rails.application.routes.draw do
   root 'home#index'
 
   devise_for(:users,
-    only: %i[sessions registrations],
-    controllers: {
-      sessions: 'users/sessions',
-      registrations: 'users/registrations'
-    }
-  )
+             only: %i[sessions registrations],
+             controllers: {
+               sessions: 'users/sessions',
+               registrations: 'users/registrations'
+             })
 
-  resources :articles, only: [:show, :index]
+  resources :articles, only: %i[show index]
 
   namespace :admin do
     root 'home#index'
@@ -34,8 +35,8 @@ Rails.application.routes.draw do
   end
 
   unless Rails.env.development?
-    match '*path', to: 'error#no_match', via: :all, constraints: lambda { |request|
-      return true;
+    match '*path', to: 'error#no_match', via: :all, constraints: lambda { |_request|
+      return true
     }
   end
 end

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Admin
   class ArticlesController < ::AdminController
     include Pagy::Backend
-    before_action :load_article, only: [:publish, :edit, :show, :update, :unpublish, :destroy]
+    before_action :load_article, only: %i[publish edit show update unpublish destroy]
 
     def index
       @articles = ArticleQuery.new(current_user.articles).search(query_params)
@@ -18,8 +20,8 @@ module Admin
       redirect_to admin_articles_path
     rescue ActiveRecord::RecordInvalid => e
       redirect_to new_admin_article_path,
-        status: :unprocessable_entity,
-        flash: { errors: e.record.errors.full_messages }
+                  status: :unprocessable_entity,
+                  flash: { errors: e.record.errors.full_messages }
     end
 
     def publish
@@ -37,8 +39,7 @@ module Admin
       redirect_to admin_articles_path
     end
 
-    def edit
-    end
+    def edit; end
 
     def update
       @article.update!(article_params)
@@ -46,10 +47,11 @@ module Admin
     end
 
     def show
-      render 'articles/show', layout: "application"
+      render 'articles/show', layout: 'application'
     end
 
     private
+
     def article_params
       params.require(:article).permit(:title, :label_id, :body)
     end

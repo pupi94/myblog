@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class CreateUsers < ActiveRecord::Migration[5.0]
   def up
     create_table :users do |t|
-      t.string  :username, null: false, limit: 32
+      t.string :username, null: false, limit: 32
 
       ## Database authenticatable
       t.string :email,              null: false
@@ -38,8 +40,8 @@ class CreateUsers < ActiveRecord::Migration[5.0]
 
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
-    #add_index :users, :confirmation_token,   unique: true
-    #add_index :users, :unlock_token,         unique: true
+    # add_index :users, :confirmation_token,   unique: true
+    # add_index :users, :unlock_token,         unique: true
   end
 
   def down

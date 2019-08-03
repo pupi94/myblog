@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Admin
   class LabelsController < ::AdminController
     before_action :load_label, only: [:destroy]
-    protect_from_forgery :except => [:create]
+    protect_from_forgery except: [:create]
 
     def index
       @labels = Label.all
@@ -17,13 +19,14 @@ module Admin
       @label.destroy!
       redirect_to admin_labels_path
     rescue Label::ExitArticleError
-      flash[:alert] = I18n.t("error.article_exit")
+      flash[:alert] = I18n.t('error.article_exit')
       redirect_to admin_labels_path
     end
 
     private
-      def load_label
-        @label = Label.find(params[:id])
-      end
+
+    def load_label
+      @label = Label.find(params[:id])
+    end
   end
 end

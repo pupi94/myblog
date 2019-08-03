@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module RenderHelper
   extend ActiveSupport::Concern
 
   def render_internal_server_error
-    render json: { error: I18n.t("error.server_error") }, status: :internal_server_error
+    render json: { error: I18n.t('error.server_error') }, status: :internal_server_error
   end
 
   def render_unprocessable_entity(error)
@@ -14,6 +16,6 @@ module RenderHelper
   end
 
   def render_ok
-    render json: { }, status: :ok
+    render json: {}, status: :ok
   end
 end

@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class ArticleQuery
   def initialize(relation)
-    #@relation = relation.all.extend(Scopes)
+    # @relation = relation.all.extend(Scopes)
     @relation = relation.all
   end
 
-  def search(params)
+  def search(_params)
     @relation = @relation.order(created_at: :desc)
   end
 
@@ -29,8 +31,8 @@ class ArticleQuery
   #   end
   # end
 
-  # scope :enabled, -> { where(enabled: true) }
-  # scope :disabled, -> { where(enabled: false) }
+  #scope :enabled, -> { where(enabled: true) }
+  #scope :disabled, -> { where(enabled: false) }
   #
   # scope :page_filter, ->(page_size, page) do
   #   page, page_size = page.to_i, page_size.to_i
@@ -39,5 +41,4 @@ class ArticleQuery
   #
   #   limit(page_size).offset(page_size * (page - 1))
   # end
-
 end
