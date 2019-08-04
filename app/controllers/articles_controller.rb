@@ -2,7 +2,7 @@
 
 class ArticlesController < ApplicationController
   before_action :load_article, only: [:show]
-  include Pagy::Backend
+  # include Pagy::Backend
 
   def index
     @articles = ArticleQuery.new(Article.published).search(query_params)

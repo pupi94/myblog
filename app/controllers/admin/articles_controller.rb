@@ -2,12 +2,14 @@
 
 module Admin
   class ArticlesController < ::AdminController
-    include Pagy::Backend
+    # include Pagy::Backend
     before_action :load_article, only: %i[publish edit show update unpublish destroy]
 
     def index
-      @articles = ArticleQuery.new(current_user.articles).search(query_params)
-      @pagy, @articles = pagy(@articles)
+      p "============="
+      p params
+      @articles = ArticleQuery.new(current_user, query_params).query
+      @pagy = Pagy.new_from_searchkick(@articles)
     end
 
     def new
@@ -57,7 +59,7 @@ module Admin
       end
 
       def query_params
-        params.permit(:title, :published, :label_id)
+        params.permit(:title, :published, :label_id, :page, :per_page)
       end
 
       def load_article
