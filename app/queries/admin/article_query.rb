@@ -29,13 +29,13 @@ module Admin
 
       def where_clause
         clause = { user_id: user.id }
-        clause[:label_id] = params[:label_id] if params["label_id"].present?
-        clause[:published] = params[:published] if params.key?(:published)
+        clause[:label_id] = params[:label_id] if params[:label_id].present?
+        clause[:published] = params[:published] if params[:published].to_s.present?
         clause
       end
 
       def per_page
-        params[:per_page].present? ? params[:per_page] : 10
+        params[:per_page].present? ? params[:per_page] : 15
       end
 
       def page
@@ -44,8 +44,8 @@ module Admin
 
       def order_clause
         [
-          { _score: :desc } # ,
-          # { created_at: :desc }
+          { _score: :desc },
+          { created_at: :desc }
         ]
       end
   end

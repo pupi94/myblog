@@ -2,18 +2,18 @@
 
 class ArticlesController < ApplicationController
   before_action :load_article, only: [:show]
-  # include Pagy::Backend
+  include Pagy::Backend
 
   def index
-    @articles = ArticleQuery.new(Article.published).search(query_params)
-    @pagy, @articles = pagy(@articles)
+    articles = ArticleQuery.new(query_params).query
+    @pagy, @articles = pagy_searchkick(articles)
   end
 
   def show; end
 
   private
     def query_params
-      params.permit(:wd)
+      params.permit(:wd, :page)
     end
 
     # def article_pv

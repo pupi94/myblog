@@ -13,12 +13,12 @@
       <%= select_tag :label_id, label_options, class: 'form-control' %>
     </div>
     <div class="form-group">
-      <%= label_tag :status, t('.status') %>:
-      <%= select_tag :status, article_status_options, class: 'form-control' %>
+      <%= label_tag :published, t('.status') %>:
+      <%= select_tag :published, article_status_options, class: 'form-control' %>
     </div>
     <div class="form-group">
-      <%= label_tag :title, t('.title') %>:
-      <%= text_field_tag :title, '', class: 'form-control' %>
+      <%= label_tag :keyword, t('.title') %>:
+      <%= text_field_tag :keyword, '', class: 'form-control' %>
     </div>
     <%= submit_tag t('.search'), class: "btn btn-default", data:{ disable_with: t('.searching') } %>
   <% end %>

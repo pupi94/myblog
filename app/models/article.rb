@@ -11,9 +11,9 @@ class Article < ApplicationRecord
 
   scope :published, -> { where(published: true) }
 
-  searchkick searchable: [:title],
+  searchkick searchable: [:title, :body],
     filterable: [:label_id, :user_id, :published],
-    word_middle: [:title],
+    word_middle: [:title, :body],
     settings: { index: { max_result_window: 100000 } },
     language: "chinese"
 
@@ -22,8 +22,10 @@ class Article < ApplicationRecord
       user_id: user_id,
       label_id: label_id,
       title: title,
+      body: body,
       published: published,
-      created_at: created_at
+      created_at: created_at,
+      published_at: published_at
     }
   end
 

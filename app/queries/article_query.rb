@@ -1,43 +1,46 @@
 # frozen_string_literal: true
 
 class ArticleQuery
-  def initialize(relation)
-    # @relation = relation.all.extend(Scopes)
-    @relation = relation.all
+  attr_reader :params, :user
+
+  def initialize(params)
+    @params = params
   end
 
-  def search(_params)
-    @relation = @relation.order(created_at: :desc)
+  def query
+    Article.search keyword,
+      operator: "or",
+      fields: ["title^10", "body"],
+      match: :word_middle,
+      where: where_clause,
+      order: order_clause,
+      per_page: per_page,
+      page: page,
+      includes: [:label],
+      body_options: { min_score: 0.5 }
   end
 
   private
-  # def keywords_downcase(keywords)
-  #   return "" if keywords.blank?
-  #   keywords.downcase
-  # end
-  #
-  # module Scopes
-  #   def search_products_title(keywords)
-  #     where("lower(products.title) LIKE ?", "%#{keywords}%")
-  #   end
-  #
-  #   def with_products_type(type)
-  #     if type == "normal"
-  #       where("products.state != 'finished'")
-  #     else
-  #       where("products.state = 'finished'")
-  #     end
-  #   end
-  # end
+    def keyword
+      params[:wd].present? ? CGI.unescape(params[:wd]) : "*"
+    end
 
-  # scope :enabled, -> { where(enabled: true) }
-  # scope :disabled, -> { where(enabled: false) }
-  #
-  # scope :page_filter, ->(page_size, page) do
-  #   page, page_size = page.to_i, page_size.to_i
-  #   page = page < DEFAULT_PAGE ? DEFAULT_PAGE : page
-  #   page_size = page_size <= 0 ? DEFAULT_PAGE_SIZE : page_size
-  #
-  #   limit(page_size).offset(page_size * (page - 1))
-  # end
+    def where_clause
+      { published: true }
+    end
+
+    def per_page
+      params[:per_page].present? ? params[:per_page] : 10
+    end
+
+    def page
+      params[:page].present? ? params[:page] : 1
+    end
+
+    def order_clause
+      [
+        { _score: :desc },
+        { published_at: :desc }
+      ]
+    end
 end
