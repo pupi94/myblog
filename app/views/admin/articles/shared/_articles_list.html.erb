@@ -33,7 +33,7 @@
             <%= link_to t("article.publish"), publish_admin_article_path(article), method: :patch %>
           <% end %>
 
-          <%#= link_to t("button.delete"),
+          <%= link_to t("button.delete"),
               "/admin/articles/delete/#{article.id}",
               method: :delete,
               data: { confirm: t('common.delete_confirm') } %>

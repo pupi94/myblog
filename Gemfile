@@ -16,7 +16,7 @@ gem "aasm", "~> 5.0"
 gem "bootstrap-sass", "~> 3.3.6"
 gem "coffee-rails", "~> 4.2"
 gem "jbuilder", "~> 2.5"
-gem "pagy", "~> 0.19"
+gem "pagy"
 gem "rails-i18n", "~> 5.1"
 gem "redis-rails", "~> 5.0"
 gem "sass-rails", "~> 5.0"
@@ -32,6 +32,9 @@ gem "devise-i18n", "~> 1.6"
 
 gem "sidekiq", "~> 5.1"
 gem "sidekiq-cron", "~> 0.6.3"
+
+gem "searchkick"
+gem "oj" # increase json serialize performance
 
 group :development, :test do
   gem "byebug", platform: :mri

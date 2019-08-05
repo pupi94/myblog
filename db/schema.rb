@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_170_523_135_813) do
+ActiveRecord::Schema.define(version: 2017_05_23_135813) do
   create_table "articles", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "label_id"
     t.integer "user_id"

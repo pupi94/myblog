@@ -6,8 +6,8 @@ module Admin
     before_action :load_article, only: %i[publish edit show update unpublish destroy]
 
     def index
-      @articles = ArticleQuery.new(current_user.articles).search(query_params)
-      @pagy, @articles = pagy(@articles)
+      articles = Admin::ArticleQuery.new(current_user, query_params).query
+      @pagy, @articles = pagy_searchkick(articles)
     end
 
     def new
@@ -57,7 +57,7 @@ module Admin
       end
 
       def query_params
-        params.permit(:title, :published, :label_id)
+        params.permit(:keyword, :published, :label_id, :page, :per_page)
       end
 
       def load_article
