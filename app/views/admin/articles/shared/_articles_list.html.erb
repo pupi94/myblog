@@ -34,9 +34,9 @@
           <% end %>
 
           <%= link_to t("button.delete"),
-              "/admin/articles/delete/#{article.id}",
+              admin_article_path(article),
               method: :delete,
-              data: { confirm: t('common.delete_confirm') } %>
+              data: { confirm: t('button.confirm_delete') } %>
         </td>
       </tr>
     <% end %>
