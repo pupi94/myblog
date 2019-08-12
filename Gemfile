@@ -13,7 +13,9 @@ gem "jquery-rails"
 gem "puma", "~> 3.0"
 #  压缩JavaScript
 gem "aasm", "~> 5.0"
-gem "bootstrap-sass", "~> 3.3.6"
+gem "bootstrap-sass"
+gem "sassc-rails", ">= 2.1.0"
+
 gem "coffee-rails", "~> 4.2"
 gem "jbuilder", "~> 2.5"
 gem "pagy"

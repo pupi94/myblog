@@ -21,7 +21,7 @@ RSpec.describe Label, type: :model do
     context "length" do
       let(:label) { create(:label) }
 
-      it { should_not allow_value(label.name).for(:name).with_message("has already been taken)") }
+      it { should_not allow_value(label.name).for(:name).with_message("has already been taken") }
     end
   end
 end
