@@ -2,6 +2,6 @@
 
 class HomeController < ApplicationController
   def index
-    @articles = Article.published.order(published_at: :desc).limit(6)
+    @articles = ArticleQuery.new({ per_page: 8 }).query
   end
 end

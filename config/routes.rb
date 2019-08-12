@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "sidekiq/web"
-require "sidekiq/cron/web"
-
 Rails.application.routes.draw do
   root "home#index"
 
@@ -28,10 +25,6 @@ Rails.application.routes.draw do
     resources :labels, only: %i[index create update destroy]
 
     post "markdown/convert_html"
-
-    authenticate :user do
-      mount Sidekiq::Web => "/sidekiq"
-    end
   end
 
   unless Rails.env.development?

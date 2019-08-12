@@ -30,9 +30,6 @@ gem "redcarpet", "~> 3.4"
 gem "devise", "~> 4.4"
 gem "devise-i18n", "~> 1.6"
 
-gem "sidekiq", "~> 5.1"
-gem "sidekiq-cron", "~> 0.6.3"
-
 gem "searchkick"
 gem "oj" # increase json serialize performance
 

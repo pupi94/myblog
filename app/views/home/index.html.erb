@@ -33,9 +33,9 @@
             <h2><a href="<%= article_path(article['id']) %>" title=""><%= article['title'] %></a></h2>
           </header>
           <p class="meta">
-            <time><i class="glyphicon glyphicon-time"></i><%= format_date(article['published_at']) %></time>
+            <time><i class="glyphicon glyphicon-time"></i>&nbsp;<%= format_date(article['published_at']) %></time>
             <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共<%= article['pageview'] %>人围观</span>
-            <a class="comment" href="article.html#comment">
+            <a class="comment" href="#">
               <i class="glyphicon glyphicon-comment"></i> 0个评论
             </a>
           </p>
