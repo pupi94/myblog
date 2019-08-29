@@ -2,12 +2,11 @@
 
 module Admin
   class ArticlesController < ::AdminController
-    include Pagy::Backend
     before_action :load_article, only: %i[publish edit show update unpublish destroy]
 
     def index
-      articles = Admin::ArticleQuery.new(current_user, query_params).query
-      @pagy, @articles = pagy_searchkick(articles)
+      @articles = Admin::ArticleQuery.new(current_user, query_params).query
+      @pagy = Pagy.new_from_searchkick(@articles)
     end
 
     def new
@@ -19,9 +18,7 @@ module Admin
       @article.save!
       redirect_to admin_articles_path
     rescue ActiveRecord::RecordInvalid => e
-      redirect_to new_admin_article_path,
-                  status: :unprocessable_entity,
-                  flash: { errors: e.record.errors.full_messages }
+      redirect_to new_admin_article_path, status: :unprocessable_entity, flash: { errors: e.record.errors.full_messages }
     end
 
     def publish

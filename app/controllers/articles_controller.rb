@@ -2,11 +2,10 @@
 
 class ArticlesController < ApplicationController
   before_action :load_article, only: [:show]
-  include Pagy::Backend
 
   def index
-    articles = ArticleQuery.new(query_params).query
-    @pagy, @articles = pagy_searchkick(articles)
+    @articles = ArticleQuery.new(query_params).query
+    @pagy = Pagy.new_from_searchkick(@articles)
   end
 
   def show; end
