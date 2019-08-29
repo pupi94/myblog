@@ -27,9 +27,5 @@ Rails.application.routes.draw do
     post "markdown/convert_html"
   end
 
-  unless Rails.env.development?
-    match "*path", to: "error#no_match", via: :all, constraints: lambda { |_request|
-      return true
-    }
-  end
+  match "*path", to: "error#no_match", via: :all
 end

@@ -5,9 +5,7 @@ module Admin
     include MarkdownHelper
 
     def convert_html
-      result = { "return_code" => SUCCESS_CODE, "content" => "" }
-      result["content"] = super(params["content"])
-      render json: result
+      render json: { content: super(params["content"]) }
     end
   end
 end
