@@ -8,23 +8,23 @@ gem "mysql2", ">= 0.3.18"
 gem "rails", "~> 6.0"
 
 gem "bootsnap", "~> 1.3"
-
-gem "jquery-rails"
 gem "puma", "~> 3.0"
 #  压缩JavaScript
 gem "aasm", "~> 5.0"
-gem "bootstrap-sass"
-gem "sassc-rails", ">= 2.1.0"
 
-gem "coffee-rails"
 gem "jbuilder", "~> 2.5"
 gem "pagy"
 gem "rails-i18n"
 gem "redis-rails", "~> 5.0"
-gem "sass-rails", "~> 5.0"
 gem "therubyracer", platforms: :ruby
+
+gem "webpacker"
 gem "turbolinks", "~> 5"
-gem "uglifier", ">= 1.3.0"
+gem "sass-rails", "~> 5.0"
+gem "sassc-rails", ">= 2.1.0"
+
+# gem "jquery-rails"
+# gem "bootstrap"
 
 # markdown
 gem "redcarpet", "~> 3.4"

@@ -11,8 +11,8 @@
   <title><%= t(".title") %></title>
   <%= csrf_meta_tags %>
 
-  <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'admin', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_pack_tag 'admin', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'admin', 'data-turbolinks-track': 'reload' %>
 </head>
 
 <body>
@@ -20,7 +20,7 @@
 
   <div class="header">
     <div class="header-title">
-      <strong><a href="<%= root_path %>"><%= image_tag 'logo.png'%></a></strong>
+      <strong><a href="<%= root_path %>"><%= image_tag asset_pack_path('media/images/logo.png')%></a></strong>
       <small><%= t('management_system') %></small>
     </div>
     <div class="header-nav">

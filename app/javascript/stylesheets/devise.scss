@@ -1,0 +1,77 @@
+.container{
+  display:flex;
+  justify-content:center;
+}
+
+.sign-in-container{
+  margin-top: 120px;
+  background: #FFF none repeat scroll 0% 0%;
+  border:solid 1px #ddd;
+  border-radius:4px;
+  padding: 0;
+
+  form{
+    margin-bottom: 0;
+  }
+  .help-block {
+    padding-left: 40px;
+  }
+
+  .form-title{
+    font-size: 20px;
+    text-align: center;
+    background-color:#f5f5f5;
+    border-bottom:solid 1px #ddd;
+    margin-bottom: 30px;
+    border-radius:4px 4px 0 0;
+    height: 45px;
+    line-height: 45px;
+  }
+
+  .form-foot{
+    display: flex;
+    justify-content:space-around;
+    padding: 8px 0;
+    background-color:#f5f5f5;
+  }
+
+  .form-group {
+    padding: 0 30px;
+    margin: 0 0 30px 0;
+
+    .form-control-feedback {
+      right: 30px;
+    }
+    .bv-icon-input-group {
+      top: 3px;
+    }
+
+    input{
+      height: 40px;
+      padding: 10px 16px;
+      font-size: 15px;
+      line-height: 1.3333333;
+      border-radius: 6px;
+    }
+  }
+
+  .pwd-group, .remember-group{
+    margin: 0;
+  }
+  .link-group{
+    margin: 0 0 5px 0;
+  }
+  .checkbox input{
+    height: 12px;
+  }
+  .alert-group{
+    margin: 0;
+  }
+}
+
+.register-container{
+  margin-top: 50px;
+}
+.retrieve-password-container{
+  margin-top: 50px;
+}

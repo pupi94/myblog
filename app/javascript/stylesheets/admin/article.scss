@@ -1,0 +1,22 @@
+.container-main{
+  .article-form {
+    padding-top: 0;
+  }
+  .query-form {
+    margin-left: 0;
+    .form-group{
+      margin-right: 15px;
+    }
+    select{
+      width: 100px;
+    }
+  }
+}
+
+.article_unpublished {
+  color: green;
+}
+
+.article_published {
+
+}

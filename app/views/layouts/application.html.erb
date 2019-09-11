@@ -11,8 +11,8 @@
   <title><%= t("myblog_system") %></title>
   <%= csrf_meta_tags %>
 
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
 
@@ -34,7 +34,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="areDevelopingModalLabel" style="cursor:default;">该功能正在日以继夜的开发中…</h4>
         </div>
-        <div class="modal-body"><%= image_tag "baoman/baoman_01.gif", attr: '深思熟虑' %>
+        <div class="modal-body"><%= image_tag asset_pack_path "media/images/baoman/baoman_01.gif", attr: '深思熟虑' %>
           <p style="padding:15px 15px 15px 100px; position:absolute; top:15px; cursor:default;">很抱歉，程序猿正在日以继夜的开发此功能，本程序将会在以后的版本中持续完善！</p>
         </div>
         <div class="modal-footer">

@@ -1,0 +1,135 @@
+html,body{
+  margin: 0;
+  height: 100%;
+}
+.wrapper{
+  display:flex;
+  flex-direction:column;
+  height:100%;
+}
+.header {
+  height: 50px;
+  display: flex;
+  justify-content:space-between;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+}
+a>i{
+  margin-right: 5px;
+}
+.header-title{
+  color: #666;
+  line-height: 50px;
+  padding-left: 15px;
+}
+.header-title strong{
+  font-size: 22px;
+}
+.header-title small{
+  font-size: 17px;
+}
+.header-title a{
+  text-decoration:none;
+}
+.header-nav{
+  float: right;
+  margin-right: 30px ;
+}
+.header-nav ul>li{
+  cursor: pointer;
+  margin-left: 5px;
+}
+.navbar-nav > li > .dropdown-menu {
+  min-width: 120px;
+}
+.header-nav li a{
+  color: #666;
+  font-size: 16px;
+}
+.header-nav li a:hover,
+.header-nav li a:focus{
+  color: #0e90d2;
+}
+.header-nav .glyphicon {
+  top: 3px;
+}
+.container-wrapper{
+  display:flex;
+  flex:1;
+  background: #f3f3f3;
+}
+.container-nav {
+  width: 160px;
+  padding-left: 2px;
+  background-color: #f8f8f8;
+  border-right: 1px solid #cecece;
+}
+.container-nav ul{
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.container-nav ul li{
+  padding: 2px 0;
+  background-color: #fff;
+  border: 1px solid #dedede;
+  border-width: 0 0 1px 0;
+}
+.container-nav ul li a{
+  color: #5c5c5c;
+  font-size: 16px;
+  padding-left: 25px;
+}
+.container-nav ul li a:hover,
+.container-nav ul li a:focus{
+  background-color: #FFFFFF;
+  color: #337ab7;
+}
+.container-nav .glyphicon {
+  top: 2px;
+}
+.container {
+  background-color: #f8f8f8;
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;
+  padding-left:10px;
+  padding-right:15px;
+}
+.container .alert {
+  padding: 10px 30px;
+  margin-bottom: 5px;
+}
+.container-title{
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  margin-left: -15px;
+  margin-right: -15px;
+  display: flex;
+  height: 45px;
+  margin-bottom: 5px;
+}
+.container-title .title-img{
+  margin: 5px 0 5px 15px;
+  width: 40px;
+}
+.container-title .title-text{
+  flex: 1;
+}
+.container-title .breadcrumb {
+  background-color: #FFFFFF;
+  font-size: 20px;
+  margin-bottom: 0;
+}
+.container-main{
+  background-color: #FFFFFF;
+  padding: 15px 30px 15px 30px;
+}
+
+.ibox-content {
+  background-color: #ffffff;
+  color: inherit;
+  padding: 30px 45px 30px 45px;
+  border-color: #e7eaec;
+  border-style: solid solid none;
+  border-width: 0;
+}
