@@ -23,9 +23,6 @@ gem "turbolinks", "~> 5"
 gem "sass-rails", "~> 5.0"
 gem "sassc-rails", ">= 2.1.0"
 
-# gem "jquery-rails"
-# gem "bootstrap"
-
 # markdown
 gem "redcarpet", "~> 3.4"
 
