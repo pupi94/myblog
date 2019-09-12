@@ -1,8 +1,8 @@
 const images = require.context('../images', true);
 const imagePath = (name) => images(name, true);
 
-//require("@rails/ujs").start();
-require("turbolinks").start();
+require("@rails/ujs").start()
+require("turbolinks").start()
 
 // import css
 import './../stylesheets/bootstrap'
@@ -13,9 +13,3 @@ import './../stylesheets/devise'
 import 'jquery'
 import 'bootstrap/dist/js/bootstrap'
 import './../src/common/bootstrap-validator'
-
-
-/*
- *= require include_bootstrap
- *= require bootstrapValidator.min
- */

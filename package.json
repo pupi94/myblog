@@ -1,5 +1,8 @@
 {
+  "name": "myblog",
+  "private": true,
   "dependencies": {
+    "@rails/ujs": "^6.0.0-alpha",
     "@rails/webpacker": "^4.0.7",
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",

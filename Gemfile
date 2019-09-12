@@ -7,7 +7,7 @@ ruby "2.6.3"
 gem "mysql2", ">= 0.3.18"
 gem "rails", "~> 6.0"
 
-gem "bootsnap", "~> 1.3"
+gem "bootsnap", "~> 1.3", require: false
 gem "puma", "~> 3.0"
 #  压缩JavaScript
 gem "aasm", "~> 5.0"
@@ -16,12 +16,10 @@ gem "jbuilder", "~> 2.5"
 gem "pagy"
 gem "rails-i18n"
 gem "redis-rails", "~> 5.0"
-gem "therubyracer", platforms: :ruby
 
 gem "webpacker"
 gem "turbolinks", "~> 5"
 gem "sass-rails", "~> 5.0"
-gem "sassc-rails", ">= 2.1.0"
 
 # markdown
 gem "redcarpet", "~> 3.4"

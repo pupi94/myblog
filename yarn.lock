@@ -604,6 +604,10 @@
   version "1.4.0"
   resolved "https://registry.npm.taobao.org/@csstools/convert-colors/download/@csstools/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
 
+"@rails/ujs@^6.0.0-alpha":
+  version "6.0.0"
+  resolved "https://registry.npm.taobao.org/@rails/ujs/download/@rails/ujs-6.0.0.tgz#6c1957870ba075f7e82fdf875f5ed2181ff9355e"
+
 "@rails/webpacker@^4.0.7":
   version "4.0.7"
   resolved "https://registry.npm.taobao.org/@rails/webpacker/download/@rails/webpacker-4.0.7.tgz#268571bf974e78ce57eca9fa478f5bd97fd5182c"
