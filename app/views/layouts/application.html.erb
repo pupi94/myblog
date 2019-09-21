@@ -2,12 +2,6 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-  <meta name="description" content="">
-  <meta name="keywords" content="">
   <title><%= t("myblog_system") %></title>
   <%= csrf_meta_tags %>
 
@@ -17,85 +11,6 @@
 
 
 <body class="user-select">
-  <%= render :partial => "layouts/shared/header" %>
-
-  <div class="main">
-    <section class="container">
-      <%= yield %>
-    </section>
-  </div>
-
-  <%= render :partial => "layouts/shared/footer" %>
-
-  <div class="modal fade user-select" id="developing" tabindex="-1" role="dialog" aria-labelledby="developingModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="areDevelopingModalLabel" style="cursor:default;">该功能正在日以继夜的开发中…</h4>
-        </div>
-        <div class="modal-body"><%= image_tag asset_pack_path "media/images/baoman/baoman_01.gif", attr: '深思熟虑' %>
-          <p style="padding:15px 15px 15px 100px; position:absolute; top:15px; cursor:default;">很抱歉，程序猿正在日以继夜的开发此功能，本程序将会在以后的版本中持续完善！</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">朕已阅</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <%= yield %>
 </body>
-
-<script type="text/javascript">
-    $('body').show();
-    $('.version').text(NProgress.version);
-    NProgress.start();
-    setTimeout(function() { NProgress.done(); $('.fade').removeClass('out'); }, 500);
-
-    $('img').attr('draggable', 'false');
-    $('a').attr('draggable', 'false');
-
-    $(window).scroll(function () {
-        if ($(window).scrollTop() > 100) {
-            $("#go_top").fadeIn();
-        } else {
-            $("#go_top").fadeOut();
-        }
-    });
-
-    $("#go_top").hide();
-    $("#go_top").click(function () {
-        $('html,body').animate({
-            'scrollTop': 0
-        }, 500);
-    });
-
-    //导航智能定位
-    $.fn.navSmartFloat = function () {
-        var position = function (element) {
-            var top = element.position().top, pos = element.css("position");
-            $(window).scroll(function () {
-                var scrolls = $(this).scrollTop();
-                if (scrolls > top) { //如果滚动到页面超出了当前元素element的相对页面顶部的高度
-                    $('.top-nav').fadeOut(0);
-                    element.css({
-                        position: "fixed",
-                        top: 0
-                    }).addClass("shadow");
-                } else {
-                    $('.top-nav').fadeIn(500);
-                    element.css({
-                        position: pos,
-                        top: top
-                    }).removeClass("shadow");
-                }
-            });
-        };
-        return $(this).each(function () {
-            position($(this));
-        });
-    };
-    //启用导航定位
-    $(".header").navSmartFloat();
-</script>
-
 </html>
