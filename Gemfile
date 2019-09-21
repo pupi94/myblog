@@ -4,7 +4,7 @@ source "https://gems.ruby-china.com"
 
 ruby "2.6.3"
 
-gem "mysql2", ">= 0.3.18"
+gem "pg", ">= 0.18", "< 2.0"
 gem "rails", "~> 6.0"
 
 gem "bootsnap", "~> 1.3", require: false

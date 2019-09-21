@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class CreateArticles < ActiveRecord::Migration[5.0]
+class CreateArticles < ActiveRecord::Migration[6.0]
   def change
-    create_table :articles do |t|
+    create_table :articles, id: :uuid do |t|
       t.references :label, type: :integer
       t.references :user, type: :integer
       t.string   :title

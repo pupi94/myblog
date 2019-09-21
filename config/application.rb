@@ -18,14 +18,7 @@ module Myblog
     config.i18n.default_locale = "zh-CN"
 
     config.generators do |g|
-      g.test_framework :rspec,
-                       fixtures: false,
-                       view_specs: false,
-                       helper_specs: true,
-                       routing_specs: true,
-                       controller_specs: false,
-                       request_specs: false
-      g.fixture_replacement :factory_girl, dir: "spec/factories"
+      g.orm :active_record, primary_key_type: :uuid
     end
   end
 end
