@@ -8,8 +8,8 @@
 // like app/views/layouts/application.html.erb. All it does is render <div>Hello React</div> at the bottom
 // of the page.
 
-require("@rails/ujs").start()
-require("turbolinks").start()
+require("@rails/ujs").start();
+require("turbolinks").start();
 
 import React from 'react'
 // import ReactDOM from 'react-dom'
