@@ -9,8 +9,30 @@
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
+<body style="padding-top: 51px;">
+  <nav class="navbar navbar-expand-lg navbar-my fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand nav-logo" href="#">
+        <%= image_tag asset_pack_path 'media/images/logo.png', class: "d-inline-block align-top"  %>
+      </a>
 
-<body class="user-select">
-  <%= yield %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-navbar-collapse" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="bs-navbar-collapse">
+        <ul class="navbar-nav ml-auto top-nav">
+          <li class="nav-item active"><a href="#">Home</a></li>
+          <li class="nav-item"><a href="#">我的相册</a></li>
+          <li class="nav-item"><a href="#">我的分享</a></li>
+          <li class="nav-item"><a href="#">关于我</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div>
+    <%= yield %>
+  </div>
+  <div class="footer"><p>COPYRIGHT (&copy;) 2019 黄谱平个人站.</p></div>
 </body>
 </html>

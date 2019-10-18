@@ -4,10 +4,6 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta name="renderer" content="webkit">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
   <title><%= t(".title") %></title>
   <%= csrf_meta_tags %>
 
@@ -16,82 +12,7 @@
 </head>
 
 <body>
-<div class="wrapper">
-
-  <div class="header">
-    <div class="header-title">
-      <strong><a href="<%= root_path %>"><%= image_tag asset_pack_path('media/images/logo.png')%></a></strong>
-      <small><%= t('management_system') %></small>
-    </div>
-    <div class="header-nav">
-      <ul class="nav navbar-nav">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <%= current_user.username %><span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="#"><i class="glyphicon glyphicon-user"></i><%= t('.user_info') %></a></li>
-            <li><a href="#"><i class="glyphicon glyphicon-cog"></i><%= t('.pwd_edit') %></a></li>
-          </ul>
-        </li>
-        <li>
-          <%= link_to(destroy_user_session_path, method: 'DELETE') do %>
-            <i class='glyphicon glyphicon-off'></i><%= t('.log_out')%>
-          <% end %>
-      </ul>
-    </div>
-  </div>
-
-  <div class="container-wrapper">
-    <nav class="container-nav">
-      <ul class="nav">
-        <li><a href="<%= admin_root_path %>"><i class="glyphicon glyphicon-home"></i><%= t('.first_page') %></a></li>
-        <li><a href="<%= admin_articles_path %>"><i class="glyphicon glyphicon-menu-hamburger"></i><%= t('.my_article') %></a></li>
-        <li><a href="<%= admin_labels_path %>"><i class="glyphicon glyphicon-menu-hamburger"></i><%= t('.label')%></a></li>
-      </ul>
-    </nav>
-    <div class="container">
-      <div class="container-title">
-        <div class="title-img">
-          <a class="btn btn-primary" href="javascript:void(0)">
-            <span class="glyphicon glyphicon-list"></span>
-          </a>
-        </div>
-        <div class="title-text">
-          <ol class="breadcrumb">
-            <!--<li>新增文章</li>-->
-            <!--<li class="active">Library</li>-->
-            <% if content_for?(:title) %><%= yield(:title) %><% end %>
-          </ol>
-        </div>
-      </div>
-
-      <div class="container-notice">
-        <% if flash[:error_msg] %>
-          <div class="fade in alert alert-danger alert-dismissible" role="alert">
-            <button type="button" class="close fade" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <%= flash[:error_msg] %>
-          </div>
-        <% end %>
-      </div>
-
-      <div class="container-main">
-        <%= yield %>
-      </div>
-    </div>
-  </div>
-
-</div>
-<script type="text/javascript">
-  $(function(){
-    var notice = $('.container-notice .alert');
-    if(notice.length > 0){
-      setTimeout(function () {notice.alert('close')}, 15000);
-    }
-  })
-</script>
+  <%= yield %>
 </body>
 </html>
 
