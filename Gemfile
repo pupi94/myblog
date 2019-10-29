@@ -24,7 +24,7 @@ gem "sass-rails", "~> 5.0"
 # markdown
 gem "redcarpet", "~> 3.4"
 
-gem "devise", "~> 4.4"
+gem "devise", "~> 4.7"
 gem "devise-i18n", "~> 1.6"
 
 gem "searchkick"
