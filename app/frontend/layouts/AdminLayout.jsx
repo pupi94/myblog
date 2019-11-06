@@ -1,57 +1,76 @@
 import React from 'react'
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Layout, Menu, Breadcrumb, Icon, Dropdown, message } from 'antd';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
 class AdminLayout extends React.Component {
-    state = {
-        collapsed: false,
-    };
-
-    onCollapse = collapsed => {
-        this.setState({ collapsed });
-    };
-
     render() {
+        let onClick = ({ key }) => {
+            message.info(`Click on item ${key}`);
+        };
+
+        let menu = (
+            <Menu onClick={onClick}>
+                <Menu.Item key="1"><Icon type="user"/><span style={{marginLeft: '5px'}}>账号信息</span></Menu.Item>
+                <Menu.Item key="2"><Icon type="logout"/><span style={{marginLeft: '5px'}}>退出登录</span></Menu.Item>
+            </Menu>
+        );
         return (
             <Layout style={{ minHeight: '100vh' }}>
-                <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
-                    <div className="logo" style={{color: "#FFF"}}>logo</div>
+                <Sider style={{overflow: 'auto', height: '100vh', position: 'fixed'}}>
+                    <div className="logo" style={{color: "#FFF"}}/>
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
                         <Menu.Item key="1">
                             <Icon type="pie-chart" />
-                            <span>Option 1</span>
+                            <span>概览</span>
                         </Menu.Item>
-                        <Menu.Item key="2">
-                            <Icon type="desktop" />
-                            <span>Option 2</span>
-                        </Menu.Item>
-                        <SubMenu key="sub1" title={<span><Icon type="user" /><span>User</span></span>}>
-                            <Menu.Item key="3">Tom</Menu.Item>
-                            <Menu.Item key="4">Bill</Menu.Item>
-                            <Menu.Item key="5">Alex</Menu.Item>
+                        <SubMenu key="sub1" title={<span><Icon type="container"/><span>博客</span></span>}>
+                            <Menu.Item key="2">博客管理</Menu.Item>
+                            <Menu.Item key="3">博客专辑</Menu.Item>
                         </SubMenu>
-                        <SubMenu key="sub2" title={<span><Icon type="team" /><span>Team</span></span>}>
-                            <Menu.Item key="6">Team 1</Menu.Item>
-                            <Menu.Item key="8">Team 2</Menu.Item>
+                        <SubMenu key="sub2" title={<span><Icon type="picture" /><span>相册</span></span>}>
+                            <Menu.Item key="4">图片管理</Menu.Item>
+                            <Menu.Item key="5">图片专辑</Menu.Item>
                         </SubMenu>
-                        <Menu.Item key="9">
-                            <Icon type="file" />
-                            <span>File</span>
-                        </Menu.Item>
                     </Menu>
                 </Sider>
-                <Layout>
-                    <Header style={{ background: '#d4d4d4', padding: 0, height: 50, lineHeight: 50 }}></Header>
-                    <Content style={{ margin: '0 16px' }}>
-                        <Breadcrumb style={{ margin: '16px 0' }}>
-                            <Breadcrumb.Item>User</Breadcrumb.Item>
-                            <Breadcrumb.Item>Bill</Breadcrumb.Item>
+                <Layout style={{marginLeft: '200px'}}>
+                    <Header style={{ background: '#fff', height: '50px', lineHeight: '50px', position: 'fixed', zIndex: 1, width: '100%'}}>
+                        <div style={{marginRight: '165px', float: 'right'}}>
+                            <div style={{display: "inline-block", marginRight: '30px'}}>
+                                <a href="#"><Icon type="home"/><span>店铺首页</span></a>
+                            </div>
+                            <Dropdown overlay={menu}>
+                                <a className="ant-dropdown-link" href="#">
+                                    <Icon type="user"/><span style={{marginLeft: '5px'}}>huangpuping</span><Icon type="down"/>
+                                </a>
+                            </Dropdown>
+                        </div>
+
+                    </Header>
+
+                    <Content style={{ marginTop: '50px', background: '#eef0f5', padding: '15px 15px 15px 30px'}}>
+                        <Breadcrumb style={{ marginBottom: '15px'}}>
+                            <Breadcrumb.Item href=""><Icon type="home" /></Breadcrumb.Item>
+                            <Breadcrumb.Item>Application</Breadcrumb.Item>
+                            <Breadcrumb.Item>option1</Breadcrumb.Item>
                         </Breadcrumb>
-                        <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>Bill is a cat.</div>
+
+                        <div style={{background: '#fff', padding: 15 }}>
+                            中间内容
+                            ...
+                            <br />
+                            ...
+                            <br />
+                            ...
+                            <br />
+                            ...
+                            <br />
+                            content
+                        </div>
                     </Content>
-                    <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+                    <Footer style={{ textAlign: 'center',background: '#fff', padding: '15px 50px' }}>Ant Design ©2018 Created by Ant UED</Footer>
                 </Layout>
             </Layout>
         );
