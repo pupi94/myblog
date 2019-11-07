@@ -2,9 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import '../stylesheets/admin.scss'
-
-import '../layouts/AdminLayout'
-import AdminLayout from "../layouts/AdminLayout";
+import AdminLayout from "../components/AdminLayout";
 
 document.addEventListener('DOMContentLoaded', () => {
     ReactDOM.render(

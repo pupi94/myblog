@@ -3,12 +3,7 @@
 Rails.application.routes.draw do
   root "home#index"
 
-  devise_for(:users,
-             only: %i[sessions registrations],
-             controllers: {
-               sessions: "users/sessions",
-               registrations: "users/registrations"
-             })
+  devise_for :users, only: %i[sessions], controllers: { sessions: "users/sessions" }
 
   resources :articles, only: %i[show index]
 

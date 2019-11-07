@@ -11,10 +11,6 @@
 require("@rails/ujs").start();
 require("turbolinks").start();
 
-import React from 'react'
-// import ReactDOM from 'react-dom'
-// import PropTypes from 'prop-types'
-
 const images = require.context('./../images', true);
 const imagePath = (name) => images(name, true);
 

@@ -4,24 +4,6 @@ module ExceptionHandleHelper
   extend ActiveSupport::Concern
 
   included do
-    rescue_from Exception do |ex|
-      log_error ex
-      respond_to do |format|
-        format.html { render "error/500" }
-        format.js { render_internal_server_error }
-        format.json { render_internal_server_error }
-      end
-    end
-
-    rescue_from ActiveRecord::RecordNotSaved do |ex|
-      log_error ex
-      respond_to do |format|
-        format.html { render "error/500" }
-        format.js { render_unprocessable_entity(ex.record.errors.full_messages) }
-        format.json { render_unprocessable_entity(ex.record.errors.full_messages) }
-      end
-    end
-
     rescue_from ActiveRecord::RecordInvalid do |ex|
       log_error ex
       respond_to do |format|

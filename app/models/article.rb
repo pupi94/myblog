@@ -4,7 +4,6 @@ class Article < ApplicationRecord
   include MarkdownHelper
   include AASM
 
-  belongs_to :label
   belongs_to :user
 
   validates :title, presence: true, length: { maximum: 255 }
