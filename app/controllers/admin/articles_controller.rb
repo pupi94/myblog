@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
-  class ArticlesController < ::AdminController
+  class ArticlesController < BaseController
     before_action :load_article, only: %i[publish edit show update unpublish destroy]
 
     def index
