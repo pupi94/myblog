@@ -1,25 +1,36 @@
 import React from 'react'
-import { Layout, Menu, Icon, Dropdown, message } from 'antd';
-import {useHistory} from "react-router-dom";
-import axios from 'axios';
+import { Menu, Icon, Dropdown } from 'antd';
+import ajax from '../utils/Request'
 
 class AppHeader extends React.Component {
-    render() {
-        let logout = () => {
-            useHistory().push("/users/sign_in")
-            // fetch("/users/sign_out", {
-            //     method: "DELETE",
-            //     headers: {"X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content}
-            // });
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: ""
         };
+        this.logout = this.logout.bind(this);
+    }
+    componentDidMount() {
+        ajax.get("/api/admin/user")
+            .then(response => {
+                this.setState(response)
+            })
+    }
+    logout() {
+        ajax.delete("/users/sign_out", {
+            headers: {"X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content}
+        }).then(response => {
+            window.location.href="/";
+        });
+    }
 
+    render() {
         let menu = (
             <Menu>
-                <Menu.Item key="1">
-                    <Icon type="user"/><span style={{marginLeft: '5px'}}>账号信息</span>
-                </Menu.Item>
-                <Menu.Item key="2" onClick={logout} >
+                {/*<Menu.Item key="1" onClick={showUserInfo()}>*/}
+                {/*    <Icon type="user"/><span style={{marginLeft: '5px'}}>账号信息</span>*/}
+                {/*</Menu.Item>*/}
+                <Menu.Item key="2" onClick={this.logout} >
                     <Icon type="logout"/><span style={{marginLeft: '5px'}}>退出登录</span>
                 </Menu.Item>
             </Menu>
@@ -32,7 +43,7 @@ class AppHeader extends React.Component {
                     </div>
                     <Dropdown overlay={menu}>
                         <a className="ant-dropdown-link" href="#">
-                            <Icon type="user"/><span style={{marginLeft: '5px'}}>huangpuping</span><Icon type="down"/>
+                            <Icon type="user"/><span style={{marginLeft: '5px'}}>{this.state.email}</span><Icon type="down"/>
                         </a>
                     </Dropdown>
                 </div>

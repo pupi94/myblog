@@ -11,7 +11,6 @@ const breadcrumbNameMap = {
 class AppBreadcrumb extends React.Component {
     render() {
         const { location } = this.props;
-        console.log(this.props);
         const pathSnippets = location.pathname.split('/').filter(i => i);
         const breadcrumbItems = pathSnippets.map((_, index) => {
             const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;

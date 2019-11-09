@@ -11,4 +11,10 @@ Rails.application.routes.draw do
     root "home#index"
     get '/*path' => 'home#index'
   end
+
+  namespace :api do
+    namespace :admin do
+      resource :user, only: [:show]
+    end
+  end
 end

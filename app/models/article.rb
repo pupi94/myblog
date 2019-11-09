@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Article < ApplicationRecord
-  include MarkdownHelper
   include AASM
 
   belongs_to :user
@@ -26,11 +25,6 @@ class Article < ApplicationRecord
       created_at: created_at,
       published_at: published_at
     }
-  end
-
-  before_save :set_body_html
-  def set_body_html
-    self.body_html = convert_html(body)
   end
 
   def publish!
