@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Article < ApplicationRecord
-  include AASM
-
   belongs_to :user
 
   validates :title, presence: true, length: { maximum: 255 }
@@ -18,9 +16,8 @@ class Article < ApplicationRecord
   def search_data
     {
       user_id: user_id,
-      label_id: label_id,
       title: title,
-      body: body,
+      content: content,
       published: published,
       created_at: created_at,
       published_at: published_at

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-class AdminController < ApplicationController
+module Api
+  class AdminController < BaseController
     layout "admin"
     before_action :authenticate_user!
+  end
 end

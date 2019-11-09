@@ -1,11 +1,10 @@
 en:
   activerecord:
     attributes:
-      label:
-        name: "Name"
-
       article:
         title: "Title"
     model:
-      label: "Article category"
       article: "Article"
+
+  error:
+    not_found: Resource Not Found

@@ -3,7 +3,7 @@
 class CreateArticles < ActiveRecord::Migration[6.0]
   def change
     create_table :articles, id: :uuid do |t|
-      t.references :user, type: :integer
+      t.references :user, type: :uuid
       t.string   :title
       t.integer  :pageview, limit: 4, default: 0
       t.boolean  :published, default: false

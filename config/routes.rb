@@ -9,12 +9,25 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "home#index"
-    get '/*path' => 'home#index'
+    get "/*path" => "home#index"
   end
 
-  namespace :api do
+  namespace :api, defaults: { format: :json } do
     namespace :admin do
       resource :user, only: [:show]
+      resources :articles, only: [:show, :index] do
+        member do
+          patch :publish
+          patch :unpublish
+        end
+
+        collection do
+          patch :batch_publish
+          patch :batch_unpublish
+        end
+      end
     end
+
+    match "*path", to: "base#render_not_found", via: :all
   end
 end

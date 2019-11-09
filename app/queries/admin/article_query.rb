@@ -18,7 +18,6 @@ module Admin
         order: order_clause,
         per_page: per_page,
         page: page,
-        includes: [:label],
         body_options: { min_score: 0.5 }
     end
 
@@ -29,13 +28,12 @@ module Admin
 
       def where_clause
         clause = { user_id: user.id }
-        clause[:label_id] = params[:label_id] if params[:label_id].present?
         clause[:published] = params[:published] if params[:published].to_s.present?
         clause
       end
 
       def per_page
-        params[:per_page].present? ? params[:per_page] : 15
+        params[:per_page].present? ? params[:per_page] : 10
       end
 
       def page

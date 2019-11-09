@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import { Table, Divider, Tag } from 'antd';
+import { Table, Divider, Tag, Button, Pagination } from 'antd';
+import ajax from "../../utils/Request"
 
 const columns = [
     {
@@ -51,72 +52,89 @@ const columns = [
     },
 ];
 
-const data = [
-    {
-        id: '1',
-        title: 'John Brown',
-        pageview: 32,
-        published: true,
-        published_at: '2010-10-11',
-        created_at: '2010-10-11',
-    }, {
-        id: '2',
-        title: 'John Brown',
-        pageview: 32,
-        published: false,
-        published_at: '2010-10-11',
-        created_at: '2010-10-11',
-    }, {
-        id: '3',
-        title: 'John Brown',
-        pageview: 32,
-        published: true,
-        published_at: '2010-10-11',
-        created_at: '2010-10-11',
-    }
-];
-
 class Index extends React.Component {
-    state = {
-        selectedRowKeys: [],
+    constructor(props) {
+        super(props);
+        this.state = {
+            articles: [],
+            selectedRowKeys: [],
+            loading: true,
+            pagination: {
+                showTotal: this.showTotal,
+                total: 0,
+                current: 1,
+                pageSize: 10,
+                showSizeChanger: true
+            }
+        };
+        this.onSelectChange = this.onSelectChange.bind(this);
+        this.batchPublish = this.batchPublish.bind(this);
+        this.batchUnpublish = this.batchUnpublish.bind(this);
+        this.fetchData = this.fetchData.bind(this);
+        this.onTableChange = this.onTableChange.bind(this);
+    }
+
+    componentDidMount() {
+        this.fetchData()
+    }
+
+    onTableChange = (pagination, filters, sorter) => {
+        this.setState({ pagination: pagination });
+        this.fetchData({ per_page: pagination.pageSize, page: pagination.current })
     };
 
-    onSelectChange = selectedRowKeys => {
-        console.log('selectedRowKeys changed: ', selectedRowKeys);
-        this.setState({ selectedRowKeys });
+    showTotal = (total) => {
+        return <span>{total} 条记录</span>;
+    };
+    onSelectChange = (keys) => {
+        this.setState({ selectedRowKeys: keys });
+    };
+
+    batchPublish = () => {
+
+    };
+
+    batchUnpublish = () => {
+
+    };
+
+    fetchData = (params = {}) => {
+        this.setState({ loading: true });
+        ajax.get("/api/admin/articles", { data: params})
+          .then(response => {
+              let pager = { ...this.state.pagination };
+              pager.total = response.count;
+              this.setState({
+                  articles: response.articles,
+                  loading: false,
+                  pagination: pager
+              });
+        });
     };
 
     render() {
-        let { selectedRowKeys } = this.state;
+        let { selectedRowKeys, articles, loading, pagination } = this.state;
         let rowSelection = {
             selectedRowKeys,
             onChange: this.onSelectChange,
-            hideDefaultSelections: true,
-            selections: [
-                {
-                    key: 'batch-delete',
-                    text: '批量删除',
-                    onSelect: () => {
-                        console.log("批量删除")
-                    },
-                },
-                {
-                    key: 'batch-publish',
-                    text: '批量发布',
-                    onSelect: () => {
-                        console.log("批量发布")
-                    },
-                },
-                {
-                    key: 'batch-unpublish',
-                    text: '批量取消发布',
-                    onSelect: () => {
-                        console.log("批量取消发布")
-                    },
-                }
-            ]
+            hideDefaultSelections: true
         };
-        return <Table rowSelection={rowSelection} columns={columns} dataSource={data} />;
+        return (
+            <div>
+                <div className="table-operations">
+                    <Button onClick={this.batchPublish}>批量发布</Button>
+                    <Button onClick={this.batchUnpublish}>批量下架</Button>
+                </div>
+                <Table
+                  rowSelection={rowSelection}
+                  columns={columns}
+                  dataSource={articles}
+                  loading={loading}
+                  pagination={pagination}
+                  onChange={this.onTableChange}
+                />
+            </div>
+        )
     }
 }
 
