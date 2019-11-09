@@ -1,7 +1,59 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import { Table, Divider, Tag, Button, Pagination } from 'antd';
+import { Table, Divider, Tag, Button, Input, Select, Form, Row, Col } from 'antd';
 import ajax from "../../utils/Request"
+
+class SearchForm extends React.Component {
+    handleSearch = (e) => {
+        e.preventDefault();
+        this.props.onSubmit(this.props.form)
+    };
+
+    handleReset = () => {
+        this.props.form.resetFields();
+        this.props.onReset()
+    };
+
+    render() {
+        const { getFieldDecorator } = this.props.form;
+
+        return (
+          <Form onSubmit={this.handleSearch}>
+              <Row gutter={10}>
+                  <Col span={2}>
+                      <Form.Item>
+                          {
+                              getFieldDecorator('published', {
+                                  initialValue: ""
+                              })
+                              (
+                                <Select>
+                                    <Select.Option value="">全部</Select.Option>
+                                    <Select.Option value="true">已发布</Select.Option>
+                                    <Select.Option value="false">未发布</Select.Option>
+                                </Select>
+                              )
+                          }
+                      </Form.Item>
+                  </Col>
+                  <Col span={6}>
+                      <Form.Item>
+                          {
+                              getFieldDecorator('title')
+                              (<Input placeholder="文章标题"/>)
+                          }
+                      </Form.Item>
+                  </Col>
+                  <Col span={5} style={{paddingTop: 4}}>
+                      <Button type="primary" icon="search" htmlType="submit">查询</Button>
+                      <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>重置</Button>
+                  </Col>
+              </Row>
+          </Form>
+        )
+    }
+}
+const ArticleSearchForm = Form.create({ name: 'article_search' })(SearchForm);
 
 const columns = [
     {
@@ -9,7 +61,7 @@ const columns = [
         dataIndex: 'title',
         key: 'title',
         render: (text, record) => (
-            <Link to={"/admin/articles/" + record.id}>{text}</Link>
+          <Link to={"/admin/articles/" + record.id}>{text}</Link>
         ),
     },
     {
@@ -22,7 +74,7 @@ const columns = [
         dataIndex: 'published',
         key: 'published',
         render: published => (
-            <span>
+          <span>
                 <Tag color={published ? 'blue' : '#838486'}>{published ? '已发布' : '未发布'}</Tag>
             </span>
         ),
@@ -41,17 +93,16 @@ const columns = [
         title: '',
         key: 'action',
         render: (text, record) => (
-            <span>
+          <span>
                 {
                     record.published ? <a>取消发布</a> : <a>发布</a>
                 }
-                <Divider type="vertical" />
+              <Divider type="vertical" />
                 <a>删除</a>
             </span>
         ),
     },
 ];
-
 class Index extends React.Component {
     constructor(props) {
         super(props);
@@ -72,6 +123,8 @@ class Index extends React.Component {
         this.batchUnpublish = this.batchUnpublish.bind(this);
         this.fetchData = this.fetchData.bind(this);
         this.onTableChange = this.onTableChange.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
+        this.handleReset = this.handleReset.bind(this);
     }
 
     componentDidMount() {
@@ -112,6 +165,25 @@ class Index extends React.Component {
         });
     };
 
+    handleSearch = (form) => {
+        console.log(form, "1111111111");
+        form.validateFields((err, values) => {
+            console.log('Received values of form: ', err);
+            console.log('Received values of form: ', values);
+        });
+
+
+        // e.preventDefault();
+        // console.log(this.props.form);
+        // this.props.form.validateFields((err, values) => {
+        //     console.log('Received values of form: ', values);
+        // });
+    };
+
+    handleReset = () => {
+
+    };
+
     render() {
         let { selectedRowKeys, articles, loading, pagination } = this.state;
         let rowSelection = {
@@ -119,8 +191,10 @@ class Index extends React.Component {
             onChange: this.onSelectChange,
             hideDefaultSelections: true
         };
+
         return (
             <div>
+                <ArticleSearchForm onSubmit={this.handleSearch} onReset={this.handleReset}/>
                 <div className="table-operations">
                     <Button onClick={this.batchPublish}>批量发布</Button>
                     <Button onClick={this.batchUnpublish}>批量下架</Button>
