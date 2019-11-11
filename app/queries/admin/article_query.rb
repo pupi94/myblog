@@ -2,6 +2,8 @@
 
 module Admin
   class ArticleQuery
+    using StringExtensions
+
     attr_reader :params, :user
 
     def initialize(user, params)

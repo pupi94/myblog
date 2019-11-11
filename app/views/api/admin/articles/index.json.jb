@@ -8,7 +8,7 @@
           title: article.title,
           pageview: article.pageview,
           published: article.published,
-          published_at: article.published_at.utc.iso8601,
+          published_at: article.published_at&.utc&.iso8601,
           created_at: article.created_at.utc.iso8601
       }
     end

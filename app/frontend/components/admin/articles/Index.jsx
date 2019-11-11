@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import { Table, Divider, Tag, Button, Input, Select, Form, Row, Col } from 'antd';
+import { Table, Divider, Tag, Button, Input, Select, Form, Row, Col, message, Modal } from 'antd';
+const { confirm } = Modal;
 import ajax from "../../utils/Request"
 
 class SearchForm extends React.Component {
@@ -30,7 +31,7 @@ class SearchForm extends React.Component {
                                 <Select>
                                     <Select.Option value="">全部</Select.Option>
                                     <Select.Option value="true">已发布</Select.Option>
-                                    <Select.Option value="false">未发布</Select.Option>
+                                    <Select.Option value="false">已下架</Select.Option>
                                 </Select>
                               )
                           }
@@ -39,7 +40,7 @@ class SearchForm extends React.Component {
                   <Col span={6}>
                       <Form.Item>
                           {
-                              getFieldDecorator('title')
+                              getFieldDecorator('keyword', { initialValue: "" })
                               (<Input placeholder="文章标题"/>)
                           }
                       </Form.Item>
@@ -59,20 +60,17 @@ const columns = [
     {
         title: '标题',
         dataIndex: 'title',
-        key: 'title',
         render: (text, record) => (
           <Link to={"/admin/articles/" + record.id}>{text}</Link>
         ),
     },
     {
         title: '浏览人数',
-        dataIndex: 'pageview',
-        key: 'pageview',
+        dataIndex: 'pageview'
     },
     {
         title: '状态',
         dataIndex: 'published',
-        key: 'published',
         render: published => (
           <span>
                 <Tag color={published ? 'blue' : '#838486'}>{published ? '已发布' : '未发布'}</Tag>
@@ -81,17 +79,14 @@ const columns = [
     },
     {
         title: '发布时间',
-        dataIndex: 'published_at',
-        key: 'published_at',
+        dataIndex: 'published_at'
     },
     {
         title: '创建时间',
-        dataIndex: 'created_at',
-        key: 'created_at',
+        dataIndex: 'created_at'
     },
     {
         title: '',
-        key: 'action',
         render: (text, record) => (
           <span>
                 {
@@ -116,15 +111,9 @@ class Index extends React.Component {
                 current: 1,
                 pageSize: 10,
                 showSizeChanger: true
-            }
+            },
+            searchData: {}
         };
-        this.onSelectChange = this.onSelectChange.bind(this);
-        this.batchPublish = this.batchPublish.bind(this);
-        this.batchUnpublish = this.batchUnpublish.bind(this);
-        this.fetchData = this.fetchData.bind(this);
-        this.onTableChange = this.onTableChange.bind(this);
-        this.handleSearch = this.handleSearch.bind(this);
-        this.handleReset = this.handleReset.bind(this);
     }
 
     componentDidMount() {
@@ -133,7 +122,24 @@ class Index extends React.Component {
 
     onTableChange = (pagination, filters, sorter) => {
         this.setState({ pagination: pagination });
-        this.fetchData({ per_page: pagination.pageSize, page: pagination.current })
+        let data = this.state.searchData;
+        let params = this.mergeJsonObject(data, { per_page: pagination.pageSize, page: pagination.current });
+        this.fetchData(params)
+    };
+
+    handleReset = () => {
+        let pager = { ...this.state.pagination };
+        this.setState({ searchData: {} });
+        this.fetchData({ per_page: pager.pageSize, page: pager.current })
+    };
+
+    handleSearch = (form) => {
+        form.validateFields((err, values) => {
+            let pager = this.state.pagination;
+            this.setState({ searchData: values });
+            let params = this.mergeJsonObject(values, { per_page: pager.pageSize, page: pager.current } );
+            this.fetchData(params)
+        });
     };
 
     showTotal = (total) => {
@@ -144,15 +150,52 @@ class Index extends React.Component {
     };
 
     batchPublish = () => {
-
+        confirm({
+            title: '你确定要发布选中的文章?',
+            okType: 'danger',
+            onOk: () => {
+                this.batchOperation("/api/admin/articles/batch_publish")
+            }
+        });
     };
 
     batchUnpublish = () => {
+        confirm({
+            title: '你确定要下架选中的文章?',
+            okType: 'danger',
+            onOk: () => {
+                this.batchOperation("/api/admin/articles/batch_unpublish")
+            }
+        });
+    };
 
+    batchOperation = (url) => {
+        let keys = this.state.selectedRowKeys;
+        if(keys.length == 0){
+            message.info("无选中记录！");
+            return
+        }
+        ajax.patch(url, {
+            data: { ids: keys.join(",") },
+            headers: {"X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content}
+        }).then(response => {
+            Modal.success({
+                content: '操作成功！',
+                onOk: () => {
+                    this.refreshData();
+                }
+            });
+        })
+    };
+
+    refreshData = () => {
+        let pager = this.state.pagination;
+        let params = this.mergeJsonObject(this.state.searchData, { per_page: pager.pageSize, page: pager.current });
+        this.fetchData(params)
     };
 
     fetchData = (params = {}) => {
-        this.setState({ loading: true });
+        this.setState({ loading: true, selectedRowKeys: [] });
         ajax.get("/api/admin/articles", { data: params})
           .then(response => {
               let pager = { ...this.state.pagination };
@@ -165,23 +208,15 @@ class Index extends React.Component {
         });
     };
 
-    handleSearch = (form) => {
-        console.log(form, "1111111111");
-        form.validateFields((err, values) => {
-            console.log('Received values of form: ', err);
-            console.log('Received values of form: ', values);
-        });
-
-
-        // e.preventDefault();
-        // console.log(this.props.form);
-        // this.props.form.validateFields((err, values) => {
-        //     console.log('Received values of form: ', values);
-        // });
-    };
-
-    handleReset = () => {
-
+    mergeJsonObject = (obj1, obj2) => {
+        let jsonObj = {};
+        for(let attr in obj1){
+            jsonObj[attr] = obj1[attr];
+        }
+        for(let attr in obj2){
+            jsonObj[attr] = obj2[attr];
+        }
+        return jsonObj;
     };
 
     render() {
@@ -206,6 +241,7 @@ class Index extends React.Component {
                   loading={loading}
                   pagination={pagination}
                   onChange={this.onTableChange}
+                  rowKey={"id"}
                 />
             </div>
         )

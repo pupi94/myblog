@@ -6,6 +6,7 @@ class Article < ApplicationRecord
   validates :title, presence: true, length: { maximum: 255 }
 
   scope :published, -> { where(published: true) }
+  scope :unpublished, -> { where(published: false) }
 
   searchkick searchable: [:title, :body],
     filterable: [:label_id, :user_id, :published],

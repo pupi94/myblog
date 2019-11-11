@@ -11,24 +11,33 @@ class Api::Admin::ArticlesController < Api::AdminController
   def create
     @article = current_user.articles.new(article_params)
     @article.save!
-    redirect_to admin_articles_path
-  rescue ActiveRecord::RecordInvalid => e
-    redirect_to new_admin_article_path, status: :unprocessable_entity, flash: { errors: e.record.errors.full_messages }
+    render_ok
   end
 
   def publish
     @article.publish!
-    redirect_to admin_articles_path
+
+    render_ok
+  end
+
+  def batch_publish
+    BatchPublishArticle.new(current_user, article_ids).call
+    render_ok
+  end
+
+  def batch_unpublish
+    BatchUnpublishArticle.new(current_user, article_ids).call
+    render_ok
   end
 
   def unpublish
     @article.unpublish!
-    redirect_to admin_articles_path
+    render_ok
   end
 
   def destroy
     @article.destroy!
-    redirect_to admin_articles_path
+    render_ok
   end
 
   def edit
@@ -36,7 +45,7 @@ class Api::Admin::ArticlesController < Api::AdminController
 
   def update
     @article.update!(article_params)
-    redirect_to admin_articles_path
+    render_ok
   end
 
   def show
@@ -49,10 +58,14 @@ class Api::Admin::ArticlesController < Api::AdminController
     end
 
     def query_params
-      params.permit(:keyword, :published, :label_id, :page, :per_page)
+      params.permit(:keyword, :published, :page, :per_page)
     end
 
     def load_article
       @article = current_user.articles.find(params[:id])
+    end
+
+    def article_ids
+      params[:ids].to_s.split(",")
     end
 end
