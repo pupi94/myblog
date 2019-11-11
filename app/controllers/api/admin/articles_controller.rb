@@ -14,12 +14,6 @@ class Api::Admin::ArticlesController < Api::AdminController
     render_ok
   end
 
-  def publish
-    @article.publish!
-
-    render_ok
-  end
-
   def batch_publish
     BatchPublishArticle.new(current_user, article_ids).call
     render_ok
@@ -27,11 +21,6 @@ class Api::Admin::ArticlesController < Api::AdminController
 
   def batch_unpublish
     BatchUnpublishArticle.new(current_user, article_ids).call
-    render_ok
-  end
-
-  def unpublish
-    @article.unpublish!
     render_ok
   end
 

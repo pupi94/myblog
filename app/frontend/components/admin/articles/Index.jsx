@@ -30,7 +30,7 @@ class SearchForm extends React.Component {
                               (
                                 <Select>
                                     <Select.Option value="">全部</Select.Option>
-                                    <Select.Option value="true">已发布</Select.Option>
+                                    <Select.Option value="true">已上架</Select.Option>
                                     <Select.Option value="false">已下架</Select.Option>
                                 </Select>
                               )
@@ -56,48 +56,6 @@ class SearchForm extends React.Component {
 }
 const ArticleSearchForm = Form.create({ name: 'article_search' })(SearchForm);
 
-const columns = [
-    {
-        title: '标题',
-        dataIndex: 'title',
-        render: (text, record) => (
-          <Link to={"/admin/articles/" + record.id}>{text}</Link>
-        ),
-    },
-    {
-        title: '浏览人数',
-        dataIndex: 'pageview'
-    },
-    {
-        title: '状态',
-        dataIndex: 'published',
-        render: published => (
-          <span>
-                <Tag color={published ? 'blue' : '#838486'}>{published ? '已发布' : '未发布'}</Tag>
-            </span>
-        ),
-    },
-    {
-        title: '发布时间',
-        dataIndex: 'published_at'
-    },
-    {
-        title: '创建时间',
-        dataIndex: 'created_at'
-    },
-    {
-        title: '',
-        render: (text, record) => (
-          <span>
-                {
-                    record.published ? <a>取消发布</a> : <a>发布</a>
-                }
-              <Divider type="vertical" />
-                <a>删除</a>
-            </span>
-        ),
-    },
-];
 class Index extends React.Component {
     constructor(props) {
         super(props);
@@ -114,6 +72,51 @@ class Index extends React.Component {
             },
             searchData: {}
         };
+        this.columns = [
+            {
+                title: '标题',
+                dataIndex: 'title',
+                render: (text, record) => (
+                  <Link to={"/admin/articles/" + record.id}>{text}</Link>
+                ),
+            },
+            {
+                title: '浏览人数',
+                dataIndex: 'pageview'
+            },
+            {
+                title: '状态',
+                dataIndex: 'published',
+                render: published => (
+                  <span>
+                <Tag color={published ? 'blue' : '#838486'}>{published ? '已上架' : '未上架'}</Tag>
+            </span>
+                ),
+            },
+            {
+                title: '上架时间',
+                dataIndex: 'published_at'
+            },
+            {
+                title: '创建时间',
+                dataIndex: 'created_at'
+            },
+            {
+                title: '',
+                render: (text, record) => (
+                  <span>
+                      {
+                          record.published ?
+                            <a onClick={ (e) => { this.unpublish(record.id, e); }}>下架</a>
+                            :
+                            <a onClick={ (e) => { this.publish(record.id, e); }}>上架</a>
+                      }
+                      <Divider type="vertical" />
+                      <a onClick={ (e) => { this.deleteRecord(record.id, e); }}>删除</a>
+                  </span>
+                ),
+            },
+        ]
     }
 
     componentDidMount() {
@@ -145,16 +148,17 @@ class Index extends React.Component {
     showTotal = (total) => {
         return <span>{total} 条记录</span>;
     };
+
     onSelectChange = (keys) => {
         this.setState({ selectedRowKeys: keys });
     };
 
     batchPublish = () => {
         confirm({
-            title: '你确定要发布选中的文章?',
+            title: '你确定要上架选中的文章?',
             okType: 'danger',
             onOk: () => {
-                this.batchOperation("/api/admin/articles/batch_publish")
+                this.batchOperation("/api/admin/articles/batch_publish", this.state.selectedRowKeys)
             }
         });
     };
@@ -164,13 +168,12 @@ class Index extends React.Component {
             title: '你确定要下架选中的文章?',
             okType: 'danger',
             onOk: () => {
-                this.batchOperation("/api/admin/articles/batch_unpublish")
+                this.batchOperation("/api/admin/articles/batch_unpublish", this.state.selectedRowKeys)
             }
         });
     };
 
-    batchOperation = (url) => {
-        let keys = this.state.selectedRowKeys;
+    batchOperation = (url, keys) => {
         if(keys.length == 0){
             message.info("无选中记录！");
             return
@@ -181,11 +184,44 @@ class Index extends React.Component {
         }).then(response => {
             Modal.success({
                 content: '操作成功！',
-                onOk: () => {
-                    this.refreshData();
-                }
+                onOk: () => { this.refreshData() }
             });
         })
+    };
+
+    deleteRecord = (id, e) => {
+        confirm({
+            title: '你确定要删除此文章?',
+            okType: 'danger',
+            onOk: () => {
+                ajax.delete(`/api/admin/articles/${id}`, {
+                    headers: {"X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content}
+                }).then(response => {
+                    Modal.success({
+                        content: '操作成功！',
+                        onOk: () => { this.refreshData() }
+                    });
+                })
+            }
+        });
+    };
+    publish = (id, e) => {
+        confirm({
+            title: '你确定要上架此文章?',
+            okType: 'danger',
+            onOk: () => {
+                this.batchOperation("/api/admin/articles/batch_publish", [id])
+            }
+        });
+    };
+    unpublish = (id, e) => {
+        confirm({
+            title: '你确定要下架此文章?',
+            okType: 'danger',
+            onOk: () => {
+                this.batchOperation("/api/admin/articles/batch_unpublish", [id])
+            }
+        });
     };
 
     refreshData = () => {
@@ -231,12 +267,12 @@ class Index extends React.Component {
             <div>
                 <ArticleSearchForm onSubmit={this.handleSearch} onReset={this.handleReset}/>
                 <div className="table-operations">
-                    <Button onClick={this.batchPublish}>批量发布</Button>
+                    <Button onClick={this.batchPublish}>批量上架</Button>
                     <Button onClick={this.batchUnpublish}>批量下架</Button>
                 </div>
                 <Table
                   rowSelection={rowSelection}
-                  columns={columns}
+                  columns={this.columns}
                   dataSource={articles}
                   loading={loading}
                   pagination={pagination}
