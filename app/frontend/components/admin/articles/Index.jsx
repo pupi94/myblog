@@ -131,7 +131,7 @@ class Index extends React.Component {
     };
 
     handleReset = () => {
-        let pager = { ...this.state.pagination };
+        let pager = this.state.pagination;
         this.setState({ searchData: {} });
         this.fetchData({ per_page: pager.pageSize, page: pager.current })
     };
@@ -139,7 +139,9 @@ class Index extends React.Component {
     handleSearch = (form) => {
         form.validateFields((err, values) => {
             let pager = this.state.pagination;
-            this.setState({ searchData: values });
+            pager.current = 1;
+
+            this.setState({ searchData: values, pagination: pager });
             let params = this.mergeJsonObject(values, { per_page: pager.pageSize, page: pager.current } );
             this.fetchData(params)
         });
@@ -205,6 +207,7 @@ class Index extends React.Component {
             }
         });
     };
+
     publish = (id, e) => {
         confirm({
             title: '你确定要上架此文章?',
@@ -214,6 +217,7 @@ class Index extends React.Component {
             }
         });
     };
+
     unpublish = (id, e) => {
         confirm({
             title: '你确定要下架此文章?',
@@ -234,7 +238,7 @@ class Index extends React.Component {
         this.setState({ loading: true, selectedRowKeys: [] });
         ajax.get("/api/admin/articles", { data: params})
           .then(response => {
-              let pager = { ...this.state.pagination };
+              let pager = this.state.pagination;
               pager.total = response.count;
               this.setState({
                   articles: response.articles,
