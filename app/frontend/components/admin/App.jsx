@@ -33,9 +33,7 @@ class AdminApp extends React.Component {
                     <AppHeader/>
                     <Content style={{ marginTop: '50px', background: '#eef0f5', padding: '15px 15px 15px 30px'}}>
                         <AppBreadcrumb/>
-                        <div style={{background: '#fff', padding: 15 }}>
-                            <AppRouter/>
-                        </div>
+                        <AppRouter/>
                     </Content>
                     <Footer style={{ textAlign: 'center',background: '#fff', padding: '15px 50px' }}>Ant Design ©2018 Created by Ant UED</Footer>
                 </Layout>

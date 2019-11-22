@@ -1,6 +1,6 @@
 <div class='sign-in-container col-lg-5'>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "needs-validation", novalidate: true}) do |f| %>
-      <div class="form-title"><strong><%= t('management_system') %></strong></div>
+      <div class="form-title"><strong><%= t('.sign_in') %></strong></div>
 
       <div class="form-group email-group">
         <%= f.text_field :email, class: 'form-control', placeholder: t('.email_placeholder'), required: true %>

@@ -77,7 +77,7 @@ class Index extends React.Component {
                 title: '标题',
                 dataIndex: 'title',
                 render: (text, record) => (
-                  <Link to={"/admin/articles/" + record.id}>{text}</Link>
+                  <Link to={`/admin/articles/${record.id}`}>{text}</Link>
                 ),
             },
             {
@@ -184,10 +184,7 @@ class Index extends React.Component {
             data: { ids: keys.join(",") },
             headers: {"X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content}
         }).then(response => {
-            Modal.success({
-                content: '操作成功！',
-                onOk: () => { this.refreshData() }
-            });
+            this.refreshData();
         })
     };
 
@@ -199,10 +196,7 @@ class Index extends React.Component {
                 ajax.delete(`/api/admin/articles/${id}`, {
                     headers: {"X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content}
                 }).then(response => {
-                    Modal.success({
-                        content: '操作成功！',
-                        onOk: () => { this.refreshData() }
-                    });
+                    this.refreshData()
                 })
             }
         });

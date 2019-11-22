@@ -8,12 +8,6 @@ class Api::Admin::ArticlesController < Api::AdminController
     @count = @articles.total_count
   end
 
-  def create
-    @article = current_user.articles.new(article_params)
-    @article.save!
-    render_ok
-  end
-
   def batch_publish
     BatchPublishArticle.new(current_user, article_ids).call
     render_ok
@@ -29,17 +23,20 @@ class Api::Admin::ArticlesController < Api::AdminController
     render_ok
   end
 
-  def edit
-  end
+  def show; end
+
 
   def update
     @article.update!(article_params)
     render_ok
   end
 
-  def show
-    render "articles/show", layout: "application"
+  def create
+    @article = current_user.articles.new(article_params)
+    @article.save!
+    render_ok
   end
+
 
   private
     def article_params
