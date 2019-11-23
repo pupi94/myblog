@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Input, Form } from 'antd';
+const { TextArea } = Input;
 
 class ArticleForm extends React.Component {
     handleSubmit = (e) => {
@@ -15,23 +16,25 @@ class ArticleForm extends React.Component {
         const { getFieldDecorator } = this.props.form;
 
         return (
-          <Form onSubmit={this.handleSubmit}>
+          <div style={ { width: '70%', marginLeft: "auto", marginRight: "auto" } }>
+            <Form onSubmit={this.handleSubmit}>
               <Form.Item>
-                  {
-                    getFieldDecorator('username', { rules: [{ required: true, message: 'Please input your username!' }] })
-                    (<Input placeholder="Username"/>)
-                  }
+                {
+                  getFieldDecorator('title', { rules: [{ required: true, message: 'Please input title' }] })
+                  (<Input size="large" placeholder="标题"/>)
+                }
               </Form.Item>
               <Form.Item>
-                  {
-                    getFieldDecorator('password', { rules: [{ required: true, message: 'Please input your Password!' }] })
-                    (<Input type="password" placeholder="Password"/>)
-                  }
+                {
+                  getFieldDecorator('content', { rules: [] })
+                  (<TextArea rows={25} />)
+                }
               </Form.Item>
               <Form.Item>
-                  <Button type="primary" htmlType="submit">Log in</Button>
+                <Button type="primary" htmlType="submit">保存</Button>
               </Form.Item>
-          </Form>
+            </Form>
+          </div>
         )
     }
 }
