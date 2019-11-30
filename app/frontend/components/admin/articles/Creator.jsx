@@ -3,27 +3,24 @@ import ArticleForm from "./Form"
 import ajax from "../../utils/Request";
 import {message} from "antd";
 
-class Editor extends React.Component {
+class Creator extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            article: {}
-        };
-        this.id = props.match.params.id;
+        this.state = {};
     }
 
     onSubmit = (article) => {
-        ajax.patch(`/api/admin/articles/${this.id}`, {
+        ajax.post("/api/admin/articles", {
             data: { article: article }
         }).then(response => {
             this.props.history.push("/admin/articles");
-            message.success("修改成功");
+            message.success("创建成功");
         })
     };
 
     render() {
-        return (<div> <ArticleForm articleId={ this.id } onSubmit={this.onSubmit} /> </div>)
+        return (<div> <ArticleForm onSubmit={this.onSubmit}/> </div>)
     }
 }
 
-export default Editor;
+export default Creator;

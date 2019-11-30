@@ -15,6 +15,10 @@ class SearchForm extends React.Component {
         this.props.onReset()
     };
 
+    handleSelect = () => {
+        this.props.onSubmit(this.props.form)
+    };
+
     render() {
         const { getFieldDecorator } = this.props.form;
 
@@ -28,7 +32,7 @@ class SearchForm extends React.Component {
                                   initialValue: ""
                               })
                               (
-                                <Select>
+                                <Select onChange={this.handleSelect}>
                                     <Select.Option value="">全部</Select.Option>
                                     <Select.Option value="true">已上架</Select.Option>
                                     <Select.Option value="false">已下架</Select.Option>
@@ -181,8 +185,7 @@ class Index extends React.Component {
             return
         }
         ajax.patch(url, {
-            data: { ids: keys.join(",") },
-            headers: {"X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content}
+            data: { ids: keys.join(",") }
         }).then(response => {
             this.refreshData();
         })
@@ -193,9 +196,7 @@ class Index extends React.Component {
             title: '你确定要删除此文章?',
             okType: 'danger',
             onOk: () => {
-                ajax.delete(`/api/admin/articles/${id}`, {
-                    headers: {"X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content}
-                }).then(response => {
+                ajax.delete(`/api/admin/articles/${id}`).then(response => {
                     this.refreshData()
                 })
             }
@@ -267,6 +268,9 @@ class Index extends React.Component {
                 <div className="table-operations">
                     <Button onClick={this.batchPublish}>批量上架</Button>
                     <Button onClick={this.batchUnpublish}>批量下架</Button>
+                    <Link to={"/admin/articles/new"} style={{float: 'right' }}>
+                        <Button type="primary">创建</Button>
+                    </Link>
                 </div>
                 <Table
                   rowSelection={rowSelection}

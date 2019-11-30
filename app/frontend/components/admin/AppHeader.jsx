@@ -17,9 +17,7 @@ class AppHeader extends React.Component {
             })
     }
     logout() {
-        ajax.delete("/users/sign_out", {
-            headers: {"X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content}
-        }).then(response => {
+        ajax.delete("/users/sign_out").then(response => {
             window.location.href="/";
         });
     }

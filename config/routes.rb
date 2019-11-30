@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :admin do
       resource :user, only: [:show]
-      resources :articles, only: [:show, :index, :destroy] do
+      resources :articles, only: [:show, :index, :destroy, :update, :create] do
         collection do
           patch :batch_publish
           patch :batch_unpublish

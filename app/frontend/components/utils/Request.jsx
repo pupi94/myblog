@@ -14,25 +14,61 @@ class Request {
     };
 
     post = (url, options = {}) => {
-
-    };
-
-    delete = (url, options = {}) => {
-        let opts = { method: "DELETE" };
+        let opts = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
+            },
+        };
         if(options.headers){
-            opts.headers = options.headers
+            opts.headers = this._mergeHeaders(opts.headers, options.headers)
+        }
+        if(options.data) {
+            opts.body = JSON.stringify(options.data)
         }
         return this._request(url, opts)
     };
 
-    put = (url, options = {}) =>{
+    delete = (url, options = {}) => {
+        let opts = {
+            method: "DELETE",
+            headers: {
+                "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
+            }
+        };
+        if(options.headers){
+            opts.headers = this._mergeHeaders(opts.headers, options.headers)
+        }
 
+        return this._request(url, opts)
+    };
+
+    put = (url, options = {}) =>{
+        let opts = {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
+            },
+        };
+
+        if(options.headers){
+            opts.headers = this._mergeHeaders(opts.headers, options.headers)
+        }
+        if(options.data) {
+            opts.body = JSON.stringify(options.data)
+        }
+        return this._request(url, opts)
     };
 
     patch = (url, options = {}) =>{
         let opts = {
             method: "PATCH",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
+            },
         };
 
         if(options.headers){
