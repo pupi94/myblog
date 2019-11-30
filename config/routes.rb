@@ -21,6 +21,8 @@ Rails.application.routes.draw do
           patch :batch_unpublish
         end
       end
+
+      resources :collections, only: [:show, :index, :destroy, :update, :create]
     end
 
     match "*path", to: "base#render_not_found", via: :all

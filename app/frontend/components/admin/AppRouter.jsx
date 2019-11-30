@@ -2,9 +2,13 @@ import React from "react";
 import { Switch, Route } from 'react-router-dom'
 
 import Dashboard from "./Dashboard";
-import ArticleIndex from "./articles/Index";
-import ArticleEditor from "./articles/Editor";
-import ArticleCreator from "./articles/Creator";
+import ArticleIndex from "./article/Index";
+import ArticleEditor from "./article/Editor";
+import ArticleCreator from "./article/Creator";
+import CollectionIndex from "./collection/Index";
+import CollectionEditor from "./collection/Editor";
+import CollectionCreator from "./collection/Creator";
+
 import NoMatch from "./NoMatch";
 
 const routes = [
@@ -12,6 +16,9 @@ const routes = [
   { path: "/admin/articles/new", component: ArticleCreator },
   { path: "/admin/articles/:id", component: ArticleEditor },
   { path: "/admin/articles", exact: true, component: ArticleIndex },
+  { path: "/admin/collections/new", component: CollectionCreator },
+  { path: "/admin/collections/:id", component: CollectionEditor },
+  { path: "/admin/collections", exact: true, component: CollectionIndex },
   { path: "/admin/*", component: NoMatch }
 ];
 

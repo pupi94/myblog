@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout, Menu, Breadcrumb, Icon, Dropdown, message } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
 import { Link } from "react-router-dom";
 
 import AppHeader from "./AppHeader";
@@ -17,11 +17,11 @@ class AdminApp extends React.Component {
                     <div className="logo" style={{color: "#FFF"}}/>
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
                         <Menu.Item key="1">
-                            <Link to="/admin"><Icon type="pie-chart" /><span>概览</span></Link>
+                            <Link to="/admin"><Icon type="pie-chart"/><span>概览</span></Link>
                         </Menu.Item>
                         <SubMenu key="sub1" title={<span><Icon type="container"/><span>博客</span></span>}>
                             <Menu.Item key="2"><Link to="/admin/articles">博客管理</Link></Menu.Item>
-                            <Menu.Item key="3">博客专辑</Menu.Item>
+                            <Menu.Item key="3"><Link to="/admin/collections">博客专辑</Link></Menu.Item>
                         </SubMenu>
                         <SubMenu key="sub2" title={<span><Icon type="picture" /><span>相册</span></span>}>
                             <Menu.Item key="4">图片管理</Menu.Item>

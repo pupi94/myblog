@@ -37,7 +37,7 @@ class AppHeader extends React.Component {
             <div className="admin-header">
                 <div style={{marginRight: '230px', float: 'right'}}>
                     <div style={{display: "inline-block", marginRight: '30px'}}>
-                        <a href="/"><Icon type="home"/><span>店铺首页</span></a>
+                        <a href="/"><Icon type="home"/><span>网站首页</span></a>
                     </div>
                     <Dropdown overlay={menu}>
                         <a className="ant-dropdown-link" href="#">

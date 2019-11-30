@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+{
+    count: @count,
+    collections: @collections.map do |collection|
+      {
+          id: collection.id,
+          title: collection.title,
+          created_at: collection.created_at.utc.iso8601
+      }
+    end
+}

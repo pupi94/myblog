@@ -6,6 +6,7 @@ const breadcrumbNameMap = {
     '/admin': <Icon type="home" />,
     //'/admin/articles/:id': '编辑',
     '/admin/articles': '博客管理',
+    '/admin/collections': '博客专辑'
 };
 
 class AppBreadcrumb extends React.Component {

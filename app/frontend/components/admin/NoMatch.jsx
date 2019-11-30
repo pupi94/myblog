@@ -1,5 +1,5 @@
 import React from 'react'
-import {Result, Button, Breadcrumb} from 'antd';
+import {Result, Button} from 'antd';
 import {Link} from "react-router-dom";
 
 class NoMatch extends React.Component {

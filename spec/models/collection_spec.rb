@@ -2,18 +2,18 @@
 
 require "rails_helper"
 
-RSpec.describe Article, type: :model do
+RSpec.describe Collection, type: :model do
   describe "association" do
     it { should belong_to(:user) }
-    it { should have_many(:collections) }
+    it { should have_many(:articles) }
     it { should have_many(:collection_articles) }
   end
 
   describe ".validate" do
-    let(:article) { build(:article) }
+    let(:collection) { build(:collection) }
 
     it "be valid" do
-      expect(article).to be_valid
+      expect(collection).to be_valid
     end
 
     context "presence" do

@@ -8,4 +8,5 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 32 }
 
   has_many :articles
+  has_many :collections
 end

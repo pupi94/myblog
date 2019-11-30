@@ -24,9 +24,10 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+
 <div class="pic-container">
   <div class="container-t">
-    <h3>我的靓照</h3>
+    <h3>我的相簿</h3>
     <p>My Album</p>
   </div>
   <div class="pic-group">
@@ -40,84 +41,21 @@
   <div class="pic-list">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-3 col-xs-12">
-          <div class="pic-box">
-            <a href="#">
-              <%= image_tag asset_pack_path 'media/images/201606131517538ua3.jpg', class: "rounded mx-auto d-block", alt: "xxx，测试照片，一个小孩子" %>
-              <div class="pic-info">
-                <div>
-                  <h4>xxx，测试照片，一个小孩子"</h4>
-                  <p>2011-08-12</p>
+        <% 6.times do |n| %>
+          <div class="col-lg-3 col-md-4 col-sm-3 col-xs-12">
+            <div class="pic-box">
+              <a href="#">
+                <%= image_tag asset_pack_path 'media/images/201606131517538ua3.jpg', class: "rounded mx-auto d-block", alt: "xxx，测试照片，一个小孩子" %>
+                <div class="pic-info">
+                  <div>
+                    <h4>xxx，测试照片，一个小孩子"</h4>
+                    <p>2011-08-12</p>
+                  </div>
                 </div>
-              </div>
-            </a>
+              </a>
+            </div>
           </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-3 col-xs-12">
-          <div class="pic-box">
-            <a href="#">
-              <%= image_tag asset_pack_path 'media/images/201606131517538ua3.jpg', class: "rounded mx-auto d-block", alt: "xxx，测试照片，一个小孩子" %>
-              <div class="pic-info">
-                <div>
-                  <h4>xxx，测试照片，一个小孩子"</h4>
-                  <p>2011-08-12</p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-3 col-xs-12">
-          <div class="pic-box">
-            <a href="#">
-              <%= image_tag asset_pack_path 'media/images/201606131517538ua3.jpg', class: "rounded mx-auto d-block", alt: "xxx，测试照片，一个小孩子" %>
-              <div class="pic-info">
-                <div>
-                  <h4>xxx，测试照片，一个小孩子"</h4>
-                  <p>2011-08-12</p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-3 col-xs-12">
-          <div class="pic-box">
-            <a href="#">
-              <%= image_tag asset_pack_path 'media/images/201606131517538ua3.jpg', class: "rounded mx-auto d-block", alt: "xxx，测试照片，一个小孩子" %>
-              <div class="pic-info">
-                <div>
-                  <h4>xxx，测试照片，一个小孩子"</h4>
-                  <p>2011-08-12</p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-3 col-xs-12">
-          <div class="pic-box">
-            <a href="#">
-              <%= image_tag asset_pack_path 'media/images/201606131517538ua3.jpg', class: "rounded mx-auto d-block", alt: "xxx，测试照片，一个小孩子" %>
-              <div class="pic-info">
-                <div>
-                  <h4>xxx，测试照片，一个小孩子"</h4>
-                  <p>2011-08-12</p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-3 col-xs-12">
-          <div class="pic-box">
-            <a href="#">
-              <%= image_tag asset_pack_path 'media/images/201606131517538ua3.jpg', class: "rounded mx-auto d-block", alt: "xxx，测试照片，一个小孩子" %>
-              <div class="pic-info">
-                <div>
-                  <h4>xxx，测试照片，一个小孩子"</h4>
-                  <p>2011-08-12</p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>

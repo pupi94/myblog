@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+{
+  collection: {
+    id: @collection.id,
+    title: @collection.title,
+    description: @collection.description,
+    articles: @collection.articles.map do |article|
+      {
+        id: article.id,
+        title: article.title
+      }
+    end
+  }
+}

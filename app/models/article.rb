@@ -2,6 +2,8 @@
 
 class Article < ApplicationRecord
   belongs_to :user
+  has_many :collection_articles, dependent: :destroy
+  has_many :collections, through: :collection_articles
 
   validates :title, presence: true, length: { maximum: 255 }
 
@@ -17,6 +19,7 @@ class Article < ApplicationRecord
   def search_data
     {
       user_id: user_id,
+      collection_ids: collection_articles.pluck(:collection_id),
       title: title,
       content: content,
       published: published,
