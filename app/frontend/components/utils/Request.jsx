@@ -82,18 +82,21 @@ class Request {
 
     _request = (url, opts) => {
         return fetch(url, opts)
-          .catch((error) => {
-            message.error("网络异常");
-            throw error
-          }).then(response => {
+          .then(response => {
               if(response.status === 204){
                   return response
-              }else if(response.status >= 200 && response.status < 300){
+              }else if(response.status === 200){
                   return response.json()
-              }else{
+              }else if(response.status >= 400 && response.status <= 500){
                   message.error(response.statusText);
+                  throw new Error(response.statusText);
+              }else {
+                  message.error("系统异常！");
                   throw new Error(response.statusText)
               }
+          }).catch((error) => {
+              message.error("网络异常");
+              throw error
           })
     };
 
@@ -110,7 +113,7 @@ class Request {
             headers1[attr] = headers2[attr];
         }
         return headers1;
-    }
+    };
 }
 const ajax = new Request();
 export default ajax;

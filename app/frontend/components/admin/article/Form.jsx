@@ -1,8 +1,9 @@
 import React from 'react'
-import { Button, Input, Form, Drawer } from 'antd';
+import { Button, Input, Form, Drawer, Select } from 'antd';
 import Markdown from 'react-markdown/with-html';
 import ajax from "../../utils/Request";
 
+const { Option } = Select;
 const { TextArea } = Input;
 
 class ArticleForm extends React.Component {
@@ -53,15 +54,33 @@ class ArticleForm extends React.Component {
       return (
         <div className="form-page">
           <Form onSubmit={this.handleSubmit}>
-            <Form.Item style={{marginBottom: 15}}>
-              {
-                getFieldDecorator('title', {
-                  rules: [{ required: true, message: '请输入标题' }],
-                  initialValue: article.title
-                })
-                (<Input size="large" placeholder="标题"/>)
-              }
-            </Form.Item>
+            <div style={{display: 'flex'}}>
+              <Form.Item style={{width: '30%', marginRight: '15px', marginBottom: '15px'}}>
+                {
+                  getFieldDecorator('collection_ids', {
+                    rules: [{ required: true, message: '请选择所属专辑' }],
+                    initialValue: article.collection_ids
+                  })
+                  (
+                    <Select mode="multiple" size="large" placeholder="所属专辑">
+                      <Option value="red">Red</Option>
+                      <Option value="green">Green</Option>
+                      <Option value="blue">Blue</Option>
+                    </Select>
+                  )
+                }
+              </Form.Item>
+
+              <Form.Item style={{flex: '1', marginBottom: '15px'}}>
+                {
+                  getFieldDecorator('title', {
+                    rules: [{ required: true, message: '请输入标题' }],
+                    initialValue: article.title
+                  })
+                  (<Input size="large" placeholder="标题"/>)
+                }
+              </Form.Item>
+            </div>
             <div style={{height: 35}}>
               <Button style={{float: 'right'}} onClick={this.showDrawer}>预览</Button>
             </div>

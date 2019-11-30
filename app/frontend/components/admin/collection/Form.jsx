@@ -37,16 +37,16 @@ class CollectionForm extends React.Component {
       return (
         <div className='form-page'>
           <Form onSubmit={this.handleSubmit}>
-            <Form.Item style={{marginBottom: 15}}>
+            <Form.Item style={{marginBottom: 15}} label="专辑名称">
               {
-                getFieldDecorator('title', {
-                  rules: [{ required: true, message: '请输入标题' }],
+                getFieldDecorator('name', {
+                  rules: [{ required: true, message: '请输入专辑名称' }],
                   initialValue: collection.title
                 })
-                (<Input size="large" placeholder="标题"/>)
+                (<Input size="large"/>)
               }
             </Form.Item>
-            <Form.Item>
+            <Form.Item label="专辑描述">
                 {
                   getFieldDecorator('description', {
                     rules: [],

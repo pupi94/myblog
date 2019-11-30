@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2019_11_30_055729) do
 
   create_table "collections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id"
-    t.string "title"
+    t.string "name"
     t.text "description"
     t.integer "article_count", default: 0
     t.datetime "created_at", precision: 6, null: false

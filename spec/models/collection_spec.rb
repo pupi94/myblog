@@ -17,11 +17,11 @@ RSpec.describe Collection, type: :model do
     end
 
     context "presence" do
-      it { should validate_presence_of(:title).with_message("can't be blank") }
+      it { should validate_presence_of(:name).with_message("can't be blank") }
     end
 
     context "length" do
-      it { should validate_length_of(:title).is_at_most(255).with_message("is too long (maximum is 255 characters)") }
+      it { should validate_length_of(:name).is_at_most(30).with_message("is too long (maximum is 30 characters)") }
     end
   end
 end

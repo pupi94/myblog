@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :collection, class: Collection do
     user
-    title     { "test title" }
+    name     { "name" }
     description { "test description" }
   end
 end

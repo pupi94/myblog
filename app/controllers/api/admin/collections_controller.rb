@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::Admin::CollectionsController < Api::AdminController
-  before_action :load_collection, only: %i[publish show update unpublish destroy]
+  before_action :load_collection, only: %i[show update destroy]
 
   def index
     collections = current_user.collections.includes(:articles)
@@ -28,7 +28,7 @@ class Api::Admin::CollectionsController < Api::AdminController
 
   private
     def collection_params
-      params.require(:collection).permit(:title, :description, article_ids: [])
+      params.require(:collection).permit(:name, :description)
     end
 
     def load_collection

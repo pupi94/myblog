@@ -5,7 +5,7 @@
     collections: @collections.map do |collection|
       {
           id: collection.id,
-          title: collection.title,
+          name: collection.name,
           article_count: collection.article_count,
           created_at: collection.created_at.utc.iso8601
       }
