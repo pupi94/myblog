@@ -5,12 +5,14 @@ import Dashboard from "./Dashboard";
 import ArticleIndex from "./articles/Index";
 import ArticleEditor from "./articles/Editor";
 import ArticleCreator from "./articles/Creator";
+import NoMatch from "./NoMatch";
 
 const routes = [
   { path: "/admin", exact: true, component: Dashboard },
   { path: "/admin/articles/new", component: ArticleCreator },
   { path: "/admin/articles/:id", component: ArticleEditor },
-  { path: "/admin/articles", exact: true, component: ArticleIndex }
+  { path: "/admin/articles", exact: true, component: ArticleIndex },
+  { path: "/admin/*", component: NoMatch }
 ];
 
 class AppRouter extends React.Component {
