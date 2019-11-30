@@ -6,6 +6,7 @@
       {
           id: collection.id,
           title: collection.title,
+          article_count: collection.article_count,
           created_at: collection.created_at.utc.iso8601
       }
     end

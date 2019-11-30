@@ -263,7 +263,7 @@ class Index extends React.Component {
         };
 
         return (
-            <div>
+            <div className='index-page'>
                 <ArticleSearchForm onSubmit={this.handleSearch} onReset={this.handleReset}/>
                 <div className="table-operations">
                     <Button onClick={this.batchPublish}>批量上架</Button>

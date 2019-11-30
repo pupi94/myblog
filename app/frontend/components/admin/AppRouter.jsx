@@ -25,15 +25,13 @@ const routes = [
 class AppRouter extends React.Component {
   render() {
     return (
-      <div style={{background: '#fff', padding: 15 }}>
-        <Switch>
-          {
-            routes.map( (route, index) => (
-              <Route path={route.path} exact={route.exact} component={ route.component } key={index} />
-            ))
-          }
-        </Switch>
-      </div>
+      <Switch>
+        {
+          routes.map( (route, index) => (
+            <Route path={route.path} exact={route.exact} component={ route.component } key={index} />
+          ))
+        }
+      </Switch>
     )
   }
 }

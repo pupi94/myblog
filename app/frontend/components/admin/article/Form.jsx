@@ -51,9 +51,9 @@ class ArticleForm extends React.Component {
       let { getFieldDecorator } = this.props.form;
       let { article } = this.state;
       return (
-        <div className="article-form">
+        <div className="form-page">
           <Form onSubmit={this.handleSubmit}>
-            <Form.Item style={{marginBottom: 15, marginTop: 30}}>
+            <Form.Item style={{marginBottom: 15}}>
               {
                 getFieldDecorator('title', {
                   rules: [{ required: true, message: '请输入标题' }],
@@ -92,9 +92,7 @@ class ArticleForm extends React.Component {
                 </div>
               </Drawer>
             </div>
-            <Form.Item>
-              <Button type="primary" htmlType="submit">保存</Button>
-            </Form.Item>
+            <Button type="primary" htmlType="submit">保存</Button>
           </Form>
         </div>
       )

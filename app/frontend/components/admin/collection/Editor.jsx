@@ -22,7 +22,7 @@ class Editor extends React.Component {
     };
 
     render() {
-        return (<div> <CollectionForm collectionId={ this.id } onSubmit={this.onSubmit} /> </div>)
+        return <CollectionForm collectionId={ this.id } onSubmit={this.onSubmit} />
     }
 }
 

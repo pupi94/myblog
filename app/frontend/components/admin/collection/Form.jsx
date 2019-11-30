@@ -35,9 +35,9 @@ class CollectionForm extends React.Component {
       let { getFieldDecorator } = this.props.form;
       let { collection } = this.state;
       return (
-        <div className="collection-form">
+        <div className='form-page'>
           <Form onSubmit={this.handleSubmit}>
-            <Form.Item style={{marginBottom: 15, marginTop: 30}}>
+            <Form.Item style={{marginBottom: 15}}>
               {
                 getFieldDecorator('title', {
                   rules: [{ required: true, message: '请输入标题' }],
@@ -52,12 +52,10 @@ class CollectionForm extends React.Component {
                     rules: [],
                     initialValue: collection.description
                   })
-                  (<TextArea rows={10} />)
+                  (<TextArea rows={5} />)
                 }
             </Form.Item>
-            <Form.Item>
-              <Button type="primary" htmlType="submit">保存</Button>
-            </Form.Item>
+            <Button type="primary" htmlType="submit">保存</Button>
           </Form>
         </div>
       )

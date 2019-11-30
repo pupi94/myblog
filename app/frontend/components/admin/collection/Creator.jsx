@@ -19,7 +19,7 @@ class Creator extends React.Component {
     };
 
     render() {
-        return (<div> <CollectionForm onSubmit={this.onSubmit}/> </div>)
+        return <CollectionForm onSubmit={this.onSubmit}/>
     }
 }
 

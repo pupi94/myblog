@@ -27,6 +27,10 @@ class Index extends React.Component {
                 ),
             },
             {
+                title: '文章数量',
+                dataIndex: 'article_count'
+            },
+            {
                 title: '创建时间',
                 dataIndex: 'created_at'
             },
@@ -89,7 +93,7 @@ class Index extends React.Component {
         let { collections, loading, pagination } = this.state;
 
         return (
-            <div>
+            <div className='index-page'>
                 <div className="table-operations">
                     <Link to={"/admin/collections/new"} style={{float: 'right' }}>
                         <Button type="primary">创建</Button>
