@@ -1,15 +1,14 @@
 # frozen_string_literal: true
 
 class Article < ApplicationRecord
-  include MarkdownHelper
-  include AASM
-
-  belongs_to :label
   belongs_to :user
+  has_many :collection_articles, dependent: :destroy
+  has_many :collections, through: :collection_articles
 
   validates :title, presence: true, length: { maximum: 255 }
 
   scope :published, -> { where(published: true) }
+  scope :unpublished, -> { where(published: false) }
 
   searchkick searchable: [:title, :body],
     filterable: [:label_id, :user_id, :published],
@@ -20,18 +19,13 @@ class Article < ApplicationRecord
   def search_data
     {
       user_id: user_id,
-      label_id: label_id,
+      collection_ids: collection_articles.pluck(:collection_id),
       title: title,
-      body: body,
+      content: content,
       published: published,
       created_at: created_at,
       published_at: published_at
     }
-  end
-
-  before_save :set_body_html
-  def set_body_html
-    self.body_html = convert_html(body)
   end
 
   def publish!

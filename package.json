@@ -2,15 +2,24 @@
   "name": "myblog",
   "private": true,
   "dependencies": {
+    "@babel/preset-react": "^7.0.0",
     "@rails/ujs": "^6.0.0-alpha",
     "@rails/webpacker": "^4.0.7",
-    "bootstrap": "^4.3.1",
-    "jquery": "^3.4.1",
-    "popper.js": "^1.15.0",
+    "antd": "^3.24.1",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "bootstrap": "4.3.1",
+    "github-markdown-css": "^3.0.1",
+    "jquery": "3.4",
+    "popper.js": "^1.16.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-markdown": "^4.2.2",
+    "react-router-dom": "^5.1.2",
     "turbolinks": "^5.2.0"
   },
+  "version": "0.1.0",
   "devDependencies": {
-    "expose-loader": "^0.7.5",
     "webpack-dev-server": "^3.8.0"
   }
 }

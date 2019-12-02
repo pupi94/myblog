@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class CreateUsers < ActiveRecord::Migration[5.0]
+class CreateUsers < ActiveRecord::Migration[6.0]
   def up
-    create_table :users do |t|
-      t.string :username, null: false, limit: 32
+    create_table :users, id: :uuid do |t|
+      t.string :name, null: false, limit: 32
 
       ## Database authenticatable
       t.string :email,              null: false

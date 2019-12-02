@@ -3,6 +3,12 @@
 require "rails_helper"
 
 RSpec.describe Article, type: :model do
+  describe "association" do
+    it { should belong_to(:user) }
+    it { should have_many(:collections) }
+    it { should have_many(:collection_articles) }
+  end
+
   describe ".validate" do
     let(:article) { build(:article) }
 

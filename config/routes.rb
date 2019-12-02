@@ -3,29 +3,28 @@
 Rails.application.routes.draw do
   root "home#index"
 
-  devise_for(:users,
-             only: %i[sessions registrations],
-             controllers: {
-               sessions: "users/sessions",
-               registrations: "users/registrations"
-             })
+  devise_for :users, only: %i[sessions], controllers: { sessions: "users/sessions" }
 
   resources :articles, only: %i[show index]
 
   namespace :admin do
     root "home#index"
-
-    resources :articles do
-      member do
-        patch :publish
-        patch :unpublish
-      end
-    end
-
-    resources :labels, only: %i[index create update destroy]
-
-    post "markdown/convert_html"
+    get "/*path" => "home#index"
   end
 
-  match "*path", to: "error#no_match", via: :all
+  namespace :api, defaults: { format: :json } do
+    namespace :admin do
+      resource :user, only: [:show]
+      resources :articles, only: [:show, :index, :destroy, :update, :create] do
+        collection do
+          patch :batch_publish
+          patch :batch_unpublish
+        end
+      end
+
+      resources :collections, only: [:show, :index, :destroy, :update, :create]
+    end
+
+    match "*path", to: "base#render_not_found", via: :all
+  end
 end

@@ -1,0 +1,17 @@
+# frozen_string_literal: true
+
+{
+  article: {
+    id: @article.id,
+    title: @article.title,
+    published: @article.published,
+    content: @article.content,
+    html_content: @article.html_content,
+    collections: @article.collections.map do |collection|
+      {
+        id: collection.id,
+        name: collection.name
+      }
+    end
+  }
+}
