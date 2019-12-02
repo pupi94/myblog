@@ -6,7 +6,7 @@
       {
           id: collection.id,
           name: collection.name,
-          article_count: collection.article_count,
+          article_count: collection.collection_articles.size,
           created_at: collection.created_at.utc.iso8601
       }
     end

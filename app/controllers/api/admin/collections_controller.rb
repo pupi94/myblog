@@ -4,7 +4,7 @@ class Api::Admin::CollectionsController < Api::AdminController
   before_action :load_collection, only: %i[show update destroy]
 
   def index
-    collections = current_user.collections.includes(:articles)
+    collections = current_user.collections.includes(:collection_articles)
     @count = collections.count
     @collections = paginate(collections)
   end

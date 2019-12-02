@@ -20,7 +20,7 @@ class Index extends React.Component {
         };
         this.columns = [
             {
-                name: '标题',
+                title: '专辑名称',
                 dataIndex: 'name',
                 render: (text, record) => (
                   <Link to={`/admin/collections/${record.id}`}>{text}</Link>

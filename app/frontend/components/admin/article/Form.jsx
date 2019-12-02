@@ -3,7 +3,6 @@ import { Button, Input, Form, Drawer, Select } from 'antd';
 import Markdown from 'react-markdown/with-html';
 import ajax from "../../utils/Request";
 
-const { Option } = Select;
 const { TextArea } = Input;
 
 class ArticleForm extends React.Component {
@@ -12,24 +11,38 @@ class ArticleForm extends React.Component {
     this.state = {
       visible: false,
       content: null,
-      article: {}
+      article: {},
+      selectedCollections: [],
+      collections: []
     };
     this.articleId = this.props.articleId;
   }
+  handleSelectChange = (_, selectedItems) => {
+    this.setState({ selectedCollections: selectedItems.map(item => item.key)});
+  };
 
   componentDidMount() {
     if(this.articleId){
       ajax.get(`/api/admin/articles/${this.articleId}`)
         .then(response => {
           this.setState({ article: response.article });
+          let collections = response.article.collections.map((c) => {
+            return { key: c.id, label: c.name }
+          });
+          this.setState({ selectedCollections: collections});
         });
     }
+    ajax.get("/api/admin/collections")
+      .then(response => {
+        this.setState({ collections: response.collections });
+      });
   }
 
   handleSubmit = (e) => {
       e.preventDefault();
       this.props.form.validateFields((err, values) => {
           if (!err) {
+            values.collection_ids = values.collection_ids.map(c => c.key);
             this.props.onSubmit(values);
           }
       });
@@ -50,7 +63,9 @@ class ArticleForm extends React.Component {
 
   render() {
       let { getFieldDecorator } = this.props.form;
-      let { article } = this.state;
+      let { article, selectedCollections, collections } = this.state;
+      let filteredOptions = collections.filter(o => !selectedCollections.includes(o.id));
+
       return (
         <div className="form-page">
           <Form onSubmit={this.handleSubmit}>
@@ -59,13 +74,22 @@ class ArticleForm extends React.Component {
                 {
                   getFieldDecorator('collection_ids', {
                     rules: [{ required: true, message: '请选择所属专辑' }],
-                    initialValue: article.collection_ids
+                    initialValue: selectedCollections
                   })
                   (
-                    <Select mode="multiple" size="large" placeholder="所属专辑">
-                      <Option value="red">Red</Option>
-                      <Option value="green">Green</Option>
-                      <Option value="blue">Blue</Option>
+                    <Select
+                      showSearch={true}
+                      labelInValue={true}
+                      mode="multiple"
+                      size="large"
+                      placeholder="所属专辑"
+                      onChange={this.handleSelectChange}
+                    >
+                      {filteredOptions.map(item => (
+                        <Select.Option key={item.id}>
+                          {item.name}
+                        </Select.Option>
+                      ))}
                     </Select>
                   )
                 }

@@ -4,9 +4,14 @@
   article: {
     id: @article.id,
     title: @article.title,
-    pageview: @article.pageview,
     published: @article.published,
     content: @article.content,
-    html_content: @article.html_content
+    html_content: @article.html_content,
+    collections: @article.collections.map do |collection|
+      {
+        id: collection.id,
+        name: collection.name
+      }
+    end
   }
 }

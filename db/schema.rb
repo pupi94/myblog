@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 2019_11_30_055729) do
     t.uuid "user_id"
     t.string "name"
     t.text "description"
-    t.integer "article_count", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_collections_on_user_id"

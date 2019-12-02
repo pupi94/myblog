@@ -20,6 +20,7 @@ module Admin
         order: order_clause,
         per_page: per_page,
         page: page,
+        includes: ["collections"],
         body_options: { min_score: 0.5 }
     end
 

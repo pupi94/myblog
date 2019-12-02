@@ -4,7 +4,6 @@ class CreateCollections < ActiveRecord::Migration[6.0]
       t.references :user, type: :uuid
       t.string :name
       t.text :description
-      t.integer :article_count, default: 0
       t.timestamps
     end
   end

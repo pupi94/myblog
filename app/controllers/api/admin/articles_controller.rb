@@ -26,18 +26,18 @@ class Api::Admin::ArticlesController < Api::AdminController
   def show; end
 
   def update
-    @article.update!(article_params)
+    UpdateArticle.new(@article, article_params).call
     render_ok
   end
 
   def create
-    @article = current_user.articles.create!(article_params)
+    CreateArticle.new(current_user, article_params).call
     render_ok
   end
 
   private
     def article_params
-      params.require(:article).permit(:title, :content)
+      params.require(:article).permit(:title, :content, collection_ids: [])
     end
 
     def query_params
