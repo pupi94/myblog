@@ -19,6 +19,7 @@ class Api::Admin::ArticlesController < Api::AdminController
   end
 
   def destroy
+    @article.collection_articles.delete_all
     @article.destroy!
     render_ok
   end

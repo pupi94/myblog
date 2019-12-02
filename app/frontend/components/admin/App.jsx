@@ -24,7 +24,7 @@ class AdminApp extends React.Component {
                             <Menu.Item key="3"><Link to="/admin/collections">博客专辑</Link></Menu.Item>
                         </SubMenu>
                         <SubMenu key="sub2" title={<span><Icon type="picture" /><span>相册</span></span>}>
-                            <Menu.Item key="4">图片管理</Menu.Item>
+                            <Menu.Item key="4"><Link to="/admin/pictures">图片管理</Link></Menu.Item>
                             <Menu.Item key="5">图片专辑</Menu.Item>
                         </SubMenu>
                     </Menu>

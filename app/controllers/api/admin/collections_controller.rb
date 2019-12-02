@@ -10,6 +10,7 @@ class Api::Admin::CollectionsController < Api::AdminController
   end
 
   def destroy
+    @collection.collection_articles.delete_all
     @collection.destroy!
     render_ok
   end
