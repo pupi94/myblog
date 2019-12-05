@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link } from "react-router-dom";
-import {Button, Card, Icon} from 'antd';
+import {Link, Route} from "react-router-dom";
+import {Button, Card, Icon, Pagination} from 'antd';
 import ajax from "../../utils/Request"
 const { Meta } = Card;
 
@@ -17,24 +17,87 @@ class Index extends React.Component {
         console.log(e.currentTarget);
         console.log(e)
     };
+    showTotal = (total) => {
+        return <span>{total} 条记录</span>;
+    };
 
     render() {
+        let pictures = [
+            {
+                src: "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
+                title: "JiqGstEfoWAOHiTxclqi.png",
+            },
+            {
+                src: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
+                title: "QBnOOoLaAfKPirc.png",
+            },
+            {
+                src: "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
+                title: "JiqGstEfoWAOHiTxclqi.png",
+            },
+            {
+                src: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
+                title: "QBnOOoLaAfKPirc.png",
+            },
+            {
+                src: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
+                title: "QBnOOoLaAfKPirc.png",
+            },
+            {
+                src: "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
+                title: "JiqGstEfoWAOHiTxclqi.png",
+            },
+            {
+                src: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
+                title: "QBnOOoLaAfKPirc.png",
+            },
+            {
+                src: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
+                title: "QBnOOoLaAfKPirc.png",
+            },
+            {
+                src: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
+                title: "QBnOOoLaAfKPirc.png",
+            },
+            {
+                src: "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
+                title: "JiqGstEfoWAOHiTxclqi.png",
+            },
+            {
+                src: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
+                title: "QBnOOoLaAfKPirc.png",
+            },
+            {
+                src: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
+                title: "QBnOOoLaAfKPirc.png",
+            },
+            {
+                src: "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
+                title: "JiqGstEfoWAOHiTxclqi.png",
+            }
+        ];
+
         return (
-          <div>
-              <div className="table-operations">
-                  <Link to={"/admin/pictures/new"} style={{float: 'right' }}>
-                      <Button type="primary">创建</Button>
-                  </Link>
+          <div className="index-page">
+              <div style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'row', alignContent: 'flex-start'}}>
+                  {
+                      pictures.map( (picture, idx) => (
+                        <Card
+                          key={idx}
+                          hoverable={true}
+                          style={{ margin: 10 }}
+                          cover={ <img style={{height: 200, width:300}} alt="example" src={picture.src} /> }
+                          actions={[<Icon type="delete" onClick={this.deleteRecord} />]} >
+
+                            <Meta description={picture.title} />
+                        </Card>
+                      ))
+                  }
               </div>
-              <div style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'row'}}>
-                  <Card
-                    style={{ width: 300, padding: '5' }}
-                    cover={<img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"/>}
-                    actions={[<Icon type="delete" key="delete" id={'2'} onClick={this.deleteRecord} />]}
-                  >
-                      <Meta description="This is the description"/>
-                  </Card>
+              <div style={{textAlign: 'center', marginTop: 15}}>
+                  <Pagination defaultCurrent={1} total={50} showTotal={this.showTotal} />
               </div>
+
           </div>
         )
     }

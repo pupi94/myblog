@@ -7,8 +7,6 @@ class Creator extends React.Component {
         this.state = {};
     }
 
-
-
     render() {
         const fileList = [
             {
