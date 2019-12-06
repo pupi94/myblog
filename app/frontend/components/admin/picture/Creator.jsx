@@ -21,19 +21,29 @@ class Creator extends React.Component {
                 name: 'yyy.png',
                 status: 'error',
             },
+            {
+                uid: '-3',
+                name: 'yyy.png',
+                status: 'error',
+            },
         ];
 
         const props = {
             action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
             listType: 'picture',
+            multiple: true,
             defaultFileList: [...fileList],
-            className: 'upload-list-inline',
+            className: "picture-upload"
         };
 
         return (
           <div className='form-page' style={{minHeight: 600}}>
+              <div style={{float: 'right'}}>
+                  <Button type="primary" shape="round" size='large'><Icon type="save" />保存</Button>
+              </div>
+
               <Upload {...props}>
-                  <Button><Icon type="upload" /> Upload</Button>
+                  <Button shape="round" size='large' style={{marginRight: 15}}><Icon type="upload" />上传</Button>
               </Upload>
           </div>
         )

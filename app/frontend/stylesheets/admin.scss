@@ -35,3 +35,10 @@
   background-color: #FFFFFF;
   padding: 30px;
 }
+
+.picture-upload {
+  .ant-upload {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+}

@@ -76,7 +76,11 @@ class Index extends React.Component {
                 title: "JiqGstEfoWAOHiTxclqi.png",
             }
         ];
-
+        let actions = [
+            <Icon type="delete" onClick={this.deleteRecord} />,
+            <Icon type="edit" onClick={this.deleteRecord} />,
+            <Icon type="eye" onClick={this.deleteRecord} />
+        ];
         return (
           <div className="index-page">
               <div style={{display: 'flex', flexWrap: 'wrap', flexDirection: 'row', alignContent: 'flex-start'}}>
@@ -87,7 +91,7 @@ class Index extends React.Component {
                           hoverable={true}
                           style={{ margin: 10 }}
                           cover={ <img style={{height: 200, width:300}} alt="example" src={picture.src} /> }
-                          actions={[<Icon type="delete" onClick={this.deleteRecord} />]} >
+                          actions={actions}>
 
                             <Meta description={picture.title} />
                         </Card>
