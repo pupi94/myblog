@@ -29,8 +29,6 @@ RUN mkdir -p $RAILS_ROOT/tmp/pids
 # Set our working directory inside the image
 WORKDIR $RAILS_ROOT
 
-ENV RAILS_MASTER_KEY=d6616fce51f8bb86a9452f6be037a321
-
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
 
