@@ -41,7 +41,7 @@ class CollectionForm extends React.Component {
               {
                 getFieldDecorator('name', {
                   rules: [{ required: true, message: '请输入专辑名称' }],
-                  initialValue: collection.title
+                  initialValue: collection.name
                 })
                 (<Input size="large"/>)
               }

@@ -10,8 +10,8 @@ class Article < ApplicationRecord
   scope :published, -> { where(published: true) }
   scope :unpublished, -> { where(published: false) }
 
-  searchkick searchable: [:title, :body],
-    filterable: [:label_id, :user_id, :published],
+  searchkick searchable: [:title, :content],
+    filterable: [:user_id, :published, :collection_ids],
     word_middle: [:title, :body],
     settings: { index: { max_result_window: 100000 } },
     language: "chinese"

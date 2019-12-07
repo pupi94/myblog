@@ -15,7 +15,6 @@ gem "jb"
 gem "pagy"
 
 gem "rails-i18n"
-gem "redis-rails", "~> 5.0"
 
 gem "webpacker"
 gem "turbolinks", "~> 5"
@@ -26,6 +25,8 @@ gem "devise-i18n", "~> 1.6"
 
 gem "searchkick"
 gem "oj" # increase json serialize performance
+
+gem "sidekiq"
 
 group :development, :test do
   gem "byebug", platform: :mri

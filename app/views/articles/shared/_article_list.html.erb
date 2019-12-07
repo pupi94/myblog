@@ -1,22 +1,18 @@
-<div class="article-list">
-  <% @articles.each do |article|%>
-    <article class="article">
-      <header>
-        <a class="cat"><%= article.label.name %><i></i></a>
-        <h2><a href="<%= article_path(article['id']) %>" title=""><%= article['title'] %></a></h2>
-      </header>
-      <p class="meta">
-        <time><i class="glyphicon glyphicon-time"></i><%= format_date(article['published_at']) %></time>
-        <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共<%= article['pageview'] %>人围观</span>
-        <a class="comment" href="#">
-          <i class="glyphicon glyphicon-comment"></i> 0个评论
+<div class="share-list">
+  <% @articles.each do |article| %>
+    <div class="media share-item">
+      <div class="media-date">
+        <p class="md"><%= article.created_at.strftime("%m-%d") %></p>
+        <p class="year"><%= article.created_at.strftime("%Y") %></p>
+      </div>
+      <div class="media-body">
+        <a href="<%= article_path(article) %>">
+          <h5 class="mt-0"><%= article.title %></h5>
+          <p><%= article.content.slice(0, 100) %></p>
         </a>
-      </p>
-      <p class="note"><%= %></p>
-    </article>
+      </div>
+    </div>
   <% end %>
 </div>
-
-<div class="pagination-wrapper">
-  <%== render :partial => 'pagy/nav_bootstrap', locals: { pagy: @pagy } %>
-</div>
+<div class="clear"></div>
+<a href="#" class="more">VIEW MORE</a>

@@ -2,6 +2,6 @@
 
 class HomeController < ApplicationController
   def index
-    @articles = Article.all # ArticleQuery.new(per_page: 8).query
+    @articles = ArticleQuery.new(per_page: 10).query
   end
 end

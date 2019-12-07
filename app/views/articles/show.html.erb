@@ -1,37 +1,6 @@
-<div class="content-wrap">
-  <div class="content article-show">
-    <div class="article">
-      <div class="article-header">
-        <h1 class="article-title">
-          <a><%= @article['title'] %></a>
-        </h1>
-        <div class="article-meta">
-          <span class="item article-meta-time">
-            <a class="time"><i class="glyphicon glyphicon-time"></i> <%= format_date(@article['published_at']) %></a>
-          </span>
-
-          <span class="item article-meta-category">
-            <a><i class="glyphicon glyphicon-list"></i><%= @article.label.name %></a>
-          </span>
-
-          <span class="item article-meta-views">
-            <a><i class="glyphicon glyphicon-eye-open"></i> 共<%= @article['pageview'] %>人围观</a>
-          </span>
-
-          <span class="item article-meta-comment">
-            <a><i class="glyphicon glyphicon-comment"></i> 0个评论</a>
-          </span>
-        </div>
-      </div>
-      <div class="article-content html-show">
-        <%= raw(@article['body_html']) %>
-      </div>
-
-      <div class="article-copyright hidden-xs">
-        未经允许不得转载：<a href="">Puping博客</a> » <a href="#"><%= @article['title'] %></a>
-      </div>
-    </div>
+<div style="background-color: #FFFFFF; padding: 15px 30px;">
+  <h1><a><%= @article['title'] %></a></h1>
+  <div>
+    <%= raw(@article['content']) %>
   </div>
 </div>
-
-<%= render partial: "home/shared/sidebar" %>

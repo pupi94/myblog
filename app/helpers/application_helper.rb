@@ -9,11 +9,7 @@ module ApplicationHelper
     date.to_time.strftime format
   end
 
-  def show_status(status)
-    status ? t("common.enabled") : t("common.disabled")
-  end
-
-  def notice_list
-    Notice.order(created_at: :desc).limit(5)
+  def collections
+    Collection.all
   end
 end

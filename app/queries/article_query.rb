@@ -10,13 +10,12 @@ class ArticleQuery
   def query
     Article.search keyword,
       operator: "or",
-      fields: ["title^10", "body"],
+      fields: ["title^10", "content"],
       match: :word_middle,
       where: where_clause,
       order: order_clause,
       per_page: per_page,
       page: page,
-      includes: [:label],
       body_options: { min_score: 0.5 }
   end
 
@@ -26,7 +25,9 @@ class ArticleQuery
     end
 
     def where_clause
-      { published: true }
+      { published: true }.tap do |clause|
+        clause[:collection_ids] = params[:collection] if params[:collection].present?
+      end
     end
 
     def per_page
@@ -40,7 +41,7 @@ class ArticleQuery
     def order_clause
       [
         { _score: :desc },
-        { published_at: :desc }
+        { created_at: :desc }
       ]
     end
 end

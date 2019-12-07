@@ -1,0 +1,12 @@
+<div class="side-container hidden-xs">
+  <div class="card position-fixed">
+    <div class="card-header">CATEGORY</div>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <% collections.each do |collection| %>
+          <li class="list-group-item"><%= link_to collection.name, articles_path(collection: collection.id) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

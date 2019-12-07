@@ -12,19 +12,7 @@ class ArticlesController < ApplicationController
 
   private
     def query_params
-      params.permit(:wd, :page)
-    end
-
-    def article_pv
-      key = cache_key(@article.id)
-      @article.pageview += Rails.cache.redis.pfcount(key).to_i
-      Rails.cache.redis.pfadd(key, request.remote_ip || session.id)
-
-      Rails.logger.info("文章 #{@article.id} 访问量加1： 访问者的IP是： #{request.remote_ip || session.id}")
-    end
-
-    def cache_key(id)
-      "article::#{id}::pv"
+      params.permit(:wd, :page, :collection)
     end
 
     def load_article
