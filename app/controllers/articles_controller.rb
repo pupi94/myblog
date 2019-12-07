@@ -5,6 +5,7 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = ArticleQuery.new(query_params).query
+    @total_count = @articles.total_count
     @pagy = Pagy.new_from_searchkick(@articles)
   end
 

@@ -15,4 +15,9 @@
   <% end %>
 </div>
 <div class="clear"></div>
-<a href="#" class="more">VIEW MORE</a>
+
+<% if @total_count > 10 %>
+  <div class="pagination-wrapper">
+    <%== render :partial => 'pagy/nav_bootstrap', locals: { pagy: @pagy } %>
+  </div>
+<% end %>

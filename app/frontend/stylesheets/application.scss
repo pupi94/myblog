@@ -160,3 +160,25 @@
     display: block;
   }
 }
+
+.pagination-wrapper {
+  margin-top: 15px;
+
+  .page-link {
+    color: #8e8e8e;
+  }
+  .pagination {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .active {
+
+  }
+
+  .page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #888787;;
+    border-color: #888787;
+  }
+}
