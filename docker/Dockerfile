@@ -20,15 +20,17 @@ RUN touch /var/log/cron.log && chmod go+rw /var/log/cron.log
 # get latest bundler
 RUN gem install bundler
 
+ENV RAILS_MASTER_KEY=xxx
+ENV DB_HOST=127.0.0.1
+ENV DB_PASSWORD=123456
 
 ENV RAILS_ENV=production
 # Define where our application will live inside the image
-ENV RAILS_ROOT /var/www/app
+ENV RAILS_ROOT=/var/www/app
 # Create application home. App server will need the pids dir so just create everything in one shot
 RUN mkdir -p $RAILS_ROOT/tmp/pids
 # Set our working directory inside the image
 WORKDIR $RAILS_ROOT
-
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
 
