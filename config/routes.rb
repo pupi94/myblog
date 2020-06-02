@@ -5,8 +5,6 @@ Rails.application.routes.draw do
 
   devise_for :users, only: %i[sessions], controllers: { sessions: "users/sessions" }
 
-  resources :articles, only: %i[show index]
-
   namespace :admin do
     root "home#index"
     get "/*path" => "home#index"
@@ -15,14 +13,6 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :admin do
       resource :user, only: [:show]
-      resources :articles, only: [:show, :index, :destroy, :update, :create] do
-        collection do
-          patch :batch_publish
-          patch :batch_unpublish
-        end
-      end
-
-      resources :collections, only: [:show, :index, :destroy, :update, :create]
     end
 
     match "*path", to: "base#render_not_found", via: :all
