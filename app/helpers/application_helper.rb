@@ -8,8 +8,4 @@ module ApplicationHelper
 
     date.to_time.strftime format
   end
-
-  def collections
-    Collection.all
-  end
 end

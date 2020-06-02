@@ -1,36 +1,12 @@
-<div class="share-container">
-  <div class="share-list">
-    <% @articles.each do |article| %>
-      <div class="media share-item">
-        <div class="media-date">
-          <p class="md"><%= article.created_at.strftime("%m-%d") %></p>
-          <p class="year"><%= article.created_at.strftime("%Y") %></p>
-        </div>
-        <div class="media-body">
-          <a href="<%= article_path(article) %>">
-            <h5 class="mt-0"><%= article.title %></h5>
-            <p><%= article.content.slice(0, 100) %></p>
-          </a>
-        </div>
-      </div>
-    <% end %>
-  </div>
-  <div class="clear"></div>
-  <a href="<%= articles_path %>" class="more">VIEW MORE</a>
-</div>
-
 <div class="pic-container">
   <div class="container-t">
     <h3>我的相册</h3>
-    <p>My Album</p>
   </div>
   <div class="pic-group">
     <a href="#" class="active">ALL</a>
-    <a href="#">4-5岁</a>
-    <a href="#">3-4岁</a>
-    <a href="#">2-3岁</a>
-    <a href="#">1-2岁</a>
-    <a href="#" value="1">0-1岁</a>
+    <a href="#">纪实</a>
+    <a href="#">风景</a>
+    <a href="#">人物</a>
   </div>
   <div class="pic-list">
     <% 4.times do |n| %>
@@ -39,7 +15,7 @@
           <%= image_tag asset_pack_path 'media/images/201606131517538ua3.jpg', class: "rounded mx-auto d-block", alt: "xxx，测试照片，一个小孩子" %>
           <div class="pic-info">
             <div>
-              <h4>xxx，测试照片，一个小孩子"</h4>
+              <h4>xxx，测试照片"</h4>
               <p>2011-08-12</p>
             </div>
           </div>

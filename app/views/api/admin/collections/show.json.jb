@@ -1,9 +1,0 @@
-# frozen_string_literal: true
-
-{
-  collection: {
-    id: @collection.id,
-    name: @collection.name,
-    description: @collection.description
-  }
-}
